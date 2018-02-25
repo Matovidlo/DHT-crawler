@@ -1,0 +1,58 @@
+.TH MONITOR BITTORRENT 1
+.SH NAME
+monitor \- sends KRPC calls to any known host, or program should find this host and monitor trough this start host to BitTorrent network with help of Kademlia DHT.
+.SH SYNOPSIS
+.B monitor.py
+
+
+
+
+[\fB\-h\fR]
+[\fB\-u\fR]
+[\fB\-t\fR \fIinterval\fR]
+[\fB\-i\fR \fIinterval\fR]
+[\fB\-p\fR \fIport\fR]
+[\fB\-l\fR \fIport\fR]
+[\fB\-s\fR \fIsize\fR]
+[\fB\-r\fR \fIvalue\fR]
+.IR <node>, <node>, ...
+.SH DESCRIPTION
+.B testovac \fRuses the ICMP protocol's mandatory ECHO_REQUEST or UDP datagram to recieve an ICMP ECHO_RESPONSE or UDP from any host.  ECHO_REQUEST datagrams ('pings') have an IP and ICMP header, followed by a \fBstruct timeval\fR and arbitrary number of 'pad' bytes used to fill out packet. UDP packet is filled with \fBstruct timeval\fR and requisite number of 'pad' bytes.
+.B testovac \fRworks with both IPv4 and IPv6. Using both at the same time because every node is handled in parallel thread. If you provide a domain name to the parameters, it is translated to IP address.
+.B testovac \fRhas ability to operate as UDP server. In this mode the received packet is sent back to a sender with no addition.
+.SH OPTIONS
+.TP
+.BR \-h\fR
+Show help message.
+.TP
+.BR \-u\fR
+Use UDP datagram. Must be specified with \fB\-p\fR option.
+.TP
+.BR \-s\fR\ \fISIZE\fR
+Size of the packet. Implicit value for UDP is 64 bytes, for ICMP 56 bytes.
+.TP
+.BR \-t\fR\ \fISECONDS\fR
+Specifies \fIinterval\fR in seconds in which statistics are printed.
+.TP
+.BR \-i\fR\ \fISECONDS\fR
+Specifies \fIinterval\fR in milliseconds between sending each packet.
+.TP
+.BR \-w\fR\ \fISECONDS\fR
+Specifies \fIinterval\fR in seconds for response wait.
+.TP
+.BR \-p\fR\ \fISECONDS\fR
+Set sender UDP \FIport\fR. Must be specified \fB\-u\fR option.
+.TP
+.BR \-l\fR\ \fIPORT\fR
+Set testovac to listen state on \fIport\fR.
+.TP
+.BR \-r\fR\ \fIVALUE\fR
+set rtt threshold with \fIvalue\fR. If rtt is longer than the threshold, accident will be reported.
+.TP
+.BR \-v\fR
+Verbose mode. Program shows on stdout received packets.
+.TP
+.BR <node>\fR
+IPv4/IPv6/hostname node address
+.SH SEE ALSO
+.BR ping\fR(8)
