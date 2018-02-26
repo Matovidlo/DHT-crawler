@@ -1,0 +1,3 @@
+# Ignore all files/directories with __
+__pycache__/
+.*py[cod]
