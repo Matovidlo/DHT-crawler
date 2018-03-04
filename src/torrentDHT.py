@@ -1,15 +1,22 @@
 #!/usr/bin/env python3
 
+import queue
 import socket
+import binascii
 from random import randint
 from hashlib import sha1
-from collections import deque
+from threading import Timer, Thread
+from struct import unpack
+
 # from threading import Timer, Thread
 from bencoder import bencode, bdecode
 '''
 This should be used as part of library, where you can create socket and send
 all torrent DHT messages over UDP.
 '''
+
+BOOTSTRAP_NODES = [("router.bittorrent.com", 6881), ("dht.transmissionbt.com", 6881),("router.utorrent.com", 6881)]
+
 
 # TODO no IPv6 support
 # class to store node as object with necessary information
@@ -20,18 +27,10 @@ def get_myip():
 	s.close()
 	return name
 
-class _DHTNode(object):
+# set timer function for threading
+def timer(t, f):
+	return Timer(t, f)
 
-	def __init__(self, infohash, ip, port):
-		self.infohash = infohash
-		self.ip = ip
-		self.port = port
-
-BOOTSTRAP_NODES = (
-    ("router.bittorrent.com", 6881),
-    ("dht.transmissionbt.com", 6881),
-    ("router.utorrent.com", 6881)
-)
 # Main class
 class torrentDHT():
 
@@ -52,15 +51,15 @@ class torrentDHT():
 		self.infohash = sha1(infohash.encode('utf-8'))
 		if not infohash:
 			self.infohash = self.random_infohash()
-		# self.target = sha1(target.encode('utf-8'))
-		# if not target:
-			# self.target = self.random_infohash()
 
 		# list of nodes
-		self.info = deque(maxlen=max_node_qsize)
+		self.max_node_qsize = max_node_qsize
+		self.info = queue.Queue(self.max_node_qsize)
 		# Append all bootstrap nodes
 		for node in bootstrap_nodes:
-			self.info.append(node)
+			self.info.put((self.infohash, node[0], node[1]))
+		self.rejoin = timer(3, self.rejoin_DHT)
+		self.rejoin.start()
 
 	def __str__(self):
 		return "IP {}, Port {}".format(self.bind_ip, self.bind_port)
@@ -84,44 +83,37 @@ class torrentDHT():
 		# mix target and own infohash to get "neighbor"
 		return target[:end] + infohash[end:]
 
+	def change_bootstrap(self, infohash, node):
+		self.info = queue.Queue(self.max_node_qsize)
+		self.info.put((infohash, node[0][0].decode("utf-8"), node[0][1]))
+
 	'''
 	This part is about query messages. Supports all 4 Kademlia messages sends over UDP with bencoding as torrent BEP05 refers.
 	'''
 	# Joins DHT network from exact address
 	def join_DHT(self):
-		if len(self.nodes) == 0:
-			self.info = (address)
-			self.find_node()
-		# TODO rejoin to network when exhausted
+		for address in BOOTSTRAP_NODES:
+			node = (self.random_infohash(), address[0], address[1])
+			self.find_node(node)
 
-	# def auto_find_node(self):
-	# 	# TODO wait
-	# 	while True:
-	# 		try:
-	# 			node = self.nodes.popleft()
-	# 			self.info = (node.ip, node.port)
-	# 			self.find_node(node.infohash)
-	# 		except IndexError:
-	# 			# TODO if verbosity
-	# 			if verbosity:
-	# 				print("Nodes index out of range")
-	# 			pass
-	# 			# TODO sleep
+	def rejoin_DHT(self):
+		if self.info.qsize() == 0:
+			self.join_DHT()
+		self.rejoin = timer(3, self.rejoin_DHT)
+		self.rejoin.start()
 
-	def send_krpc(self, message):
+	def send_krpc(self, message, node):
 		try:
 			# Get IP address and port touple
-			# print(message)
 			try:
-				node = self.info.popleft()
-				self.query_socket.sendto(bencode(message), node)
+				self.query_socket.sendto(bencode(message), (node[1],node[2]))
 			except IndexError:
 				pass
 		except Exception as err:
-			# TODO if configured to report
 			if self.verbosity:
 				print("KRPC send error: {}".format(err.message))
 			pass
+
 
 	def decode_krpc(self, message):
 		return bdecode(message)
@@ -130,12 +122,15 @@ class torrentDHT():
 	Query messages.
 	'''
 
-	def find_node(self, target, infohash = None):
+	def find_node(self, node, target = None, infohash = None):
 		infohash = self.get_neighbor(infohash, self.infohash) if infohash else self.infohash
 		# By default transaction ID should be at least 2 bytes long
-		transaction_id = self.entropy(self.TID_LENGTH)
+		# transaction_id = self.entropy(self.TID_LENGTH)
+		if target is None:
+			target = node[0]
+			# TODO set target
 		message = {
-			"t": transaction_id,
+			"t": "fn",
 			"y": "q",
 			"q": "find_node",
 			"a": {
@@ -143,7 +138,7 @@ class torrentDHT():
 				"target": target
 			}
 		}
-		self.send_krpc(message)
+		self.send_krpc(message, node)
 
 
 	def ping(self, infohash = None):
@@ -161,14 +156,18 @@ class torrentDHT():
 		self.send_krpc(message)
 
 	'''
-	Response messages.
+	TODO Response messages.
 	'''
+
+	# TODO
+	# decode_message, decode_nodes hasNodes as interface
+
 
 
 # LogClass
 class LogDHT(object):
 	def log(self, infohash, address=None):
-		print ("{} from {}:{}").format(infohash.encode("hex"), address[0], address[1])
+		print ("{} from {}:{}").format(infohash, address[0], address[1])
 
 
 # FIXME

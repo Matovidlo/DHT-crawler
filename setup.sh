@@ -99,17 +99,17 @@ do
 				sudo dnf config-manager \
 					--add-repo \
 					https://download.docker.com/linux/fedora/docker-ce.repo
-				sudo dnf -y install docker-devel docker-ce
-				# Verify
-				# user=$(whoami)
-				# echo $user
-				# $USER
-				sudo groupadd docker
-				sudo usermod -aG docker $USER
-				session=$(echo $DESKTOP_SESSION | grep -Eo gnome)
-				if [ "$session" == "gnome" ]; then
-					gnome-session-quit
+				sudo dnf -y install docker-devel docker-ce bats
+				grep 'docker' /etc/group | grep $USER
+				if [ $? -eq 1 ]; then
+					sudo groupadd docker
+					sudo usermod -aG docker $USER
+					session=$(echo $DESKTOP_SESSION | grep -Eo gnome)
+					if [ "$session" == "gnome" ]; then
+						gnome-session-quit
+					fi
 				fi
+				# Verify
 
 				if [ $verify = true ]; then
 					verify
@@ -131,7 +131,6 @@ do
 		"run")
 			# RUN program
 			./src/monitor.py
-			# TODO run with various arguments
 			exit 0
 			;;
 		"run-docker")
@@ -139,12 +138,14 @@ do
 			if [ $? == 3 ]; then
 				sudo systemctl start docker
 			fi
-			docker build -t monitor-dht .
+			docker build -t monitor-dht . --build-arg distribution=fedora --build-arg version=27
 			docker run --rm --name monitor-dht -v /$(pwd):/monitoring monitor-dht ./setup.sh run
 			exit 0
 			;;
 		"test")
 			echo "Start unitest"
+			# TODO bats
+			# bats
 			exit 0
 	esac
 	shift
