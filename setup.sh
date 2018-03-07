@@ -8,6 +8,18 @@
 # Installs all necessary libs	#
 #################################
 # Sudo when install docker, if not
+
+
+# Prerequisities:
+# docker for using dockerfile
+# python bencoder.pyx using pip
+# python3 and more
+
+# Testing:
+# For testing you need to install bats.
+# Most of scripts and runnable wihout any prerequisities
+# There is possibility to install all necessities with ./setup install
+
 help()
 {
 	echo "Help message"
@@ -123,8 +135,8 @@ do
 			OS=$(get_os)
 			echo -e "Operation system: " . $OS
 			if [ "$OS" == "Fedora" ]; then
-				sudo dnf -y install python-devel python36
-				pip3.6 install bencoder hashlib
+				sudo dnf -y install python-devel python36 bats
+				pip3.6 install --user bencoder.pyx bencode
 			fi
 			exit 0
 			;;

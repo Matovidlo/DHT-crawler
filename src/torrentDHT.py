@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
 
+'''
+Create by Martin Vasko
+3BIT, Brno, Faculty of Information Technology.
+'''
+
 import queue
 import socket
 import binascii
 from random import randint
 from hashlib import sha1
-from threading import Timer, Thread
+from threading import Timer, Thread, Event
 from struct import unpack
-
-# from threading import Timer, Thread
 from bencoder import bencode, bdecode
+
 '''
-This should be used as part of library, where you can create socket and send
-all torrent DHT messages over UDP.
+This should be used as part of library, where you can create, bind socket and send all torrent DHT messages over UDP. BOOTSTRAP_NODES are well known nodes from which should crawl begin.
 '''
 
 BOOTSTRAP_NODES = [("router.bittorrent.com", 6881), ("dht.transmissionbt.com", 6881),("router.utorrent.com", 6881)]
 
 
 # TODO no IPv6 support
-# class to store node as object with necessary information
 def get_myip():
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	s.connect(("8.8.8.8", 80))
@@ -34,9 +36,7 @@ def timer(t, f):
 # Main class
 class torrentDHT():
 
-	def __init__(self, log, bind_port = 6882, bootstrap_nodes = BOOTSTRAP_NODES, infohash = "", target = "", verbosity = False, max_node_qsize = 200):
-		# Thread.__init__(self)
-		# self.setDaemon(True)
+	def __init__(self, bind_port = 6882, bootstrap_nodes = BOOTSTRAP_NODES, infohash = "", target = "", verbosity = False, max_node_qsize = 200):
 		self.bind_ip = get_myip()
 		self.bind_port = bind_port
 		self.query_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
@@ -45,7 +45,7 @@ class torrentDHT():
 		self.verbosity = verbosity
 		self.TID_LENGTH = 2
 		# Set log object
-		self.log_output = log
+		self.bootstrap = True
 
 		# create all necessary for transmission over network
 		self.infohash = sha1(infohash.encode('utf-8'))
@@ -75,33 +75,40 @@ class torrentDHT():
 	def random_infohash(self):
 		i_hash = sha1(self.entropy(20).encode('utf-8'))
 		# infohash should be 20 bytes long
-		# line = self.entropy(20)
-		# i_hash.update(line.encode('utf-8'))
 		return i_hash.digest()
 
 	def get_neighbor(self, target, infohash, end = 10):
 		# mix target and own infohash to get "neighbor"
 		return target[:end] + infohash[end:]
 
+	def clear_bootstrap(self):
+		global BOOTSTRAP_NODES
+		BOOTSTRAP_NODES = []
+
 	def change_bootstrap(self, infohash, node):
 		self.info = queue.Queue(self.max_node_qsize)
 		self.info.put((infohash, node[0][0].decode("utf-8"), node[0][1]))
+		# Change bootstrap
+		global BOOTSTRAP_NODES
+		BOOTSTRAP_NODES.append((node[0][0].decode("utf-8"), node[0][1]))
 
-	'''
-	This part is about query messages. Supports all 4 Kademlia messages sends over UDP with bencoding as torrent BEP05 refers.
-	'''
+	# This is bootstrap mechanism, to get new nodes from well known ones.
 	# Joins DHT network from exact address
 	def join_DHT(self):
+		if self.verbosity:
+			print("Sending to bootstrap")
 		for address in BOOTSTRAP_NODES:
 			node = (self.random_infohash(), address[0], address[1])
-			self.find_node(node)
+			self.query_find_node(node)
 
 	def rejoin_DHT(self):
 		if self.info.qsize() == 0:
 			self.join_DHT()
 		self.rejoin = timer(3, self.rejoin_DHT)
 		self.rejoin.start()
-
+	'''
+	This part is about query messages. Supports all 4 Kademlia messages sends over UDP with bencoding as torrent BEP05 refers.
+	'''
 	def send_krpc(self, message, node):
 		try:
 			# Get IP address and port touple
@@ -122,7 +129,7 @@ class torrentDHT():
 	Query messages.
 	'''
 
-	def find_node(self, node, target = None, infohash = None):
+	def query_find_node(self, node, target = None, infohash = None):
 		infohash = self.get_neighbor(infohash, self.infohash) if infohash else self.infohash
 		# By default transaction ID should be at least 2 bytes long
 		# transaction_id = self.entropy(self.TID_LENGTH)
@@ -141,23 +148,72 @@ class torrentDHT():
 		self.send_krpc(message, node)
 
 
-	def ping(self, infohash = None):
+	def query_ping(self, node, infohash = None):
 		infohash = self.get_neighbor(infohash, self.infohash) if infohash else self.infohash
 		# By default transaction ID should be at least 2 bytes long
-		transaction_id = self.entropy(TID_LENGTH)
 		message = {
-			"t": transaction_id,
+			"t": "pg",
 			"y": "q",
 			"q": "ping",
 			"a": {
 				"id": infohash
 			}
 		}
-		self.send_krpc(message)
+		self.send_krpc(message, node)
+
+	def query_get_peers(self, node, infohash, peer_id = None):
+		peer_id = self.get_neighbor(peer_id, self.infohash) if peer_id else self.infohash
+		message = {
+			"t": "gp",
+			"y": "q",
+			"q": "get_peers",
+			"a": {
+				"id": peer_id,
+				"info_hash": infohash
+			}
+		}
+		self.send_krpc(message, node)
+
+	def query_announce_peer(self, node, infohash, token="", implied_port = 1, peer_id = None):
+		# get port from node
+		port = node[2]
+		peer_id = self.get_neighbor(peer_id, self.infohash) if peer_id else self.infohash
+		message = {
+			"t": "ap",
+			"y": "q",
+			"q": "announce_peer",
+			"a": {
+				"id": peer_id,
+				"implied_port": implied_port,
+				"info_hash": infohash,
+				"port": port,
+				"token": token
+			}
+		}
+		self.send_krpc(message, node)
 
 	'''
-	TODO Response messages.
+	Response message decode
 	'''
+
+	def response_get_peers(self, message, address):
+		try:
+			infohash = message["a"]["info_hash"]
+			tid = message["t"]
+			# nid = message["a"]["id"]
+			token = infohash[:2]
+			msg = {
+				"t": tid,
+				"y": "r",
+				"r": {
+					"id": get_neighbor(infohash, self.infohash),
+					"nodes": "",
+					"token": token
+				}
+			}
+			self.send_krpc(msg, address)
+		except KeyError:
+			pass
 
 	# TODO
 	# decode_message, decode_nodes hasNodes as interface
@@ -165,15 +221,11 @@ class torrentDHT():
 
 
 # LogClass
-class LogDHT(object):
-	def log(self, infohash, address=None):
-		print ("{} from {}:{}").format(infohash, address[0], address[1])
+'''
+Class can possibly print nodes with this log class in format given below in method log.
+'''
+# class LogDHT(object):
+# 	def log(self, infohash, address=None):
+# 		print ("{} from {}:{}").format(infohash, address[0], address[1])
 
 
-# FIXME
-# if __name__ == "__main__":
-	# dht_socket = BindSocket(get_myip(), 6882)
-	# print(dht_socket)
-	# dht = torrentDHT(Log(), dht_socket)
-	# Start thread
-	# dht.start()
