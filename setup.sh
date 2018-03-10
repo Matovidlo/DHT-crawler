@@ -142,7 +142,7 @@ do
 			;;
 		"run")
 			# RUN program
-			./src/monitor.py
+			./src/exec.py
 			exit 0
 			;;
 		"run-docker")

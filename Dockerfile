@@ -17,9 +17,7 @@ RUN . /etc/os-release
 RUN if [ "$NAME" == "fedora" ]; then dnf install -y python36 python3-pip python3-devel gcc redhat-rpm-config; pip3.6 install bencoder.pyx bencode; fi
 #debian like distributions
 # Ubuntu:latest
-RUN apt-get update
-RUN apt-get install -y python3-all-dev python3-pip
-RUN pip3 install bencoder.pyx bencode
+RUN if [ "$NAME" == "ubuntu" ]; then apt-get update; apt-get install -y python3-all-dev python3-pip; pip3 install bencoder.pyx bencode; fi
 
 COPY . /monitoring/
 # FIXME copy successful
