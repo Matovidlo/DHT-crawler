@@ -3,10 +3,8 @@
 '''
 Execution script
 '''
-import monitor
+from monitor import create_monitor
 
 if __name__ == '__main__':
-	monitor_obj = monitor.create_monitor(False)
-	monitor_obj.parse_torrent()
-	monitor_obj.crawl_begin()
-
+    CRAWL = create_monitor(False)
+    CRAWL.crawl_begin()

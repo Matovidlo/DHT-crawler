@@ -142,7 +142,7 @@ do
 			;;
 		"run")
 			# RUN program
-			./src/exec.py
+			./src/exec.py --duration 60
 			exit 0
 			;;
 		"run-docker")
@@ -155,9 +155,7 @@ do
 			exit 0
 			;;
 		"test")
-			echo "Start unitest"
-			# TODO bats
-			# bats
+			./tests/tests.py
 			exit 0
 	esac
 	shift

@@ -4,7 +4,7 @@ import socket
 import binascii
 from random import randint
 from hashlib import sha1
-from threading import Timer, Thread, Event
+from threading import Timer
 from struct import unpack
 from bencoder import bencode, bdecode
 
@@ -29,38 +29,64 @@ BOOTSTRAP_NODES = [
 
 # TODO no IPv6 support
 def get_myip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    name = s.getsockname()[0]
-    s.close()
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.connect(("8.8.8.8", 80))
+    name = sock.getsockname()[0]
+    sock.close()
     return name
 
 
 # set timer function for threading
-def timer(t, f):
-    return Timer(t, f)
+def timer(time, function):
+    return Timer(time, function)
 
 
-class torrentDHT():
+def entropy(length):
+    return "".join(chr(randint(0, 255)) for _ in range(length))
+
+
+def random_infohash():
+    i_hash = sha1(entropy(20).encode('utf-8'))
+    # infohash should be 20 bytes long
+    return i_hash.digest()
+
+
+def get_neighbor(target, infohash, end=10):
+    # mix target and own infohash to get "neighbor"
+    return target[:end] + infohash[end:]
+
+def has_node(id_node, host, port, info_pool):
+    list_node = None
+    for nodes in info_pool[id_node]:
+        if nodes[0] == host and nodes[1] == port:
+            list_node = nodes
+            break
+    return list_node
+
+
+def decode_krpc(message):
+    try:
+        return bdecode(message)
+    except Exception:
+        return None
+
+class TorrentDHT():
 
     def __init__(self, bind_port=6882, bootstrap_nodes=BOOTSTRAP_NODES,
-                 infohash="", target="", verbosity=False, max_node_qsize=200):
-        self.bind_ip = get_myip()
-        self.bind_port = bind_port
+                 infohash="", verbosity=False, max_node_qsize=200):
         self.query_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM,
                                           socket.IPPROTO_UDP)
 
-        self.query_socket.bind((self.bind_ip, self.bind_port))
+        self.query_socket.bind((get_myip(), bind_port))
         # Set verboisty
         self.verbosity = verbosity
-        self.TID_LENGTH = 2
         # Set log object
         self.bootstrap = True
 
         # create all necessary for transmission over network
         self.infohash = sha1(infohash.encode('utf-8'))
         if not infohash:
-            self.infohash = self.random_infohash()
+            self.infohash = random_infohash()
 
         # list of nodes
         self.max_node_qsize = max_node_qsize
@@ -68,56 +94,46 @@ class torrentDHT():
         # Append all bootstrap nodes
         for node in bootstrap_nodes:
             self.info.put((self.infohash, node[0], node[1]))
-        self.rejoin = timer(3, self.rejoin_DHT)
+        self.rejoin = timer(3, self.rejoin_dht)
         self.rejoin.start()
 
-    def __str__(self):
-        return "IP {}, Port {}".format(self.bind_ip, self.bind_port)
-
-    def entropy(self, length):
-        return "".join(chr(randint(0, 255)) for _ in range(length))
-
-    def change_TID_length(value):
-        # FIXME transaction_id = self.entropy(self.TID_LENGTH)
-        if isinstance(value, int):
-            self.TID_LENGTH = value
-
-    def random_infohash(self):
-        i_hash = sha1(self.entropy(20).encode('utf-8'))
-        # infohash should be 20 bytes long
-        return i_hash.digest()
-
-    def get_neighbor(self, target, infohash, end=10):
-        # mix target and own infohash to get "neighbor"
-        return target[:end] + infohash[end:]
 
     def clear_bootstrap(self):
         global BOOTSTRAP_NODES
         BOOTSTRAP_NODES = []
 
+    def print_bootstrap(self):
+        return BOOTSTRAP_NODES
+
     def change_bootstrap(self, infohash, node):
         self.info = queue.Queue(self.max_node_qsize)
-        self.info.put((infohash, node[0][0].decode("utf-8"), node[0][1]))
+        try:
+            self.info.put((infohash, node[0][0].decode("utf-8"), node[0][1]))
+        except AttributeError:
+            self.info.put((infohash, node[0], node[1]))
         # Change bootstrap
         global BOOTSTRAP_NODES
-        BOOTSTRAP_NODES.append((node[0][0].decode("utf-8"), node[0][1]))
+        try:
+            BOOTSTRAP_NODES.append((node[0][0].decode("utf-8"), node[0][1]))
+        except AttributeError:
+            BOOTSTRAP_NODES.append((node[0], node[1]))
 
     '''
     This is bootstrap mechanism, to get new nodes from well known ones.
     Joins DHT network from exact address
     '''
 
-    def join_DHT(self):
+    def join_dht(self):
         if self.verbosity:
             print("Sending to bootstrap")
         for address in BOOTSTRAP_NODES:
-            node = (self.random_infohash(), address[0], address[1])
+            node = (random_infohash(), address[0], address[1])
             self.query_find_node(node)
 
-    def rejoin_DHT(self):
-        if self.info.qsize() == 0:
-            self.join_DHT()
-        self.rejoin = timer(3, self.rejoin_DHT)
+    def rejoin_dht(self):
+        # if self.info.qsize() == 0:
+        self.join_dht()
+        self.rejoin = timer(3, self.rejoin_dht)
         self.rejoin.start()
     '''
     This part is about query messages. Supports all 4 Kademlia messages sends
@@ -125,31 +141,22 @@ class torrentDHT():
     '''
 
     def send_krpc(self, message, node):
+        # Get IP address and port touple
         try:
-            # Get IP address and port touple
-            try:
-                self.query_socket.sendto(bencode(message), (node[1], node[2]))
-            except IndexError:
-                pass
-        except Exception as err:
-            if self.verbosity:
-                print("KRPC send error: {}".format(err.message))
+            self.query_socket.sendto(bencode(message), (node[1], node[2]))
+        except IndexError:
             pass
-
-    def decode_krpc(self, message):
-        return bdecode(message)
 
     '''
     Query messages.
     '''
 
     def query_find_node(self, node, target=None, infohash=None):
-        infohash = self.get_neighbor(infohash, self.infohash) if infohash else
-        self.infohash
+        infohash = get_neighbor(infohash, self.infohash) if infohash \
+            else self.infohash
         # By default transaction ID should be at least 2 bytes long
         if target is None:
             target = node[0]
-            # TODO set target
         message = {
             "t": "fn",
             "y": "q",
@@ -162,8 +169,8 @@ class torrentDHT():
         self.send_krpc(message, node)
 
     def query_ping(self, node, infohash=None):
-        infohash = self.get_neighbor(infohash, self.infohash) if infohash else
-        self.infohash
+        infohash = get_neighbor(infohash, self.infohash) if infohash \
+            else self.infohash
         # By default transaction ID should be at least 2 bytes long
         message = {
             "t": "pg",
@@ -176,8 +183,8 @@ class torrentDHT():
         self.send_krpc(message, node)
 
     def query_get_peers(self, node, infohash, peer_id=None):
-        peer_id = self.get_neighbor(peer_id, self.infohash) if peer_id else
-        self.infohash
+        peer_id = get_neighbor(peer_id, self.infohash) if peer_id \
+            else self.infohash
         message = {
             "t": "gp",
             "y": "q",
@@ -193,8 +200,8 @@ class torrentDHT():
                             peer_id=None):
         # get port from node
         port = node[2]
-        peer_id = self.get_neighbor(peer_id, self.infohash) if peer_id else
-        self.infohash
+        peer_id = get_neighbor(peer_id, self.infohash) if peer_id \
+            else self.infohash
         message = {
             "t": "ap",
             "y": "q",
@@ -217,7 +224,6 @@ class torrentDHT():
         try:
             infohash = message["a"]["info_hash"]
             tid = message["t"]
-            # nid = message["a"]["id"]
             token = infohash[:2]
             msg = {
                 "t": tid,
@@ -232,8 +238,44 @@ class torrentDHT():
         except KeyError:
             pass
 
-    # TODO
-    # decode_message, decode_nodes hasNodes as interface
+    # Decode all types of messages, recieved and querry
+    def decode_message(self, msg, info_pool):
+        nodes = []
+        for key, value in msg.items():
+            # TODO responses and queries
+            # print(key.decode('utf-8'))
+            if str(key)[2] == "r":
+                for lkey, lvalue in value.items():
+                    nodes = self.decode_nodes(lvalue, info_pool)
+
+        return nodes
+
+    def decode_nodes(self, value, info_pool):
+        nodes = []
+        try:
+            length = len(value)
+        except TypeError:
+            length = 0
+
+        if (length % 26) != 0:
+            return nodes
+        # nodes in raw state
+        for i in range(0, length, 26):
+            nid = value[i:i+20]
+            ip_addr = socket.inet_ntoa(value[i+20:i+24])
+            port = unpack("!H", value[i+24:i+26])[0]
+            nodes.append((nid, ip_addr, port))
+
+            nid = binascii.hexlify(nid).decode("utf-8")
+            if nid not in info_pool:
+                info_pool[nid] = [(ip_addr, port)]
+            else:
+                if not has_node(nid, ip_addr, port, info_pool):
+                    info_pool[nid].append((ip_addr, port))
+                else:
+                    # duplicates
+                    pass
+        return nodes
 
 
 '''

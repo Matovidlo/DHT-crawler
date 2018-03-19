@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 import argparse as arg
-import inspect
 import signal
 import time
-import os
-import sys
 import datetime
 import json
-from torrentDHT import *
-from processOutput import *
+from threading import Thread, Semaphore
+try:
+    from torrentDHT import TorrentDHT, get_neighbor,\
+                           random_infohash, decode_krpc
+    from processOutput import ProcessOutput
+except ImportError:
+    from src.torrentDHT import TorrentDHT, get_neighbor,\
+                               random_infohash, decode_krpc
+    from src.processOutput import ProcessOutput
 
 '''
 Created by Martin Vasko
@@ -21,20 +25,29 @@ torrentDHT implementation, which was implemented by Martin Vasko.
 '''
 
 
-def argParse():
+def argument_parser():
     '''
     This part is about parsing input arguments. Using argparse for
     standardized use
     '''
-    # first parse paramters of program
     parser = arg.ArgumentParser()
 
     parser.add_argument('--hash', type=str, dest='hash', action='store',
                         help='Specifies info_hash of torrent file which can \
                         be get from magnet-link.')
+    parser.add_argument('--bind_port', type=int, dest='bind_port', action='store',
+                        help='Specify port to which should be connection \
+                        binded.')
+    parser.add_argument('--ipaddr', type=str, dest='ipaddr', action='store',
+                        help='Specify ip addres to which should \
+                         be bootstraped.')
     parser.add_argument('--port', type=int, dest='port', action='store',
                         help='Specify port to which should be connection \
                         binded.')
+    parser.add_argument('--country', type=str, dest='country',
+                        action='store', help='Store country name to \
+                        converge only in this country and do not \
+                        bootstrap away from it.')
     parser.add_argument('--regex', type=str, dest='regex', action='store',
                         help='Filters output by this regular expression.')
     parser.add_argument('--file', nargs='+', dest='file', action='store',
@@ -52,13 +65,9 @@ def argParse():
     parser.add_argument('--result', type=str, dest="result_file",
                         action='store', help='opens result file as json and \
                         dumps it\'s content.')
-    parser.add_argument('--country', action='store_true',
+    parser.add_argument('--print_as_country', action='store_true',
                         help='Store ip addresses with coresponding \
                         dictionary in format country:city -> ip.addr.')
-    ''' parser.add_argument('--output', type=str, dest="output", action='store',
-    help='Specifies output file name, if not given output is written to
-    standard output (terminal).')
-    '''
     # settings for dht
 
     parser.add_argument('--counter', type=int, dest='counter', action='store',
@@ -80,6 +89,12 @@ def argParse():
     return parser
 
 
+def parse_input_args():
+    args = argument_parser()
+    args = args.parse_args()
+    return args
+
+
 class Monitor:
     '''
      Parse it from class methods to monitor class where we want to exchange
@@ -90,7 +105,7 @@ class Monitor:
     def __init__(self, arguments, torrent):
         self.counter = 1
         self.torrent = torrent
-        self.infohash = self.torrent.random_infohash()
+        self.infohash = random_infohash()
         self.test = False
         self.duration = 600
 
@@ -102,11 +117,16 @@ class Monitor:
         self.magnet = arguments.magnet
         self.result = arguments.result_file
         self.country = arguments.country
+
+        self.ipaddr = arguments.ipaddr
+        self.port = arguments.port
+        if arguments.ipaddr and arguments.port is None:
+            self.vprint("No addr and port set")
+
         if arguments.hash is not None:
             '''
             infohash of some file on internet,
             if not specified randomly generate infohash
-
             self.infohash = sha1(arguments.hash.encode('utf-8')).digest()
             '''
             self.infohash = arguments.hash
@@ -121,70 +141,24 @@ class Monitor:
             self.duration = arguments.duration
 
         # local variables for class
-        self.tn = 0             # Number of nodes in a specified n-bit zone
+        self.n_nodes = 0             # Number of nodes in a specified n-bit zone
         self.tnspeed = 0
-        self.infoPool = {}      # infohashes already found
-        self.addrPool = {}      # Addr recieved from
+        self.info_pool = {}      # infohashes already found
+        self.addr_pool = {}      # Addr recieved from
         self.respondent = 0     # Number of respondents
+        self.output = ProcessOutput(self, arguments.print_as_country,
+                                    arguments.country)
+        self.lock = Semaphore()
 
-    # Debug info of class variables , print(Monitor_obj)
     def __str__(self):
         return "Hash: {},\nRegex: {},\nFile: {},\nMagnet-link: {},\
-                \nDuration of crawl: {},\nCounter: {}"
-        .format(self.infohash, self.regex,
-                self.file, self.magnet,
-                self.duration, self.counter)
+    \nDuration of crawl: {}, \nCounter: {}".format(self.infohash, self.regex,
+                                                   self.file, self.magnet,
+                                                   self.duration, self.counter)
 
     def vprint(self, msg):
         if self.torrent.verbosity:
             print(msg)
-
-    def hasNode(self, id, host, port):
-        r = None
-        for n in self.infoPool[id]:
-            if n[0] == host and n[1] == port:
-                r = n
-                break
-        return r
-
-    def decode_message(self, msg):
-        nodes = []
-        for key, value in msg.items():
-            # print(key.decode('utf-8'))
-            # print(value)
-            if str(key)[2] == "r":
-                for lkey, lvalue in value.items():
-                    nodes = self.decode_nodes(lvalue)
-
-        return nodes
-
-    def decode_nodes(self, nodes):
-        n = []
-        try:
-            length = len(nodes)
-        except:
-            length = 0
-            pass
-
-        if (length % 26) != 0:
-            return n
-        # nodes in raw state
-        for i in range(0, length, 26):
-            nid = nodes[i:i+20]
-            ip = socket.inet_ntoa(nodes[i+20:i+24])
-            port = unpack("!H", nodes[i+24:i+26])[0]
-            n.append((nid, ip, port))
-
-            nid = binascii.hexlify(nid).decode("utf-8")
-            if nid not in self.infoPool:
-                self.infoPool[nid] = [(ip, port)]
-            else:
-                if not self.hasNode(nid, ip, port):
-                    self.infoPool[nid].append((ip, port))
-                else:
-                    # duplicates
-                    pass
-        return n
 
     #####################
     # START OF CRAWLING #
@@ -196,63 +170,75 @@ class Monitor:
                 time.sleep(self.counter)
             try:
                 msg, addr = self.torrent.query_socket.recvfrom(1024)
-                try:
-                    msg = self.torrent.decode_krpc(msg)
-                except:
-                    # TODO probably malformed message
-                    continue
-                nodes = self.decode_message(msg)
+            except OSError:
+                # probably closed socket
+                return 9
+            try:
+                msg = decode_krpc(msg)
+            except Exception:
+                # TODO probably malformed message
+                continue
+            nodes = self.torrent.decode_message(msg, self.info_pool)
+            # When --country is passed as argument, diverge it
+            if self.country is not None:
+                self.lock.acquire()
+                nodes = self.diverge_in_location(nodes)
+                self.lock.release()
+
+            if self.torrent.info.qsize() <= 150:
                 for node in nodes:
+                    infohash = self.torrent.info.get(True)
                     if self.torrent.info.empty():
                         self.torrent.info.put((node))
-                    elif node[0] != self.torrent.info.get(True):
+                    elif node[0] != infohash[0]:
+                        self.torrent.info.put((infohash))
                         self.torrent.info.put((node))
 
-                self.addrPool[addr] = {"timestamp": time.time()}
-                # FIXME len(self.addrPool) ??
+            self.addr_pool[addr] = {"timestamp": time.time()}
+            if self.country is None:
                 self.respondent += 1
-
-                self.vprint("Last Thing\n{")
-                for key, value in self.infoPool.items():
-                    for val in value:
-                        self.vprint("\"{}\": [\n\"{}\",{}\n],"
-                                    .format(key, val[0], val[1]))
-                self.vprint("}")
-            except Exception:
-                print("Exception in creating listener")
 
     def start_sender(self, test=False):
         if not test:
             while True:
                 if self.counter is not None:
                     time.sleep(self.counter)
-
+                node = self.torrent.info.get(True)
                 try:
-                    node = self.torrent.info.get(True)
+                    hexdig_self = int.from_bytes(
+                        self.infohash, byteorder='big')
+                except ValueError:
+                    hexdig_self = int(self.infohash, 16)
+                try:
+                    hexdig_target = int.from_bytes(node[0], byteorder='big')
+                except ValueError:
+                    hexdig_target = int(node[0], 16)
+
+                # TODO metrics
+                if((hexdig_self ^ hexdig_target) >> 148) == 0:
                     try:
-                        hexDig1 = int.from_bytes(self.infohash,
-                                                 byteorder='big')
-                    except Exception:
-                        hexDig1 = int(self.infohash, 16)
-                    hexDig2 = int.from_bytes(node[0], byteorder='big')
-                    # TODO metrics
-                    if((hexDig1 ^ hexDig2) >> 148) == 0:
                         self.torrent.query_find_node(node)
-                        for i in range(1, 5):
-                            tid = self.torrent.get_neighbor(self.infohash,
-                                                            node[0], i)
-                            self.query_find_node(tid, node)
-                    elif self.tn < 2000:
+                    except OSError:
+                        return 9
+                    for i in range(1, 5):
+                        tid = get_neighbor(self.infohash,
+                                           node[0], i)
+                        self.torrent.query_find_node(tid, node)
+                # Speed is less than 2000 bps
+                elif self.n_nodes < 2000:
+                    try:
                         self.torrent.query_find_node(node)
-                except Exception:
-                    print("Exception in creating sender")
+                    except OSError:
+                        return 9
 
         # if test is given perform single message send
         node = self.torrent.info.get(True)
-        hexDig1 = int.from_bytes(self.infohash, byteorder='big')
-        hexDig2 = int.from_bytes(node[0], byteorder='big')
+        hexdig_self = int.from_bytes(self.infohash, byteorder='big')
+        hexdig_target = int.from_bytes(node[0], byteorder='big')
         self.torrent.query_find_node(node)
         self.torrent.rejoin.cancel()
+        # return 2 to make test connection assertion
+        return 2
 
     def start_timer(self, thread1, thread2):
         self.vprint("Start of duration")
@@ -261,16 +247,31 @@ class Monitor:
             time.sleep(1)
         self.vprint("End of duration")
         # Clear all resources
+        self.kill_sender_reciever(thread1, thread2)
+
+    def kill_sender_reciever(self, thread1, thread2):
         self.torrent.rejoin.cancel()
         identification = thread1.ident
-        signal.pthread_kill(identification, 2)
+        try:
+            signal.pthread_kill(identification, 2)
+        except KeyboardInterrupt:
+            pass
         identification = thread2.ident
-        signal.pthread_kill(identification, 2)
+        try:
+            signal.pthread_kill(identification, 2)
+        except Exception:
+            pass
+        try:
+            self.torrent.query_socket.close()
+        except Exception:
+            return
 
     def clear_resources(self):
         self.torrent.rejoin.cancel()
+        self.torrent.query_socket.close()
 
-    def crawl_begin(self):
+    def crawl_begin(self, test=False):
+        # Create all threads, duration to count how long program is executed
         send_thread = Thread(target=self.start_sender, args=())
         send_thread.daemon = True
         send_thread.start()
@@ -282,47 +283,50 @@ class Monitor:
         duration_thread.daemon = True
         duration_thread.start()
 
-        output = ProcessOutput(self, self.country)
         while True:
+            if test:
+                self.kill_sender_reciever(send_thread, listen_thread)
             try:
                 '''
-                 self.counter = 10 if self.torrent.info.qsize()
+                    self.counter = 10 if self.torrent.info.qsize()
                     else self.counter - 1
                 '''
-                self.info()
-                output.get_locations()
-
+                if self.country:
+                    self.lock.acquire()
+                    self.output.get_locations()
+                    self.lock.release()
+                else:
+                    # self.info()
+                    self.output.get_locations()
                 time.sleep(1)
             except KeyboardInterrupt:
                 self.vprint("\nClearing threads, wait a second")
                 self.clear_resources()
                 break
-            except Exception as err:
-                print("Expcetion: Crawler start threads()", err.args)
-        output.print_locations()
+        self.info()
+        self.output.print_locations()
 
-    def fill_locations(self):
-        '''
-        fill various information to dictionary
-        '''
-        pass
-
-    # TODO, think about it
     def info(self):
-        # [Dup]:%.2f%% ,  self.duplicates*100.0/self.total
         print("[NodeSet]:%i\t\t[12-bit Zone]:%i [%i/s]\t\t[Response]:\
             %.2f%%\t\t[Queue]:%i\t\t" %
-              (len(self.infoPool), self.tn, self.tnspeed,
-               self.respondent*100.0 / max(1, len(self.infoPool)),
+              (len(self.info_pool), self.n_nodes, self.tnspeed,
+               self.respondent*100.0 / max(1, len(self.info_pool)),
                self.torrent.info.qsize()))
-        pass
 
-    def parse_ips(self):
-        iplist = []
-        for key, value in self.monitor.infoPool.items():
-            for val in value:
-                iplist.append((val[0]))
-        self.ipPool["ip"] = iplist
+    def diverge_in_location(self, nodes):
+        '''
+        After climbing to another teritory, do not access it,
+        return adjusted list of nodes.
+        '''
+        iplist = self.output.translate_node(self.info_pool)
+        print(iplist)
+        for ip_addr in iplist:
+            num = 0
+            for node_ip in nodes:
+                if node_ip[1] == ip_addr[0]:
+                    nodes.remove(nodes[num])
+                num = num + 1
+        return nodes
 
     def parse_torrent_info(self, pieces, values):
         pieces = pieces.decode("utf-8")
@@ -339,7 +343,7 @@ class Monitor:
                 content = file_r.read()
                 info_hash = None
                 self.vprint("Torrent file content")
-                for key, value in self.torrent.decode_krpc(content).items():
+                for key, value in decode_krpc(content).items():
                     key = key.decode('utf-8')
                     if key == "creation date":
                         self.vprint("Creation of file: ")
@@ -350,18 +354,25 @@ class Monitor:
                         for info_key, info_value in value.items():
                             info_hash = self.parse_torrent_info(info_key,
                                                                 info_value)
-                            pass
                     if key == "nodes":
                         self.torrent.change_bootstrap(info_hash, value)
-                        pass
                     # TODO url-list parse to join to swarm with torrent file
+                    # Try it with real torrent file
                 file_r.close()
-        else:
-            '''
-             If no file given in self.file passing this function and continue
-             without torrent file
-            '''
-            pass
+        '''
+         If no file given in self.file passing this function and continue
+         without torrent file
+        '''
+
+    def change_ip(self):
+        if self.ipaddr is not None and self.port is not None:
+            self.torrent.clear_bootstrap()
+            self.torrent.change_bootstrap(self.infohash,
+                                          (self.ipaddr, self.port))
+        if self.ipaddr is not None:
+            self.torrent.clear_bootstrap()
+            self.torrent.change_bootstrap(self.infohash,
+                                          (self.ipaddr, 6881))
 
     def parse_magnet(self):
         '''
@@ -376,30 +387,25 @@ class Monitor:
 #################
 
 
-def parse_input_args():
-    args = argParse()
-    args = args.parse_args()
-    return args
-
-
 def create_monitor(verbosity=False):
     args = parse_input_args()
     # This is variant with verbose output to track some lib imported staff
-    if args.port is not None:
-        dht_socket = torrentDHT(bind_port=args.port, verbosity=verbosity)
+    if args.bind_port is not None:
+        dht_socket = TorrentDHT(bind_port=args.bind_port, verbosity=verbosity)
     else:
-        dht_socket = torrentDHT(verbosity=verbosity)
-    # dht_socket = torrentDHT(LogDHT())
+        dht_socket = TorrentDHT(verbosity=verbosity)
 
-    # Monitor class needs dht_socket, which is imported from torrentDHT.py
+    # Monitor class needs dht_socket, which is imported from TorrentDHT.py
     monitor = Monitor(args, dht_socket)
     # This variant is only to test connection to BOOTSTRAP_NODES
     if monitor.test:
-        monitor.start_sender(test=True)
-        exit(2)
+        result = monitor.start_sender(test=True)
+        exit(result)
     elif monitor.result is not None:
         result = json.load(open(monitor.result))
         print(json.dumps(result, indent=4))
         monitor.torrent.rejoin.cancel()
         exit(3)
+    monitor.parse_torrent()
+    monitor.change_ip()
     return monitor

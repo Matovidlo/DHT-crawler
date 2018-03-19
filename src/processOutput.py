@@ -13,19 +13,43 @@ class ProcessOutput():
     Process output to process regex or to remove duplicities
     '''
 
-    def __init__(self, monitor, country):
+    def __init__(self, monitor, country_print, country):
         self.monitor = monitor
         # class variables to save position and information about node
-        self.ip = {}
         self.country_city = {}
-        if country is not None:
-            self.print_country = country
+        if country_print is not None:
+            self.print_country = country_print
         else:
             self.print_country = False
-        # TODO
-        # self.latitude = {}
-        # self.longitude = {}
-        self.ipPool = {}
+        self.country_name = country
+        self.ip_pool = {}
+        self.info_pool = {}
+        self.port_pool = {}
+
+    def translate_node(self, nodes):
+        '''
+        translates nodes ip address to equivalent country name, check wether
+        they corelate with name given as parameter, returns adjusted ip
+        addresses which should be deleted from `nodes` list.
+        '''
+        iplist = []
+        infolist = []
+        for info, node in nodes.items():
+            url_of_location = "http://www.freegeoip.net/json/{}"\
+                .format(node[0][0])
+            location_info = json.loads(urllib.request.urlopen(url_of_location)
+                                       .read())
+            if location_info['country_name'] is None:
+                iplist.append(node[0])
+                infolist.append(info)
+            else:
+                if self.country_name != location_info['country_name']:
+                    iplist.append(node[0])
+                    infolist.append(info)
+        for i in infolist:
+            del nodes[i]
+
+        return iplist
 
     def get_locations(self):
         '''
@@ -33,51 +57,64 @@ class ProcessOutput():
         '''
         if self.print_country:
             self.parse_ips()
-            for key, value in self.ipPool.items():
-                for ip_addr in value:
-                    # FIXME when freegeoip is down we need another website to
-                    # get this kind of information
-                    urlFoLaction = "http://www.freegeoip.net/json/{0}".format(
-                        ip_addr)
-                    locationInfo = json.loads(urllib.request.urlopen(
-                        urlFoLaction).read())
-                    iplist = []
-                    if locationInfo['country_name'] + ":" +
-                    locationInfo['city'] in self.country_city:
-                        iplist = self.fill_locations(locationInfo)
-                    else:
-                        iplist = [str(locationInfo['ip'])]
-                    self.country_city[locationInfo['country_name'] + ":" +
-                                      locationInfo['city']] = iplist
-                    # FIXME
-                    # print(self.country_city)
-                    # print ('Latitude: ' + str(locationInfo['latitude']))
-                    # print ('Longitude: ' + str(locationInfo['longitude']))
-        pass
+            for ip_addr in self.ip_pool:
+                # FIXME when freegeoip is down we need another website to
+                # get this kind of information
+                url_of_location = "http://www.freegeoip.net/json/{0}".format(
+                    ip_addr)
+                location_info = json.loads(urllib.request.urlopen(
+                    url_of_location).read())
+                iplist = []
+
+                if location_info['country_name'] + ":" + \
+                        location_info['city'] in self.country_city:
+                    iplist = self.fill_locations(location_info)
+                else:
+                    '''
+                    TODO there are not all ports and infohashes for all
+                    addresses need to fill it within fill_location method
+                    '''
+                    iplist = [{"ip": str(location_info['ip']),
+                               "port": self.port_pool.pop(0),
+                               "infohash": self.info_pool.pop(0),
+                               "latitude": str(location_info['latitude']),
+                               "longitude": str(location_info['longitude'])
+                              }]
+
+                self.country_city[location_info['country_name'] + ":" +
+                                  location_info['city']] = iplist
 
     def parse_ips(self):
         iplist = []
-        for key, value in self.monitor.infoPool.items():
+        infolist = []
+        portlist = []
+        for key, value in self.monitor.info_pool.items():
+            infolist.append((key))
             for val in value:
                 iplist.append((val[0]))
-        self.ipPool["ip"] = iplist
+                portlist.append((val[1]))
+        self.ip_pool = iplist
+        self.port_pool = portlist
+        self.info_pool = infolist
 
-    def fill_locations(self, locationInfo, iplist=[]):
+    def fill_locations(self, location_info, iplist=None):
         '''
         fill various information to dictionary
         '''
-        iplist = self.country_city[locationInfo['country_name'] + ":" +
-                                   locationInfo['city']]
+        iplist = self.country_city[location_info['country_name'] + ":" +
+                                   location_info['city']]
         is_in_list = False
-        for ip in iplist:
-            if str(ip) == str(locationInfo['ip']):
+        for ip_addr in iplist:
+            if str(ip_addr['ip']) == str(location_info['ip']):
                 is_in_list = True
         if not is_in_list:
-            iplist.append(str(locationInfo['ip']))
+            iplist.append({"ip": str(location_info['ip']),
+                           "latitude": str(location_info['latitude']),
+                           "longitude": str(location_info["longitude"])})
         return iplist
 
     def print_locations(self):
         if self.print_country:
             print(json.dumps(self.country_city, indent=4, sort_keys=True))
         else:
-            print(json.dumps(self.monitor.infoPool, indent=4, sort_keys=True))
+            print(json.dumps(self.monitor.info_pool, indent=4, sort_keys=True))
