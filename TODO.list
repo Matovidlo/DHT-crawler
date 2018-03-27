@@ -1,0 +1,11 @@
+testy, hlavne s TORRENT FILE / MAGNET LINK
+rozbehat examples,
+excel grafy, z torrent file
+odstranit duplicitne adresy z roznych crawlov.
+Prerobit na get_peers, s dotazovanim iba z getPeers mnoziny, ak je vycerpana mat zaloznu nodes.
+Ukladat do json ako routovaciu tabulku
+
+TODO
+rozne casy pri prehladavani a % pocet najdenych
+
+program - ip adresa -> json {whois, rev. zaznam, dns server etc.}

@@ -51,7 +51,39 @@ class ProcessOutput():
 
         return iplist
 
-    def get_locations(self):
+
+    def parse_ips(self):
+        iplist = []
+        infolist = []
+        portlist = []
+        for key, value in self.monitor.info_pool.items():
+            infolist.append((key))
+            for val in value:
+                iplist.append((val[0]))
+                portlist.append((val[1]))
+        self.ip_pool = iplist
+        self.port_pool = portlist
+        self.info_pool = infolist
+
+
+    def fill_locations(self, location_info, iplist=None):
+        '''
+        fill various information to dictionary
+        '''
+        iplist = self.country_city[location_info['country_name'] + ":" +
+                                   location_info['city']]
+        is_in_list = False
+        for ip_addr in iplist:
+            if str(ip_addr['ip']) == str(location_info['ip']):
+                is_in_list = True
+        if not is_in_list:
+            iplist.append({"ip": str(location_info['ip']),
+                           "latitude": str(location_info['latitude']),
+                           "longitude": str(location_info["longitude"])})
+        return iplist
+
+
+    def get_geolocations(self):
         '''
         get real locations of ip addresses
         '''
@@ -70,10 +102,6 @@ class ProcessOutput():
                         location_info['city'] in self.country_city:
                     iplist = self.fill_locations(location_info)
                 else:
-                    '''
-                    TODO there are not all ports and infohashes for all
-                    addresses need to fill it within fill_location method
-                    '''
                     iplist = [{"ip": str(location_info['ip']),
                                "port": self.port_pool.pop(0),
                                "infohash": self.info_pool.pop(0),
@@ -84,36 +112,8 @@ class ProcessOutput():
                 self.country_city[location_info['country_name'] + ":" +
                                   location_info['city']] = iplist
 
-    def parse_ips(self):
-        iplist = []
-        infolist = []
-        portlist = []
-        for key, value in self.monitor.info_pool.items():
-            infolist.append((key))
-            for val in value:
-                iplist.append((val[0]))
-                portlist.append((val[1]))
-        self.ip_pool = iplist
-        self.port_pool = portlist
-        self.info_pool = infolist
 
-    def fill_locations(self, location_info, iplist=None):
-        '''
-        fill various information to dictionary
-        '''
-        iplist = self.country_city[location_info['country_name'] + ":" +
-                                   location_info['city']]
-        is_in_list = False
-        for ip_addr in iplist:
-            if str(ip_addr['ip']) == str(location_info['ip']):
-                is_in_list = True
-        if not is_in_list:
-            iplist.append({"ip": str(location_info['ip']),
-                           "latitude": str(location_info['latitude']),
-                           "longitude": str(location_info["longitude"])})
-        return iplist
-
-    def print_locations(self):
+    def print_geolocations(self):
         if self.print_country:
             print(json.dumps(self.country_city, indent=4, sort_keys=True))
         else:
