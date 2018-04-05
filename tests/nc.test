@@ -1,0 +1,1 @@
+nc -v -u tracker.openbittorrent.com 1337

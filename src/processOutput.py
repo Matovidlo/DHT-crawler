@@ -53,6 +53,9 @@ class ProcessOutput():
 
 
     def parse_ips(self):
+        '''
+        initiate pool of ip addresses port and infohashes for geolocation.
+        '''
         iplist = []
         infolist = []
         portlist = []
@@ -114,6 +117,10 @@ class ProcessOutput():
 
 
     def print_geolocations(self):
+        '''
+        print geolocation when argument --print_country is specified, else
+        print as json object with no resolution.
+        '''
         if self.print_country:
             print(json.dumps(self.country_city, indent=4, sort_keys=True))
         else:
