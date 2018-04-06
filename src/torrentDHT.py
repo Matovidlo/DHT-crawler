@@ -88,6 +88,7 @@ def decode_nodes(value, info_pool):
     if (length % 26) != 0:
         return nodes
     # nodes in raw state
+    # print(value)
     for i in range(0, length, 26):
         nid = value[i:i+20]
         ip_addr = socket.inet_ntoa(value[i+20:i+24])
@@ -104,13 +105,6 @@ def decode_nodes(value, info_pool):
                 # duplicates
                 pass
     return nodes
-
-
-def decode_peers(value, info_pool):
-    '''
-    decode peers from response message
-    '''
-    pass
 
 
 class TorrentArguments:
@@ -167,7 +161,7 @@ class TorrentDHT():
 
         # create all necessary for transmission over network
         self.infohash = random_infohash()
-        self.target = None
+        self.target = random_infohash()
         # list of nodes
         self.bootstrap_nodes = arguments.bootstrap_nodes
         self.max_node_qsize = arguments.max_node_qsize
@@ -176,8 +170,16 @@ class TorrentDHT():
         # Append all bootstrap nodes
         for node in arguments.bootstrap_nodes:
             self.nodes.put((self.infohash, node[0], node[1]))
+        # FIXME
         # self.rejoin = timer(3, self.rejoin_dht)
         # self.rejoin.start()
+
+    def change_arguments(self, length):
+        '''
+        change class arguments
+        '''
+        if length is not None:
+            self.max_node_qsize = length
 
     def change_bootstrap(self, infohash, nodes):
         '''
@@ -193,6 +195,7 @@ class TorrentDHT():
 
                 compact_node = re.search(r".*:", compact_node)
                 compact_node = compact_node.group(0)[6:-1]
+                # FIXME
                 # self.nodes.put((infohash, compact_node, port))
                 # self.bootstrap_nodes.append((compact_node, port))
         for bootstrap in self.bootstrap_nodes:
@@ -206,10 +209,8 @@ class TorrentDHT():
         for bootstrap in self.bootstrap_nodes:
             self.nodes.put((infohash, bootstrap[0], bootstrap[1]))
 
-    '''
-    This is bootstrap mechanism, to get new nodes from well known ones.
-    Joins DHT network from exact address
-    '''
+    # This is bootstrap mechanism, to get new nodes from well known ones.
+    # Joins DHT network from exact address
 
     # def join_dht(self):
     #     if self.verbosity:
@@ -224,10 +225,9 @@ class TorrentDHT():
     #     self.join_dht()
     #     self.rejoin = timer(3, self.rejoin_dht)
     #     self.rejoin.start()
-    '''
-    This part is about query messages. Supports all 4 Kademlia messages sends
-    over UDP with bencoding as torrent BEP05 refers.
-    '''
+
+    # This part is about query messages. Supports all 4 Kademlia messages sends
+    # over UDP with bencoding as torrent BEP05 refers.
 
     def send_krpc(self, message, node):
         '''
@@ -238,10 +238,8 @@ class TorrentDHT():
         except (IndexError, TypeError):
             pass
 
-    '''
-    Query messages.
-    '''
 
+    # Query messages.
     def query_find_node(self, node, infohash=None):
         '''
         send query find_node to node with our infohash
@@ -274,11 +272,10 @@ class TorrentDHT():
         }
         self.send_krpc(message, node)
 
-    def query_get_peers(self, node, infohash, target):
+    def query_get_peers(self, node, infohash):
         '''
         send simple get_peers with our infohash to node
         '''
-        print(target)
         infohash = get_neighbor(infohash, self.infohash) if infohash \
             else self.infohash
         message = {
@@ -287,7 +284,7 @@ class TorrentDHT():
             "q": "get_peers",
             "a": {
                 "id": binascii.unhexlify(infohash),
-                "info_hash": binascii.unhexlify(target)
+                "info_hash": binascii.unhexlify(self.target)
             }
         }
         self.send_krpc(message, node)
@@ -322,16 +319,15 @@ class TorrentDHT():
         decode peers and return them as result.
         '''
         nodes = []
+        retval = {}
         for key_type, message_content in msg.items():
             # response is detected
             if str(key_type)[2] == "r":
                 for key, value in message_content.items():
                     if key.decode("utf-8") == "nodes":
                         nodes = decode_nodes(value, info_pool)
-                        retval = "Nodes"
+                        retval["Nodes"] = nodes
                     if key.decode("utf-8") == "values":
-                        retval = "Peers"
-                        nodes = decode_peers(value, info_pool)
-                        print(value)
-        return {retval: nodes}
-
+                        nodes = decode_nodes(value, info_pool)
+                        retval["Peers"] = nodes
+        return retval

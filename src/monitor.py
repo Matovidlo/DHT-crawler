@@ -5,6 +5,7 @@ import time
 import datetime
 import hashlib
 import select
+import queue
 from threading import Thread, Semaphore
 from bencoder import bencode
 try:
@@ -72,7 +73,6 @@ def argument_parser():
                         on value of 200.')
     parser.add_argument('--test', action='store_true',
                         help='Tests connection to remote(local) server.')
-
     # parser.add_argument('--ipaddr', type=str, dest='ipaddr', action='store',
     #                     help='Specify ip addres to which should \
     #                      be bootstraped.')
@@ -102,7 +102,6 @@ class Monitor:
         self.timeout = 1
         self.torrent = torrent
         self.infohash = random_infohash()
-        self.target = random_infohash()
         self.test = False
         self.duration = 600
 
@@ -116,7 +115,9 @@ class Monitor:
         self.magnet = arguments.magnet
         self.country = arguments.country
 
-        self.max_peers = arguments.max_peers
+        self.max_peers = 600
+        if arguments.max_peers is not None:
+            self.max_peers = arguments.max_peers
         if arguments.hash is not None:
             # infohash of some file on internet,
             # if not specified randomly generate infohash
@@ -158,6 +159,28 @@ class Monitor:
     # START OF CRAWLING #
     #####################
 
+    def insert_to_queue(self, nodes, queue_type):
+        '''
+        Inserts nodes to queue by given queue type.
+        '''
+        if (queue_type == "Nodes"):
+            for node in nodes["Nodes"]:
+                infohash = self.torrent.nodes.get(True)
+                if self.torrent.nodes.empty():
+                    self.torrent.nodes.put((node))
+                elif node[0] != infohash[0]:
+                    self.torrent.nodes.put((infohash))
+                    self.torrent.nodes.put((node))
+        elif queue_type == "Peers":
+            for node in nodes["Peers"]:
+                infohash = self.torrent.peers.get(True)
+                if self.torrent.peers.empty():
+                    self.torrent.peers.put((node))
+                elif node[0] != infohash[0]:
+                    self.torrent.peers.put((infohash))
+                    self.torrent.peers.put((node))
+
+
     def start_listener(self):
         '''
         start listener thread. Recieve query packet and decode its body.
@@ -167,33 +190,51 @@ class Monitor:
             if self.timeout is not None:
                 time.sleep(self.timeout)
 
-            ready = select.select([self.torrent.query_socket], [], [], 2)
+            # socket is closed no value returned
+            try:
+                ready = select.select([self.torrent.query_socket], [], [], 0.5)
+            except:
+                continue
+
             if ready[0]:
                 msg, addr = self.torrent.query_socket.recvfrom(1024)
             else:
                 continue
-
             # try:
             msg = decode_krpc(msg)
-            # except Exception as instance:
-                # print("Malformed {}".format(instance.args))
-                # continue
-            nodes = self.torrent.decode_message(msg, self.info_pool)
-            # When --country is passed as argument, diverge it
-            if self.country is not None:
-                self.lock.acquire()
-                nodes = self.diverge_in_location(nodes)
-                self.lock.release()
+            if msg is None:
+                continue
+            pool = {}
+            nodes = self.torrent.decode_message(msg, pool)
+            # update dictionary by given pool value
+            for key in nodes.keys():
+                if key is "Nodes":
+                    self.info_pool.update(pool)
+                elif key is "Peers":
+                    self.peers_pool.update(pool)
+            print(len(self.info_pool), len(self.peers_pool), self.max_peers)
 
             # when 3/4 of queue is not resolved, do not resolve next
-            if self.torrent.info.qsize() <= 150:
-                for node in nodes:
-                    infohash = self.torrent.info.get(True)
-                    if self.torrent.info.empty():
-                        self.torrent.info.put((node))
-                    elif node[0] != infohash[0]:
-                        self.torrent.info.put((infohash))
-                        self.torrent.info.put((node))
+            # Resolution without cleaning queue
+            # TODO
+            if self.torrent.nodes.qsize() <= self.max_peers * 0.75:
+                for key in nodes.keys():
+                    self.insert_to_queue(nodes, key)
+
+            # if len(self.peers_pool) != 0:
+            #     for num in range(0, self.max_peers, 2):
+            #         self.torrent.nodes.get(True)
+
+            # Resolution with clean queue
+            # if self.torrent.nodes.qsize() <= self.max_peers * 0.8:
+            #     for key in nodes.keys():
+            #         self.insert_to_queue(nodes, key)
+            # else:
+            #     # Clear half of queue
+            #     for num in range(0, self.max_peers, 2):
+            #         self.torrent.nodes.get(True)
+            #     for key in nodes.keys():
+            #         self.insert_to_queue(nodes, key)
 
             self.addr_pool[addr] = {"timestamp": time.time()}
             # if self.country is None:
@@ -209,14 +250,14 @@ class Monitor:
             while True:
                 if self.timeout is not None:
                     time.sleep(self.timeout)
-                node = self.torrent.info.get(True)
+                node = self.torrent.nodes.get(True)
                 hexdig_self = int(self.infohash, 16)
                 hexdig_target = int(node[0], 16)
                 # print(hexdig_self, hexdig_target)
 
                 if((hexdig_self ^ hexdig_target) >> 148) == 0:
                     try:
-                        self.torrent.query_get_peers(node, self.infohash, self.target)
+                        self.torrent.query_get_peers(node, self.infohash)
                     except OSError:
                         return 9
                     # for i in range(1, 5):
@@ -228,12 +269,12 @@ class Monitor:
                     # DEBUG
                     # print(node)
                     try:
-                        self.torrent.query_get_peers(node, self.infohash, self.target)
+                        self.torrent.query_get_peers(node, self.infohash)
                     except OSError:
                         return 9
 
         # if test is given perform single message send
-        node = self.torrent.info.get(True)
+        node = self.torrent.nodes.get(True)
         hexdig_self = int(self.infohash, 16)
         hexdig_target = int(node[0], 16)
         self.torrent.query_get_peers(node, self.infohash)
@@ -312,11 +353,11 @@ class Monitor:
         '''
         Print info for current state of crawling.
         '''
-        print("[NodeSet]:%i\t\t[12-bit Zone]:%i [%i/s]\t\t[Response]:\
+        print("[NodeSet]:%i\t\t[PeerSet]:%i\t\t[12-bit Zone]:%i [%i/s]\t\t[Response]:\
             %.2f%%\t\t[Queue]:%i\t\t" %
-              (len(self.info_pool), self.n_nodes, self.tnspeed,
-               self.respondent*100.0 / max(1, len(self.info_pool)),
-               self.torrent.info.qsize()))
+              (len(self.info_pool), len(self.peers_pool), self.n_nodes,
+               self.tnspeed, self.respondent*100.0 / max(1, len(self.info_pool)),
+               self.torrent.nodes.qsize()))
 
     def diverge_in_location(self, nodes):
         '''
@@ -324,7 +365,6 @@ class Monitor:
         return adjusted list of nodes.
         '''
         iplist = self.output.translate_node(self.info_pool)
-        print(iplist)
         for ip_addr in iplist:
             num = 0
             for node_ip in nodes:
@@ -355,14 +395,16 @@ class Monitor:
                                     .strftime("%Y-%m-%d %H:%M:%S"))
                     if key == "info":
                         info_hash = hashlib.sha1(bencode(value)).hexdigest()
-                        # set target infohash
-                        self.target = info_hash
+                        # set torrent target
+                        self.torrent.target = info_hash
+
                     if key == "nodes":
                         pass
                     if key == "announce-list":
                         nodes = value
                 self.torrent.change_bootstrap(info_hash, nodes)
                 file_r.close()
+
          # If no file given in self.file passed, simply end
 
 
@@ -372,11 +414,8 @@ class Monitor:
         '''
         if self.magnet is not None:
             print(self.magnet)
+            # set torrent target
 
-
-    def change_dht_arguments(self):
-        self.torrent.target = self.target
-        self.torrent.change_arguments()
 
 #################
 # Start of main #
@@ -407,7 +446,7 @@ def create_monitor(verbosity=False):
     if monitor.test:
         result = monitor.start_sender(test=True)
         exit(result)
+    monitor.torrent.change_arguments(monitor.max_peers)
     monitor.parse_torrent()
     monitor.parse_magnet()
-    monitor.change_dht_arguments()
     return monitor
