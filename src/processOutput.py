@@ -123,5 +123,11 @@ class ProcessOutput():
         '''
         if self.print_country:
             print(json.dumps(self.country_city, indent=4, sort_keys=True))
+            print(json.dumps(self.monitor.peers_pool, indent=4, sort_keys=True))
+            print("Time spend not recieving any UDP response: {}"
+                  .format(self.monitor.no_recieve))
         else:
             print(json.dumps(self.monitor.info_pool, indent=4, sort_keys=True))
+            print(json.dumps(self.monitor.peers_pool, indent=4, sort_keys=True))
+            print("Time spend not recieving any UDP response: {}"
+                  .format(self.monitor.no_recieve))

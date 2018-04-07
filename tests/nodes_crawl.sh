@@ -5,6 +5,6 @@ fi
 
 for i in `seq 1 1600`;
 do
-	../src/exec.py --duration $i --file ../examples/ > ../logs/nodes_timer/log$i.out
+	../src/exec.py --duration $i --file ../examples/Chasing\ Coral\ \(2017\)\ \[WEBRip\]\ \[1080p\]\ \[YTS.AM\].torrent > ../logs/nodes_timer/log$i.out
 	sleep 1
 done

@@ -5,7 +5,7 @@ import time
 import datetime
 import hashlib
 import select
-import queue
+import re
 from threading import Thread, Semaphore
 from bencoder import bencode
 try:
@@ -45,8 +45,6 @@ def argument_parser():
                         action='store', help='Store country name to \
                         converge only in this country and do not \
                         bootstrap away from it.')
-    parser.add_argument('--regex', type=str, dest='regex', action='store',
-                        help='Filters output by this regular expression.')
     parser.add_argument('--file', nargs='+', dest='file', action='store',
                         help='Gets torrent file, which decompose and start \
                         monitoring from DHT nodes in this file or \
@@ -105,10 +103,6 @@ class Monitor:
         self.test = False
         self.duration = 600
 
-        # FIXME
-        # regular expression which should parse output/input
-        # self.regex = arguments.regex
-
         # file which should be parsed
         self.file = arguments.file
         # magnet-link given
@@ -135,6 +129,7 @@ class Monitor:
         # local variables for class
         self.n_nodes = 0             # Number of nodes in a specified n-bit zone
         self.tnspeed = 0
+        self.no_recieve = 0      # timer that should point how many packets were timed out
         self.info_pool = {}      # infohashes already found
         self.peers_pool = {}     # peers already found
         self.addr_pool = {}      # Addr recieved from
@@ -163,22 +158,18 @@ class Monitor:
         '''
         Inserts nodes to queue by given queue type.
         '''
-        if (queue_type == "Nodes"):
+        if queue_type == "Nodes":
             for node in nodes["Nodes"]:
-                infohash = self.torrent.nodes.get(True)
                 if self.torrent.nodes.empty():
                     self.torrent.nodes.put((node))
-                elif node[0] != infohash[0]:
+                    continue
+                infohash = self.torrent.nodes.get(True)
+                if node[0] != infohash[0]:
                     self.torrent.nodes.put((infohash))
                     self.torrent.nodes.put((node))
-        elif queue_type == "Peers":
-            for node in nodes["Peers"]:
-                infohash = self.torrent.peers.get(True)
-                if self.torrent.peers.empty():
-                    self.torrent.peers.put((node))
-                elif node[0] != infohash[0]:
-                    self.torrent.peers.put((infohash))
-                    self.torrent.peers.put((node))
+        # elif queue_type == "Peers":
+        #     for node in nodes["Peers"]:
+        #         self.torrent.peers.put((node))
 
 
     def start_listener(self):
@@ -192,32 +183,32 @@ class Monitor:
 
             # socket is closed no value returned
             try:
-                ready = select.select([self.torrent.query_socket], [], [], 0.5)
-            except:
+                ready = select.select([self.torrent.query_socket], [], [], 0.1)
+            except (OSError, ValueError):
+                # FIXME
+                self.no_recieve = self.no_recieve + 0.1
                 continue
 
             if ready[0]:
-                msg, addr = self.torrent.query_socket.recvfrom(1024)
+                msg, addr = self.torrent.query_socket.recvfrom(2048)
             else:
                 continue
-            # try:
+
             msg = decode_krpc(msg)
             if msg is None:
                 continue
+
             pool = {}
             nodes = self.torrent.decode_message(msg, pool)
             # update dictionary by given pool value
             for key in nodes.keys():
                 if key is "Nodes":
-                    self.info_pool.update(pool)
+                    self.info_pool.update(pool["Nodes"])
                 elif key is "Peers":
-                    self.peers_pool.update(pool)
-            print(len(self.info_pool), len(self.peers_pool), self.max_peers)
-
+                    self.peers_pool.update(pool["Peers"])
             # when 3/4 of queue is not resolved, do not resolve next
             # Resolution without cleaning queue
-            # TODO
-            if self.torrent.nodes.qsize() <= self.max_peers * 0.75:
+            if self.torrent.nodes.qsize() <= self.max_peers * 0.8:
                 for key in nodes.keys():
                     self.insert_to_queue(nodes, key)
 
@@ -226,7 +217,6 @@ class Monitor:
             #         self.torrent.nodes.get(True)
 
             # Resolution with clean queue
-            # if self.torrent.nodes.qsize() <= self.max_peers * 0.8:
             #     for key in nodes.keys():
             #         self.insert_to_queue(nodes, key)
             # else:
@@ -250,9 +240,14 @@ class Monitor:
             while True:
                 if self.timeout is not None:
                     time.sleep(self.timeout)
+                # if self.torrent.peers.empty():
                 node = self.torrent.nodes.get(True)
+                # else:
+                    # node = self.torrent.peers.get(True)
+
                 hexdig_self = int(self.infohash, 16)
                 hexdig_target = int(node[0], 16)
+                # DEBUG
                 # print(hexdig_self, hexdig_target)
 
                 if((hexdig_self ^ hexdig_target) >> 148) == 0:
@@ -260,14 +255,13 @@ class Monitor:
                         self.torrent.query_get_peers(node, self.infohash)
                     except OSError:
                         return 9
+                    # FIXME
                     # for i in range(1, 5):
                     #     tid = get_neighbor(self.infohash,
                     #                        node[0], i)
                     #     self.torrent.query_find_node(node, tid)
                 # Speed is less than 2000 bps
                 elif self.n_nodes < 2000:
-                    # DEBUG
-                    # print(node)
                     try:
                         self.torrent.query_get_peers(node, self.infohash)
                     except OSError:
@@ -314,11 +308,13 @@ class Monitor:
             return
 
 
-    def crawl_begin(self, test=False):
+    def crawl_begin(self, torrent, test=False):
         '''
         Create all threads, duration to count how long program is executed.
         When Ctrl+C is pressed kill all threads
         '''
+        # TODO process thread probably
+        self.torrent.target = torrent
         send_thread = Thread(target=self.start_sender, args=())
         send_thread.daemon = True
         send_thread.start()
@@ -344,10 +340,10 @@ class Monitor:
                 time.sleep(1)
             except KeyboardInterrupt:
                 self.vprint("\nClearing threads, wait a second")
-                self.torrent.query_socket.close()
                 break
         self.info()
         self.output.print_geolocations()
+
 
     def info(self):
         '''
@@ -396,7 +392,7 @@ class Monitor:
                     if key == "info":
                         info_hash = hashlib.sha1(bencode(value)).hexdigest()
                         # set torrent target
-                        self.torrent.target = info_hash
+                        self.torrent.target_pool.append(info_hash)
 
                     if key == "nodes":
                         pass
@@ -405,22 +401,25 @@ class Monitor:
                 self.torrent.change_bootstrap(info_hash, nodes)
                 file_r.close()
 
-         # If no file given in self.file passed, simply end
-
 
     def parse_magnet(self):
         '''
         parse magnet link
         '''
         if self.magnet is not None:
-            print(self.magnet)
-            # set torrent target
+            for magnet in self.magnet:
+                file_r = open(magnet, "rb")
+                content = file_r.read()
+                info_hash = re.search(r"urn:.*&(xl|dn)", content.decode('utf-8'))
+                # match last `:` and its content
+                info_hash = re.search(r"(?:.(?!:))+$", info_hash.group(0))
 
+                # set torrent target
+                self.torrent.target_pool.append(info_hash.group(0)[1:-3])
 
 #################
 # Start of main #
 #################
-
 
 def create_monitor(verbosity=False):
     '''

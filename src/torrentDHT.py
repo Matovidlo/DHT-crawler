@@ -3,6 +3,7 @@ import queue
 import socket
 import binascii
 import re
+import datetime
 from random import randint
 from hashlib import sha1
 from threading import Timer
@@ -88,10 +89,12 @@ def decode_nodes(value, info_pool):
     if (length % 26) != 0:
         return nodes
     # nodes in raw state
-    # print(value)
     for i in range(0, length, 26):
         nid = value[i:i+20]
-        ip_addr = socket.inet_ntoa(value[i+20:i+24])
+        try:
+            ip_addr = socket.inet_ntoa(value[i+20:i+24])
+        except TypeError:
+            return nodes
         port = unpack("!H", value[i+24:i+26])[0]
 
         nid = binascii.hexlify(nid).decode("utf-8")
@@ -105,6 +108,30 @@ def decode_nodes(value, info_pool):
                 # duplicates
                 pass
     return nodes
+
+
+def decode_peers(infohash, peers, info_pool):
+    '''
+    decodes peers from get_peers response. They have only ip address and port
+    within message
+    '''
+    nodes = []
+    for peer in peers:
+        try:
+            length = len(peer)
+        except IndexError:
+            continue
+        if (length % 6) != 0:
+            continue
+        for i in range(0, length, 6):
+            ip_addr = socket.inet_ntoa(peer[i:i+4])
+            port = unpack("!H", peer[i+4:i+6])[0]
+            nodes.append((infohash, ip_addr, port))
+            info_pool[str(ip_addr)] = [datetime.datetime.now()
+                                       .strftime('%d.%m.%Y %H:%M:%S:%f'),
+                                       (infohash, ip_addr, port)]
+    return nodes
+
 
 
 class TorrentArguments:
@@ -161,6 +188,7 @@ class TorrentDHT():
 
         # create all necessary for transmission over network
         self.infohash = random_infohash()
+        self.target_pool = []
         self.target = random_infohash()
         # list of nodes
         self.bootstrap_nodes = arguments.bootstrap_nodes
@@ -170,9 +198,6 @@ class TorrentDHT():
         # Append all bootstrap nodes
         for node in arguments.bootstrap_nodes:
             self.nodes.put((self.infohash, node[0], node[1]))
-        # FIXME
-        # self.rejoin = timer(3, self.rejoin_dht)
-        # self.rejoin.start()
 
     def change_arguments(self, length):
         '''
@@ -208,23 +233,6 @@ class TorrentDHT():
         self.nodes = queue.Queue(self.max_node_qsize)
         for bootstrap in self.bootstrap_nodes:
             self.nodes.put((infohash, bootstrap[0], bootstrap[1]))
-
-    # This is bootstrap mechanism, to get new nodes from well known ones.
-    # Joins DHT network from exact address
-
-    # def join_dht(self):
-    #     if self.verbosity:
-    #         print("Sending to bootstrap")
-    #     for address in self.bootstrap_nodes:
-    #         node = (random_infohash(), address[0], address[1])
-    #         self.query_get_peers(node, self.nodeshash, self.target)
-
-    # def rejoin_dht(self):
-    #     # print(self.nodes.qsize())
-    #     # if self.nodes.qsize() == 0:
-    #     self.join_dht()
-    #     self.rejoin = timer(3, self.rejoin_dht)
-    #     self.rejoin.start()
 
     # This part is about query messages. Supports all 4 Kademlia messages sends
     # over UDP with bencoding as torrent BEP05 refers.
@@ -324,10 +332,13 @@ class TorrentDHT():
             # response is detected
             if str(key_type)[2] == "r":
                 for key, value in message_content.items():
+                    tmp_pool = {}
                     if key.decode("utf-8") == "nodes":
-                        nodes = decode_nodes(value, info_pool)
+                        nodes = decode_nodes(value, tmp_pool)
+                        info_pool["Nodes"] = tmp_pool
                         retval["Nodes"] = nodes
                     if key.decode("utf-8") == "values":
-                        nodes = decode_nodes(value, info_pool)
+                        nodes = decode_peers(self.target, value, tmp_pool)
+                        info_pool["Peers"] = tmp_pool
                         retval["Peers"] = nodes
         return retval
