@@ -110,7 +110,7 @@ def decode_nodes(value, info_pool):
     return nodes
 
 
-def decode_peers(infohash, peers, info_pool):
+def decode_peers(infohash, peers, info_pool, unique=None):
     '''
     decodes peers from get_peers response. They have only ip address and port
     within message
@@ -127,9 +127,15 @@ def decode_peers(infohash, peers, info_pool):
             ip_addr = socket.inet_ntoa(peer[i:i+4])
             port = unpack("!H", peer[i+4:i+6])[0]
             nodes.append((infohash, ip_addr, port))
-            info_pool[str(ip_addr)] = [datetime.datetime.now()
-                                       .strftime('%d.%m.%Y %H:%M:%S:%f'),
-                                       (infohash, ip_addr, port)]
+            if unique:
+                info_pool[str(ip_addr)] = [datetime.datetime.now()
+                                           .strftime('%d.%m.%Y %H:%M:%S:%f'),
+                                           (infohash, ip_addr, port)]
+            else:
+                key = str(ip_addr) + str(port)
+                info_pool[key] = [datetime.datetime.now()
+                                  .strftime('%d.%m.%Y %H:%M:%S:%f'),
+                                  (infohash, ip_addr, port)]
     return nodes
 
 
@@ -230,9 +236,11 @@ class TorrentDHT():
         '''
         change infohash in nodes queue
         '''
-        self.nodes = queue.Queue(self.max_node_qsize)
-        for bootstrap in self.bootstrap_nodes:
-            self.nodes.put((infohash, bootstrap[0], bootstrap[1]))
+        # FIXME
+        # self.nodes = queue.Queue(self.max_node_qsize)
+        # for bootstrap in self.bootstrap_nodes:
+        #     self.nodes.put((infohash, bootstrap[0], bootstrap[1]))
+        self.target = infohash
 
     # This part is about query messages. Supports all 4 Kademlia messages sends
     # over UDP with bencoding as torrent BEP05 refers.
@@ -338,7 +346,7 @@ class TorrentDHT():
                         info_pool["Nodes"] = tmp_pool
                         retval["Nodes"] = nodes
                     if key.decode("utf-8") == "values":
-                        nodes = decode_peers(self.target, value, tmp_pool)
+                        nodes = decode_peers(self.target, value, tmp_pool, True)
                         info_pool["Peers"] = tmp_pool
                         retval["Peers"] = nodes
         return retval

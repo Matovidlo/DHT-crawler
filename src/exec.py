@@ -7,5 +7,8 @@ from monitor import create_monitor
 
 if __name__ == '__main__':
     CRAWL = create_monitor(False)
-    for torrent in CRAWL.torrent.target_pool:
-        CRAWL.crawl_begin(torrent)
+    if CRAWL.torrent.target_pool:
+        for torrent in CRAWL.torrent.target_pool:
+            CRAWL.crawl_begin(torrent)
+    else:
+        CRAWL.crawl_begin()

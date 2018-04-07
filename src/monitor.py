@@ -251,6 +251,7 @@ class Monitor:
                 # print(hexdig_self, hexdig_target)
 
                 if((hexdig_self ^ hexdig_target) >> 148) == 0:
+                    # TODO very good node, lets clear a bit queue and get neighbors
                     try:
                         self.torrent.query_get_peers(node, self.infohash)
                     except OSError:
@@ -308,13 +309,15 @@ class Monitor:
             return
 
 
-    def crawl_begin(self, torrent, test=False):
+    def crawl_begin(self, torrent=None, test=False):
         '''
         Create all threads, duration to count how long program is executed.
         When Ctrl+C is pressed kill all threads
         '''
         # TODO process thread probably
-        self.torrent.target = torrent
+        if torrent:
+            self.torrent.target = torrent
+
         send_thread = Thread(target=self.start_sender, args=())
         send_thread.daemon = True
         send_thread.start()
