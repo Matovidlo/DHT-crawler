@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import urllib.request
-import json
-
 '''
 Create by Martin Vasko
 3BIT, Brno, Faculty of Information Technology.
 '''
+import urllib.request
+import json
+
 
 
 class ProcessOutput():

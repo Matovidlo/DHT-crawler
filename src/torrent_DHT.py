@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+'''
+Create by Martin Vasko
+3BIT, Brno, Faculty of Information Technology.
+
+This should be used as part of library, where you can create,
+bind socket and send all torrent DHT messages over UDP.
+BOOTSTRAP_NODES are well known nodes from which should begin torrent
+peer detection.
+'''
 import queue
 import socket
 import binascii
@@ -10,18 +19,7 @@ from threading import Timer
 from struct import unpack
 from bencoder import bencode, bdecode
 
-'''
-Create by Martin Vasko
-3BIT, Brno, Faculty of Information Technology.
-'''
 
-
-'''
-This should be used as part of library, where you can create,
-bind socket and send all torrent DHT messages over UDP.
-BOOTSTRAP_NODES are well known nodes from which should begin torrent
-peer detection.
-'''
 # TODO no IPv6 support
 
 # set timer function for threading
@@ -70,10 +68,10 @@ def decode_krpc(message):
     '''
     decode with bencoding. When exception is thrown, return None.
     '''
-    try:
-        return bdecode(message)
-    except Exception:
-        return None
+    # try:
+    return bdecode(message)
+    # except:
+        # return None
 
 
 def decode_nodes(value, info_pool):
@@ -133,6 +131,7 @@ def decode_peers(infohash, peers, info_pool, unique=None):
                                            (infohash, ip_addr, port)]
             else:
                 key = str(ip_addr) + str(port)
+                print(ip_addr, port, key)
                 info_pool[key] = [datetime.datetime.now()
                                   .strftime('%d.%m.%Y %H:%M:%S:%f'),
                                   (infohash, ip_addr, port)]
@@ -217,7 +216,6 @@ class TorrentDHT():
         change bootstrap nodes when parsed magnet-link or .torrent file
         '''
         self.nodes = queue.Queue(self.max_node_qsize)
-        # self.bootstrap_nodes = []
         for node_list in nodes:
             for node in node_list:
                 compact_node = node.decode("utf-8")
@@ -226,9 +224,6 @@ class TorrentDHT():
 
                 compact_node = re.search(r".*:", compact_node)
                 compact_node = compact_node.group(0)[6:-1]
-                # FIXME
-                # self.nodes.put((infohash, compact_node, port))
-                # self.bootstrap_nodes.append((compact_node, port))
         for bootstrap in self.bootstrap_nodes:
             self.nodes.put((infohash, bootstrap[0], bootstrap[1]))
 
@@ -236,10 +231,6 @@ class TorrentDHT():
         '''
         change infohash in nodes queue
         '''
-        # FIXME
-        # self.nodes = queue.Queue(self.max_node_qsize)
-        # for bootstrap in self.bootstrap_nodes:
-        #     self.nodes.put((infohash, bootstrap[0], bootstrap[1]))
         self.target = infohash
 
     # This part is about query messages. Supports all 4 Kademlia messages sends

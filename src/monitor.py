@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+'''
+Created by Martin Vasko
+3BIT, Brno, Faculty of Information Technology.
+
+Brief information:
+This is implementation of monitoring BiTtorrent with Kademlia DHT.
+Whole monitor class which will be presented next is going to be supported by
+torrentDHT implementation, which was implemented by Martin Vasko.
+'''
 import argparse as arg
 import signal
 import time
@@ -9,23 +18,15 @@ import re
 from threading import Thread, Semaphore
 from bencoder import bencode
 try:
-    from torrentDHT import TorrentDHT, TorrentArguments,\
+    from torrent_DHT import TorrentDHT, TorrentArguments,\
                            random_infohash, decode_krpc
-    from processOutput import ProcessOutput
+    from process_output import ProcessOutput
 except ImportError:
-    from src.torrentDHT import TorrentDHT, TorrentArguments,\
+    from src.torrent_DHT import TorrentDHT, TorrentArguments,\
                                random_infohash, decode_krpc
-    from src.processOutput import ProcessOutput
+    from src.process_output import ProcessOutput
 
-'''
-Created by Martin Vasko
-3BIT, Brno, Faculty of Information Technology.
 
-Brief information:
-This is implementation of monitoring BiTtorrent with Kademlia DHT.
-Whole monitor class which will be presented next is going to be supported by
-torrentDHT implementation, which was implemented by Martin Vasko.
-'''
 
 
 def argument_parser():
@@ -71,12 +72,6 @@ def argument_parser():
                         on value of 200.')
     parser.add_argument('--test', action='store_true',
                         help='Tests connection to remote(local) server.')
-    # parser.add_argument('--ipaddr', type=str, dest='ipaddr', action='store',
-    #                     help='Specify ip addres to which should \
-    #                      be bootstraped.')
-    # parser.add_argument('--port', type=int, dest='port', action='store',
-    #                     help='Specify port to which should be connection \
-    #                     binded.')
     return parser
 
 
@@ -185,13 +180,12 @@ class Monitor:
             try:
                 ready = select.select([self.torrent.query_socket], [], [], 0.1)
             except (OSError, ValueError):
-                # FIXME
-                self.no_recieve = self.no_recieve + 0.1
                 continue
 
             if ready[0]:
                 msg, addr = self.torrent.query_socket.recvfrom(2048)
             else:
+                self.no_recieve = self.no_recieve + 0.1
                 continue
 
             msg = decode_krpc(msg)
@@ -201,6 +195,7 @@ class Monitor:
             pool = {}
             nodes = self.torrent.decode_message(msg, pool)
             # update dictionary by given pool value
+            # FIXME need to check nodes by ping whether are still alive
             for key in nodes.keys():
                 if key is "Nodes":
                     self.info_pool.update(pool["Nodes"])
@@ -211,10 +206,6 @@ class Monitor:
             if self.torrent.nodes.qsize() <= self.max_peers * 0.8:
                 for key in nodes.keys():
                     self.insert_to_queue(nodes, key)
-
-            # if len(self.peers_pool) != 0:
-            #     for num in range(0, self.max_peers, 2):
-            #         self.torrent.nodes.get(True)
 
             # Resolution with clean queue
             #     for key in nodes.keys():
@@ -227,7 +218,6 @@ class Monitor:
             #         self.insert_to_queue(nodes, key)
 
             self.addr_pool[addr] = {"timestamp": time.time()}
-            # if self.country is None:
             self.respondent += 1
 
     def start_sender(self, test=False):
@@ -314,7 +304,6 @@ class Monitor:
         Create all threads, duration to count how long program is executed.
         When Ctrl+C is pressed kill all threads
         '''
-        # TODO process thread probably
         if torrent:
             self.torrent.target = torrent
 
