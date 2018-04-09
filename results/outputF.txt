@@ -1,0 +1,1777 @@
+../logs/nodes_timer/logF1002.out
+[NodeSet]:2156 [PeerSet]:139 [12-bit Zone]:0 [0/s] [Response]: 40.21% [Queue]:484 
+../logs/nodes_timer/logF1006.out
+[NodeSet]:2238 [PeerSet]:181 [12-bit Zone]:0 [0/s] [Response]: 38.74% [Queue]:482 
+../logs/nodes_timer/logF1010.out
+[NodeSet]:2087 [PeerSet]:208 [12-bit Zone]:0 [0/s] [Response]: 41.64% [Queue]:486 
+../logs/nodes_timer/logF1014.out
+[NodeSet]:2213 [PeerSet]:186 [12-bit Zone]:0 [0/s] [Response]: 39.09% [Queue]:486 
+../logs/nodes_timer/logF1018.out
+[NodeSet]:2253 [PeerSet]:145 [12-bit Zone]:0 [0/s] [Response]: 38.48% [Queue]:485 
+../logs/nodes_timer/logF1022.out
+[NodeSet]:3065 [PeerSet]:161 [12-bit Zone]:0 [0/s] [Response]: 28.65% [Queue]:488 
+../logs/nodes_timer/logF1026.out
+[NodeSet]:3122 [PeerSet]:142 [12-bit Zone]:0 [0/s] [Response]: 27.87% [Queue]:484 
+../logs/nodes_timer/logF102.out
+[NodeSet]:608 [PeerSet]:97 [12-bit Zone]:0 [0/s] [Response]: 14.31% [Queue]:484 
+../logs/nodes_timer/logF1030.out
+[NodeSet]:2867 [PeerSet]:151 [12-bit Zone]:0 [0/s] [Response]: 31.25% [Queue]:479 
+../logs/nodes_timer/logF1034.out
+[NodeSet]:2183 [PeerSet]:192 [12-bit Zone]:0 [0/s] [Response]: 40.45% [Queue]:480 
+../logs/nodes_timer/logF1038.out
+[NodeSet]:2459 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 35.22% [Queue]:483 
+../logs/nodes_timer/logF1042.out
+[NodeSet]:2898 [PeerSet]:170 [12-bit Zone]:0 [0/s] [Response]: 30.68% [Queue]:480 
+../logs/nodes_timer/logF1046.out
+[NodeSet]:2637 [PeerSet]:189 [12-bit Zone]:0 [0/s] [Response]: 33.64% [Queue]:486 
+../logs/nodes_timer/logF1050.out
+[NodeSet]:3339 [PeerSet]:123 [12-bit Zone]:0 [0/s] [Response]: 26.33% [Queue]:485 
+../logs/nodes_timer/logF1054.out
+[NodeSet]:3724 [PeerSet]:168 [12-bit Zone]:0 [0/s] [Response]: 23.23% [Queue]:486 
+../logs/nodes_timer/logF1058.out
+[NodeSet]:3444 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 25.78% [Queue]:481 
+../logs/nodes_timer/logF1062.out
+[NodeSet]:2837 [PeerSet]:155 [12-bit Zone]:0 [0/s] [Response]: 32.64% [Queue]:487 
+../logs/nodes_timer/logF1066.out
+[NodeSet]:2530 [PeerSet]:162 [12-bit Zone]:0 [0/s] [Response]: 35.89% [Queue]:484 
+../logs/nodes_timer/logF106.out
+[NodeSet]:606 [PeerSet]:20 [12-bit Zone]:0 [0/s] [Response]: 13.86% [Queue]:482 
+../logs/nodes_timer/logF1070.out
+[NodeSet]:3393 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 27.38% [Queue]:482 
+../logs/nodes_timer/logF1074.out
+[NodeSet]:3314 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 27.70% [Queue]:485 
+../logs/nodes_timer/logF1078.out
+[NodeSet]:3062 [PeerSet]:143 [12-bit Zone]:0 [0/s] [Response]: 31.78% [Queue]:485 
+../logs/nodes_timer/logF1082.out
+[NodeSet]:1736 [PeerSet]:182 [12-bit Zone]:0 [0/s] [Response]: 54.09% [Queue]:481 
+../logs/nodes_timer/logF1086.out
+[NodeSet]:2970 [PeerSet]:182 [12-bit Zone]:0 [0/s] [Response]: 31.28% [Queue]:487 
+../logs/nodes_timer/logF1090.out
+[NodeSet]:2108 [PeerSet]:199 [12-bit Zone]:0 [0/s] [Response]: 45.68% [Queue]:486 
+../logs/nodes_timer/logF1094.out
+[NodeSet]:2916 [PeerSet]:174 [12-bit Zone]:0 [0/s] [Response]: 32.78% [Queue]:482 
+../logs/nodes_timer/logF1098.out
+[NodeSet]:2192 [PeerSet]:184 [12-bit Zone]:0 [0/s] [Response]: 43.25% [Queue]:479 
+../logs/nodes_timer/logF1102.out
+[NodeSet]:3212 [PeerSet]:106 [12-bit Zone]:0 [0/s] [Response]: 29.61% [Queue]:480 
+../logs/nodes_timer/logF1106.out
+[NodeSet]:3483 [PeerSet]:161 [12-bit Zone]:0 [0/s] [Response]: 26.67% [Queue]:480 
+../logs/nodes_timer/logF110.out
+[NodeSet]:555 [PeerSet]:0 [12-bit Zone]:0 [0/s] [Response]: 14.59% [Queue]:485 
+../logs/nodes_timer/logF1110.out
+[NodeSet]:2669 [PeerSet]:149 [12-bit Zone]:0 [0/s] [Response]: 35.26% [Queue]:484 
+../logs/nodes_timer/logF1114.out
+[NodeSet]:3782 [PeerSet]:128 [12-bit Zone]:0 [0/s] [Response]: 24.75% [Queue]:479 
+../logs/nodes_timer/logF1118.out
+[NodeSet]:2769 [PeerSet]:187 [12-bit Zone]:0 [0/s] [Response]: 35.61% [Queue]:487 
+../logs/nodes_timer/logF1122.out
+[NodeSet]:2508 [PeerSet]:176 [12-bit Zone]:0 [0/s] [Response]: 39.31% [Queue]:479 
+../logs/nodes_timer/logF1126.out
+[NodeSet]:4280 [PeerSet]:124 [12-bit Zone]:0 [0/s] [Response]: 22.38% [Queue]:486 
+../logs/nodes_timer/logF1130.out
+[NodeSet]:2105 [PeerSet]:198 [12-bit Zone]:0 [0/s] [Response]: 47.08% [Queue]:482 
+../logs/nodes_timer/logF1134.out
+[NodeSet]:2513 [PeerSet]:185 [12-bit Zone]:0 [0/s] [Response]: 39.36% [Queue]:485 
+../logs/nodes_timer/logF1138.out
+[NodeSet]:3810 [PeerSet]:128 [12-bit Zone]:0 [0/s] [Response]: 24.65% [Queue]:480 
+../logs/nodes_timer/logF1142.out
+[NodeSet]:3158 [PeerSet]:163 [12-bit Zone]:0 [0/s] [Response]: 30.87% [Queue]:480 
+../logs/nodes_timer/logF1146.out
+[NodeSet]:3330 [PeerSet]:141 [12-bit Zone]:0 [0/s] [Response]: 29.40% [Queue]:482 
+../logs/nodes_timer/logF114.out
+
+../logs/nodes_timer/logF1150.out
+[NodeSet]:2885 [PeerSet]:165 [12-bit Zone]:0 [0/s] [Response]: 34.56% [Queue]:481 
+../logs/nodes_timer/logF1154.out
+[NodeSet]:1517 [PeerSet]:182 [12-bit Zone]:0 [0/s] [Response]: 67.11% [Queue]:484 
+../logs/nodes_timer/logF1158.out
+[NodeSet]:4131 [PeerSet]:123 [12-bit Zone]:0 [0/s] [Response]: 24.21% [Queue]:480 
+../logs/nodes_timer/logF1162.out
+[NodeSet]:2490 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 40.84% [Queue]:483 
+../logs/nodes_timer/logF1166.out
+[NodeSet]:1456 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 68.75% [Queue]:486 
+../logs/nodes_timer/logF1170.out
+[NodeSet]:2695 [PeerSet]:139 [12-bit Zone]:0 [0/s] [Response]: 38.22% [Queue]:487 
+../logs/nodes_timer/logF1174.out
+[NodeSet]:3271 [PeerSet]:134 [12-bit Zone]:0 [0/s] [Response]: 31.52% [Queue]:482 
+../logs/nodes_timer/logF1178.out
+[NodeSet]:2286 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 42.26% [Queue]:481 
+../logs/nodes_timer/logF1182.out
+[NodeSet]:3476 [PeerSet]:174 [12-bit Zone]:0 [0/s] [Response]: 28.28% [Queue]:485 
+../logs/nodes_timer/logF1186.out
+[NodeSet]:2356 [PeerSet]:194 [12-bit Zone]:0 [0/s] [Response]: 44.48% [Queue]:485 
+../logs/nodes_timer/logF118.out
+[NodeSet]:512 [PeerSet]:42 [12-bit Zone]:0 [0/s] [Response]: 17.97% [Queue]:482 
+../logs/nodes_timer/logF1190.out
+[NodeSet]:3718 [PeerSet]:123 [12-bit Zone]:0 [0/s] [Response]: 26.95% [Queue]:484 
+../logs/nodes_timer/logF1194.out
+[NodeSet]:2658 [PeerSet]:194 [12-bit Zone]:0 [0/s] [Response]: 38.26% [Queue]:481 
+../logs/nodes_timer/logF1198.out
+[NodeSet]:3325 [PeerSet]:183 [12-bit Zone]:0 [0/s] [Response]: 31.31% [Queue]:484 
+../logs/nodes_timer/logF1202.out
+[NodeSet]:2455 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 41.14% [Queue]:487 
+../logs/nodes_timer/logF1206.out
+[NodeSet]:3030 [PeerSet]:196 [12-bit Zone]:0 [0/s] [Response]: 34.88% [Queue]:480 
+../logs/nodes_timer/logF1210.out
+[NodeSet]:3029 [PeerSet]:196 [12-bit Zone]:0 [0/s] [Response]: 34.70% [Queue]:480 
+../logs/nodes_timer/logF1214.out
+[NodeSet]:2931 [PeerSet]:161 [12-bit Zone]:0 [0/s] [Response]: 36.03% [Queue]:481 
+../logs/nodes_timer/logF1218.out
+[NodeSet]:3013 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 35.28% [Queue]:488 
+../logs/nodes_timer/logF1222.out
+[NodeSet]:3124 [PeerSet]:194 [12-bit Zone]:0 [0/s] [Response]: 33.00% [Queue]:484 
+../logs/nodes_timer/logF1226.out
+[NodeSet]:3033 [PeerSet]:99 [12-bit Zone]:0 [0/s] [Response]: 35.38% [Queue]:484 
+../logs/nodes_timer/logF122.out
+[NodeSet]:686 [PeerSet]:3 [12-bit Zone]:0 [0/s] [Response]: 14.14% [Queue]:480 
+../logs/nodes_timer/logF1230.out
+[NodeSet]:3269 [PeerSet]:202 [12-bit Zone]:0 [0/s] [Response]: 32.49% [Queue]:484 
+../logs/nodes_timer/logF1234.out
+[NodeSet]:2458 [PeerSet]:200 [12-bit Zone]:0 [0/s] [Response]: 43.21% [Queue]:481 
+../logs/nodes_timer/logF1238.out
+[NodeSet]:3366 [PeerSet]:174 [12-bit Zone]:0 [0/s] [Response]: 31.73% [Queue]:488 
+../logs/nodes_timer/logF1242.out
+[NodeSet]:2607 [PeerSet]:150 [12-bit Zone]:0 [0/s] [Response]: 42.31% [Queue]:488 
+../logs/nodes_timer/logF1246.out
+[NodeSet]:2890 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 36.71% [Queue]:481 
+../logs/nodes_timer/logF1250.out
+[NodeSet]:2532 [PeerSet]:199 [12-bit Zone]:0 [0/s] [Response]: 42.22% [Queue]:484 
+../logs/nodes_timer/logF1254.out
+[NodeSet]:4140 [PeerSet]:140 [12-bit Zone]:0 [0/s] [Response]: 25.89% [Queue]:482 
+../logs/nodes_timer/logF1258.out
+[NodeSet]:2881 [PeerSet]:176 [12-bit Zone]:0 [0/s] [Response]: 37.63% [Queue]:481 
+../logs/nodes_timer/logF1262.out
+[NodeSet]:2915 [PeerSet]:187 [12-bit Zone]:0 [0/s] [Response]: 36.26% [Queue]:482 
+../logs/nodes_timer/logF1266.out
+[NodeSet]:3299 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 31.62% [Queue]:484 
+../logs/nodes_timer/logF126.out
+[NodeSet]:745 [PeerSet]:17 [12-bit Zone]:0 [0/s] [Response]: 14.63% [Queue]:484 
+../logs/nodes_timer/logF1270.out
+[NodeSet]:2676 [PeerSet]:192 [12-bit Zone]:0 [0/s] [Response]: 41.26% [Queue]:485 
+../logs/nodes_timer/logF1274.out
+[NodeSet]:2816 [PeerSet]:193 [12-bit Zone]:0 [0/s] [Response]: 38.92% [Queue]:486 
+../logs/nodes_timer/logF1278.out
+[NodeSet]:3157 [PeerSet]:195 [12-bit Zone]:0 [0/s] [Response]: 34.53% [Queue]:486 
+../logs/nodes_timer/logF1282.out
+[NodeSet]:2570 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 42.96% [Queue]:481 
+../logs/nodes_timer/logF1286.out
+[NodeSet]:3383 [PeerSet]:75 [12-bit Zone]:0 [0/s] [Response]: 32.93% [Queue]:482 
+../logs/nodes_timer/logF1290.out
+[NodeSet]:3436 [PeerSet]:170 [12-bit Zone]:0 [0/s] [Response]: 32.36% [Queue]:485 
+../logs/nodes_timer/logF1294.out
+[NodeSet]:1974 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 46.81% [Queue]:485 
+../logs/nodes_timer/logF1298.out
+[NodeSet]:3229 [PeerSet]:199 [12-bit Zone]:0 [0/s] [Response]: 35.37% [Queue]:487 
+../logs/nodes_timer/logF1302.out
+[NodeSet]:3981 [PeerSet]:149 [12-bit Zone]:0 [0/s] [Response]: 26.40% [Queue]:481 
+../logs/nodes_timer/logF1306.out
+[NodeSet]:4075 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 27.31% [Queue]:482 
+../logs/nodes_timer/logF130.out
+[NodeSet]:545 [PeerSet]:23 [12-bit Zone]:0 [0/s] [Response]: 18.53% [Queue]:487 
+../logs/nodes_timer/logF1310.out
+[NodeSet]:3533 [PeerSet]:165 [12-bit Zone]:0 [0/s] [Response]: 32.44% [Queue]:480 
+../logs/nodes_timer/logF1314.out
+[NodeSet]:3033 [PeerSet]:169 [12-bit Zone]:0 [0/s] [Response]: 36.43% [Queue]:487 
+../logs/nodes_timer/logF1318.out
+[NodeSet]:2842 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 39.13% [Queue]:482 
+../logs/nodes_timer/logF1322.out
+[NodeSet]:2422 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 46.66% [Queue]:485 
+../logs/nodes_timer/logF1326.out
+[NodeSet]:2969 [PeerSet]:191 [12-bit Zone]:0 [0/s] [Response]: 38.46% [Queue]:484 
+../logs/nodes_timer/logF1330.out
+[NodeSet]:2789 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 41.63% [Queue]:484 
+../logs/nodes_timer/logF1334.out
+[NodeSet]:3253 [PeerSet]:193 [12-bit Zone]:0 [0/s] [Response]: 36.21% [Queue]:485 
+../logs/nodes_timer/logF1338.out
+[NodeSet]:2702 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 41.78% [Queue]:481 
+../logs/nodes_timer/logF1342.out
+[NodeSet]:3070 [PeerSet]:190 [12-bit Zone]:0 [0/s] [Response]: 38.08% [Queue]:487 
+../logs/nodes_timer/logF1346.out
+[NodeSet]:3540 [PeerSet]:206 [12-bit Zone]:0 [0/s] [Response]: 31.72% [Queue]:484 
+../logs/nodes_timer/logF134.out
+[NodeSet]:624 [PeerSet]:34 [12-bit Zone]:0 [0/s] [Response]: 16.19% [Queue]:485 
+../logs/nodes_timer/logF1350.out
+[NodeSet]:1778 [PeerSet]:203 [12-bit Zone]:0 [0/s] [Response]: 65.86% [Queue]:483 
+../logs/nodes_timer/logF1354.out
+[NodeSet]:2867 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 39.52% [Queue]:479 
+../logs/nodes_timer/logF1358.out
+[NodeSet]:3935 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 28.67% [Queue]:482 
+../logs/nodes_timer/logF1362.out
+[NodeSet]:2398 [PeerSet]:193 [12-bit Zone]:0 [0/s] [Response]: 40.53% [Queue]:482 
+../logs/nodes_timer/logF1366.out
+[NodeSet]:2014 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 58.69% [Queue]:485 
+../logs/nodes_timer/logF1370.out
+[NodeSet]:3339 [PeerSet]:153 [12-bit Zone]:0 [0/s] [Response]: 35.43% [Queue]:484 
+../logs/nodes_timer/logF1374.out
+[NodeSet]:3144 [PeerSet]:169 [12-bit Zone]:0 [0/s] [Response]: 36.77% [Queue]:484 
+../logs/nodes_timer/logF1378.out
+[NodeSet]:1892 [PeerSet]:210 [12-bit Zone]:0 [0/s] [Response]: 63.27% [Queue]:482 
+../logs/nodes_timer/logF1382.out
+[NodeSet]:2292 [PeerSet]:199 [12-bit Zone]:0 [0/s] [Response]: 52.71% [Queue]:477 
+../logs/nodes_timer/logF1386.out
+[NodeSet]:2254 [PeerSet]:187 [12-bit Zone]:0 [0/s] [Response]: 52.31% [Queue]:484 
+../logs/nodes_timer/logF138.out
+[NodeSet]:707 [PeerSet]:3 [12-bit Zone]:0 [0/s] [Response]: 13.86% [Queue]:480 
+../logs/nodes_timer/logF1390.out
+[NodeSet]:2860 [PeerSet]:192 [12-bit Zone]:0 [0/s] [Response]: 41.19% [Queue]:482 
+../logs/nodes_timer/logF1394.out
+[NodeSet]:3139 [PeerSet]:208 [12-bit Zone]:0 [0/s] [Response]: 37.59% [Queue]:484 
+../logs/nodes_timer/logF1398.out
+[NodeSet]:3098 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 39.96% [Queue]:486 
+../logs/nodes_timer/logF1402.out
+[NodeSet]:3121 [PeerSet]:145 [12-bit Zone]:0 [0/s] [Response]: 38.19% [Queue]:479 
+../logs/nodes_timer/logF1406.out
+[NodeSet]:3651 [PeerSet]:195 [12-bit Zone]:0 [0/s] [Response]: 33.03% [Queue]:487 
+../logs/nodes_timer/logF1410.out
+[NodeSet]:2185 [PeerSet]:200 [12-bit Zone]:0 [0/s] [Response]: 58.95% [Queue]:482 
+../logs/nodes_timer/logF1414.out
+[NodeSet]:2968 [PeerSet]:190 [12-bit Zone]:0 [0/s] [Response]: 41.48% [Queue]:484 
+../logs/nodes_timer/logF1418.out
+[NodeSet]:3774 [PeerSet]:154 [12-bit Zone]:0 [0/s] [Response]: 32.64% [Queue]:482 
+../logs/nodes_timer/logF1422.out
+[NodeSet]:4195 [PeerSet]:162 [12-bit Zone]:0 [0/s] [Response]: 29.54% [Queue]:486 
+../logs/nodes_timer/logF1426.out
+[NodeSet]:3101 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 39.18% [Queue]:481 
+../logs/nodes_timer/logF142.out
+[NodeSet]:757 [PeerSet]:29 [12-bit Zone]:0 [0/s] [Response]: 16.25% [Queue]:484 
+../logs/nodes_timer/logF1430.out
+[NodeSet]:3247 [PeerSet]:196 [12-bit Zone]:0 [0/s] [Response]: 37.82% [Queue]:483 
+../logs/nodes_timer/logF1434.out
+[NodeSet]:3855 [PeerSet]:155 [12-bit Zone]:0 [0/s] [Response]: 32.81% [Queue]:481 
+../logs/nodes_timer/logF1438.out
+[NodeSet]:2787 [PeerSet]:184 [12-bit Zone]:0 [0/s] [Response]: 46.21% [Queue]:482 
+../logs/nodes_timer/logF1442.out
+[NodeSet]:3742 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 33.46% [Queue]:488 
+../logs/nodes_timer/logF1446.out
+[NodeSet]:4120 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 29.68% [Queue]:483 
+../logs/nodes_timer/logF1450.out
+[NodeSet]:2975 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 41.21% [Queue]:484 
+../logs/nodes_timer/logF1454.out
+[NodeSet]:3684 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 34.39% [Queue]:482 
+../logs/nodes_timer/logF1458.out
+[NodeSet]:2970 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 43.37% [Queue]:479 
+../logs/nodes_timer/logF1462.out
+[NodeSet]:4181 [PeerSet]:161 [12-bit Zone]:0 [0/s] [Response]: 28.99% [Queue]:479 
+../logs/nodes_timer/logF1466.out
+[NodeSet]:3180 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 37.70% [Queue]:482 
+../logs/nodes_timer/logF146.out
+[NodeSet]:840 [PeerSet]:3 [12-bit Zone]:0 [0/s] [Response]: 13.81% [Queue]:482 
+../logs/nodes_timer/logF1470.out
+[NodeSet]:3137 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 39.34% [Queue]:486 
+../logs/nodes_timer/logF1474.out
+[NodeSet]:4252 [PeerSet]:134 [12-bit Zone]:0 [0/s] [Response]: 29.33% [Queue]:482 
+../logs/nodes_timer/logF1478.out
+[NodeSet]:3469 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 35.98% [Queue]:485 
+../logs/nodes_timer/logF1482.out
+[NodeSet]:2960 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 43.48% [Queue]:488 
+../logs/nodes_timer/logF1486.out
+[NodeSet]:4066 [PeerSet]:166 [12-bit Zone]:0 [0/s] [Response]: 32.27% [Queue]:485 
+../logs/nodes_timer/logF1490.out
+[NodeSet]:3939 [PeerSet]:196 [12-bit Zone]:0 [0/s] [Response]: 32.24% [Queue]:484 
+../logs/nodes_timer/logF1494.out
+[NodeSet]:4276 [PeerSet]:164 [12-bit Zone]:0 [0/s] [Response]: 30.19% [Queue]:486 
+../logs/nodes_timer/logF1498.out
+[NodeSet]:2530 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 49.49% [Queue]:486 
+../logs/nodes_timer/logF1502.out
+[NodeSet]:4077 [PeerSet]:184 [12-bit Zone]:0 [0/s] [Response]: 31.15% [Queue]:488 
+../logs/nodes_timer/logF1506.out
+[NodeSet]:3485 [PeerSet]:199 [12-bit Zone]:0 [0/s] [Response]: 37.47% [Queue]:484 
+../logs/nodes_timer/logF150.out
+[NodeSet]:754 [PeerSet]:20 [12-bit Zone]:0 [0/s] [Response]: 15.78% [Queue]:487 
+../logs/nodes_timer/logF1510.out
+[NodeSet]:4149 [PeerSet]:146 [12-bit Zone]:0 [0/s] [Response]: 31.53% [Queue]:485 
+../logs/nodes_timer/logF1514.out
+[NodeSet]:3541 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 36.26% [Queue]:483 
+../logs/nodes_timer/logF1518.out
+[NodeSet]:3437 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 39.16% [Queue]:482 
+../logs/nodes_timer/logF1522.out
+[NodeSet]:3568 [PeerSet]:203 [12-bit Zone]:0 [0/s] [Response]: 36.77% [Queue]:485 
+../logs/nodes_timer/logF1526.out
+[NodeSet]:2451 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 52.31% [Queue]:481 
+../logs/nodes_timer/logF1530.out
+[NodeSet]:3558 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 35.89% [Queue]:483 
+../logs/nodes_timer/logF1534.out
+[NodeSet]:4782 [PeerSet]:195 [12-bit Zone]:0 [0/s] [Response]: 27.62% [Queue]:485 
+../logs/nodes_timer/logF1538.out
+[NodeSet]:3586 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 34.83% [Queue]:481 
+../logs/nodes_timer/logF1542.out
+[NodeSet]:2452 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 54.73% [Queue]:481 
+../logs/nodes_timer/logF1546.out
+[NodeSet]:2131 [PeerSet]:191 [12-bit Zone]:0 [0/s] [Response]: 62.18% [Queue]:484 
+../logs/nodes_timer/logF154.out
+[NodeSet]:751 [PeerSet]:22 [12-bit Zone]:0 [0/s] [Response]: 17.04% [Queue]:480 
+../logs/nodes_timer/logF1550.out
+[NodeSet]:3813 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 35.14% [Queue]:481 
+../logs/nodes_timer/logF1554.out
+[NodeSet]:3741 [PeerSet]:183 [12-bit Zone]:0 [0/s] [Response]: 36.86% [Queue]:480 
+../logs/nodes_timer/logF1558.out
+[NodeSet]:3990 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 33.28% [Queue]:486 
+../logs/nodes_timer/logF1562.out
+[NodeSet]:3120 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 43.69% [Queue]:487 
+../logs/nodes_timer/logF1566.out
+[NodeSet]:3135 [PeerSet]:203 [12-bit Zone]:0 [0/s] [Response]: 43.57% [Queue]:482 
+../logs/nodes_timer/logF1570.out
+[NodeSet]:4563 [PeerSet]:174 [12-bit Zone]:0 [0/s] [Response]: 28.40% [Queue]:487 
+../logs/nodes_timer/logF1574.out
+[NodeSet]:2709 [PeerSet]:137 [12-bit Zone]:0 [0/s] [Response]: 24.88% [Queue]:482 
+../logs/nodes_timer/logF1578.out
+[NodeSet]:3777 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 35.61% [Queue]:488 
+../logs/nodes_timer/logF1582.out
+[NodeSet]:3386 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 41.26% [Queue]:481 
+../logs/nodes_timer/logF1586.out
+[NodeSet]:3876 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 34.65% [Queue]:481 
+../logs/nodes_timer/logF158.out
+[NodeSet]:785 [PeerSet]:101 [12-bit Zone]:0 [0/s] [Response]: 16.69% [Queue]:482 
+../logs/nodes_timer/logF1590.out
+[NodeSet]:3274 [PeerSet]:196 [12-bit Zone]:0 [0/s] [Response]: 42.58% [Queue]:480 
+../logs/nodes_timer/logF1594.out
+[NodeSet]:2801 [PeerSet]:164 [12-bit Zone]:0 [0/s] [Response]: 50.41% [Queue]:485 
+../logs/nodes_timer/logF1598.out
+[NodeSet]:3510 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 38.80% [Queue]:485 
+../logs/nodes_timer/logF1602.out
+[NodeSet]:4187 [PeerSet]:193 [12-bit Zone]:0 [0/s] [Response]: 32.89% [Queue]:483 
+../logs/nodes_timer/logF1606.out
+[NodeSet]:2623 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 53.49% [Queue]:482 
+../logs/nodes_timer/logF1610.out
+[NodeSet]:4305 [PeerSet]:169 [12-bit Zone]:0 [0/s] [Response]: 32.54% [Queue]:480 
+../logs/nodes_timer/logF1614.out
+[NodeSet]:3559 [PeerSet]:198 [12-bit Zone]:0 [0/s] [Response]: 38.92% [Queue]:484 
+../logs/nodes_timer/logF1618.out
+[NodeSet]:3426 [PeerSet]:181 [12-bit Zone]:0 [0/s] [Response]: 41.21% [Queue]:485 
+../logs/nodes_timer/logF1622.out
+[NodeSet]:1610 [PeerSet]:112 [12-bit Zone]:0 [0/s] [Response]: 16.71% [Queue]:478 
+../logs/nodes_timer/logF1626.out
+[NodeSet]:3432 [PeerSet]:195 [12-bit Zone]:0 [0/s] [Response]: 39.86% [Queue]:482 
+../logs/nodes_timer/logF162.out
+[NodeSet]:795 [PeerSet]:36 [12-bit Zone]:0 [0/s] [Response]: 16.23% [Queue]:482 
+../logs/nodes_timer/logF1630.out
+[NodeSet]:3003 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 45.92% [Queue]:483 
+../logs/nodes_timer/logF1634.out
+[NodeSet]:2836 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 49.47% [Queue]:480 
+../logs/nodes_timer/logF1638.out
+[NodeSet]:2740 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 49.71% [Queue]:485 
+../logs/nodes_timer/logF1642.out
+[NodeSet]:2298 [PeerSet]:202 [12-bit Zone]:0 [0/s] [Response]: 62.92% [Queue]:481 
+../logs/nodes_timer/logF1646.out
+[NodeSet]:5168 [PeerSet]:137 [12-bit Zone]:0 [0/s] [Response]: 27.69% [Queue]:487 
+../logs/nodes_timer/logF1650.out
+[NodeSet]:3788 [PeerSet]:202 [12-bit Zone]:0 [0/s] [Response]: 37.54% [Queue]:485 
+../logs/nodes_timer/logF1654.out
+[NodeSet]:3351 [PeerSet]:202 [12-bit Zone]:0 [0/s] [Response]: 43.42% [Queue]:485 
+../logs/nodes_timer/logF1658.out
+[NodeSet]:3993 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 34.16% [Queue]:485 
+../logs/nodes_timer/logF1662.out
+[NodeSet]:2991 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 46.71% [Queue]:486 
+../logs/nodes_timer/logF1666.out
+[NodeSet]:3723 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 39.27% [Queue]:488 
+../logs/nodes_timer/logF166.out
+[NodeSet]:595 [PeerSet]:110 [12-bit Zone]:0 [0/s] [Response]: 21.51% [Queue]:484 
+../logs/nodes_timer/logF1670.out
+[NodeSet]:3375 [PeerSet]:137 [12-bit Zone]:0 [0/s] [Response]: 22.34% [Queue]:482 
+../logs/nodes_timer/logF1674.out
+[NodeSet]:2866 [PeerSet]:210 [12-bit Zone]:0 [0/s] [Response]: 51.54% [Queue]:486 
+../logs/nodes_timer/logF1678.out
+[NodeSet]:3159 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 44.32% [Queue]:485 
+../logs/nodes_timer/logF1682.out
+[NodeSet]:3749 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 38.65% [Queue]:483 
+../logs/nodes_timer/logF1686.out
+[NodeSet]:3184 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 45.10% [Queue]:479 
+../logs/nodes_timer/logF1690.out
+[NodeSet]:2948 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 50.61% [Queue]:481 
+../logs/nodes_timer/logF1694.out
+[NodeSet]:3005 [PeerSet]:199 [12-bit Zone]:0 [0/s] [Response]: 48.35% [Queue]:482 
+../logs/nodes_timer/logF1698.out
+[NodeSet]:3037 [PeerSet]:186 [12-bit Zone]:0 [0/s] [Response]: 47.81% [Queue]:482 
+../logs/nodes_timer/logF1702.out
+[NodeSet]:3612 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 40.81% [Queue]:486 
+../logs/nodes_timer/logF1706.out
+[NodeSet]:3505 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 42.77% [Queue]:483 
+../logs/nodes_timer/logF170.out
+[NodeSet]:899 [PeerSet]:12 [12-bit Zone]:0 [0/s] [Response]: 15.46% [Queue]:481 
+../logs/nodes_timer/logF1710.out
+[NodeSet]:3198 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 45.84% [Queue]:484 
+../logs/nodes_timer/logF1714.out
+[NodeSet]:2973 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 50.15% [Queue]:481 
+../logs/nodes_timer/logF1718.out
+[NodeSet]:1758 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 81.11% [Queue]:483 
+../logs/nodes_timer/logF1722.out
+[NodeSet]:4072 [PeerSet]:200 [12-bit Zone]:0 [0/s] [Response]: 36.22% [Queue]:480 
+../logs/nodes_timer/logF1726.out
+[NodeSet]:3042 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 48.36% [Queue]:479 
+../logs/nodes_timer/logF1730.out
+[NodeSet]:4130 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 36.80% [Queue]:486 
+../logs/nodes_timer/logF1734.out
+[NodeSet]:3566 [PeerSet]:210 [12-bit Zone]:0 [0/s] [Response]: 42.57% [Queue]:486 
+../logs/nodes_timer/logF1738.out
+[NodeSet]:3952 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 37.90% [Queue]:482 
+../logs/nodes_timer/logF1742.out
+[NodeSet]:2407 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 60.70% [Queue]:481 
+../logs/nodes_timer/logF1746.out
+[NodeSet]:3598 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 40.58% [Queue]:483 
+../logs/nodes_timer/logF174.out
+[NodeSet]:982 [PeerSet]:0 [12-bit Zone]:0 [0/s] [Response]: 13.34% [Queue]:486 
+../logs/nodes_timer/logF1750.out
+[NodeSet]:3637 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 41.55% [Queue]:481 
+../logs/nodes_timer/logF1754.out
+[NodeSet]:3647 [PeerSet]:183 [12-bit Zone]:0 [0/s] [Response]: 41.49% [Queue]:485 
+../logs/nodes_timer/logF1758.out
+[NodeSet]:2505 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 60.08% [Queue]:485 
+../logs/nodes_timer/logF1762.out
+[NodeSet]:3570 [PeerSet]:195 [12-bit Zone]:0 [0/s] [Response]: 42.02% [Queue]:480 
+../logs/nodes_timer/logF1766.out
+[NodeSet]:3467 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 43.32% [Queue]:482 
+../logs/nodes_timer/logF1770.out
+[NodeSet]:2636 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 58.54% [Queue]:483 
+../logs/nodes_timer/logF1774.out
+[NodeSet]:3232 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 47.90% [Queue]:481 
+../logs/nodes_timer/logF1778.out
+[NodeSet]:4430 [PeerSet]:191 [12-bit Zone]:0 [0/s] [Response]: 34.85% [Queue]:480 
+../logs/nodes_timer/logF1782.out
+[NodeSet]:2534 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 61.56% [Queue]:487 
+../logs/nodes_timer/logF1786.out
+[NodeSet]:3241 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 47.36% [Queue]:488 
+../logs/nodes_timer/logF178.out
+[NodeSet]:771 [PeerSet]:153 [12-bit Zone]:0 [0/s] [Response]: 19.33% [Queue]:481 
+../logs/nodes_timer/logF1790.out
+[NodeSet]:3442 [PeerSet]:191 [12-bit Zone]:0 [0/s] [Response]: 45.61% [Queue]:481 
+../logs/nodes_timer/logF1794.out
+[NodeSet]:2343 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 64.79% [Queue]:485 
+../logs/nodes_timer/logF1798.out
+[NodeSet]:3002 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 49.57% [Queue]:481 
+../logs/nodes_timer/logF1802.out
+[NodeSet]:3014 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 49.60% [Queue]:485 
+../logs/nodes_timer/logF1806.out
+[NodeSet]:3956 [PeerSet]:169 [12-bit Zone]:0 [0/s] [Response]: 39.48% [Queue]:480 
+../logs/nodes_timer/logF1810.out
+[NodeSet]:3458 [PeerSet]:198 [12-bit Zone]:0 [0/s] [Response]: 44.19% [Queue]:481 
+../logs/nodes_timer/logF1814.out
+[NodeSet]:3567 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 43.68% [Queue]:480 
+../logs/nodes_timer/logF1818.out
+[NodeSet]:2273 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 69.69% [Queue]:488 
+../logs/nodes_timer/logF1822.out
+[NodeSet]:4011 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 37.57% [Queue]:483 
+../logs/nodes_timer/logF1826.out
+[NodeSet]:3275 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 47.82% [Queue]:482 
+../logs/nodes_timer/logF182.out
+[NodeSet]:732 [PeerSet]:74 [12-bit Zone]:0 [0/s] [Response]: 20.49% [Queue]:485 
+../logs/nodes_timer/logF1830.out
+[NodeSet]:3697 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 41.17% [Queue]:480 
+../logs/nodes_timer/logF1834.out
+[NodeSet]:3100 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 48.55% [Queue]:484 
+../logs/nodes_timer/logF1838.out
+[NodeSet]:2600 [PeerSet]:210 [12-bit Zone]:0 [0/s] [Response]: 61.00% [Queue]:485 
+../logs/nodes_timer/logF1842.out
+[NodeSet]:3710 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 41.21% [Queue]:484 
+../logs/nodes_timer/logF1846.out
+[NodeSet]:2856 [PeerSet]:222 [12-bit Zone]:0 [0/s] [Response]: 53.33% [Queue]:485 
+../logs/nodes_timer/logF1850.out
+[NodeSet]:3454 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 46.12% [Queue]:480 
+../logs/nodes_timer/logF1854.out
+[NodeSet]:3281 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 47.18% [Queue]:488 
+../logs/nodes_timer/logF1858.out
+[NodeSet]:3176 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 48.49% [Queue]:486 
+../logs/nodes_timer/logF1862.out
+[NodeSet]:3335 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 47.44% [Queue]:485 
+../logs/nodes_timer/logF1866.out
+[NodeSet]:3980 [PeerSet]:222 [12-bit Zone]:0 [0/s] [Response]: 39.07% [Queue]:481 
+../logs/nodes_timer/logF186.out
+[NodeSet]:953 [PeerSet]:15 [12-bit Zone]:0 [0/s] [Response]: 15.74% [Queue]:482 
+../logs/nodes_timer/logF1870.out
+[NodeSet]:2594 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 60.95% [Queue]:487 
+../logs/nodes_timer/logF1874.out
+[NodeSet]:2097 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 75.73% [Queue]:483 
+../logs/nodes_timer/logF1878.out
+[NodeSet]:3367 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 46.57% [Queue]:484 
+../logs/nodes_timer/logF1882.out
+[NodeSet]:4394 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 35.80% [Queue]:484 
+../logs/nodes_timer/logF1886.out
+[NodeSet]:4516 [PeerSet]:165 [12-bit Zone]:0 [0/s] [Response]: 35.98% [Queue]:483 
+../logs/nodes_timer/logF1890.out
+[NodeSet]:4185 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 38.76% [Queue]:484 
+../logs/nodes_timer/logF1894.out
+[NodeSet]:2692 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 61.66% [Queue]:481 
+../logs/nodes_timer/logF1898.out
+[NodeSet]:1901 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 86.27% [Queue]:484 
+../logs/nodes_timer/logF1902.out
+[NodeSet]:3051 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 53.43% [Queue]:479 
+../logs/nodes_timer/logF1906.out
+[NodeSet]:3652 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 44.06% [Queue]:482 
+../logs/nodes_timer/logF190.out
+[NodeSet]:1004 [PeerSet]:18 [12-bit Zone]:0 [0/s] [Response]: 14.54% [Queue]:483 
+../logs/nodes_timer/logF1910.out
+[NodeSet]:4295 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 37.76% [Queue]:483 
+../logs/nodes_timer/logF1914.out
+[NodeSet]:3555 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 47.12% [Queue]:485 
+../logs/nodes_timer/logF1918.out
+[NodeSet]:2328 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 69.03% [Queue]:486 
+../logs/nodes_timer/logF1922.out
+[NodeSet]:3541 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 45.35% [Queue]:482 
+../logs/nodes_timer/logF1926.out
+[NodeSet]:1067 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 147.89% [Queue]:480 
+../logs/nodes_timer/logF1930.out
+[NodeSet]:4579 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 36.78% [Queue]:479 
+../logs/nodes_timer/logF1934.out
+[NodeSet]:3180 [PeerSet]:206 [12-bit Zone]:0 [0/s] [Response]: 52.99% [Queue]:480 
+../logs/nodes_timer/logF1938.out
+[NodeSet]:3160 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 54.43% [Queue]:479 
+../logs/nodes_timer/logF1942.out
+[NodeSet]:5293 [PeerSet]:196 [12-bit Zone]:0 [0/s] [Response]: 30.42% [Queue]:484 
+../logs/nodes_timer/logF1946.out
+[NodeSet]:4678 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 35.46% [Queue]:478 
+../logs/nodes_timer/logF194.out
+[NodeSet]:1050 [PeerSet]:17 [12-bit Zone]:0 [0/s] [Response]: 15.05% [Queue]:482 
+../logs/nodes_timer/logF1950.out
+[NodeSet]:2042 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 78.75% [Queue]:480 
+../logs/nodes_timer/logF1954.out
+[NodeSet]:2870 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 54.88% [Queue]:487 
+../logs/nodes_timer/logF1958.out
+[NodeSet]:4546 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 36.14% [Queue]:485 
+../logs/nodes_timer/logF1962.out
+[NodeSet]:3654 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 45.21% [Queue]:485 
+../logs/nodes_timer/logF1966.out
+[NodeSet]:2554 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 67.11% [Queue]:487 
+../logs/nodes_timer/logF1970.out
+[NodeSet]:2718 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 62.36% [Queue]:482 
+../logs/nodes_timer/logF1974.out
+[NodeSet]:3807 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 44.16% [Queue]:481 
+../logs/nodes_timer/logF1978.out
+[NodeSet]:4843 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 34.42% [Queue]:485 
+../logs/nodes_timer/logF1982.out
+[NodeSet]:2743 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 60.74% [Queue]:479 
+../logs/nodes_timer/logF1986.out
+[NodeSet]:2980 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 54.03% [Queue]:481 
+../logs/nodes_timer/logF198.out
+[NodeSet]:997 [PeerSet]:11 [12-bit Zone]:0 [0/s] [Response]: 15.55% [Queue]:481 
+../logs/nodes_timer/logF1990.out
+[NodeSet]:3663 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 46.66% [Queue]:480 
+../logs/nodes_timer/logF1994.out
+[NodeSet]:3281 [PeerSet]:183 [12-bit Zone]:0 [0/s] [Response]: 51.57% [Queue]:484 
+../logs/nodes_timer/logF1998.out
+[NodeSet]:4079 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 42.09% [Queue]:487 
+../logs/nodes_timer/logF2002.out
+[NodeSet]:2377 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 71.64% [Queue]:485 
+../logs/nodes_timer/logF2006.out
+[NodeSet]:2416 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 71.73% [Queue]:485 
+../logs/nodes_timer/logF2010.out
+[NodeSet]:2884 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 58.36% [Queue]:486 
+../logs/nodes_timer/logF2014.out
+[NodeSet]:3240 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 53.52% [Queue]:482 
+../logs/nodes_timer/logF2018.out
+[NodeSet]:3550 [PeerSet]:193 [12-bit Zone]:0 [0/s] [Response]: 47.80% [Queue]:481 
+../logs/nodes_timer/logF2022.out
+[NodeSet]:3697 [PeerSet]:199 [12-bit Zone]:0 [0/s] [Response]: 46.47% [Queue]:483 
+../logs/nodes_timer/logF2026.out
+[NodeSet]:2100 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 76.76% [Queue]:483 
+../logs/nodes_timer/logF202.out
+[NodeSet]:948 [PeerSet]:35 [12-bit Zone]:0 [0/s] [Response]: 16.88% [Queue]:484 
+../logs/nodes_timer/logF2030.out
+[NodeSet]:4174 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 41.21% [Queue]:485 
+../logs/nodes_timer/logF2034.out
+[NodeSet]:2987 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 56.85% [Queue]:481 
+../logs/nodes_timer/logF2038.out
+[NodeSet]:2948 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 53.12% [Queue]:480 
+../logs/nodes_timer/logF2042.out
+[NodeSet]:3428 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 50.53% [Queue]:487 
+../logs/nodes_timer/logF2046.out
+
+../logs/nodes_timer/logF2050.out
+[NodeSet]:3233 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 52.27% [Queue]:485 
+../logs/nodes_timer/logF2054.out
+[NodeSet]:2706 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 60.27% [Queue]:487 
+../logs/nodes_timer/logF2058.out
+[NodeSet]:4391 [PeerSet]:210 [12-bit Zone]:0 [0/s] [Response]: 39.19% [Queue]:484 
+../logs/nodes_timer/logF2062.out
+[NodeSet]:3734 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 47.40% [Queue]:486 
+../logs/nodes_timer/logF2066.out
+[NodeSet]:3336 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 54.05% [Queue]:481 
+../logs/nodes_timer/logF206.out
+[NodeSet]:1166 [PeerSet]:1 [12-bit Zone]:0 [0/s] [Response]: 15.18% [Queue]:484 
+../logs/nodes_timer/logF2070.out
+[NodeSet]:3068 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 55.83% [Queue]:486 
+../logs/nodes_timer/logF2074.out
+[NodeSet]:3825 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 46.35% [Queue]:480 
+../logs/nodes_timer/logF2078.out
+[NodeSet]:3035 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 56.71% [Queue]:483 
+../logs/nodes_timer/logF2082.out
+[NodeSet]:4494 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 39.14% [Queue]:480 
+../logs/nodes_timer/logF2086.out
+[NodeSet]:4391 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 39.92% [Queue]:483 
+../logs/nodes_timer/logF2090.out
+[NodeSet]:4458 [PeerSet]:198 [12-bit Zone]:0 [0/s] [Response]: 39.48% [Queue]:486 
+../logs/nodes_timer/logF2094.out
+[NodeSet]:3366 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 53.51% [Queue]:484 
+../logs/nodes_timer/logF2098.out
+[NodeSet]:2880 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 60.94% [Queue]:482 
+../logs/nodes_timer/logF2102.out
+[NodeSet]:2456 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 73.21% [Queue]:485 
+../logs/nodes_timer/logF2106.out
+[NodeSet]:4536 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 40.06% [Queue]:485 
+../logs/nodes_timer/logF210.out
+[NodeSet]:875 [PeerSet]:69 [12-bit Zone]:0 [0/s] [Response]: 18.51% [Queue]:482 
+../logs/nodes_timer/logF2110.out
+[NodeSet]:4597 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 38.79% [Queue]:483 
+../logs/nodes_timer/logF2114.out
+[NodeSet]:5231 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 34.37% [Queue]:479 
+../logs/nodes_timer/logF2118.out
+[NodeSet]:5129 [PeerSet]:179 [12-bit Zone]:0 [0/s] [Response]: 34.74% [Queue]:484 
+../logs/nodes_timer/logF2122.out
+[NodeSet]:2687 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 63.30% [Queue]:485 
+../logs/nodes_timer/logF2126.out
+[NodeSet]:4474 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 40.61% [Queue]:485 
+../logs/nodes_timer/logF2130.out
+[NodeSet]:2850 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 61.68% [Queue]:486 
+../logs/nodes_timer/logF2134.out
+[NodeSet]:3060 [PeerSet]:231 [12-bit Zone]:0 [0/s] [Response]: 57.68% [Queue]:486 
+../logs/nodes_timer/logF2138.out
+[NodeSet]:3012 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 60.76% [Queue]:487 
+../logs/nodes_timer/logF2142.out
+[NodeSet]:3133 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 56.88% [Queue]:482 
+../logs/nodes_timer/logF2146.out
+[NodeSet]:4207 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 44.00% [Queue]:482 
+../logs/nodes_timer/logF214.out
+[NodeSet]:1199 [PeerSet]:25 [12-bit Zone]:0 [0/s] [Response]: 14.43% [Queue]:488 
+../logs/nodes_timer/logF2150.out
+[NodeSet]:2133 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 76.61% [Queue]:480 
+../logs/nodes_timer/logF2154.out
+[NodeSet]:2815 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 63.45% [Queue]:487 
+../logs/nodes_timer/logF2158.out
+[NodeSet]:3045 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 60.30% [Queue]:482 
+../logs/nodes_timer/logF2162.out
+[NodeSet]:4612 [PeerSet]:200 [12-bit Zone]:0 [0/s] [Response]: 40.03% [Queue]:481 
+../logs/nodes_timer/logF2166.out
+[NodeSet]:3557 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 50.83% [Queue]:485 
+../logs/nodes_timer/logF2170.out
+[NodeSet]:2446 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 72.98% [Queue]:483 
+../logs/nodes_timer/logF2174.out
+[NodeSet]:2400 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 75.29% [Queue]:481 
+../logs/nodes_timer/logF2178.out
+[NodeSet]:3380 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 54.62% [Queue]:481 
+../logs/nodes_timer/logF2182.out
+[NodeSet]:2797 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 68.64% [Queue]:485 
+../logs/nodes_timer/logF2186.out
+[NodeSet]:2582 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 70.37% [Queue]:482 
+../logs/nodes_timer/logF218.out
+[NodeSet]:1000 [PeerSet]:8 [12-bit Zone]:0 [0/s] [Response]: 18.10% [Queue]:481 
+../logs/nodes_timer/logF2190.out
+[NodeSet]:4684 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 40.41% [Queue]:480 
+../logs/nodes_timer/logF2194.out
+[NodeSet]:2792 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 68.45% [Queue]:484 
+../logs/nodes_timer/logF2198.out
+[NodeSet]:3074 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 59.53% [Queue]:487 
+../logs/nodes_timer/logF2202.out
+[NodeSet]:2682 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 67.11% [Queue]:487 
+../logs/nodes_timer/logF2206.out
+[NodeSet]:4274 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 43.36% [Queue]:482 
+../logs/nodes_timer/logF2210.out
+[NodeSet]:3161 [PeerSet]:210 [12-bit Zone]:0 [0/s] [Response]: 58.05% [Queue]:480 
+../logs/nodes_timer/logF2214.out
+[NodeSet]:3112 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 58.61% [Queue]:488 
+../logs/nodes_timer/logF2218.out
+[NodeSet]:5545 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 34.25% [Queue]:484 
+../logs/nodes_timer/logF2222.out
+[NodeSet]:3974 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 47.46% [Queue]:481 
+../logs/nodes_timer/logF2226.out
+[NodeSet]:4033 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 45.52% [Queue]:488 
+../logs/nodes_timer/logF222.out
+[NodeSet]:1063 [PeerSet]:24 [12-bit Zone]:0 [0/s] [Response]: 17.87% [Queue]:486 
+../logs/nodes_timer/logF2230.out
+[NodeSet]:2647 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 70.42% [Queue]:481 
+../logs/nodes_timer/logF2234.out
+[NodeSet]:5361 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 35.03% [Queue]:483 
+../logs/nodes_timer/logF2238.out
+[NodeSet]:3863 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 49.26% [Queue]:486 
+../logs/nodes_timer/logF2242.out
+[NodeSet]:5660 [PeerSet]:200 [12-bit Zone]:0 [0/s] [Response]: 33.32% [Queue]:485 
+../logs/nodes_timer/logF2246.out
+[NodeSet]:3853 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 49.34% [Queue]:487 
+../logs/nodes_timer/logF2250.out
+[NodeSet]:3042 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 63.45% [Queue]:482 
+../logs/nodes_timer/logF2254.out
+[NodeSet]:3280 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 55.18% [Queue]:483 
+../logs/nodes_timer/logF2258.out
+[NodeSet]:2835 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 65.54% [Queue]:483 
+../logs/nodes_timer/logF2262.out
+[NodeSet]:5132 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 37.33% [Queue]:488 
+../logs/nodes_timer/logF2266.out
+[NodeSet]:2603 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 75.22% [Queue]:481 
+../logs/nodes_timer/logF226.out
+[NodeSet]:1092 [PeerSet]:10 [12-bit Zone]:0 [0/s] [Response]: 16.21% [Queue]:482 
+../logs/nodes_timer/logF2270.out
+[NodeSet]:4353 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 45.53% [Queue]:481 
+../logs/nodes_timer/logF2274.out
+[NodeSet]:2178 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 84.57% [Queue]:479 
+../logs/nodes_timer/logF2278.out
+[NodeSet]:3518 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 56.14% [Queue]:481 
+../logs/nodes_timer/logF2282.out
+[NodeSet]:3395 [PeerSet]:208 [12-bit Zone]:0 [0/s] [Response]: 57.41% [Queue]:486 
+../logs/nodes_timer/logF2286.out
+[NodeSet]:4601 [PeerSet]:214 [12-bit Zone]:0 [0/s] [Response]: 42.49% [Queue]:483 
+../logs/nodes_timer/logF2290.out
+[NodeSet]:5120 [PeerSet]:201 [12-bit Zone]:0 [0/s] [Response]: 39.06% [Queue]:479 
+../logs/nodes_timer/logF2294.out
+[NodeSet]:2763 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 70.97% [Queue]:486 
+../logs/nodes_timer/logF2298.out
+[NodeSet]:3625 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 51.83% [Queue]:481 
+../logs/nodes_timer/logF2302.out
+[NodeSet]:2557 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 76.61% [Queue]:486 
+../logs/nodes_timer/logF2306.out
+[NodeSet]:3721 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 52.65% [Queue]:486 
+../logs/nodes_timer/logF230.out
+[NodeSet]:1171 [PeerSet]:74 [12-bit Zone]:0 [0/s] [Response]: 16.31% [Queue]:484 
+../logs/nodes_timer/logF2310.out
+[NodeSet]:3826 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 48.93% [Queue]:483 
+../logs/nodes_timer/logF2314.out
+[NodeSet]:4302 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 46.61% [Queue]:487 
+../logs/nodes_timer/logF2318.out
+[NodeSet]:4925 [PeerSet]:206 [12-bit Zone]:0 [0/s] [Response]: 39.07% [Queue]:480 
+../logs/nodes_timer/logF2322.out
+[NodeSet]:3534 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 57.02% [Queue]:486 
+../logs/nodes_timer/logF2326.out
+[NodeSet]:2334 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 81.36% [Queue]:482 
+../logs/nodes_timer/logF2330.out
+[NodeSet]:3472 [PeerSet]:231 [12-bit Zone]:0 [0/s] [Response]: 55.82% [Queue]:487 
+../logs/nodes_timer/logF2334.out
+[NodeSet]:4054 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 48.57% [Queue]:486 
+../logs/nodes_timer/logF2338.out
+[NodeSet]:4143 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 48.37% [Queue]:483 
+../logs/nodes_timer/logF2342.out
+[NodeSet]:2757 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 69.57% [Queue]:480 
+../logs/nodes_timer/logF2346.out
+[NodeSet]:4925 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 39.88% [Queue]:481 
+../logs/nodes_timer/logF234.out
+[NodeSet]:1044 [PeerSet]:105 [12-bit Zone]:0 [0/s] [Response]: 16.00% [Queue]:486 
+../logs/nodes_timer/logF2350.out
+[NodeSet]:5246 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 37.95% [Queue]:479 
+../logs/nodes_timer/logF2354.out
+[NodeSet]:1852 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 99.08% [Queue]:481 
+../logs/nodes_timer/logF2358.out
+[NodeSet]:3255 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 60.43% [Queue]:482 
+../logs/nodes_timer/logF2362.out
+[NodeSet]:3601 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 53.82% [Queue]:484 
+../logs/nodes_timer/logF2366.out
+[NodeSet]:2732 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 72.77% [Queue]:482 
+../logs/nodes_timer/logF2370.out
+[NodeSet]:2769 [PeerSet]:231 [12-bit Zone]:0 [0/s] [Response]: 69.99% [Queue]:481 
+../logs/nodes_timer/logF2374.out
+[NodeSet]:5186 [PeerSet]:202 [12-bit Zone]:0 [0/s] [Response]: 39.95% [Queue]:482 
+../logs/nodes_timer/logF2378.out
+[NodeSet]:3868 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 52.48% [Queue]:486 
+../logs/nodes_timer/logF2382.out
+[NodeSet]:2608 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 74.08% [Queue]:487 
+../logs/nodes_timer/logF2386.out
+[NodeSet]:3093 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 61.33% [Queue]:485 
+../logs/nodes_timer/logF238.out
+[NodeSet]:1168 [PeerSet]:116 [12-bit Zone]:0 [0/s] [Response]: 16.87% [Queue]:485 
+../logs/nodes_timer/logF2390.out
+[NodeSet]:4187 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 49.18% [Queue]:486 
+../logs/nodes_timer/logF2394.out
+[NodeSet]:2813 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 70.67% [Queue]:488 
+../logs/nodes_timer/logF2398.out
+[NodeSet]:2475 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 78.34% [Queue]:482 
+../logs/nodes_timer/logF2402.out
+[NodeSet]:2807 [PeerSet]:222 [12-bit Zone]:0 [0/s] [Response]: 71.00% [Queue]:481 
+../logs/nodes_timer/logF2406.out
+[NodeSet]:4403 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 45.97% [Queue]:481 
+../logs/nodes_timer/logF2410.out
+[NodeSet]:3592 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 54.82% [Queue]:480 
+../logs/nodes_timer/logF2414.out
+[NodeSet]:1970 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 97.06% [Queue]:482 
+../logs/nodes_timer/logF2418.out
+[NodeSet]:3453 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 58.91% [Queue]:486 
+../logs/nodes_timer/logF2422.out
+[NodeSet]:3682 [PeerSet]:222 [12-bit Zone]:0 [0/s] [Response]: 54.62% [Queue]:484 
+../logs/nodes_timer/logF2426.out
+[NodeSet]:2893 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 70.27% [Queue]:483 
+../logs/nodes_timer/logF242.out
+[NodeSet]:1106 [PeerSet]:48 [12-bit Zone]:0 [0/s] [Response]: 17.72% [Queue]:483 
+../logs/nodes_timer/logF2430.out
+[NodeSet]:5038 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 40.39% [Queue]:487 
+../logs/nodes_timer/logF2434.out
+[NodeSet]:2970 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 64.24% [Queue]:488 
+../logs/nodes_timer/logF2438.out
+[NodeSet]:3948 [PeerSet]:209 [12-bit Zone]:0 [0/s] [Response]: 53.75% [Queue]:482 
+../logs/nodes_timer/logF2442.out
+[NodeSet]:4879 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 41.87% [Queue]:480 
+../logs/nodes_timer/logF2446.out
+[NodeSet]:3458 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 57.35% [Queue]:483 
+../logs/nodes_timer/logF2450.out
+[NodeSet]:3016 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 65.19% [Queue]:488 
+../logs/nodes_timer/logF2454.out
+[NodeSet]:4247 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 47.56% [Queue]:481 
+../logs/nodes_timer/logF2458.out
+[NodeSet]:2917 [PeerSet]:222 [12-bit Zone]:0 [0/s] [Response]: 70.14% [Queue]:483 
+../logs/nodes_timer/logF2462.out
+[NodeSet]:3097 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 66.19% [Queue]:479 
+../logs/nodes_timer/logF2466.out
+[NodeSet]:4496 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 47.62% [Queue]:485 
+../logs/nodes_timer/logF246.out
+[NodeSet]:1261 [PeerSet]:9 [12-bit Zone]:0 [0/s] [Response]: 15.94% [Queue]:483 
+../logs/nodes_timer/logF2470.out
+[NodeSet]:4197 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 48.58% [Queue]:486 
+../logs/nodes_timer/logF2474.out
+[NodeSet]:3835 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 53.72% [Queue]:486 
+../logs/nodes_timer/logF2478.out
+[NodeSet]:5038 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 42.28% [Queue]:484 
+../logs/nodes_timer/logF2482.out
+[NodeSet]:4828 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 42.85% [Queue]:480 
+../logs/nodes_timer/logF2486.out
+[NodeSet]:3784 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 54.97% [Queue]:484 
+../logs/nodes_timer/logF2490.out
+[NodeSet]:3770 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 55.01% [Queue]:480 
+../logs/nodes_timer/logF2494.out
+[NodeSet]:4355 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 48.63% [Queue]:485 
+../logs/nodes_timer/logF2498.out
+[NodeSet]:3264 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 62.35% [Queue]:481 
+../logs/nodes_timer/logF2502.out
+[NodeSet]:3925 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 54.52% [Queue]:483 
+../logs/nodes_timer/logF2506.out
+[NodeSet]:3135 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 66.22% [Queue]:484 
+../logs/nodes_timer/logF250.out
+[NodeSet]:1403 [PeerSet]:30 [12-bit Zone]:0 [0/s] [Response]: 15.18% [Queue]:484 
+../logs/nodes_timer/logF2510.out
+[NodeSet]:4365 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 45.77% [Queue]:482 
+../logs/nodes_timer/logF2514.out
+[NodeSet]:4320 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 48.73% [Queue]:480 
+../logs/nodes_timer/logF2518.out
+[NodeSet]:3604 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 59.35% [Queue]:485 
+../logs/nodes_timer/logF2522.out
+[NodeSet]:3955 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 55.27% [Queue]:481 
+../logs/nodes_timer/logF2526.out
+[NodeSet]:4827 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 42.82% [Queue]:482 
+../logs/nodes_timer/logF2530.out
+[NodeSet]:4246 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 49.74% [Queue]:480 
+../logs/nodes_timer/logF2534.out
+[NodeSet]:3793 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 56.58% [Queue]:480 
+../logs/nodes_timer/logF2538.out
+[NodeSet]:3048 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 67.65% [Queue]:482 
+../logs/nodes_timer/logF2542.out
+[NodeSet]:3793 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 57.03% [Queue]:485 
+../logs/nodes_timer/logF2546.out
+[NodeSet]:3033 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 68.51% [Queue]:483 
+../logs/nodes_timer/logF254.out
+[NodeSet]:1174 [PeerSet]:7 [12-bit Zone]:0 [0/s] [Response]: 16.95% [Queue]:485 
+../logs/nodes_timer/logF2550.out
+[NodeSet]:3585 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 59.02% [Queue]:480 
+../logs/nodes_timer/logF2554.out
+[NodeSet]:4214 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 50.47% [Queue]:484 
+../logs/nodes_timer/logF2558.out
+[NodeSet]:4134 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 51.72% [Queue]:482 
+../logs/nodes_timer/logF2562.out
+[NodeSet]:3127 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 65.65% [Queue]:484 
+../logs/nodes_timer/logF2566.out
+[NodeSet]:4852 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 45.03% [Queue]:484 
+../logs/nodes_timer/logF2570.out
+[NodeSet]:4026 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 51.61% [Queue]:485 
+../logs/nodes_timer/logF2574.out
+[NodeSet]:3835 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 56.82% [Queue]:482 
+../logs/nodes_timer/logF2578.out
+[NodeSet]:4057 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 51.37% [Queue]:483 
+../logs/nodes_timer/logF2582.out
+[NodeSet]:2802 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 73.80% [Queue]:483 
+../logs/nodes_timer/logF2586.out
+[NodeSet]:4363 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 49.30% [Queue]:484 
+../logs/nodes_timer/logF258.out
+[NodeSet]:1204 [PeerSet]:70 [12-bit Zone]:0 [0/s] [Response]: 18.44% [Queue]:487 
+../logs/nodes_timer/logF2590.out
+[NodeSet]:3301 [PeerSet]:212 [12-bit Zone]:0 [0/s] [Response]: 66.01% [Queue]:479 
+../logs/nodes_timer/logF2594.out
+[NodeSet]:2325 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 91.78% [Queue]:483 
+../logs/nodes_timer/logF2598.out
+[NodeSet]:3697 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 56.75% [Queue]:480 
+../logs/nodes_timer/logF2602.out
+[NodeSet]:4537 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 49.48% [Queue]:487 
+../logs/nodes_timer/logF2606.out
+[NodeSet]:3026 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 71.22% [Queue]:481 
+../logs/nodes_timer/logF2610.out
+[NodeSet]:4004 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 55.04% [Queue]:486 
+../logs/nodes_timer/logF2614.out
+[NodeSet]:4331 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 49.46% [Queue]:487 
+../logs/nodes_timer/logF2618.out
+[NodeSet]:3533 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 59.10% [Queue]:485 
+../logs/nodes_timer/logF2622.out
+[NodeSet]:4385 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 51.20% [Queue]:488 
+../logs/nodes_timer/logF2626.out
+[NodeSet]:4427 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 48.41% [Queue]:483 
+../logs/nodes_timer/logF262.out
+[NodeSet]:1135 [PeerSet]:153 [12-bit Zone]:0 [0/s] [Response]: 18.68% [Queue]:481 
+../logs/nodes_timer/logF2630.out
+[NodeSet]:3041 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 70.40% [Queue]:482 
+../logs/nodes_timer/logF2634.out
+[NodeSet]:3414 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 63.94% [Queue]:483 
+../logs/nodes_timer/logF2638.out
+[NodeSet]:3785 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 57.89% [Queue]:482 
+../logs/nodes_timer/logF2642.out
+[NodeSet]:3452 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 62.98% [Queue]:482 
+../logs/nodes_timer/logF2646.out
+[NodeSet]:2959 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 68.67% [Queue]:482 
+../logs/nodes_timer/logF2650.out
+[NodeSet]:3938 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 56.25% [Queue]:482 
+../logs/nodes_timer/logF2654.out
+[NodeSet]:4790 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 45.09% [Queue]:480 
+../logs/nodes_timer/logF2658.out
+[NodeSet]:4693 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 48.35% [Queue]:486 
+../logs/nodes_timer/logF2662.out
+[NodeSet]:3615 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 61.47% [Queue]:482 
+../logs/nodes_timer/logF2666.out
+[NodeSet]:3174 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 65.85% [Queue]:488 
+../logs/nodes_timer/logF266.out
+[NodeSet]:1284 [PeerSet]:23 [12-bit Zone]:0 [0/s] [Response]: 16.74% [Queue]:487 
+../logs/nodes_timer/logF2670.out
+[NodeSet]:3420 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 62.98% [Queue]:486 
+../logs/nodes_timer/logF2674.out
+[NodeSet]:2956 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 75.03% [Queue]:485 
+../logs/nodes_timer/logF2678.out
+[NodeSet]:4534 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 48.28% [Queue]:485 
+../logs/nodes_timer/logF2682.out
+[NodeSet]:2766 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 78.85% [Queue]:482 
+../logs/nodes_timer/logF2686.out
+[NodeSet]:4210 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 52.80% [Queue]:479 
+../logs/nodes_timer/logF2690.out
+[NodeSet]:4317 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 50.03% [Queue]:485 
+../logs/nodes_timer/logF2694.out
+[NodeSet]:4055 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 55.66% [Queue]:482 
+../logs/nodes_timer/logF2698.out
+[NodeSet]:3351 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 64.55% [Queue]:521 
+../logs/nodes_timer/logF2702.out
+[NodeSet]:4208 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 52.64% [Queue]:486 
+../logs/nodes_timer/logF2706.out
+[NodeSet]:3762 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 59.52% [Queue]:479 
+../logs/nodes_timer/logF270.out
+[NodeSet]:1157 [PeerSet]:14 [12-bit Zone]:0 [0/s] [Response]: 18.15% [Queue]:485 
+../logs/nodes_timer/logF2710.out
+[NodeSet]:4400 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 51.55% [Queue]:485 
+../logs/nodes_timer/logF2714.out
+[NodeSet]:4040 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 54.50% [Queue]:479 
+../logs/nodes_timer/logF2718.out
+[NodeSet]:3472 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 64.72% [Queue]:484 
+../logs/nodes_timer/logF2722.out
+[NodeSet]:2762 [PeerSet]:217 [12-bit Zone]:0 [0/s] [Response]: 77.95% [Queue]:487 
+../logs/nodes_timer/logF2726.out
+[NodeSet]:3736 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 57.60% [Queue]:481 
+../logs/nodes_timer/logF2730.out
+[NodeSet]:4205 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 53.60% [Queue]:488 
+../logs/nodes_timer/logF2734.out
+[NodeSet]:2088 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 102.54% [Queue]:487 
+../logs/nodes_timer/logF2738.out
+[NodeSet]:3062 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 72.50% [Queue]:481 
+../logs/nodes_timer/logF2742.out
+[NodeSet]:3921 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 58.91% [Queue]:484 
+../logs/nodes_timer/logF2746.out
+[NodeSet]:5484 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 41.43% [Queue]:483 
+../logs/nodes_timer/logF274.out
+[NodeSet]:1336 [PeerSet]:6 [12-bit Zone]:0 [0/s] [Response]: 17.37% [Queue]:484 
+../logs/nodes_timer/logF2750.out
+[NodeSet]:3928 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 57.03% [Queue]:487 
+../logs/nodes_timer/logF2754.out
+[NodeSet]:3439 [PeerSet]:231 [12-bit Zone]:0 [0/s] [Response]: 63.13% [Queue]:482 
+../logs/nodes_timer/logF2758.out
+[NodeSet]:3786 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 59.80% [Queue]:481 
+../logs/nodes_timer/logF2762.out
+[NodeSet]:4334 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 51.80% [Queue]:480 
+../logs/nodes_timer/logF2766.out
+[NodeSet]:3571 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 62.08% [Queue]:478 
+../logs/nodes_timer/logF2770.out
+[NodeSet]:4998 [PeerSet]:207 [12-bit Zone]:0 [0/s] [Response]: 46.94% [Queue]:487 
+../logs/nodes_timer/logF2774.out
+[NodeSet]:4271 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 52.87% [Queue]:484 
+../logs/nodes_timer/logF2778.out
+[NodeSet]:4451 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 52.33% [Queue]:488 
+../logs/nodes_timer/logF2782.out
+[NodeSet]:4656 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 51.12% [Queue]:482 
+../logs/nodes_timer/logF2786.out
+[NodeSet]:3874 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 58.23% [Queue]:479 
+../logs/nodes_timer/logF278.out
+[NodeSet]:940 [PeerSet]:19 [12-bit Zone]:0 [0/s] [Response]: 22.66% [Queue]:483 
+../logs/nodes_timer/logF2790.out
+[NodeSet]:3897 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 57.92% [Queue]:482 
+../logs/nodes_timer/logF2794.out
+[NodeSet]:2820 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 80.50% [Queue]:486 
+../logs/nodes_timer/logF2798.out
+[NodeSet]:3028 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 73.15% [Queue]:482 
+../logs/nodes_timer/logF2802.out
+[NodeSet]:3673 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 61.83% [Queue]:484 
+../logs/nodes_timer/logF2806.out
+[NodeSet]:5171 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 45.35% [Queue]:485 
+../logs/nodes_timer/logF2810.out
+[NodeSet]:4199 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 56.30% [Queue]:485 
+../logs/nodes_timer/logF2814.out
+[NodeSet]:4297 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 54.57% [Queue]:483 
+../logs/nodes_timer/logF2818.out
+[NodeSet]:3730 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 63.19% [Queue]:484 
+../logs/nodes_timer/logF2822.out
+[NodeSet]:3603 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 64.70% [Queue]:481 
+../logs/nodes_timer/logF2826.out
+[NodeSet]:1923 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 110.97% [Queue]:486 
+../logs/nodes_timer/logF282.out
+[NodeSet]:1363 [PeerSet]:24 [12-bit Zone]:0 [0/s] [Response]: 17.09% [Queue]:484 
+../logs/nodes_timer/logF2830.out
+[NodeSet]:2840 [PeerSet]:245 [12-bit Zone]:0 [0/s] [Response]: 81.20% [Queue]:486 
+../logs/nodes_timer/logF2834.out
+[NodeSet]:3772 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 60.79% [Queue]:480 
+../logs/nodes_timer/logF2838.out
+[NodeSet]:3375 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 66.79% [Queue]:484 
+../logs/nodes_timer/logF2842.out
+[NodeSet]:3282 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 69.44% [Queue]:480 
+../logs/nodes_timer/logF2846.out
+[NodeSet]:4803 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 49.09% [Queue]:485 
+../logs/nodes_timer/logF2850.out
+[NodeSet]:2032 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 112.30% [Queue]:480 
+../logs/nodes_timer/logF2854.out
+[NodeSet]:3528 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 65.14% [Queue]:484 
+../logs/nodes_timer/logF2858.out
+[NodeSet]:3560 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 63.17% [Queue]:486 
+../logs/nodes_timer/logF2862.out
+[NodeSet]:1752 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 115.24% [Queue]:481 
+../logs/nodes_timer/logF2866.out
+[NodeSet]:5982 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 38.43% [Queue]:480 
+../logs/nodes_timer/logF286.out
+[NodeSet]:1211 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 19.08% [Queue]:485 
+../logs/nodes_timer/logF2870.out
+[NodeSet]:4892 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 48.86% [Queue]:483 
+../logs/nodes_timer/logF2874.out
+[NodeSet]:3172 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 72.10% [Queue]:479 
+../logs/nodes_timer/logF2878.out
+[NodeSet]:3057 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 75.79% [Queue]:477 
+../logs/nodes_timer/logF2882.out
+[NodeSet]:3152 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 74.46% [Queue]:483 
+../logs/nodes_timer/logF2886.out
+[NodeSet]:4299 [PeerSet]:216 [12-bit Zone]:0 [0/s] [Response]: 54.06% [Queue]:478 
+../logs/nodes_timer/logF2890.out
+[NodeSet]:4020 [PeerSet]:213 [12-bit Zone]:0 [0/s] [Response]: 58.56% [Queue]:481 
+../logs/nodes_timer/logF2894.out
+[NodeSet]:4499 [PeerSet]:205 [12-bit Zone]:0 [0/s] [Response]: 52.52% [Queue]:485 
+../logs/nodes_timer/logF2898.out
+[NodeSet]:3069 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 76.64% [Queue]:485 
+../logs/nodes_timer/logF2902.out
+[NodeSet]:3315 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 68.60% [Queue]:487 
+../logs/nodes_timer/logF2906.out
+[NodeSet]:3610 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 65.60% [Queue]:485 
+../logs/nodes_timer/logF290.out
+[NodeSet]:1306 [PeerSet]:123 [12-bit Zone]:0 [0/s] [Response]: 18.38% [Queue]:485 
+../logs/nodes_timer/logF2910.out
+[NodeSet]:3363 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 72.35% [Queue]:483 
+../logs/nodes_timer/logF2914.out
+[NodeSet]:2496 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 89.26% [Queue]:484 
+../logs/nodes_timer/logF2918.out
+[NodeSet]:3068 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 74.25% [Queue]:485 
+../logs/nodes_timer/logF2922.out
+[NodeSet]:2932 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 80.63% [Queue]:485 
+../logs/nodes_timer/logF2926.out
+[NodeSet]:2833 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 79.95% [Queue]:481 
+../logs/nodes_timer/logF2930.out
+[NodeSet]:3326 [PeerSet]:227 [12-bit Zone]:0 [0/s] [Response]: 71.14% [Queue]:485 
+../logs/nodes_timer/logF2934.out
+[NodeSet]:3315 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 70.26% [Queue]:486 
+../logs/nodes_timer/logF2938.out
+[NodeSet]:2885 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 81.70% [Queue]:484 
+../logs/nodes_timer/logF2942.out
+[NodeSet]:4487 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 53.15% [Queue]:483 
+../logs/nodes_timer/logF2946.out
+[NodeSet]:2122 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 108.86% [Queue]:483 
+../logs/nodes_timer/logF294.out
+[NodeSet]:1153 [PeerSet]:168 [12-bit Zone]:0 [0/s] [Response]: 19.77% [Queue]:485 
+../logs/nodes_timer/logF2950.out
+[NodeSet]:4113 [PeerSet]:225 [12-bit Zone]:0 [0/s] [Response]: 56.94% [Queue]:486 
+../logs/nodes_timer/logF2954.out
+[NodeSet]:2586 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 85.19% [Queue]:481 
+../logs/nodes_timer/logF2958.out
+[NodeSet]:1639 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 135.39% [Queue]:488 
+../logs/nodes_timer/logF2962.out
+[NodeSet]:4496 [PeerSet]:211 [12-bit Zone]:0 [0/s] [Response]: 51.87% [Queue]:480 
+../logs/nodes_timer/logF2966.out
+[NodeSet]:4635 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 53.74% [Queue]:487 
+../logs/nodes_timer/logF2970.out
+[NodeSet]:3902 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 60.89% [Queue]:484 
+../logs/nodes_timer/logF2974.out
+[NodeSet]:4319 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 54.23% [Queue]:482 
+../logs/nodes_timer/logF2978.out
+[NodeSet]:3810 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 62.78% [Queue]:485 
+../logs/nodes_timer/logF2982.out
+[NodeSet]:2483 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 92.59% [Queue]:481 
+../logs/nodes_timer/logF2986.out
+[NodeSet]:3227 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 74.00% [Queue]:481 
+../logs/nodes_timer/logF298.out
+[NodeSet]:1345 [PeerSet]:51 [12-bit Zone]:0 [0/s] [Response]: 16.95% [Queue]:481 
+../logs/nodes_timer/logF2990.out
+[NodeSet]:3792 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 61.21% [Queue]:488 
+../logs/nodes_timer/logF2994.out
+[NodeSet]:3853 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 61.59% [Queue]:486 
+../logs/nodes_timer/logF2998.out
+[NodeSet]:4044 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 59.97% [Queue]:485 
+../logs/nodes_timer/logF3002.out
+[NodeSet]:3205 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 73.35% [Queue]:484 
+../logs/nodes_timer/logF3006.out
+[NodeSet]:4024 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 62.70% [Queue]:479 
+../logs/nodes_timer/logF3010.out
+[NodeSet]:2791 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 84.45% [Queue]:485 
+../logs/nodes_timer/logF3014.out
+[NodeSet]:2955 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 80.68% [Queue]:486 
+../logs/nodes_timer/logF3018.out
+[NodeSet]:3943 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 62.31% [Queue]:480 
+../logs/nodes_timer/logF3022.out
+[NodeSet]:4344 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 57.11% [Queue]:488 
+../logs/nodes_timer/logF3026.out
+[NodeSet]:4433 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 55.45% [Queue]:484 
+../logs/nodes_timer/logF302.out
+[NodeSet]:1353 [PeerSet]:14 [12-bit Zone]:0 [0/s] [Response]: 18.48% [Queue]:486 
+../logs/nodes_timer/logF3030.out
+[NodeSet]:3536 [PeerSet]:219 [12-bit Zone]:0 [0/s] [Response]: 71.41% [Queue]:480 
+../logs/nodes_timer/logF3034.out
+[NodeSet]:5626 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 42.82% [Queue]:486 
+../logs/nodes_timer/logF3038.out
+[NodeSet]:4635 [PeerSet]:251 [12-bit Zone]:0 [0/s] [Response]: 54.20% [Queue]:483 
+../logs/nodes_timer/logF3042.out
+[NodeSet]:3976 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 61.47% [Queue]:482 
+../logs/nodes_timer/logF3046.out
+[NodeSet]:4628 [PeerSet]:204 [12-bit Zone]:0 [0/s] [Response]: 55.19% [Queue]:486 
+../logs/nodes_timer/logF3050.out
+[NodeSet]:2106 [PeerSet]:245 [12-bit Zone]:0 [0/s] [Response]: 106.89% [Queue]:482 
+../logs/nodes_timer/logF3054.out
+[NodeSet]:2758 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 86.37% [Queue]:484 
+../logs/nodes_timer/logF3058.out
+[NodeSet]:2528 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 93.00% [Queue]:486 
+../logs/nodes_timer/logF3062.out
+[NodeSet]:4416 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 57.61% [Queue]:481 
+../logs/nodes_timer/logF3066.out
+[NodeSet]:4294 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 59.46% [Queue]:486 
+../logs/nodes_timer/logF306.out
+[NodeSet]:1296 [PeerSet]:13 [12-bit Zone]:0 [0/s] [Response]: 17.90% [Queue]:485 
+../logs/nodes_timer/logF3070.out
+[NodeSet]:4303 [PeerSet]:245 [12-bit Zone]:0 [0/s] [Response]: 57.31% [Queue]:485 
+../logs/nodes_timer/logF3074.out
+[NodeSet]:3266 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 77.89% [Queue]:479 
+../logs/nodes_timer/logF3078.out
+[NodeSet]:3947 [PeerSet]:245 [12-bit Zone]:0 [0/s] [Response]: 63.67% [Queue]:484 
+../logs/nodes_timer/logF3082.out
+[NodeSet]:1990 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 120.30% [Queue]:480 
+../logs/nodes_timer/logF3086.out
+[NodeSet]:3461 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 72.44% [Queue]:484 
+../logs/nodes_timer/logF3090.out
+[NodeSet]:4487 [PeerSet]:248 [12-bit Zone]:0 [0/s] [Response]: 54.33% [Queue]:485 
+../logs/nodes_timer/logF3094.out
+[NodeSet]:2975 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 80.57% [Queue]:482 
+../logs/nodes_timer/logF3098.out
+[NodeSet]:4302 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 56.62% [Queue]:482 
+../logs/nodes_timer/logF3102.out
+[NodeSet]:3591 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 71.54% [Queue]:487 
+../logs/nodes_timer/logF3106.out
+[NodeSet]:2027 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 111.30% [Queue]:481 
+../logs/nodes_timer/logF310.out
+[NodeSet]:1175 [PeerSet]:38 [12-bit Zone]:0 [0/s] [Response]: 21.70% [Queue]:481 
+../logs/nodes_timer/logF3110.out
+[NodeSet]:3783 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 67.80% [Queue]:484 
+../logs/nodes_timer/logF3114.out
+[NodeSet]:4459 [PeerSet]:249 [12-bit Zone]:0 [0/s] [Response]: 55.93% [Queue]:484 
+../logs/nodes_timer/logF3118.out
+[NodeSet]:4434 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 57.74% [Queue]:483 
+../logs/nodes_timer/logF3122.out
+[NodeSet]:4308 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 58.82% [Queue]:481 
+../logs/nodes_timer/logF3126.out
+[NodeSet]:3604 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 69.06% [Queue]:483 
+../logs/nodes_timer/logF3130.out
+[NodeSet]:3984 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 62.70% [Queue]:488 
+../logs/nodes_timer/logF3134.out
+[NodeSet]:3929 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 65.51% [Queue]:482 
+../logs/nodes_timer/logF3138.out
+[NodeSet]:2715 [PeerSet]:252 [12-bit Zone]:0 [0/s] [Response]: 83.98% [Queue]:486 
+../logs/nodes_timer/logF3142.out
+[NodeSet]:3034 [PeerSet]:245 [12-bit Zone]:0 [0/s] [Response]: 77.46% [Queue]:485 
+../logs/nodes_timer/logF3146.out
+[NodeSet]:4631 [PeerSet]:208 [12-bit Zone]:0 [0/s] [Response]: 55.26% [Queue]:483 
+../logs/nodes_timer/logF314.out
+[NodeSet]:1461 [PeerSet]:23 [12-bit Zone]:0 [0/s] [Response]: 17.93% [Queue]:482 
+../logs/nodes_timer/logF3150.out
+[NodeSet]:4169 [PeerSet]:269 [12-bit Zone]:0 [0/s] [Response]: 61.45% [Queue]:480 
+../logs/nodes_timer/logF3154.out
+[NodeSet]:4910 [PeerSet]:224 [12-bit Zone]:0 [0/s] [Response]: 52.91% [Queue]:486 
+../logs/nodes_timer/logF3158.out
+[NodeSet]:4527 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 58.12% [Queue]:483 
+../logs/nodes_timer/logF3162.out
+[NodeSet]:3856 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 66.68% [Queue]:482 
+../logs/nodes_timer/logF3166.out
+[NodeSet]:5217 [PeerSet]:223 [12-bit Zone]:0 [0/s] [Response]: 50.11% [Queue]:481 
+../logs/nodes_timer/logF3170.out
+[NodeSet]:4273 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 60.54% [Queue]:485 
+../logs/nodes_timer/logF3174.out
+[NodeSet]:5103 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 50.93% [Queue]:481 
+../logs/nodes_timer/logF3178.out
+[NodeSet]:4110 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 61.58% [Queue]:484 
+../logs/nodes_timer/logF3182.out
+[NodeSet]:2664 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 89.08% [Queue]:477 
+../logs/nodes_timer/logF3186.out
+[NodeSet]:4002 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 64.92% [Queue]:480 
+../logs/nodes_timer/logF318.out
+[NodeSet]:1724 [PeerSet]:27 [12-bit Zone]:0 [0/s] [Response]: 15.55% [Queue]:486 
+../logs/nodes_timer/logF3190.out
+[NodeSet]:2995 [PeerSet]:247 [12-bit Zone]:0 [0/s] [Response]: 84.04% [Queue]:484 
+../logs/nodes_timer/logF3194.out
+[NodeSet]:3771 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 68.68% [Queue]:485 
+../logs/nodes_timer/logF3198.out
+[NodeSet]:4476 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 57.53% [Queue]:483 
+../logs/nodes_timer/logF3202.out
+[NodeSet]:5389 [PeerSet]:210 [12-bit Zone]:0 [0/s] [Response]: 50.42% [Queue]:484 
+../logs/nodes_timer/logF3206.out
+[NodeSet]:3470 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 73.72% [Queue]:481 
+../logs/nodes_timer/logF3210.out
+[NodeSet]:3683 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 68.56% [Queue]:481 
+../logs/nodes_timer/logF3214.out
+[NodeSet]:4761 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 53.56% [Queue]:483 
+../logs/nodes_timer/logF3218.out
+[NodeSet]:3727 [PeerSet]:249 [12-bit Zone]:0 [0/s] [Response]: 69.31% [Queue]:486 
+../logs/nodes_timer/logF3222.out
+[NodeSet]:5026 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 52.53% [Queue]:483 
+../logs/nodes_timer/logF3226.out
+[NodeSet]:3549 [PeerSet]:250 [12-bit Zone]:0 [0/s] [Response]: 71.63% [Queue]:479 
+../logs/nodes_timer/logF322.out
+[NodeSet]:1455 [PeerSet]:158 [12-bit Zone]:0 [0/s] [Response]: 16.98% [Queue]:484 
+../logs/nodes_timer/logF3230.out
+[NodeSet]:3842 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 67.75% [Queue]:483 
+../logs/nodes_timer/logF3234.out
+[NodeSet]:4483 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 59.02% [Queue]:484 
+../logs/nodes_timer/logF3238.out
+[NodeSet]:3534 [PeerSet]:248 [12-bit Zone]:0 [0/s] [Response]: 70.26% [Queue]:480 
+../logs/nodes_timer/logF3242.out
+[NodeSet]:4604 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 57.41% [Queue]:484 
+../logs/nodes_timer/logF3246.out
+[NodeSet]:2404 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 106.78% [Queue]:482 
+../logs/nodes_timer/logF3250.out
+[NodeSet]:3920 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 62.09% [Queue]:488 
+../logs/nodes_timer/logF3254.out
+[NodeSet]:3566 [PeerSet]:246 [12-bit Zone]:0 [0/s] [Response]: 72.32% [Queue]:485 
+../logs/nodes_timer/logF3258.out
+[NodeSet]:2268 [PeerSet]:239 [12-bit Zone]:0 [0/s] [Response]: 104.54% [Queue]:482 
+../logs/nodes_timer/logF3262.out
+[NodeSet]:3195 [PeerSet]:247 [12-bit Zone]:0 [0/s] [Response]: 79.31% [Queue]:481 
+../logs/nodes_timer/logF3266.out
+[NodeSet]:3315 [PeerSet]:252 [12-bit Zone]:0 [0/s] [Response]: 76.62% [Queue]:479 
+../logs/nodes_timer/logF326.out
+[NodeSet]:1198 [PeerSet]:110 [12-bit Zone]:0 [0/s] [Response]: 21.87% [Queue]:481 
+../logs/nodes_timer/logF3270.out
+[NodeSet]:5225 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 50.79% [Queue]:484 
+../logs/nodes_timer/logF3274.out
+[NodeSet]:3799 [PeerSet]:250 [12-bit Zone]:0 [0/s] [Response]: 66.91% [Queue]:484 
+../logs/nodes_timer/logF3278.out
+[NodeSet]:3562 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 73.05% [Queue]:486 
+../logs/nodes_timer/logF3282.out
+[NodeSet]:4183 [PeerSet]:215 [12-bit Zone]:0 [0/s] [Response]: 65.26% [Queue]:487 
+../logs/nodes_timer/logF3286.out
+[NodeSet]:3300 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 76.64% [Queue]:486 
+../logs/nodes_timer/logF3290.out
+[NodeSet]:4224 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 62.55% [Queue]:482 
+../logs/nodes_timer/logF3294.out
+[NodeSet]:3781 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 68.29% [Queue]:479 
+../logs/nodes_timer/logF3298.out
+[NodeSet]:3288 [PeerSet]:251 [12-bit Zone]:0 [0/s] [Response]: 75.73% [Queue]:481 
+../logs/nodes_timer/logF3302.out
+[NodeSet]:4624 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 59.23% [Queue]:485 
+../logs/nodes_timer/logF3306.out
+[NodeSet]:3099 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 81.83% [Queue]:483 
+../logs/nodes_timer/logF330.out
+[NodeSet]:1359 [PeerSet]:163 [12-bit Zone]:0 [0/s] [Response]: 19.57% [Queue]:486 
+../logs/nodes_timer/logF3310.out
+[NodeSet]:3145 [PeerSet]:245 [12-bit Zone]:0 [0/s] [Response]: 83.37% [Queue]:484 
+../logs/nodes_timer/logF3314.out
+[NodeSet]:3797 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 70.98% [Queue]:482 
+../logs/nodes_timer/logF3318.out
+[NodeSet]:2739 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 96.06% [Queue]:485 
+../logs/nodes_timer/logF3322.out
+[NodeSet]:4173 [PeerSet]:255 [12-bit Zone]:0 [0/s] [Response]: 62.66% [Queue]:479 
+../logs/nodes_timer/logF3326.out
+[NodeSet]:2563 [PeerSet]:249 [12-bit Zone]:0 [0/s] [Response]: 96.96% [Queue]:483 
+../logs/nodes_timer/logF3330.out
+[NodeSet]:4322 [PeerSet]:228 [12-bit Zone]:0 [0/s] [Response]: 62.31% [Queue]:483 
+../logs/nodes_timer/logF3334.out
+[NodeSet]:4520 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 57.90% [Queue]:481 
+../logs/nodes_timer/logF3338.out
+[NodeSet]:3632 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 70.26% [Queue]:485 
+../logs/nodes_timer/logF3342.out
+[NodeSet]:4831 [PeerSet]:220 [12-bit Zone]:0 [0/s] [Response]: 54.63% [Queue]:480 
+../logs/nodes_timer/logF3346.out
+[NodeSet]:3592 [PeerSet]:229 [12-bit Zone]:0 [0/s] [Response]: 74.03% [Queue]:482 
+../logs/nodes_timer/logF334.out
+[NodeSet]:1161 [PeerSet]:117 [12-bit Zone]:0 [0/s] [Response]: 23.69% [Queue]:485 
+../logs/nodes_timer/logF3350.out
+[NodeSet]:3968 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 68.40% [Queue]:485 
+../logs/nodes_timer/logF3354.out
+[NodeSet]:2746 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 95.52% [Queue]:482 
+../logs/nodes_timer/logF3358.out
+[NodeSet]:6044 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 45.25% [Queue]:485 
+../logs/nodes_timer/logF3362.out
+[NodeSet]:3484 [PeerSet]:245 [12-bit Zone]:0 [0/s] [Response]: 76.46% [Queue]:481 
+../logs/nodes_timer/logF3366.out
+[NodeSet]:3349 [PeerSet]:248 [12-bit Zone]:0 [0/s] [Response]: 76.32% [Queue]:481 
+../logs/nodes_timer/logF3370.out
+[NodeSet]:2950 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 86.71% [Queue]:485 
+../logs/nodes_timer/logF3374.out
+[NodeSet]:4507 [PeerSet]:218 [12-bit Zone]:0 [0/s] [Response]: 62.33% [Queue]:481 
+../logs/nodes_timer/logF3378.out
+[NodeSet]:4534 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 57.63% [Queue]:481 
+../logs/nodes_timer/logF3382.out
+[NodeSet]:4350 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 62.94% [Queue]:485 
+../logs/nodes_timer/logF3386.out
+[NodeSet]:3837 [PeerSet]:246 [12-bit Zone]:0 [0/s] [Response]: 72.61% [Queue]:487 
+../logs/nodes_timer/logF338.out
+[NodeSet]:1572 [PeerSet]:19 [12-bit Zone]:0 [0/s] [Response]: 17.94% [Queue]:485 
+../logs/nodes_timer/logF3390.out
+[NodeSet]:3437 [PeerSet]:246 [12-bit Zone]:0 [0/s] [Response]: 77.65% [Queue]:487 
+../logs/nodes_timer/logF3394.out
+[NodeSet]:3324 [PeerSet]:248 [12-bit Zone]:0 [0/s] [Response]: 80.60% [Queue]:486 
+../logs/nodes_timer/logF3398.out
+[NodeSet]:4588 [PeerSet]:247 [12-bit Zone]:0 [0/s] [Response]: 60.40% [Queue]:486 
+../logs/nodes_timer/logF3402.out
+[NodeSet]:3317 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 80.83% [Queue]:484 
+../logs/nodes_timer/logF3406.out
+[NodeSet]:5623 [PeerSet]:226 [12-bit Zone]:0 [0/s] [Response]: 49.23% [Queue]:485 
+../logs/nodes_timer/logF3410.out
+[NodeSet]:4472 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 62.66% [Queue]:485 
+../logs/nodes_timer/logF3414.out
+[NodeSet]:3060 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 90.13% [Queue]:484 
+../logs/nodes_timer/logF3418.out
+[NodeSet]:4944 [PeerSet]:252 [12-bit Zone]:0 [0/s] [Response]: 56.45% [Queue]:482 
+../logs/nodes_timer/logF3422.out
+[NodeSet]:3944 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 70.41% [Queue]:480 
+../logs/nodes_timer/logF3426.out
+[NodeSet]:3565 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 76.30% [Queue]:484 
+../logs/nodes_timer/logF342.out
+[NodeSet]:1224 [PeerSet]:51 [12-bit Zone]:0 [0/s] [Response]: 22.22% [Queue]:488 
+../logs/nodes_timer/logF3430.out
+[NodeSet]:4149 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 69.00% [Queue]:487 
+../logs/nodes_timer/logF3434.out
+[NodeSet]:4706 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 56.84% [Queue]:481 
+../logs/nodes_timer/logF3438.out
+[NodeSet]:4200 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 64.38% [Queue]:481 
+../logs/nodes_timer/logF3442.out
+[NodeSet]:3775 [PeerSet]:235 [12-bit Zone]:0 [0/s] [Response]: 75.74% [Queue]:482 
+../logs/nodes_timer/logF3446.out
+[NodeSet]:3674 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 72.56% [Queue]:487 
+../logs/nodes_timer/logF3450.out
+[NodeSet]:4119 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 67.73% [Queue]:481 
+../logs/nodes_timer/logF3454.out
+[NodeSet]:3137 [PeerSet]:247 [12-bit Zone]:0 [0/s] [Response]: 86.93% [Queue]:481 
+../logs/nodes_timer/logF3458.out
+[NodeSet]:4293 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 65.36% [Queue]:488 
+../logs/nodes_timer/logF3462.out
+[NodeSet]:3230 [PeerSet]:246 [12-bit Zone]:0 [0/s] [Response]: 85.54% [Queue]:482 
+../logs/nodes_timer/logF3466.out
+[NodeSet]:4939 [PeerSet]:237 [12-bit Zone]:0 [0/s] [Response]: 58.29% [Queue]:481 
+../logs/nodes_timer/logF346.out
+[NodeSet]:1384 [PeerSet]:168 [12-bit Zone]:0 [0/s] [Response]: 22.33% [Queue]:483 
+../logs/nodes_timer/logF3470.out
+[NodeSet]:4407 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 64.03% [Queue]:481 
+../logs/nodes_timer/logF3474.out
+[NodeSet]:3063 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 86.42% [Queue]:484 
+../logs/nodes_timer/logF3478.out
+[NodeSet]:4660 [PeerSet]:234 [12-bit Zone]:0 [0/s] [Response]: 61.65% [Queue]:485 
+../logs/nodes_timer/logF3482.out
+[NodeSet]:4343 [PeerSet]:246 [12-bit Zone]:0 [0/s] [Response]: 62.97% [Queue]:486 
+../logs/nodes_timer/logF3486.out
+[NodeSet]:4798 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 60.17% [Queue]:485 
+../logs/nodes_timer/logF3490.out
+[NodeSet]:2770 [PeerSet]:249 [12-bit Zone]:0 [0/s] [Response]: 96.35% [Queue]:480 
+../logs/nodes_timer/logF3494.out
+[NodeSet]:4009 [PeerSet]:253 [12-bit Zone]:0 [0/s] [Response]: 66.55% [Queue]:481 
+../logs/nodes_timer/logF3498.out
+[NodeSet]:3165 [PeerSet]:230 [12-bit Zone]:0 [0/s] [Response]: 87.77% [Queue]:485 
+../logs/nodes_timer/logF3502.out
+[NodeSet]:4138 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 69.70% [Queue]:485 
+../logs/nodes_timer/logF3506.out
+[NodeSet]:4219 [PeerSet]:232 [12-bit Zone]:0 [0/s] [Response]: 67.62% [Queue]:487 
+../logs/nodes_timer/logF350.out
+[NodeSet]:1368 [PeerSet]:83 [12-bit Zone]:0 [0/s] [Response]: 20.54% [Queue]:482 
+../logs/nodes_timer/logF3510.out
+[NodeSet]:3538 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 76.00% [Queue]:486 
+../logs/nodes_timer/logF3514.out
+[NodeSet]:2508 [PeerSet]:248 [12-bit Zone]:0 [0/s] [Response]: 104.90% [Queue]:481 
+../logs/nodes_timer/logF3518.out
+[NodeSet]:4727 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 59.81% [Queue]:483 
+../logs/nodes_timer/logF3522.out
+[NodeSet]:2691 [PeerSet]:254 [12-bit Zone]:0 [0/s] [Response]: 99.52% [Queue]:483 
+../logs/nodes_timer/logF3526.out
+[NodeSet]:3761 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 74.69% [Queue]:485 
+../logs/nodes_timer/logF3530.out
+[NodeSet]:3983 [PeerSet]:249 [12-bit Zone]:0 [0/s] [Response]: 68.62% [Queue]:481 
+../logs/nodes_timer/logF3534.out
+[NodeSet]:2503 [PeerSet]:240 [12-bit Zone]:0 [0/s] [Response]: 110.99% [Queue]:481 
+../logs/nodes_timer/logF3538.out
+[NodeSet]:1948 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 137.11% [Queue]:481 
+../logs/nodes_timer/logF3542.out
+[NodeSet]:3739 [PeerSet]:244 [12-bit Zone]:0 [0/s] [Response]: 75.82% [Queue]:487 
+../logs/nodes_timer/logF3546.out
+[NodeSet]:4836 [PeerSet]:247 [12-bit Zone]:0 [0/s] [Response]: 59.53% [Queue]:486 
+../logs/nodes_timer/logF354.out
+[NodeSet]:1159 [PeerSet]:111 [12-bit Zone]:0 [0/s] [Response]: 24.68% [Queue]:488 
+../logs/nodes_timer/logF3550.out
+[NodeSet]:3504 [PeerSet]:238 [12-bit Zone]:0 [0/s] [Response]: 78.80% [Queue]:483 
+../logs/nodes_timer/logF3554.out
+[NodeSet]:3938 [PeerSet]:236 [12-bit Zone]:0 [0/s] [Response]: 71.20% [Queue]:480 
+../logs/nodes_timer/logF3558.out
+[NodeSet]:4347 [PeerSet]:242 [12-bit Zone]:0 [0/s] [Response]: 64.44% [Queue]:480 
+../logs/nodes_timer/logF3562.out
+[NodeSet]:2847 [PeerSet]:247 [12-bit Zone]:0 [0/s] [Response]: 95.86% [Queue]:484 
+../logs/nodes_timer/logF3566.out
+[NodeSet]:2744 [PeerSet]:256 [12-bit Zone]:0 [0/s] [Response]: 99.20% [Queue]:483 
+../logs/nodes_timer/logF3570.out
+[NodeSet]:3940 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 71.12% [Queue]:484 
+../logs/nodes_timer/logF3574.out
+[NodeSet]:3305 [PeerSet]:243 [12-bit Zone]:0 [0/s] [Response]: 86.26% [Queue]:482 
+../logs/nodes_timer/logF3578.out
+[NodeSet]:2702 [PeerSet]:248 [12-bit Zone]:0 [0/s] [Response]: 101.41% [Queue]:483 
+../logs/nodes_timer/logF3582.out
+[NodeSet]:4849 [PeerSet]:221 [12-bit Zone]:0 [0/s] [Response]: 60.90% [Queue]:483 
+../logs/nodes_timer/logF3586.out
+[NodeSet]:3553 [PeerSet]:249 [12-bit Zone]:0 [0/s] [Response]: 80.24% [Queue]:482 
+../logs/nodes_timer/logF358.out
+[NodeSet]:1516 [PeerSet]:58 [12-bit Zone]:0 [0/s] [Response]: 19.39% [Queue]:480 
+../logs/nodes_timer/logF3590.out
+[NodeSet]:4290 [PeerSet]:233 [12-bit Zone]:0 [0/s] [Response]: 68.51% [Queue]:479 
+../logs/nodes_timer/logF3594.out
+[NodeSet]:4948 [PeerSet]:257 [12-bit Zone]:0 [0/s] [Response]: 57.76% [Queue]:481 
+../logs/nodes_timer/logF3598.out
+[NodeSet]:3428 [PeerSet]:241 [12-bit Zone]:0 [0/s] [Response]: 76.90% [Queue]:485 
+../logs/nodes_timer/logF362.out
+[NodeSet]:1883 [PeerSet]:8 [12-bit Zone]:0 [0/s] [Response]: 16.04% [Queue]:484 
+../logs/nodes_timer/logF366.out
+[NodeSet]:1338 [PeerSet]:95 [12-bit Zone]:0 [0/s] [Response]: 23.39% [Queue]:483 
+../logs/nodes_timer/logF370.out
+[NodeSet]:1250 [PeerSet]:60 [12-bit Zone]:0 [0/s] [Response]: 24.32% [Queue]:484 
+../logs/nodes_timer/logF374.out
+[NodeSet]:1608 [PeerSet]:40 [12-bit Zone]:0 [0/s] [Response]: 19.47% [Queue]:486 
+../logs/nodes_timer/logF378.out
+[NodeSet]:2007 [PeerSet]:8 [12-bit Zone]:0 [0/s] [Response]: 15.55% [Queue]:481 
+../logs/nodes_timer/logF382.out
+[NodeSet]:1465 [PeerSet]:60 [12-bit Zone]:0 [0/s] [Response]: 21.30% [Queue]:485 
+../logs/nodes_timer/logF386.out
+[NodeSet]:1831 [PeerSet]:34 [12-bit Zone]:0 [0/s] [Response]: 17.80% [Queue]:483 
+../logs/nodes_timer/logF390.out
+[NodeSet]:1735 [PeerSet]:35 [12-bit Zone]:0 [0/s] [Response]: 19.08% [Queue]:486 
+../logs/nodes_timer/logF394.out
+[NodeSet]:1275 [PeerSet]:158 [12-bit Zone]:0 [0/s] [Response]: 24.63% [Queue]:486 
+../logs/nodes_timer/logF398.out
+[NodeSet]:1582 [PeerSet]:183 [12-bit Zone]:0 [0/s] [Response]: 20.54% [Queue]:486 
+../logs/nodes_timer/logF402.out
+[NodeSet]:1708 [PeerSet]:5 [12-bit Zone]:0 [0/s] [Response]: 15.87% [Queue]:481 
+../logs/nodes_timer/logF406.out
+[NodeSet]:892 [PeerSet]:178 [12-bit Zone]:0 [0/s] [Response]: 39.24% [Queue]:485 
+../logs/nodes_timer/logF410.out
+[NodeSet]:1912 [PeerSet]:112 [12-bit Zone]:0 [0/s] [Response]: 17.73% [Queue]:483 
+../logs/nodes_timer/logF414.out
+[NodeSet]:1967 [PeerSet]:10 [12-bit Zone]:0 [0/s] [Response]: 17.44% [Queue]:486 
+../logs/nodes_timer/logF418.out
+[NodeSet]:1868 [PeerSet]:54 [12-bit Zone]:0 [0/s] [Response]: 17.72% [Queue]:483 
+../logs/nodes_timer/logF422.out
+[NodeSet]:1725 [PeerSet]:104 [12-bit Zone]:0 [0/s] [Response]: 20.70% [Queue]:485 
+../logs/nodes_timer/logF426.out
+[NodeSet]:1922 [PeerSet]:37 [12-bit Zone]:0 [0/s] [Response]: 17.38% [Queue]:485 
+../logs/nodes_timer/logF430.out
+[NodeSet]:1355 [PeerSet]:114 [12-bit Zone]:0 [0/s] [Response]: 26.64% [Queue]:486 
+../logs/nodes_timer/logF434.out
+[NodeSet]:1645 [PeerSet]:82 [12-bit Zone]:0 [0/s] [Response]: 22.43% [Queue]:482 
+../logs/nodes_timer/logF438.out
+[NodeSet]:1175 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 33.19% [Queue]:484 
+../logs/nodes_timer/logF442.out
+[NodeSet]:1518 [PeerSet]:34 [12-bit Zone]:0 [0/s] [Response]: 24.11% [Queue]:481 
+../logs/nodes_timer/logF446.out
+[NodeSet]:2063 [PeerSet]:4 [12-bit Zone]:0 [0/s] [Response]: 16.87% [Queue]:481 
+../logs/nodes_timer/logF450.out
+[NodeSet]:2318 [PeerSet]:12 [12-bit Zone]:0 [0/s] [Response]: 16.22% [Queue]:480 
+../logs/nodes_timer/logF454.out
+[NodeSet]:2095 [PeerSet]:50 [12-bit Zone]:0 [0/s] [Response]: 18.28% [Queue]:481 
+../logs/nodes_timer/logF458.out
+[NodeSet]:1753 [PeerSet]:153 [12-bit Zone]:0 [0/s] [Response]: 21.28% [Queue]:480 
+../logs/nodes_timer/logF462.out
+[NodeSet]:1961 [PeerSet]:55 [12-bit Zone]:0 [0/s] [Response]: 18.66% [Queue]:487 
+../logs/nodes_timer/logF466.out
+[NodeSet]:1607 [PeerSet]:120 [12-bit Zone]:0 [0/s] [Response]: 23.15% [Queue]:484 
+../logs/nodes_timer/logF470.out
+[NodeSet]:1818 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 21.62% [Queue]:484 
+../logs/nodes_timer/logF474.out
+[NodeSet]:1673 [PeerSet]:83 [12-bit Zone]:0 [0/s] [Response]: 24.63% [Queue]:485 
+../logs/nodes_timer/logF478.out
+[NodeSet]:1887 [PeerSet]:115 [12-bit Zone]:0 [0/s] [Response]: 19.29% [Queue]:481 
+../logs/nodes_timer/logF482.out
+[NodeSet]:2069 [PeerSet]:150 [12-bit Zone]:0 [0/s] [Response]: 19.28% [Queue]:485 
+../logs/nodes_timer/logF486.out
+[NodeSet]:1472 [PeerSet]:92 [12-bit Zone]:0 [0/s] [Response]: 29.48% [Queue]:485 
+../logs/nodes_timer/logF490.out
+[NodeSet]:2424 [PeerSet]:14 [12-bit Zone]:0 [0/s] [Response]: 16.71% [Queue]:482 
+../logs/nodes_timer/logF494.out
+[NodeSet]:2073 [PeerSet]:49 [12-bit Zone]:0 [0/s] [Response]: 20.07% [Queue]:483 
+../logs/nodes_timer/logF498.out
+[NodeSet]:1994 [PeerSet]:175 [12-bit Zone]:0 [0/s] [Response]: 21.01% [Queue]:478 
+../logs/nodes_timer/logF502.out
+[NodeSet]:1263 [PeerSet]:174 [12-bit Zone]:0 [0/s] [Response]: 34.20% [Queue]:488 
+../logs/nodes_timer/logF506.out
+[NodeSet]:2496 [PeerSet]:17 [12-bit Zone]:0 [0/s] [Response]: 16.35% [Queue]:483 
+../logs/nodes_timer/logF50.out
+[NodeSet]:314 [PeerSet]:2 [12-bit Zone]:0 [0/s] [Response]: 12.74% [Queue]:284 
+../logs/nodes_timer/logF510.out
+[NodeSet]:1581 [PeerSet]:116 [12-bit Zone]:0 [0/s] [Response]: 27.70% [Queue]:483 
+../logs/nodes_timer/logF514.out
+[NodeSet]:1444 [PeerSet]:162 [12-bit Zone]:0 [0/s] [Response]: 30.75% [Queue]:483 
+../logs/nodes_timer/logF518.out
+[NodeSet]:2194 [PeerSet]:136 [12-bit Zone]:0 [0/s] [Response]: 19.05% [Queue]:482 
+../logs/nodes_timer/logF522.out
+[NodeSet]:1794 [PeerSet]:167 [12-bit Zone]:0 [0/s] [Response]: 23.36% [Queue]:481 
+../logs/nodes_timer/logF526.out
+[NodeSet]:1859 [PeerSet]:142 [12-bit Zone]:0 [0/s] [Response]: 24.37% [Queue]:486 
+../logs/nodes_timer/logF530.out
+[NodeSet]:1261 [PeerSet]:177 [12-bit Zone]:0 [0/s] [Response]: 36.64% [Queue]:482 
+../logs/nodes_timer/logF534.out
+[NodeSet]:1824 [PeerSet]:176 [12-bit Zone]:0 [0/s] [Response]: 25.33% [Queue]:484 
+../logs/nodes_timer/logF538.out
+[NodeSet]:2408 [PeerSet]:15 [12-bit Zone]:0 [0/s] [Response]: 17.86% [Queue]:480 
+../logs/nodes_timer/logF542.out
+[NodeSet]:1944 [PeerSet]:166 [12-bit Zone]:0 [0/s] [Response]: 23.56% [Queue]:481 
+../logs/nodes_timer/logF546.out
+[NodeSet]:1957 [PeerSet]:127 [12-bit Zone]:0 [0/s] [Response]: 22.69% [Queue]:485 
+../logs/nodes_timer/logF54.out
+[NodeSet]:364 [PeerSet]:0 [12-bit Zone]:0 [0/s] [Response]: 12.64% [Queue]:324 
+../logs/nodes_timer/logF550.out
+[NodeSet]:1951 [PeerSet]:124 [12-bit Zone]:0 [0/s] [Response]: 23.83% [Queue]:480 
+../logs/nodes_timer/logF554.out
+[NodeSet]:1995 [PeerSet]:161 [12-bit Zone]:0 [0/s] [Response]: 22.61% [Queue]:483 
+../logs/nodes_timer/logF558.out
+[NodeSet]:1934 [PeerSet]:153 [12-bit Zone]:0 [0/s] [Response]: 23.06% [Queue]:483 
+../logs/nodes_timer/logF562.out
+[NodeSet]:1239 [PeerSet]:196 [12-bit Zone]:0 [0/s] [Response]: 39.06% [Queue]:482 
+../logs/nodes_timer/logF566.out
+[NodeSet]:2466 [PeerSet]:54 [12-bit Zone]:0 [0/s] [Response]: 18.82% [Queue]:483 
+../logs/nodes_timer/logF570.out
+[NodeSet]:1346 [PeerSet]:119 [12-bit Zone]:0 [0/s] [Response]: 37.67% [Queue]:486 
+../logs/nodes_timer/logF574.out
+[NodeSet]:1913 [PeerSet]:130 [12-bit Zone]:0 [0/s] [Response]: 25.20% [Queue]:481 
+../logs/nodes_timer/logF578.out
+[NodeSet]:2186 [PeerSet]:49 [12-bit Zone]:0 [0/s] [Response]: 20.36% [Queue]:481 
+../logs/nodes_timer/logF582.out
+[NodeSet]:2263 [PeerSet]:63 [12-bit Zone]:0 [0/s] [Response]: 21.61% [Queue]:480 
+../logs/nodes_timer/logF586.out
+[NodeSet]:2515 [PeerSet]:12 [12-bit Zone]:0 [0/s] [Response]: 19.52% [Queue]:488 
+../logs/nodes_timer/logF58.out
+[NodeSet]:338 [PeerSet]:0 [12-bit Zone]:0 [0/s] [Response]: 12.43% [Queue]:297 
+../logs/nodes_timer/logF590.out
+[NodeSet]:2292 [PeerSet]:41 [12-bit Zone]:0 [0/s] [Response]: 22.34% [Queue]:485 
+../logs/nodes_timer/logF594.out
+[NodeSet]:2556 [PeerSet]:31 [12-bit Zone]:0 [0/s] [Response]: 19.44% [Queue]:487 
+../logs/nodes_timer/logF598.out
+[NodeSet]:1451 [PeerSet]:29 [12-bit Zone]:0 [0/s] [Response]: 17.44% [Queue]:484 
+../logs/nodes_timer/logF602.out
+[NodeSet]:2165 [PeerSet]:188 [12-bit Zone]:0 [0/s] [Response]: 23.51% [Queue]:486 
+../logs/nodes_timer/logF606.out
+[NodeSet]:1567 [PeerSet]:185 [12-bit Zone]:0 [0/s] [Response]: 32.42% [Queue]:483 
+../logs/nodes_timer/logF610.out
+[NodeSet]:1927 [PeerSet]:154 [12-bit Zone]:0 [0/s] [Response]: 25.95% [Queue]:482 
+../logs/nodes_timer/logF614.out
+[NodeSet]:2419 [PeerSet]:141 [12-bit Zone]:0 [0/s] [Response]: 21.91% [Queue]:488 
+../logs/nodes_timer/logF618.out
+[NodeSet]:2033 [PeerSet]:143 [12-bit Zone]:0 [0/s] [Response]: 24.74% [Queue]:486 
+../logs/nodes_timer/logF622.out
+[NodeSet]:1988 [PeerSet]:135 [12-bit Zone]:0 [0/s] [Response]: 26.76% [Queue]:487 
+../logs/nodes_timer/logF626.out
+[NodeSet]:2104 [PeerSet]:139 [12-bit Zone]:0 [0/s] [Response]: 24.38% [Queue]:485 
+../logs/nodes_timer/logF62.out
+[NodeSet]:348 [PeerSet]:1 [12-bit Zone]:0 [0/s] [Response]: 13.22% [Queue]:309 
+../logs/nodes_timer/logF630.out
+[NodeSet]:1996 [PeerSet]:133 [12-bit Zone]:0 [0/s] [Response]: 26.30% [Queue]:486 
+../logs/nodes_timer/logF634.out
+[NodeSet]:2892 [PeerSet]:33 [12-bit Zone]:0 [0/s] [Response]: 18.81% [Queue]:484 
+../logs/nodes_timer/logF638.out
+[NodeSet]:2614 [PeerSet]:99 [12-bit Zone]:0 [0/s] [Response]: 20.70% [Queue]:481 
+../logs/nodes_timer/logF642.out
+[NodeSet]:1964 [PeerSet]:137 [12-bit Zone]:0 [0/s] [Response]: 27.70% [Queue]:482 
+../logs/nodes_timer/logF646.out
+[NodeSet]:2002 [PeerSet]:81 [12-bit Zone]:0 [0/s] [Response]: 26.97% [Queue]:486 
+../logs/nodes_timer/logF650.out
+[NodeSet]:2112 [PeerSet]:192 [12-bit Zone]:0 [0/s] [Response]: 24.72% [Queue]:487 
+../logs/nodes_timer/logF654.out
+[NodeSet]:2920 [PeerSet]:151 [12-bit Zone]:0 [0/s] [Response]: 19.45% [Queue]:479 
+../logs/nodes_timer/logF658.out
+[NodeSet]:2526 [PeerSet]:57 [12-bit Zone]:0 [0/s] [Response]: 20.94% [Queue]:485 
+../logs/nodes_timer/logF662.out
+[NodeSet]:1997 [PeerSet]:142 [12-bit Zone]:0 [0/s] [Response]: 28.49% [Queue]:483 
+../logs/nodes_timer/logF666.out
+[NodeSet]:1685 [PeerSet]:142 [12-bit Zone]:0 [0/s] [Response]: 33.65% [Queue]:479 
+../logs/nodes_timer/logF66.out
+[NodeSet]:384 [PeerSet]:13 [12-bit Zone]:0 [0/s] [Response]: 13.54% [Queue]:361 
+../logs/nodes_timer/logF670.out
+[NodeSet]:2489 [PeerSet]:184 [12-bit Zone]:0 [0/s] [Response]: 22.54% [Queue]:486 
+../logs/nodes_timer/logF674.out
+[NodeSet]:2567 [PeerSet]:83 [12-bit Zone]:0 [0/s] [Response]: 21.97% [Queue]:486 
+../logs/nodes_timer/logF678.out
+[NodeSet]:1905 [PeerSet]:186 [12-bit Zone]:0 [0/s] [Response]: 29.71% [Queue]:483 
+../logs/nodes_timer/logF682.out
+[NodeSet]:2438 [PeerSet]:179 [12-bit Zone]:0 [0/s] [Response]: 23.54% [Queue]:484 
+../logs/nodes_timer/logF686.out
+[NodeSet]:2428 [PeerSet]:121 [12-bit Zone]:0 [0/s] [Response]: 23.93% [Queue]:482 
+../logs/nodes_timer/logF690.out
+[NodeSet]:3242 [PeerSet]:53 [12-bit Zone]:0 [0/s] [Response]: 17.98% [Queue]:482 
+../logs/nodes_timer/logF694.out
+[NodeSet]:1510 [PeerSet]:141 [12-bit Zone]:0 [0/s] [Response]: 24.97% [Queue]:481 
+../logs/nodes_timer/logF698.out
+[NodeSet]:2404 [PeerSet]:58 [12-bit Zone]:0 [0/s] [Response]: 24.46% [Queue]:481 
+../logs/nodes_timer/logF702.out
+[NodeSet]:2273 [PeerSet]:192 [12-bit Zone]:0 [0/s] [Response]: 26.44% [Queue]:485 
+../logs/nodes_timer/logF706.out
+[NodeSet]:1325 [PeerSet]:168 [12-bit Zone]:0 [0/s] [Response]: 46.94% [Queue]:482 
+../logs/nodes_timer/logF70.out
+[NodeSet]:416 [PeerSet]:130 [12-bit Zone]:0 [0/s] [Response]: 14.18% [Queue]:391 
+../logs/nodes_timer/logF710.out
+[NodeSet]:2118 [PeerSet]:156 [12-bit Zone]:0 [0/s] [Response]: 28.71% [Queue]:483 
+../logs/nodes_timer/logF714.out
+[NodeSet]:2026 [PeerSet]:140 [12-bit Zone]:0 [0/s] [Response]: 30.31% [Queue]:482 
+../logs/nodes_timer/logF718.out
+[NodeSet]:1798 [PeerSet]:164 [12-bit Zone]:0 [0/s] [Response]: 33.82% [Queue]:485 
+../logs/nodes_timer/logF722.out
+[NodeSet]:1321 [PeerSet]:76 [12-bit Zone]:0 [0/s] [Response]: 29.22% [Queue]:485 
+../logs/nodes_timer/logF726.out
+[NodeSet]:2660 [PeerSet]:73 [12-bit Zone]:0 [0/s] [Response]: 23.50% [Queue]:481 
+../logs/nodes_timer/logF730.out
+[NodeSet]:2407 [PeerSet]:87 [12-bit Zone]:0 [0/s] [Response]: 26.80% [Queue]:486 
+../logs/nodes_timer/logF734.out
+[NodeSet]:1479 [PeerSet]:191 [12-bit Zone]:0 [0/s] [Response]: 43.48% [Queue]:485 
+../logs/nodes_timer/logF738.out
+[NodeSet]:1789 [PeerSet]:134 [12-bit Zone]:0 [0/s] [Response]: 34.38% [Queue]:487 
+../logs/nodes_timer/logF742.out
+[NodeSet]:1920 [PeerSet]:143 [12-bit Zone]:0 [0/s] [Response]: 33.02% [Queue]:487 
+../logs/nodes_timer/logF746.out
+[NodeSet]:1970 [PeerSet]:172 [12-bit Zone]:0 [0/s] [Response]: 32.34% [Queue]:484 
+../logs/nodes_timer/logF74.out
+[NodeSet]:418 [PeerSet]:98 [12-bit Zone]:0 [0/s] [Response]: 13.64% [Queue]:392 
+../logs/nodes_timer/logF750.out
+[NodeSet]:2941 [PeerSet]:132 [12-bit Zone]:0 [0/s] [Response]: 21.08% [Queue]:482 
+../logs/nodes_timer/logF754.out
+[NodeSet]:3482 [PeerSet]:52 [12-bit Zone]:0 [0/s] [Response]: 18.70% [Queue]:487 
+../logs/nodes_timer/logF758.out
+[NodeSet]:2574 [PeerSet]:145 [12-bit Zone]:0 [0/s] [Response]: 25.10% [Queue]:485 
+../logs/nodes_timer/logF762.out
+[NodeSet]:2988 [PeerSet]:117 [12-bit Zone]:0 [0/s] [Response]: 20.82% [Queue]:484 
+../logs/nodes_timer/logF766.out
+[NodeSet]:2536 [PeerSet]:75 [12-bit Zone]:0 [0/s] [Response]: 25.75% [Queue]:488 
+../logs/nodes_timer/logF770.out
+[NodeSet]:2078 [PeerSet]:185 [12-bit Zone]:0 [0/s] [Response]: 31.28% [Queue]:483 
+../logs/nodes_timer/logF774.out
+[NodeSet]:2718 [PeerSet]:180 [12-bit Zone]:0 [0/s] [Response]: 24.47% [Queue]:485 
+../logs/nodes_timer/logF778.out
+[NodeSet]:3064 [PeerSet]:80 [12-bit Zone]:0 [0/s] [Response]: 21.57% [Queue]:483 
+../logs/nodes_timer/logF782.out
+[NodeSet]:2674 [PeerSet]:182 [12-bit Zone]:0 [0/s] [Response]: 24.72% [Queue]:483 
+../logs/nodes_timer/logF786.out
+[NodeSet]:2524 [PeerSet]:183 [12-bit Zone]:0 [0/s] [Response]: 26.55% [Queue]:481 
+../logs/nodes_timer/logF78.out
+[NodeSet]:437 [PeerSet]:6 [12-bit Zone]:0 [0/s] [Response]: 13.27% [Queue]:405 
+../logs/nodes_timer/logF790.out
+[NodeSet]:2021 [PeerSet]:175 [12-bit Zone]:0 [0/s] [Response]: 32.51% [Queue]:488 
+../logs/nodes_timer/logF794.out
+[NodeSet]:2582 [PeerSet]:182 [12-bit Zone]:0 [0/s] [Response]: 25.64% [Queue]:482 
+../logs/nodes_timer/logF798.out
+[NodeSet]:2628 [PeerSet]:188 [12-bit Zone]:0 [0/s] [Response]: 25.23% [Queue]:481 
+../logs/nodes_timer/logF802.out
+[NodeSet]:2242 [PeerSet]:184 [12-bit Zone]:0 [0/s] [Response]: 33.10% [Queue]:486 
+../logs/nodes_timer/logF806.out
+[NodeSet]:2491 [PeerSet]:190 [12-bit Zone]:0 [0/s] [Response]: 27.38% [Queue]:483 
+../logs/nodes_timer/logF810.out
+[NodeSet]:2562 [PeerSet]:78 [12-bit Zone]:0 [0/s] [Response]: 26.15% [Queue]:484 
+../logs/nodes_timer/logF814.out
+[NodeSet]:2950 [PeerSet]:137 [12-bit Zone]:0 [0/s] [Response]: 23.39% [Queue]:482 
+../logs/nodes_timer/logF818.out
+[NodeSet]:2628 [PeerSet]:143 [12-bit Zone]:0 [0/s] [Response]: 26.14% [Queue]:481 
+../logs/nodes_timer/logF822.out
+[NodeSet]:2420 [PeerSet]:91 [12-bit Zone]:0 [0/s] [Response]: 29.92% [Queue]:485 
+../logs/nodes_timer/logF826.out
+[NodeSet]:3100 [PeerSet]:64 [12-bit Zone]:0 [0/s] [Response]: 22.32% [Queue]:482 
+../logs/nodes_timer/logF82.out
+[NodeSet]:401 [PeerSet]:46 [12-bit Zone]:0 [0/s] [Response]: 16.96% [Queue]:471 
+../logs/nodes_timer/logF830.out
+[NodeSet]:2569 [PeerSet]:99 [12-bit Zone]:0 [0/s] [Response]: 27.79% [Queue]:486 
+../logs/nodes_timer/logF834.out
+[NodeSet]:2292 [PeerSet]:168 [12-bit Zone]:0 [0/s] [Response]: 31.76% [Queue]:484 
+../logs/nodes_timer/logF838.out
+[NodeSet]:2503 [PeerSet]:191 [12-bit Zone]:0 [0/s] [Response]: 28.81% [Queue]:480 
+../logs/nodes_timer/logF842.out
+[NodeSet]:2153 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 33.30% [Queue]:482 
+../logs/nodes_timer/logF846.out
+[NodeSet]:2158 [PeerSet]:179 [12-bit Zone]:0 [0/s] [Response]: 33.13% [Queue]:484 
+../logs/nodes_timer/logF850.out
+[NodeSet]:2603 [PeerSet]:180 [12-bit Zone]:0 [0/s] [Response]: 28.47% [Queue]:483 
+../logs/nodes_timer/logF854.out
+[NodeSet]:2855 [PeerSet]:104 [12-bit Zone]:0 [0/s] [Response]: 24.83% [Queue]:481 
+../logs/nodes_timer/logF858.out
+[NodeSet]:2934 [PeerSet]:149 [12-bit Zone]:0 [0/s] [Response]: 24.61% [Queue]:481 
+../logs/nodes_timer/logF862.out
+[NodeSet]:1984 [PeerSet]:143 [12-bit Zone]:0 [0/s] [Response]: 36.90% [Queue]:481 
+../logs/nodes_timer/logF866.out
+[NodeSet]:2609 [PeerSet]:159 [12-bit Zone]:0 [0/s] [Response]: 27.29% [Queue]:486 
+../logs/nodes_timer/logF86.out
+[NodeSet]:442 [PeerSet]:49 [12-bit Zone]:0 [0/s] [Response]: 15.84% [Queue]:468 
+../logs/nodes_timer/logF870.out
+[NodeSet]:3273 [PeerSet]:45 [12-bit Zone]:0 [0/s] [Response]: 22.21% [Queue]:485 
+../logs/nodes_timer/logF874.out
+[NodeSet]:3082 [PeerSet]:152 [12-bit Zone]:0 [0/s] [Response]: 23.69% [Queue]:485 
+../logs/nodes_timer/logF878.out
+[NodeSet]:2630 [PeerSet]:137 [12-bit Zone]:0 [0/s] [Response]: 29.13% [Queue]:485 
+../logs/nodes_timer/logF882.out
+[NodeSet]:2950 [PeerSet]:178 [12-bit Zone]:0 [0/s] [Response]: 25.49% [Queue]:486 
+../logs/nodes_timer/logF886.out
+[NodeSet]:2231 [PeerSet]:184 [12-bit Zone]:0 [0/s] [Response]: 32.90% [Queue]:484 
+../logs/nodes_timer/logF890.out
+[NodeSet]:2341 [PeerSet]:155 [12-bit Zone]:0 [0/s] [Response]: 32.72% [Queue]:484 
+../logs/nodes_timer/logF894.out
+[NodeSet]:3088 [PeerSet]:128 [12-bit Zone]:0 [0/s] [Response]: 25.23% [Queue]:484 
+../logs/nodes_timer/logF898.out
+[NodeSet]:2295 [PeerSet]:175 [12-bit Zone]:0 [0/s] [Response]: 33.20% [Queue]:483 
+../logs/nodes_timer/logF902.out
+[NodeSet]:3377 [PeerSet]:193 [12-bit Zone]:0 [0/s] [Response]: 23.30% [Queue]:482 
+../logs/nodes_timer/logF906.out
+[NodeSet]:1523 [PeerSet]:200 [12-bit Zone]:0 [0/s] [Response]: 47.80% [Queue]:484 
+../logs/nodes_timer/logF90.out
+[NodeSet]:514 [PeerSet]:42 [12-bit Zone]:0 [0/s] [Response]: 14.01% [Queue]:488 
+../logs/nodes_timer/logF910.out
+[NodeSet]:2684 [PeerSet]:182 [12-bit Zone]:0 [0/s] [Response]: 27.61% [Queue]:482 
+../logs/nodes_timer/logF914.out
+[NodeSet]:2507 [PeerSet]:129 [12-bit Zone]:0 [0/s] [Response]: 31.55% [Queue]:486 
+../logs/nodes_timer/logF918.out
+[NodeSet]:1179 [PeerSet]:66 [12-bit Zone]:0 [0/s] [Response]: 20.78% [Queue]:482 
+../logs/nodes_timer/logF922.out
+[NodeSet]:3055 [PeerSet]:154 [12-bit Zone]:0 [0/s] [Response]: 24.78% [Queue]:483 
+../logs/nodes_timer/logF926.out
+[NodeSet]:2399 [PeerSet]:194 [12-bit Zone]:0 [0/s] [Response]: 32.85% [Queue]:484 
+../logs/nodes_timer/logF930.out
+[NodeSet]:1457 [PeerSet]:162 [12-bit Zone]:0 [0/s] [Response]: 54.91% [Queue]:482 
+../logs/nodes_timer/logF934.out
+[NodeSet]:2940 [PeerSet]:189 [12-bit Zone]:0 [0/s] [Response]: 27.21% [Queue]:488 
+../logs/nodes_timer/logF938.out
+[NodeSet]:1819 [PeerSet]:142 [12-bit Zone]:0 [0/s] [Response]: 32.71% [Queue]:481 
+../logs/nodes_timer/logF942.out
+[NodeSet]:2681 [PeerSet]:141 [12-bit Zone]:0 [0/s] [Response]: 29.50% [Queue]:482 
+../logs/nodes_timer/logF946.out
+[NodeSet]:2351 [PeerSet]:137 [12-bit Zone]:0 [0/s] [Response]: 34.37% [Queue]:482 
+../logs/nodes_timer/logF94.out
+[NodeSet]:537 [PeerSet]:94 [12-bit Zone]:0 [0/s] [Response]: 13.97% [Queue]:486 
+../logs/nodes_timer/logF950.out
+[NodeSet]:3328 [PeerSet]:72 [12-bit Zone]:0 [0/s] [Response]: 23.26% [Queue]:483 
+../logs/nodes_timer/logF954.out
+[NodeSet]:3269 [PeerSet]:131 [12-bit Zone]:0 [0/s] [Response]: 25.08% [Queue]:483 
+../logs/nodes_timer/logF958.out
+[NodeSet]:1838 [PeerSet]:195 [12-bit Zone]:0 [0/s] [Response]: 43.47% [Queue]:484 
+../logs/nodes_timer/logF962.out
+[NodeSet]:2789 [PeerSet]:140 [12-bit Zone]:0 [0/s] [Response]: 30.23% [Queue]:480 
+../logs/nodes_timer/logF966.out
+[NodeSet]:2389 [PeerSet]:146 [12-bit Zone]:0 [0/s] [Response]: 35.58% [Queue]:484 
+../logs/nodes_timer/logF970.out
+[NodeSet]:3545 [PeerSet]:65 [12-bit Zone]:0 [0/s] [Response]: 23.61% [Queue]:480 
+../logs/nodes_timer/logF974.out
+[NodeSet]:3387 [PeerSet]:136 [12-bit Zone]:0 [0/s] [Response]: 24.18% [Queue]:482 
+../logs/nodes_timer/logF978.out
+[NodeSet]:2676 [PeerSet]:189 [12-bit Zone]:0 [0/s] [Response]: 30.19% [Queue]:482 
+../logs/nodes_timer/logF982.out
+[NodeSet]:2202 [PeerSet]:174 [12-bit Zone]:0 [0/s] [Response]: 38.01% [Queue]:481 
+../logs/nodes_timer/logF986.out
+[NodeSet]:2483 [PeerSet]:197 [12-bit Zone]:0 [0/s] [Response]: 33.06% [Queue]:483 
+../logs/nodes_timer/logF98.out
+[NodeSet]:430 [PeerSet]:10 [12-bit Zone]:0 [0/s] [Response]: 15.58% [Queue]:388 
+../logs/nodes_timer/logF990.out
+[NodeSet]:2931 [PeerSet]:128 [12-bit Zone]:0 [0/s] [Response]: 29.27% [Queue]:481 
+../logs/nodes_timer/logF994.out
+[NodeSet]:2462 [PeerSet]:185 [12-bit Zone]:0 [0/s] [Response]: 34.36% [Queue]:488 
+../logs/nodes_timer/logF998.out
+[NodeSet]:1893 [PeerSet]:174 [12-bit Zone]:0 [0/s] [Response]: 45.69% [Queue]:481 
+

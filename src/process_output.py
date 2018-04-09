@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import urllib.request
-import json
-
 '''
 Create by Martin Vasko
 3BIT, Brno, Faculty of Information Technology.
 '''
+import urllib.request
+import json
+
 
 
 class ProcessOutput():
@@ -53,6 +53,9 @@ class ProcessOutput():
 
 
     def parse_ips(self):
+        '''
+        initiate pool of ip addresses port and infohashes for geolocation.
+        '''
         iplist = []
         infolist = []
         portlist = []
@@ -114,7 +117,17 @@ class ProcessOutput():
 
 
     def print_geolocations(self):
+        '''
+        print geolocation when argument --print_country is specified, else
+        print as json object with no resolution.
+        '''
         if self.print_country:
             print(json.dumps(self.country_city, indent=4, sort_keys=True))
+            print(json.dumps(self.monitor.peers_pool, indent=4, sort_keys=True))
+            print("Time spend not recieving any UDP response: {}"
+                  .format(self.monitor.no_recieve))
         else:
             print(json.dumps(self.monitor.info_pool, indent=4, sort_keys=True))
+            print(json.dumps(self.monitor.peers_pool, indent=4, sort_keys=True))
+            print("Time spend not recieving any UDP response: {}"
+                  .format(self.monitor.no_recieve))
