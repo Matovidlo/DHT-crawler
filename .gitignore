@@ -1,3 +1,7 @@
 # Ignore all files/directories with __
 __pycache__/
+logs/
 .*py[cod]
+# Ignore passwd
+passwd.txt
+how_virtualenv.txt

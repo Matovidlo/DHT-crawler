@@ -1,6 +1,16 @@
-excel grafy, z torrent file
 Ukladat do json ako routovaciu tabulku
+pridaj viac examplov
 
 TODO
 rozne casy pri prehladavani a % pocet najdenych
+implementuj BT protokol na zistenie zivota peera
+rozclenenie na seedboxy a peerov
+rozdiel v percentach s unikatnou a dvojicou ip + port
+% pocet peerov ktory su aj dht uzlami
+
+        # message = (chr(19) +
+        #            "BitTorrent protocol" +
+        #            8 * chr(0) +               # reserved
+        #            self.infohash +
+        #            random_infohash())
 

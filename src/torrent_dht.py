@@ -15,21 +15,11 @@ import re
 import datetime
 from random import randint
 from hashlib import sha1
-from threading import Timer
 from struct import unpack
 from bencoder import bencode, bdecode
 
 
 # TODO no IPv6 support
-
-# set timer function for threading
-def timer(time, function):
-    '''
-    create timer
-    '''
-    return Timer(time, function)
-
-
 def entropy(length):
     '''
     entropy to generate infohash
@@ -130,13 +120,22 @@ def decode_peers(infohash, peers, info_pool, unique=None):
                                            .strftime('%d.%m.%Y %H:%M:%S:%f'),
                                            (infohash, ip_addr, port)]
             else:
-                key = str(ip_addr) + str(port)
-                print(ip_addr, port, key)
+                key = str(ip_addr) + ":" + str(port)
                 info_pool[key] = [datetime.datetime.now()
                                   .strftime('%d.%m.%Y %H:%M:%S:%f'),
                                   (infohash, ip_addr, port)]
     return nodes
 
+
+def get_myip():
+    '''
+    get my global ip_address, by connecting to google and get sockname
+    '''
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.connect(("8.8.8.8", 80))
+    name = sock.getsockname()[0]
+    sock.close()
+    return name
 
 
 class TorrentArguments:
@@ -167,17 +166,6 @@ class TorrentArguments:
         return self.bootstrap_nodes
 
 
-def get_myip():
-    '''
-    get my global ip_address, by connecting to google and get sockname
-    '''
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.connect(("8.8.8.8", 80))
-    name = sock.getsockname()[0]
-    sock.close()
-    return name
-
-
 class TorrentDHT():
     '''
     Class which perform query and response of dht messages.
@@ -198,24 +186,32 @@ class TorrentDHT():
         # list of nodes
         self.bootstrap_nodes = arguments.bootstrap_nodes
         self.max_node_qsize = arguments.max_node_qsize
-        self.nodes = queue.Queue(self.max_node_qsize)
-        self.peers = queue.Queue(self.max_node_qsize)
+        self.nodes = queue.LifoQueue(self.max_node_qsize)
         # Append all bootstrap nodes
         for node in arguments.bootstrap_nodes:
             self.nodes.put((self.infohash, node[0], node[1]))
 
-    def change_arguments(self, length):
+    def change_arguments(self, length, queue_type):
         '''
         change class arguments
         '''
         if length is not None:
             self.max_node_qsize = length
+        # change queue type
+        if queue_type:
+            self.nodes = queue.Queue(self.max_node_qsize)
+        for node in self.bootstrap_nodes:
+            self.nodes.put((self.infohash, node[0], node[1]))
 
-    def change_bootstrap(self, infohash, nodes):
+    def change_bootstrap(self, infohash, nodes, queue_type):
         '''
         change bootstrap nodes when parsed magnet-link or .torrent file
         '''
-        self.nodes = queue.Queue(self.max_node_qsize)
+        if queue_type:
+            self.nodes = queue.LifoQueue(self.max_node_qsize)
+        else:
+            self.nodes = queue.LifoQueue(self.max_node_qsize)
+
         for node_list in nodes:
             for node in node_list:
                 compact_node = node.decode("utf-8")
@@ -337,7 +333,8 @@ class TorrentDHT():
                         info_pool["Nodes"] = tmp_pool
                         retval["Nodes"] = nodes
                     if key.decode("utf-8") == "values":
-                        nodes = decode_peers(self.target, value, tmp_pool, True)
+                        # TODO not unique IP now
+                        nodes = decode_peers(self.target, value, tmp_pool)
                         info_pool["Peers"] = tmp_pool
                         retval["Peers"] = nodes
         return retval

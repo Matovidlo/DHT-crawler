@@ -15,15 +15,18 @@ import datetime
 import hashlib
 import select
 import re
+import json
+import socket
+from random import randrange
 from threading import Thread, Semaphore
 from bencoder import bencode
 try:
-    from torrent_DHT import TorrentDHT, TorrentArguments,\
-                           random_infohash, decode_krpc
+    from torrent_dht import TorrentDHT, TorrentArguments,\
+                           random_infohash, decode_krpc, get_neighbor
     from process_output import ProcessOutput
 except ImportError:
-    from src.torrent_DHT import TorrentDHT, TorrentArguments,\
-                               random_infohash, decode_krpc
+    from src.torrent_dht import TorrentDHT, TorrentArguments,\
+                               random_infohash, decode_krpc, get_neighbor
     from src.process_output import ProcessOutput
 
 
@@ -61,6 +64,9 @@ def argument_parser():
     parser.add_argument('--print_as_country', action='store_true',
                         help='Store ip addresses with coresponding \
                         dictionary in format country:city -> ip.addr.')
+    parser.add_argument('--fifo', action='store_true', dest="queue_type",
+                        help='Change shared queue between processes \
+                        from default lifo to fifo')
     # settings for dht
 
     parser.add_argument('--counter', type=int, dest='counter', action='store',
@@ -104,6 +110,7 @@ class Monitor:
         self.magnet = arguments.magnet
         self.country = arguments.country
 
+        self.queue_type = arguments.queue_type
         self.max_peers = 600
         if arguments.max_peers is not None:
             self.max_peers = arguments.max_peers
@@ -120,7 +127,6 @@ class Monitor:
         if arguments.duration is not None:
             # Duration of crawl
             self.duration = arguments.duration
-
         # local variables for class
         self.n_nodes = 0             # Number of nodes in a specified n-bit zone
         self.tnspeed = 0
@@ -149,22 +155,87 @@ class Monitor:
     # START OF CRAWLING #
     #####################
 
-    def insert_to_queue(self, nodes, queue_type):
+    def send_handshake(self, peer):
+        '''
+        send handshake message for bitTorrent connection
+        '''
+        def _int_to_bytes(data, bytes_len):
+            return data.to_bytes(bytes_len, "big")
+        message = bytes()
+        value = 4
+        ver = 1
+        message += _int_to_bytes(value << 4 | ver, 1)
+        message += _int_to_bytes(0, 1)
+        message += _int_to_bytes(randrange(0xffff), 2)
+        message += _int_to_bytes(int(time.time()), 4)
+        message += _int_to_bytes(0, 4)
+        message += _int_to_bytes(0xf000, 4)
+        message += _int_to_bytes(randrange(0xffff), 2)
+        message += _int_to_bytes(0, 2)
+
+        bt_socket = socket.socket(socket.AF_INET,
+                                  socket.SOCK_DGRAM,
+                                  socket.IPPROTO_UDP)
+        # just to establish connection to get result of this, but handshake
+        # should be good to get positive or negative acknowledgment
+        # TODO hole punch, those messages are mostly filtered because of firewall
+        bt_socket.sendto(message, (peer[1], peer[2]))
+        try:
+            ready = select.select([bt_socket], [], [], 0.1)
+        except (OSError, ValueError):
+            bt_socket.close()
+            return False
+        if ready[0]:
+            msg = bt_socket.recvfrom(1024)
+        else:
+            bt_socket.close()
+            return False
+        if msg:
+            bt_socket.close()
+            return True
+        bt_socket.close()
+        return False
+
+    def query_for_connectivity(self):
+        '''
+        Query all found peers for connectivity.
+        When respond, then connection is still there and peer is valid, else
+        peer is deleted from dictionary.
+        '''
+        present_time = datetime.datetime.now()
+        peers_outdated = []
+        for value in self.peers_pool.values():
+            past_time = datetime.datetime.strptime(value[0], "%d.%m.%Y %H:%M:%S:%f")
+            delta_time = present_time - past_time
+            total_seconds = delta_time.total_seconds()
+            if int(total_seconds) > 600:
+                is_recieved = self.send_handshake(value[1])
+                # outdated peer
+                if not is_recieved:
+                    peers_outdated.append(value[1])
+        print(len(peers_outdated))
+        print()
+
+
+    def insert_to_queue(self, nodes):
         '''
         Inserts nodes to queue by given queue type.
         '''
-        if queue_type == "Nodes":
-            for node in nodes["Nodes"]:
-                if self.torrent.nodes.empty():
-                    self.torrent.nodes.put((node))
-                    continue
-                infohash = self.torrent.nodes.get(True)
-                if node[0] != infohash[0]:
-                    self.torrent.nodes.put((infohash))
-                    self.torrent.nodes.put((node))
-        # elif queue_type == "Peers":
-        #     for node in nodes["Peers"]:
-        #         self.torrent.peers.put((node))
+        # for already_asked in self.addr_pool:
+        for node in nodes["Nodes"]:
+            # node_key = (node[1], node[2])
+            # already asked, do not add to queue
+            # if already_asked[0] is node_key[0]:
+                # print(already_asked, node_key)
+                # break
+
+            if self.torrent.nodes.empty():
+                self.torrent.nodes.put((node))
+                continue
+            infohash = self.torrent.nodes.get(True)
+            if node[0] != infohash[0]:
+                self.torrent.nodes.put((infohash))
+                self.torrent.nodes.put((node))
 
 
     def start_listener(self):
@@ -187,7 +258,7 @@ class Monitor:
             else:
                 self.no_recieve = self.no_recieve + 0.1
                 continue
-
+            self.addr_pool[addr] = {"timestamp": time.time()}
             msg = decode_krpc(msg)
             if msg is None:
                 continue
@@ -195,29 +266,22 @@ class Monitor:
             pool = {}
             nodes = self.torrent.decode_message(msg, pool)
             # update dictionary by given pool value
-            # FIXME need to check nodes by ping whether are still alive
-            for key in nodes.keys():
-                if key is "Nodes":
+            try:
+                if nodes["Nodes"]:
                     self.info_pool.update(pool["Nodes"])
-                elif key is "Peers":
+                if nodes["Peers"]:
                     self.peers_pool.update(pool["Peers"])
+            except KeyError:
+                pass
             # when 3/4 of queue is not resolved, do not resolve next
             # Resolution without cleaning queue
             if self.torrent.nodes.qsize() <= self.max_peers * 0.8:
-                for key in nodes.keys():
-                    self.insert_to_queue(nodes, key)
-
-            # Resolution with clean queue
-            #     for key in nodes.keys():
-            #         self.insert_to_queue(nodes, key)
-            # else:
-            #     # Clear half of queue
-            #     for num in range(0, self.max_peers, 2):
-            #         self.torrent.nodes.get(True)
-            #     for key in nodes.keys():
-            #         self.insert_to_queue(nodes, key)
-
-            self.addr_pool[addr] = {"timestamp": time.time()}
+                # for key in nodes.keys():
+                try:
+                    if nodes["Nodes"]:
+                        self.insert_to_queue(nodes)
+                except KeyError:
+                    pass
             self.respondent += 1
 
     def start_sender(self, test=False):
@@ -226,44 +290,49 @@ class Monitor:
         unit testing. Otherwise continuous connection is performed till
         we dont get all nodes from k-zone or duration is exhausted.
         '''
-        if not test:
-            while True:
-                if self.timeout is not None:
-                    time.sleep(self.timeout)
-                # if self.torrent.peers.empty():
-                node = self.torrent.nodes.get(True)
-                # else:
-                    # node = self.torrent.peers.get(True)
+        if test:
+            # if test is given perform single message send
+            node = self.torrent.nodes.get(True)
+            hexdig_self = int(self.infohash, 16)
+            hexdig_target = int(node[0], 16)
+            self.torrent.query_get_peers(node, self.infohash)
+            self.torrent.rejoin.cancel()
+            return
 
-                hexdig_self = int(self.infohash, 16)
-                hexdig_target = int(node[0], 16)
-                # DEBUG
-                # print(hexdig_self, hexdig_target)
+        while True:
+            if self.timeout is not None:
+                time.sleep(self.timeout)
+            node = self.torrent.nodes.get(True)
 
-                if((hexdig_self ^ hexdig_target) >> 148) == 0:
-                    # TODO very good node, lets clear a bit queue and get neighbors
+            hexdig_self = int(self.infohash, 16)
+            hexdig_target = int(node[0], 16)
+            if((hexdig_self ^ hexdig_target) >> 148) == 0:
+                # print("Closer than expected")
+                # print("qsize: {} max_peers: {}"
+                #       .format(self.torrent.nodes.qsize(), self.max_peers))
+                try:
+                    self.torrent.query_get_peers(node, self.infohash)
+                except OSError:
+                    return 9
+                for i in range(10, 20):
+                    tid = get_neighbor(self.infohash, node[0], i)
+                    self.torrent.query_get_peers(node, tid)
+                    node = self.torrent.nodes.get(True)
+            # Speed is less than 2000 bps
+            elif self.n_nodes < 2000:
+                if self.torrent.nodes.qsize() > self.max_peers * 0.8:
+                    for i in range(1, 10):
+                        try:
+                            self.torrent.query_get_peers(node, self.infohash)
+                        except OSError:
+                            return 9
+                        node = self.torrent.nodes.get(True)
+                else:
                     try:
                         self.torrent.query_get_peers(node, self.infohash)
                     except OSError:
                         return 9
-                    # FIXME
-                    # for i in range(1, 5):
-                    #     tid = get_neighbor(self.infohash,
-                    #                        node[0], i)
-                    #     self.torrent.query_find_node(node, tid)
-                # Speed is less than 2000 bps
-                elif self.n_nodes < 2000:
-                    try:
-                        self.torrent.query_get_peers(node, self.infohash)
-                    except OSError:
-                        return 9
 
-        # if test is given perform single message send
-        node = self.torrent.nodes.get(True)
-        hexdig_self = int(self.infohash, 16)
-        hexdig_target = int(node[0], 16)
-        self.torrent.query_get_peers(node, self.infohash)
-        self.torrent.rejoin.cancel()
 
     def start_timer(self, thread1, thread2):
         '''
@@ -293,10 +362,7 @@ class Monitor:
             signal.pthread_kill(identification, 2)
         except ProcessLookupError:
             pass
-        try:
-            self.torrent.query_socket.close()
-        except ProcessLookupError:
-            return
+        self.torrent.query_socket.close()
 
 
     def crawl_begin(self, torrent=None, test=False):
@@ -333,8 +399,9 @@ class Monitor:
             except KeyboardInterrupt:
                 self.vprint("\nClearing threads, wait a second")
                 break
+        self.query_for_connectivity()
         self.info()
-        self.output.print_geolocations()
+        # self.output.print_geolocations()
 
 
     def info(self):
@@ -384,13 +451,14 @@ class Monitor:
                     if key == "info":
                         info_hash = hashlib.sha1(bencode(value)).hexdigest()
                         # set torrent target
+                        self.infohash = get_neighbor(info_hash, self.infohash)
                         self.torrent.target_pool.append(info_hash)
 
                     if key == "nodes":
                         pass
                     if key == "announce-list":
                         nodes = value
-                self.torrent.change_bootstrap(info_hash, nodes)
+                self.torrent.change_bootstrap(info_hash, nodes, self.queue_type)
                 file_r.close()
 
 
@@ -405,13 +473,13 @@ class Monitor:
                 info_hash = re.search(r"urn:.*&(xl|dn)", content.decode('utf-8'))
                 # match last `:` and its content
                 info_hash = re.search(r"(?:.(?!:))+$", info_hash.group(0))
-
+                self.infohash = get_neighbor(info_hash, self.infohash)
                 # set torrent target
                 self.torrent.target_pool.append(info_hash.group(0)[1:-3])
 
-#################
-# Start of main #
-#################
+########################################
+# This should be used in main function #
+########################################
 
 def create_monitor(verbosity=False):
     '''
@@ -437,7 +505,7 @@ def create_monitor(verbosity=False):
     if monitor.test:
         result = monitor.start_sender(test=True)
         exit(result)
-    monitor.torrent.change_arguments(monitor.max_peers)
+    monitor.torrent.change_arguments(monitor.max_peers, monitor.queue_type)
     monitor.parse_torrent()
     monitor.parse_magnet()
     return monitor
