@@ -91,6 +91,7 @@ if __name__ == '__main__':
     #peer_node_ratio()
     correct_ratio("../ratio.txt")
     set_avg("../resultH.txt", 20)
+
     set_avg("../lifoH.txt", 10, "../lifo_avgP.txt")
     set_avg("../lifoNF.txt", 10, "../lifo_avgN.txt")
     peer_node_ratio("../lifo_avgN.txt", "../lifo_avgP.txt")

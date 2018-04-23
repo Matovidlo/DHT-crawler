@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 
-for i in range(10, 900, 5):
+for i in range(10, 1800, 5):
     with open("../../logs/lifo_queue/logH{}.out".format(i), "w") as f:
         subprocess.Popen(["../../src/exec.py",
                           "--duration={}".format(i),

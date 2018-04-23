@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-# TODO execute test before??
 find ../logs -size  0 -print0 |xargs -0 rm
 
 result=""
@@ -257,7 +256,6 @@ result=$(paste -d "," sec.txt val.txt)
 echo "$result" > ./graphs/testF.txt
 sort -k2 -n ./graphs/testF.txt  > ./graphs/result.txt
 mv ./graphs/result.txt ./graphs/testF.txt
-# TODO avg script
 
 cat ./graphs/1experiment.tex ./graphs/testF.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
@@ -287,7 +285,10 @@ rm val.txt
 
 # TODO Avg script
 #./graphs/avg/avg.py
-
+######################
+######################
+# Average 120 process to 1 with distribution error
+##################################################
 num_lines=$(cat ../logs/error/logH1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
@@ -309,7 +310,7 @@ for i in `seq 1 $num_lines`; do
 	num=$(($i * 5))
 	result=$(($ret / 120))
 	echo "( $num, $result )" >> error.txt
-	percentage=$(echo "(2300 - $result) / 2300" | bc -l)
+	percentage=$(echo "(3000 - $result) / 3000" | bc -l)
 	echo "( $num, $percentage )" >> error_perc.txt
 	ret=0
 done
@@ -322,8 +323,116 @@ cat ./graphs/3experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.te
 make -C ./graphs
 mv ./graphs/auto.pdf lifo_error_percentage.pdf
 
+mv ./error_perc.txt lifo_error.txt
+
 rm error.txt
 rm error_perc.txt
 
-echo "End of Peers error"
+num_lines=$(cat ../logs/error/logF1.out | wc -l)
+ret=0
+for i in `seq 1 $num_lines`; do
+	if [ $i -ge 30 ]; then
+		break
+	fi
+	for filename in ../logs/error/logF*.out; do
+		# echo $filename
+		tmp=$(head -$i $filename)
+		result=$(echo -e "$tmp" | tail -1)
+		# echo $result
 
+		value=$(echo "$result" | grep -Po "\[PeerSet\]:\d+")
+		value=$(echo "$value" | grep -Po "\d+")
+
+		ret=$((ret + value))
+		result+="\n"
+	done
+	num=$(($i * 5))
+	result=$(($ret / 120))
+	echo "( $num, $result )" >> error.txt
+	percentage=$(echo "(3000 - $result) / 3000" | bc -l)
+	echo "( $num, $percentage )" >> error_perc.txt
+	ret=0
+done
+
+cat ./graphs/1experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
+make -C ./graphs
+mv ./graphs/auto.pdf fifo_error_peers.pdf
+
+cat ./graphs/3experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.tex
+make -C ./graphs
+mv ./graphs/auto.pdf fifo_error_percentage.pdf
+
+rm error.txt
+rm error_perc.txt
+
+
+echo "End of LIFO and FIFO Peers error"
+
+
+result=""
+for filename in ../logs/lifo_less/logU*.out; do
+	result+="$filename\n"
+	result+=$(tail -1 $filename)
+	result+="\n"
+done
+echo -e $result > testF.txt
+
+sec=$(grep -Po "logU.*" testF.txt)
+sec=$(echo $sec | grep -Po "\d+")
+peer_val=$(grep -Po "\[PeerSet\]:\d+" testF.txt)
+peer_val=$(echo $peer_val | grep -Po "\d+")
+
+for line in $peer_val; do
+	echo " $line )" >> val.txt
+done
+for line in $sec; do
+	echo "( $line" >> sec.txt
+done
+
+result=$(paste -d "," sec.txt val.txt)
+
+echo "$result" > ./graphs/testF.txt
+sort -k2 -n ./graphs/testF.txt  > ./graphs/result.txt
+mv ./graphs/result.txt ./graphs/testF.txt
+# TODO avg script
+
+cat ./graphs/1experiment.tex ./graphs/testF.txt ./graphs/last.tex > ./graphs/auto.tex
+make -C ./graphs
+mv ./graphs/auto.pdf lifo_less.pdf
+
+rm testF.txt
+
+result=""
+for filename in ../logs/fifo_less/logH*.out; do
+	result+="$filename\n"
+	result+=$(tail -1 $filename)
+	result+="\n"
+done
+echo -e $result > testF.txt
+
+sec=$(grep -Po "logH.*" testF.txt)
+sec=$(echo $sec | grep -Po "\d+")
+peer_val=$(grep -Po "\[PeerSet\]:\d+" testF.txt)
+peer_val=$(echo $peer_val | grep -Po "\d+")
+
+for line in $peer_val; do
+	echo " $line )" >> val.txt
+done
+for line in $sec; do
+	echo "( $line" >> sec.txt
+done
+
+result=$(paste -d "," sec.txt val.txt)
+
+echo "$result" > ./graphs/testF.txt
+sort -k2 -n ./graphs/testF.txt  > ./graphs/result.txt
+mv ./graphs/result.txt ./graphs/testF.txt
+# TODO avg script
+
+cat ./graphs/1experiment.tex ./graphs/testF.txt ./graphs/last.tex > ./graphs/auto.tex
+make -C ./graphs
+mv ./graphs/auto.pdf fifo_less.pdf
+
+
+rm val.txt
+rm sec.txt

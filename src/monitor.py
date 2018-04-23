@@ -266,7 +266,7 @@ class Monitor:
         There is shared queue between listener and sender thread.
         '''
         # TODO
-        last_time = time.time()
+        # last_time = time.time()
         while True:
             if self.timeout is not None:
                 time.sleep(self.timeout)
@@ -307,10 +307,10 @@ class Monitor:
                 except KeyError:
                     pass
             #  TODO
-            curr = time.time()
-            if curr - last_time > 5:
-                self.info()
-                last_time = time.time()
+            # curr = time.time()
+            # if curr - last_time > 5:
+            #     self.info()
+            #     last_time = time.time()
 
     def start_sender(self, test=False):
         '''
