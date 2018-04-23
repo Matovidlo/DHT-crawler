@@ -15,8 +15,8 @@ import datetime
 import hashlib
 import select
 import re
-import json
 import socket
+import json
 from random import randrange
 from threading import Thread, Semaphore
 from bencoder import bencode
@@ -179,20 +179,35 @@ class Monitor:
         # just to establish connection to get result of this, but handshake
         # should be good to get positive or negative acknowledgment
         # TODO hole punch, those messages are mostly filtered because of firewall
-        bt_socket.sendto(message, (peer[1], peer[2]))
+        print("Connecting")
         try:
-            ready = select.select([bt_socket], [], [], 0.1)
-        except (OSError, ValueError):
+            bt_socket.sendto(message, (peer[1], peer[2]))
+        except OSError:
+            return True
+        try:
+            ready = select.select([bt_socket], [], [], 0.4)
+        except (OSError, ValueError, KeyboardInterrupt):
             bt_socket.close()
             return False
         if ready[0]:
             msg = bt_socket.recvfrom(1024)
         else:
+            bt_socket = socket.socket(socket.AF_INET,
+                                      socket.SOCK_STREAM,
+                                      socket.IPPROTO_TCP)
+            print("Connected")
+            try:
+                bt_socket = socket.create_connection((peer[1], peer[2]),
+                                                     timeout=0.4)
+            except socket.error:
+                bt_socket.close()
+                return False
             bt_socket.close()
-            return False
+            return True
         if msg:
             bt_socket.close()
             return True
+
         bt_socket.close()
         return False
 
@@ -202,6 +217,7 @@ class Monitor:
         When respond, then connection is still there and peer is valid, else
         peer is deleted from dictionary.
         '''
+        self.torrent.query_socket.close()
         present_time = datetime.datetime.now()
         peers_outdated = []
         for value in self.peers_pool.values():
@@ -209,40 +225,48 @@ class Monitor:
             delta_time = present_time - past_time
             total_seconds = delta_time.total_seconds()
             if int(total_seconds) > 600:
-                is_recieved = self.send_handshake(value[1])
-                # outdated peer
-                if not is_recieved:
-                    peers_outdated.append(value[1])
-        print(len(peers_outdated))
-        print()
-
+                # TODO rework handshake
+                # is_recieved = self.send_handshake(value[1])
+                # # outdated peer
+                # if not is_recieved:
+                peers_outdated.append((value[1]))
+        for value in peers_outdated:
+            del self.peers_pool[value[1] + ":" + str(value[2])]
 
     def insert_to_queue(self, nodes):
         '''
         Inserts nodes to queue by given queue type.
         '''
-        # for already_asked in self.addr_pool:
+        # remove already asked
+        # tmp_set = set(self.addr_pool.keys())
+        # node_set = []
+        # save_info = []
+        # for node in nodes["Nodes"]:
+        #     node_set.append(node[1:])
+        #     save_info.append(node[:1])
+
+        # not_asked = set(node_set) - tmp_set
+        # while not_asked:
+        #     item = not_asked.pop()
+        #     item = save_info[-1] + item
+        #     self.torrent.nodes.put((item))
+
+        # Do not remove already asked
+        last_node = None
         for node in nodes["Nodes"]:
-            # node_key = (node[1], node[2])
-            # already asked, do not add to queue
-            # if already_asked[0] is node_key[0]:
-                # print(already_asked, node_key)
-                # break
-
-            if self.torrent.nodes.empty():
-                self.torrent.nodes.put((node))
+            if node == last_node:
                 continue
-            infohash = self.torrent.nodes.get(True)
-            if node[0] != infohash[0]:
-                self.torrent.nodes.put((infohash))
-                self.torrent.nodes.put((node))
+            self.torrent.nodes.put((node))
+            last_node = node
 
 
-    def start_listener(self):
+    def start_listener(self, thread1):
         '''
         start listener thread. Recieve query packet and decode its body.
         There is shared queue between listener and sender thread.
         '''
+        # TODO
+        last_time = time.time()
         while True:
             if self.timeout is not None:
                 time.sleep(self.timeout)
@@ -258,10 +282,11 @@ class Monitor:
             else:
                 self.no_recieve = self.no_recieve + 0.1
                 continue
-            self.addr_pool[addr] = {"timestamp": time.time()}
             msg = decode_krpc(msg)
             if msg is None:
                 continue
+            self.addr_pool[addr] = {"timestamp": time.time()}
+            self.respondent += 1
 
             pool = {}
             nodes = self.torrent.decode_message(msg, pool)
@@ -276,13 +301,16 @@ class Monitor:
             # when 3/4 of queue is not resolved, do not resolve next
             # Resolution without cleaning queue
             if self.torrent.nodes.qsize() <= self.max_peers * 0.8:
-                # for key in nodes.keys():
                 try:
                     if nodes["Nodes"]:
                         self.insert_to_queue(nodes)
                 except KeyError:
                     pass
-            self.respondent += 1
+            #  TODO
+            curr = time.time()
+            if curr - last_time > 5:
+                self.info()
+                last_time = time.time()
 
     def start_sender(self, test=False):
         '''
@@ -296,8 +324,7 @@ class Monitor:
             hexdig_self = int(self.infohash, 16)
             hexdig_target = int(node[0], 16)
             self.torrent.query_get_peers(node, self.infohash)
-            self.torrent.rejoin.cancel()
-            return
+            return 2
 
         while True:
             if self.timeout is not None:
@@ -307,9 +334,6 @@ class Monitor:
             hexdig_self = int(self.infohash, 16)
             hexdig_target = int(node[0], 16)
             if((hexdig_self ^ hexdig_target) >> 148) == 0:
-                # print("Closer than expected")
-                # print("qsize: {} max_peers: {}"
-                #       .format(self.torrent.nodes.qsize(), self.max_peers))
                 try:
                     self.torrent.query_get_peers(node, self.infohash)
                 except OSError:
@@ -321,7 +345,7 @@ class Monitor:
             # Speed is less than 2000 bps
             elif self.n_nodes < 2000:
                 if self.torrent.nodes.qsize() > self.max_peers * 0.8:
-                    for i in range(1, 10):
+                    for i in range(1, 20):
                         try:
                             self.torrent.query_get_peers(node, self.infohash)
                         except OSError:
@@ -347,7 +371,7 @@ class Monitor:
         # Clear all resources
         self.kill_sender_reciever(thread1, thread2)
 
-    def kill_sender_reciever(self, thread1, thread2):
+    def kill_sender_reciever(self, thread1, thread2=None):
         '''
         kill sender reciever and TorrentDHT socket when there is
         continuous bootstrap.
@@ -357,12 +381,15 @@ class Monitor:
             signal.pthread_kill(identification, 2)
         except ProcessLookupError:
             pass
+
+        if thread2 is None:
+            return
+
         identification = thread2.ident
         try:
             signal.pthread_kill(identification, 2)
         except ProcessLookupError:
             pass
-        self.torrent.query_socket.close()
 
 
     def crawl_begin(self, torrent=None, test=False):
@@ -376,7 +403,8 @@ class Monitor:
         send_thread = Thread(target=self.start_sender, args=())
         send_thread.daemon = True
         send_thread.start()
-        listen_thread = Thread(target=self.start_listener, args=())
+        listen_thread = Thread(target=self.start_listener,
+                               args=(send_thread,))
         listen_thread.daemon = True
         listen_thread.start()
         duration_thread = Thread(target=self.start_timer,
@@ -386,22 +414,25 @@ class Monitor:
 
         while True:
             if test:
-                self.kill_sender_reciever(send_thread, listen_thread)
+                time.sleep(5)
+                break
             try:
                 if self.country:
                     self.lock.acquire()
                     self.output.get_geolocations()
                     self.lock.release()
                 else:
-                    # self.info()
                     self.output.get_geolocations()
                 time.sleep(1)
             except KeyboardInterrupt:
                 self.vprint("\nClearing threads, wait a second")
                 break
-        self.query_for_connectivity()
-        self.info()
-        # self.output.print_geolocations()
+        if test:
+            self.kill_sender_reciever(send_thread, listen_thread)
+        else:
+            self.query_for_connectivity()
+            # self.output.print_geolocations()
+            self.info()
 
 
     def info(self):

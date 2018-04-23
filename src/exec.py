@@ -12,3 +12,4 @@ if __name__ == '__main__':
             CRAWL.crawl_begin(torrent)
     else:
         CRAWL.crawl_begin()
+

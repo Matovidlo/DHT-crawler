@@ -1,16 +1,23 @@
 Ukladat do json ako routovaciu tabulku
 pridaj viac examplov
 
+
 TODO
+dokonc unit testy
+dokumentacia
 rozne casy pri prehladavani a % pocet najdenych
 implementuj BT protokol na zistenie zivota peera
-rozclenenie na seedboxy a peerov
 rozdiel v percentach s unikatnou a dvojicou ip + port
-% pocet peerov ktory su aj dht uzlami
+% smerodajna odchylka a chyba
 
+for next:
+ping all recieved peers with correct message. Try to understand why they are not responding
         # message = (chr(19) +
         #            "BitTorrent protocol" +
         #            8 * chr(0) +               # reserved
         #            self.infohash +
         #            random_infohash())
 
+
+
+https://asciinema.org/a/XYbUW0rMeLRzPlvH9teVsk5SI

@@ -16,7 +16,7 @@ import datetime
 from random import randint
 from hashlib import sha1
 from struct import unpack
-from bencoder import bencode, bdecode
+from bencoder import bencode, bdecode, BTFailure
 
 
 # TODO no IPv6 support
@@ -58,10 +58,10 @@ def decode_krpc(message):
     '''
     decode with bencoding. When exception is thrown, return None.
     '''
-    # try:
-    return bdecode(message)
-    # except:
-        # return None
+    try:
+        return bdecode(message)
+    except BTFailure:
+        return None
 
 
 def decode_nodes(value, info_pool):
@@ -208,7 +208,7 @@ class TorrentDHT():
         change bootstrap nodes when parsed magnet-link or .torrent file
         '''
         if queue_type:
-            self.nodes = queue.LifoQueue(self.max_node_qsize)
+            self.nodes = queue.Queue(self.max_node_qsize)
         else:
             self.nodes = queue.LifoQueue(self.max_node_qsize)
 
@@ -216,8 +216,10 @@ class TorrentDHT():
             for node in node_list:
                 compact_node = node.decode("utf-8")
                 port = re.search(r":\d+", compact_node)
-                port = port.group(0)[1::]
-
+                try:
+                    port = port.group(0)[1::]
+                except AttributeError:
+                    port = 80
                 compact_node = re.search(r".*:", compact_node)
                 compact_node = compact_node.group(0)[6:-1]
         for bootstrap in self.bootstrap_nodes:
