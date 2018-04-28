@@ -97,8 +97,11 @@ class ProcessOutput():
                 # get this kind of information
                 url_of_location = "http://www.freegeoip.net/json/{0}".format(
                     ip_addr)
-                location_info = json.loads(urllib.request.urlopen(
-                    url_of_location).read())
+                try:
+                    location_info = json.loads(urllib.request.urlopen(
+                        url_of_location).read())
+                except:
+                    continue
                 iplist = []
 
                 if location_info['country_name'] + ":" + \

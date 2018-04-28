@@ -4,6 +4,8 @@ Created by Martin Vaško
 '''
 import time
 import datetime
+import os
+import re
 from unittest import TestCase, main
 # user defined classes
 from monitor import Monitor
@@ -37,7 +39,13 @@ class TestCrawler(TestCase):
         this should take care of parser sha1 infohash.
         '''
         parser = argument_parser()
-        file = '../examples/dht_example.torrent'
+        cwd = os.getcwd()
+        cwd = re.search(r"([^\/]+)$", cwd)
+        cwd = cwd.group(0)
+        if cwd == "tests":
+            file = "../examples/dht_example.torrent"
+        elif cwd == "monitoring":
+            file = './examples/dht_example.torrent'
         result = parser.parse_args(['--file',
                                     file])
         args = TorrentArguments()

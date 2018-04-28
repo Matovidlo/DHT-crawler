@@ -332,9 +332,11 @@ class Monitor:
             kill_sender_reciever(send_thread, listen_thread)
         else:
             self.query_for_connectivity()
-            if self.output.print_country:
+            if self.output.print_country and not self.db_format:
                 self.output.get_geolocations()
-            if self.db_format:
+                self.output.print_geolocations()
+            if (self.db_format and self.output.print_country) or self.db_format:
+                self.output.get_geolocations()
                 self.output.print_geolocations()
             else:
                 self.info()
