@@ -12,11 +12,11 @@ LOADER = unittest.TestLoader()
 CWD = os.getcwd()
 CWD = re.search(r"([^\/]+)$", CWD)
 CWD = CWD.group(0)
-TESTSUITE = LOADER.discover('tests')
 if CWD == "tests":
     TESTSUITE = LOADER.discover('unit')
-# elif CWD == "monitoring" or CWD == "DHT-crawler":
-#     TESTSUITE = LOADER.discover('tests')
-
+elif CWD == "monitoring" or CWD == "DHT-crawler":
+    TESTSUITE = LOADER.discover('tests')
+else:
+    TESTSUITE = LOADER.discover('tests')
 TESTRUNNER = unittest.TextTestRunner(verbosity=2)
 TESTRUNNER.run(TESTSUITE)

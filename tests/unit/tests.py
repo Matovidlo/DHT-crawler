@@ -6,7 +6,7 @@ import time
 import datetime
 import os
 import re
-from unittest import TestCase, main
+from unittest import TestCase
 # user defined classes
 from monitor import Monitor
 from arg_parse import argument_parser
@@ -96,5 +96,5 @@ class TestCrawler(TestCase):
     #     self.assertEqual(monitor.diverge_in_location(dict_pool), {})
     #     monitor.crawl_begin(test=True)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

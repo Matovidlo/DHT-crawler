@@ -59,11 +59,11 @@ class ProcessOutput():
         iplist = []
         infolist = []
         portlist = []
-        for key, value in self.monitor.info_pool.items():
+        for key, value in self.monitor.peers_pool.items():
             infolist.append((key))
             for val in value:
-                iplist.append((val[0]))
-                portlist.append((val[1]))
+                iplist.append((val[1]))
+                portlist.append((val[2]))
         self.ip_pool = iplist
         self.port_pool = portlist
         self.info_pool = infolist
@@ -125,7 +125,7 @@ class ProcessOutput():
         '''
         if self.print_country:
             print(json.dumps(self.country_city, indent=4, sort_keys=True))
-            print(json.dumps(self.monitor.peers_pool, indent=4, sort_keys=True))
+            print(json.dumps(self.monitor.peer_announce, indent=4, sort_keys=True))
             print("Time spend not recieving any UDP response: {}"
                   .format(self.monitor.no_recieve))
         else:

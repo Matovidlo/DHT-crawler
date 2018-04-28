@@ -22,9 +22,13 @@
 
 help()
 {
-	echo "Usage: install-docker when you want to install docker."
-	echo "\t this option can be enchanced with --remove_old to remove old docker."
-	echo "\t also we can add --verify to verify, that docker is installed correctly."
+	echo -e "Usage:\t 'install-docker'- \t when you want to install docker."
+	echo -e "\t\t\t\t this option can be enchanced with --remove_old to remove old docker."
+	echo -e "\t\t\t\t also we can add --verify to verify, that docker is installed correctly.\n"
+	echo -e "\t 'install' - \t\t to install python3 with pip packages to run program.\n"
+	echo -e "\t 'run' - \t\t to run program for 60 seconds with any enhancements.\n"
+	echo -e "\t 'run-docker' - \t to run program from docker container."
+	echo -e "\t 'test' - \t\t to run unit tests."
 }
 
 verify()
@@ -182,8 +186,8 @@ do
 			exit 0
 			;;
 		"run")
-			# RUN program
-			./src/exec.py --duration 60
+			# RUN program with magnet link
+			./dht_crawler/exec.py --duration 60 --magnet ./examples/magnet-link_fedora
 			exit 0
 			;;
 		"run-docker")
@@ -192,14 +196,18 @@ do
 				sudo systemctl start docker
 			fi
 			docker build -t monitor-dht . --build-arg distribution=fedora --build-arg version=27
+			docker run --rm --name monitor-dht -v /$(pwd):/monitoring monitor-dht ./setup.sh test
+			docker run --rm --name monitor-dht -v /$(pwd):/monitoring monitor-dht ./setup.sh run
+			# ubuntu docker
+			docker build -t monitor-dht . --build-arg distribution=ubuntu --build-arg version=latest
+			docker run --rm --name monitor-dht -v /$(pwd):/monitoring monitor-dht ./setup.sh test
 			docker run --rm --name monitor-dht -v /$(pwd):/monitoring monitor-dht ./setup.sh run
 			exit 0
 			;;
 		"test")
-			./tests/unit/tests.py
+			./tests/__main__.py
 			exit 0
 			;;
-			
 	esac
 	shift
 done

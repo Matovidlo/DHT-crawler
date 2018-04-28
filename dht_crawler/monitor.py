@@ -48,13 +48,20 @@ def kill_sender_reciever(thread1, thread2=None):
 
 
 class Monitor:
-    '''
+    """
      Parse it from class methods to monitor class where we want to exchange
      this information.
      Start monitoring and initialize all necessary things at first
-    '''
+    """
 
     def __init__(self, arguments, torrent):
+        """
+        Construct a new 'Foo' object.
+
+        :param name: The name of foo
+        :param age: The ageof foo
+        :return: returns nothing
+        """
         self.timeout = 1
         self.torrent = torrent
         self.infohash = random_infohash()
@@ -142,13 +149,17 @@ class Monitor:
         try:
             self.torrent.query_socket.close()
         except KeyboardInterrupt:
+            # TODO
             pass
         present_time = datetime.datetime.now()
         peers_outdated = []
 
         # take all of incomming peers and check them
         for value in self.peers_pool.values():
-            past_time = datetime.datetime.strptime(value[0], "%d.%m.%Y %H:%M:%S:%f")
+            try:
+                past_time = datetime.datetime.strptime(value[0], "%d.%m.%Y %H:%M:%S:%f")
+            except KeyboardInterrupt:
+                continue
             delta_time = present_time - past_time
             total_seconds = delta_time.total_seconds()
             if int(total_seconds) > 800:
@@ -300,6 +311,14 @@ class Monitor:
         '''
         Create all threads, duration to count how long program is executed.
         When Ctrl+C is pressed kill all threads
+
+        Parameters
+        ----------
+        torrent : infohash
+            20 bytes long infohash which should be used as part of monitoring.
+        test : bool
+            This paramter is for testing connection.
+
         '''
         if torrent:
             self.torrent.target = torrent
@@ -338,7 +357,7 @@ class Monitor:
             if (self.db_format and self.output.print_country) or self.db_format:
                 self.output.get_geolocations()
                 self.output.print_geolocations()
-            else:
+            if not self.db_format:
                 self.info()
 
 
@@ -369,6 +388,16 @@ class Monitor:
     def get_torrent_name(self, value):
         '''
         get name of torrent from torrent file
+
+        Parameters
+        ----------
+        value : dict
+            This should contain encoded name of torrent.
+
+        Returns
+        -------
+        self.torrent_name
+            Parsed torrent name from value dictionary.
         '''
         for name, name_val in value.items():
             name = name.decode('utf-8')
@@ -387,6 +416,10 @@ class Monitor:
                 info_hash = None
                 nodes = []
                 self.vprint("Torrent file content")
+                if not decode_krpc(content):
+                    raise TypeError("WrongFileType")
+                if not isinstance(decode_krpc(content), dict):
+                    raise TypeError("WrongFileType")
                 for key, value in decode_krpc(content).items():
                     key = key.decode('utf-8')
                     if key == "creation date":
@@ -440,6 +473,16 @@ def create_monitor(verbosity=False):
     arguments to be created successfully. Then change of hash and parsing
     can change resolution of crawl. When they are not specified then
     global bootstrap nodes are used instead.
+
+    Parameters
+    ----------
+    verbosity : bool
+        Indicate verbose output
+
+    Returns
+    -------
+    object
+        Monitor object with initialized DHT socket and parsed arguments.
     '''
     args = parse_input_args()
     # This is variant with verbose output to track some lib imported staff
