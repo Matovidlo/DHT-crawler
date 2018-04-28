@@ -10,8 +10,11 @@ sys.path.append('../dht_crawler')
 
 LOADER = unittest.TestLoader()
 CWD = os.getcwd()
+print("CWD value")
+print(CWD)
 CWD = re.search(r"([^\/]+)$", CWD)
 CWD = CWD.group(0)
+print("CWD value")
 print(CWD)
 if CWD == "tests":
     TESTSUITE = LOADER.discover('unit')
