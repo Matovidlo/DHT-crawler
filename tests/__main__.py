@@ -10,15 +10,11 @@ sys.path.append('../dht_crawler')
 
 LOADER = unittest.TestLoader()
 CWD = os.getcwd()
-print("CWD value")
-print(CWD)
 CWD = re.search(r"([^\/]+)$", CWD)
 CWD = CWD.group(0)
-print("CWD value")
-print(CWD)
 if CWD == "tests":
     TESTSUITE = LOADER.discover('unit')
-elif CWD == "monitoring":
+elif CWD == "monitoring" or CWD == "DHT-crawler":
     TESTSUITE = LOADER.discover('tests')
 
 TESTRUNNER = unittest.TextTestRunner(verbosity=2)
