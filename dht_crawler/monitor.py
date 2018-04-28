@@ -138,7 +138,7 @@ class Monitor:
         peer is deleted from dictionary.
         '''
         # port = self.sock.getsockname()
-        self.sock.close()
+        # self.sock.close()
         self.torrent.query_socket.close()
         present_time = datetime.datetime.now()
         peers_outdated = []
