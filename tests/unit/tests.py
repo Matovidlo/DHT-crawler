@@ -6,18 +6,15 @@ import time
 import datetime
 from unittest import TestCase, main
 # user defined classes
-import include
 from monitor import Monitor
 from arg_parse import argument_parser
 from torrent_dht import TorrentDHT, TorrentArguments, decode_peers
 
 
-# result = parser.parse_args(sys.argv[2:])
-# self.assertEqual(parse_input_args(), 'arg')
-
-
 class TestCrawler(TestCase):
-
+    '''
+    Unit test class which is responsible to execute unit tests given below
+    '''
     def test_connection(self):
         '''
         tests connection of dht_socket and Monitor.
@@ -40,7 +37,7 @@ class TestCrawler(TestCase):
         this should take care of parser sha1 infohash.
         '''
         parser = argument_parser()
-        file = '../../examples/dht_example.torrent'
+        file = '../examples/dht_example.torrent'
         result = parser.parse_args(['--file',
                                     file])
         args = TorrentArguments()

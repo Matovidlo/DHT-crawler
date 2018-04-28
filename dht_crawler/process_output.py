@@ -111,14 +111,13 @@ class ProcessOutput():
                                "latitude": str(location_info['latitude']),
                                "longitude": str(location_info['longitude'])
                               }]
-
                 self.country_city[location_info['country_name'] + ":" +
                                   location_info['city']] = iplist
 
 
     def print_geolocations(self):
         '''
-        print geolocation when argument --print_country is specified, else
+        print geolocation when argument --print_as_country is specified, else
         print as json object with no resolution.
         '''
         if self.print_country:

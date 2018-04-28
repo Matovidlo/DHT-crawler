@@ -205,7 +205,6 @@ class Monitor:
             pass
 
         # Resolution without cleaning queue
-        # TODO test it
         if self.torrent.nodes.qsize() <= self.max_peers * 0.9:
             try:
                 if nodes["Nodes"]:
@@ -325,8 +324,6 @@ class Monitor:
                     self.lock.acquire()
                     self.output.get_geolocations()
                     self.lock.release()
-                else:
-                    self.output.get_geolocations()
                 time.sleep(1)
             except KeyboardInterrupt:
                 self.vprint("\nClearing threads, wait a second")
@@ -335,6 +332,8 @@ class Monitor:
             kill_sender_reciever(send_thread, listen_thread)
         else:
             self.query_for_connectivity()
+            if self.output.print_country:
+                self.output.get_geolocations()
             if self.db_format:
                 self.output.print_geolocations()
             else:
