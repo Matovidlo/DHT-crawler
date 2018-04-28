@@ -1,404 +1,413 @@
-[NodeSet]:32		[PeerSet]:0		[12-bit Zone]:0 [0/s]		[Response]:            6.25%		[Queue]:33		
-[NodeSet]:70		[PeerSet]:4		[12-bit Zone]:0 [0/s]		[Response]:            10.00%		[Queue]:68		
-[NodeSet]:98		[PeerSet]:70		[12-bit Zone]:0 [0/s]		[Response]:            12.24%		[Queue]:95		
-[NodeSet]:109		[PeerSet]:216		[12-bit Zone]:0 [0/s]		[Response]:            12.84%		[Queue]:106		
-[NodeSet]:113		[PeerSet]:309		[12-bit Zone]:0 [0/s]		[Response]:            13.27%		[Queue]:108		
-[NodeSet]:119		[PeerSet]:602		[12-bit Zone]:0 [0/s]		[Response]:            15.97%		[Queue]:135		
-[NodeSet]:119		[PeerSet]:686		[12-bit Zone]:0 [0/s]		[Response]:            16.81%		[Queue]:138		
-[NodeSet]:119		[PeerSet]:899		[12-bit Zone]:0 [0/s]		[Response]:            20.17%		[Queue]:161		
-[NodeSet]:119		[PeerSet]:1083		[12-bit Zone]:0 [0/s]		[Response]:            23.53%		[Queue]:185		
-[NodeSet]:119		[PeerSet]:1192		[12-bit Zone]:0 [0/s]		[Response]:            26.05%		[Queue]:200		
-[NodeSet]:119		[PeerSet]:1236		[12-bit Zone]:0 [0/s]		[Response]:            26.89%		[Queue]:200		
-[NodeSet]:119		[PeerSet]:1275		[12-bit Zone]:0 [0/s]		[Response]:            27.73%		[Queue]:200		
-[NodeSet]:119		[PeerSet]:1318		[12-bit Zone]:0 [0/s]		[Response]:            28.57%		[Queue]:200		
-[NodeSet]:119		[PeerSet]:1352		[12-bit Zone]:0 [0/s]		[Response]:            29.41%		[Queue]:200		
-[NodeSet]:119		[PeerSet]:1393		[12-bit Zone]:0 [0/s]		[Response]:            30.25%		[Queue]:200		
-[NodeSet]:126		[PeerSet]:1397		[12-bit Zone]:0 [0/s]		[Response]:            29.37%		[Queue]:200		
-[NodeSet]:127		[PeerSet]:1442		[12-bit Zone]:0 [0/s]		[Response]:            29.92%		[Queue]:200		
-[NodeSet]:127		[PeerSet]:1480		[12-bit Zone]:0 [0/s]		[Response]:            30.71%		[Queue]:200		
-[NodeSet]:127		[PeerSet]:1487		[12-bit Zone]:0 [0/s]		[Response]:            31.50%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1542		[12-bit Zone]:0 [0/s]		[Response]:            31.06%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1584		[12-bit Zone]:0 [0/s]		[Response]:            31.82%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1631		[12-bit Zone]:0 [0/s]		[Response]:            32.58%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1663		[12-bit Zone]:0 [0/s]		[Response]:            33.33%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1695		[12-bit Zone]:0 [0/s]		[Response]:            34.09%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1722		[12-bit Zone]:0 [0/s]		[Response]:            34.85%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1752		[12-bit Zone]:0 [0/s]		[Response]:            35.61%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1777		[12-bit Zone]:0 [0/s]		[Response]:            36.36%		[Queue]:200		
-[NodeSet]:132		[PeerSet]:1818		[12-bit Zone]:0 [0/s]		[Response]:            37.12%		[Queue]:200		
-[NodeSet]:140		[PeerSet]:1818		[12-bit Zone]:0 [0/s]		[Response]:            35.71%		[Queue]:200		
-[NodeSet]:148		[PeerSet]:1818		[12-bit Zone]:0 [0/s]		[Response]:            34.46%		[Queue]:200		
-[NodeSet]:154		[PeerSet]:1818		[12-bit Zone]:0 [0/s]		[Response]:            33.77%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:1848		[12-bit Zone]:0 [0/s]		[Response]:            34.19%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:1866		[12-bit Zone]:0 [0/s]		[Response]:            34.84%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:1892		[12-bit Zone]:0 [0/s]		[Response]:            35.48%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:1919		[12-bit Zone]:0 [0/s]		[Response]:            36.13%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:1938		[12-bit Zone]:0 [0/s]		[Response]:            36.77%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:1964		[12-bit Zone]:0 [0/s]		[Response]:            37.42%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:1980		[12-bit Zone]:0 [0/s]		[Response]:            38.06%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2003		[12-bit Zone]:0 [0/s]		[Response]:            38.71%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2024		[12-bit Zone]:0 [0/s]		[Response]:            39.35%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2046		[12-bit Zone]:0 [0/s]		[Response]:            40.00%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2069		[12-bit Zone]:0 [0/s]		[Response]:            40.65%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2082		[12-bit Zone]:0 [0/s]		[Response]:            41.29%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2099		[12-bit Zone]:0 [0/s]		[Response]:            44.52%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2124		[12-bit Zone]:0 [0/s]		[Response]:            45.16%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2130		[12-bit Zone]:0 [0/s]		[Response]:            45.81%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2159		[12-bit Zone]:0 [0/s]		[Response]:            46.45%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2161		[12-bit Zone]:0 [0/s]		[Response]:            47.10%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2179		[12-bit Zone]:0 [0/s]		[Response]:            47.74%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2192		[12-bit Zone]:0 [0/s]		[Response]:            48.39%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2207		[12-bit Zone]:0 [0/s]		[Response]:            51.61%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2222		[12-bit Zone]:0 [0/s]		[Response]:            52.26%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2222		[12-bit Zone]:0 [0/s]		[Response]:            52.90%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2244		[12-bit Zone]:0 [0/s]		[Response]:            53.55%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2250		[12-bit Zone]:0 [0/s]		[Response]:            54.19%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2258		[12-bit Zone]:0 [0/s]		[Response]:            54.84%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2272		[12-bit Zone]:0 [0/s]		[Response]:            58.06%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2288		[12-bit Zone]:0 [0/s]		[Response]:            58.71%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2288		[12-bit Zone]:0 [0/s]		[Response]:            59.35%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2311		[12-bit Zone]:0 [0/s]		[Response]:            60.00%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2320		[12-bit Zone]:0 [0/s]		[Response]:            60.65%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2333		[12-bit Zone]:0 [0/s]		[Response]:            61.29%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2347		[12-bit Zone]:0 [0/s]		[Response]:            64.52%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2361		[12-bit Zone]:0 [0/s]		[Response]:            65.16%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2376		[12-bit Zone]:0 [0/s]		[Response]:            65.81%		[Queue]:200		
-[NodeSet]:155		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            66.45%		[Queue]:200		
-[NodeSet]:163		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            63.80%		[Queue]:200		
-[NodeSet]:171		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            61.40%		[Queue]:200		
-[NodeSet]:179		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            59.22%		[Queue]:200		
-[NodeSet]:186		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            57.53%		[Queue]:200		
-[NodeSet]:194		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            55.67%		[Queue]:200		
-[NodeSet]:202		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            53.96%		[Queue]:200		
-[NodeSet]:210		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            52.38%		[Queue]:200		
-[NodeSet]:218		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            50.92%		[Queue]:200		
-[NodeSet]:225		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            49.78%		[Queue]:200		
-[NodeSet]:233		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            48.50%		[Queue]:200		
-[NodeSet]:241		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            47.30%		[Queue]:200		
-[NodeSet]:249		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            46.18%		[Queue]:200		
-[NodeSet]:250		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            46.40%		[Queue]:200		
-[NodeSet]:251		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            46.61%		[Queue]:200		
-[NodeSet]:259		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            45.56%		[Queue]:200		
-[NodeSet]:267		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            44.57%		[Queue]:200		
-[NodeSet]:275		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            43.64%		[Queue]:200		
-[NodeSet]:283		[PeerSet]:2385		[12-bit Zone]:0 [0/s]		[Response]:            42.76%		[Queue]:200		
-[NodeSet]:283		[PeerSet]:2396		[12-bit Zone]:0 [0/s]		[Response]:            43.11%		[Queue]:200		
-[NodeSet]:283		[PeerSet]:2396		[12-bit Zone]:0 [0/s]		[Response]:            44.88%		[Queue]:195		
-[NodeSet]:283		[PeerSet]:2431		[12-bit Zone]:0 [0/s]		[Response]:            45.58%		[Queue]:200		
-[NodeSet]:283		[PeerSet]:2441		[12-bit Zone]:0 [0/s]		[Response]:            45.94%		[Queue]:200		
-[NodeSet]:283		[PeerSet]:2453		[12-bit Zone]:0 [0/s]		[Response]:            46.29%		[Queue]:200		
-[NodeSet]:283		[PeerSet]:2455		[12-bit Zone]:0 [0/s]		[Response]:            46.64%		[Queue]:200		
-[NodeSet]:283		[PeerSet]:2470		[12-bit Zone]:0 [0/s]		[Response]:            47.00%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2491		[12-bit Zone]:0 [0/s]		[Response]:            47.18%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2503		[12-bit Zone]:0 [0/s]		[Response]:            47.54%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2503		[12-bit Zone]:0 [0/s]		[Response]:            49.30%		[Queue]:196		
-[NodeSet]:284		[PeerSet]:2521		[12-bit Zone]:0 [0/s]		[Response]:            50.00%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2530		[12-bit Zone]:0 [0/s]		[Response]:            50.35%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2532		[12-bit Zone]:0 [0/s]		[Response]:            50.70%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2543		[12-bit Zone]:0 [0/s]		[Response]:            51.06%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2548		[12-bit Zone]:0 [0/s]		[Response]:            51.41%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2557		[12-bit Zone]:0 [0/s]		[Response]:            51.76%		[Queue]:200		
-[NodeSet]:284		[PeerSet]:2568		[12-bit Zone]:0 [0/s]		[Response]:            52.11%		[Queue]:200		
-[NodeSet]:285		[PeerSet]:2568		[12-bit Zone]:0 [0/s]		[Response]:            52.28%		[Queue]:200		
-[NodeSet]:286		[PeerSet]:2568		[12-bit Zone]:0 [0/s]		[Response]:            52.45%		[Queue]:200		
-[NodeSet]:286		[PeerSet]:2585		[12-bit Zone]:0 [0/s]		[Response]:            52.80%		[Queue]:200		
-[NodeSet]:286		[PeerSet]:2593		[12-bit Zone]:0 [0/s]		[Response]:            53.15%		[Queue]:200		
-[NodeSet]:286		[PeerSet]:2600		[12-bit Zone]:0 [0/s]		[Response]:            53.50%		[Queue]:200		
-[NodeSet]:286		[PeerSet]:2612		[12-bit Zone]:0 [0/s]		[Response]:            53.85%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2621		[12-bit Zone]:0 [0/s]		[Response]:            54.01%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2638		[12-bit Zone]:0 [0/s]		[Response]:            54.36%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2654		[12-bit Zone]:0 [0/s]		[Response]:            54.70%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2672		[12-bit Zone]:0 [0/s]		[Response]:            55.05%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2672		[12-bit Zone]:0 [0/s]		[Response]:            55.40%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2672		[12-bit Zone]:0 [0/s]		[Response]:            55.75%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2672		[12-bit Zone]:0 [0/s]		[Response]:            56.10%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2688		[12-bit Zone]:0 [0/s]		[Response]:            56.45%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2698		[12-bit Zone]:0 [0/s]		[Response]:            56.79%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2703		[12-bit Zone]:0 [0/s]		[Response]:            57.14%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2711		[12-bit Zone]:0 [0/s]		[Response]:            57.49%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2719		[12-bit Zone]:0 [0/s]		[Response]:            57.84%		[Queue]:200		
-[NodeSet]:287		[PeerSet]:2723		[12-bit Zone]:0 [0/s]		[Response]:            58.19%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2743		[12-bit Zone]:0 [0/s]		[Response]:            58.33%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2763		[12-bit Zone]:0 [0/s]		[Response]:            58.68%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2770		[12-bit Zone]:0 [0/s]		[Response]:            59.72%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2776		[12-bit Zone]:0 [0/s]		[Response]:            60.07%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2776		[12-bit Zone]:0 [0/s]		[Response]:            61.81%		[Queue]:196		
-[NodeSet]:288		[PeerSet]:2786		[12-bit Zone]:0 [0/s]		[Response]:            62.50%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2794		[12-bit Zone]:0 [0/s]		[Response]:            62.85%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2807		[12-bit Zone]:0 [0/s]		[Response]:            63.19%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2808		[12-bit Zone]:0 [0/s]		[Response]:            63.54%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2817		[12-bit Zone]:0 [0/s]		[Response]:            63.89%		[Queue]:200		
-[NodeSet]:288		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            64.24%		[Queue]:200		
-[NodeSet]:295		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            63.05%		[Queue]:200		
-[NodeSet]:302		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            61.92%		[Queue]:200		
-[NodeSet]:310		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            60.65%		[Queue]:200		
-[NodeSet]:316		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            59.81%		[Queue]:200		
-[NodeSet]:324		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            58.64%		[Queue]:200		
-[NodeSet]:331		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            57.70%		[Queue]:200		
-[NodeSet]:338		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            56.80%		[Queue]:200		
-[NodeSet]:344		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            56.10%		[Queue]:200		
-[NodeSet]:352		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            55.11%		[Queue]:200		
-[NodeSet]:359		[PeerSet]:2830		[12-bit Zone]:0 [0/s]		[Response]:            54.32%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2845		[12-bit Zone]:0 [0/s]		[Response]:            54.44%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2856		[12-bit Zone]:0 [0/s]		[Response]:            54.72%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2866		[12-bit Zone]:0 [0/s]		[Response]:            55.00%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2876		[12-bit Zone]:0 [0/s]		[Response]:            55.28%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2884		[12-bit Zone]:0 [0/s]		[Response]:            55.56%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2895		[12-bit Zone]:0 [0/s]		[Response]:            55.83%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2901		[12-bit Zone]:0 [0/s]		[Response]:            56.11%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2907		[12-bit Zone]:0 [0/s]		[Response]:            56.39%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2913		[12-bit Zone]:0 [0/s]		[Response]:            56.67%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2924		[12-bit Zone]:0 [0/s]		[Response]:            56.94%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2924		[12-bit Zone]:0 [0/s]		[Response]:            57.22%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2924		[12-bit Zone]:0 [0/s]		[Response]:            57.50%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2932		[12-bit Zone]:0 [0/s]		[Response]:            57.78%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2942		[12-bit Zone]:0 [0/s]		[Response]:            58.06%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2954		[12-bit Zone]:0 [0/s]		[Response]:            58.33%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2963		[12-bit Zone]:0 [0/s]		[Response]:            58.61%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2975		[12-bit Zone]:0 [0/s]		[Response]:            58.89%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2983		[12-bit Zone]:0 [0/s]		[Response]:            59.17%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:2992		[12-bit Zone]:0 [0/s]		[Response]:            59.44%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:3013		[12-bit Zone]:0 [0/s]		[Response]:            59.72%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:3021		[12-bit Zone]:0 [0/s]		[Response]:            60.00%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:3026		[12-bit Zone]:0 [0/s]		[Response]:            60.28%		[Queue]:200		
-[NodeSet]:360		[PeerSet]:3029		[12-bit Zone]:0 [0/s]		[Response]:            60.56%		[Queue]:200		
-[NodeSet]:361		[PeerSet]:3045		[12-bit Zone]:0 [0/s]		[Response]:            60.66%		[Queue]:200		
-[NodeSet]:361		[PeerSet]:3046		[12-bit Zone]:0 [0/s]		[Response]:            60.94%		[Queue]:200		
-[NodeSet]:361		[PeerSet]:3046		[12-bit Zone]:0 [0/s]		[Response]:            61.22%		[Queue]:200		
-[NodeSet]:361		[PeerSet]:3046		[12-bit Zone]:0 [0/s]		[Response]:            61.50%		[Queue]:200		
-[NodeSet]:361		[PeerSet]:3046		[12-bit Zone]:0 [0/s]		[Response]:            61.77%		[Queue]:200		
-[NodeSet]:361		[PeerSet]:3046		[12-bit Zone]:0 [0/s]		[Response]:            62.05%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3055		[12-bit Zone]:0 [0/s]		[Response]:            62.15%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3063		[12-bit Zone]:0 [0/s]		[Response]:            62.43%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3068		[12-bit Zone]:0 [0/s]		[Response]:            62.71%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3081		[12-bit Zone]:0 [0/s]		[Response]:            62.98%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3088		[12-bit Zone]:0 [0/s]		[Response]:            63.26%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3091		[12-bit Zone]:0 [0/s]		[Response]:            63.54%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3101		[12-bit Zone]:0 [0/s]		[Response]:            63.81%		[Queue]:200		
-[NodeSet]:362		[PeerSet]:3113		[12-bit Zone]:0 [0/s]		[Response]:            64.09%		[Queue]:200		
-[NodeSet]:363		[PeerSet]:3121		[12-bit Zone]:0 [0/s]		[Response]:            64.19%		[Queue]:200		
-[NodeSet]:364		[PeerSet]:3121		[12-bit Zone]:0 [0/s]		[Response]:            64.29%		[Queue]:200		
-[NodeSet]:364		[PeerSet]:3121		[12-bit Zone]:0 [0/s]		[Response]:            64.56%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3121		[12-bit Zone]:0 [0/s]		[Response]:            64.48%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3129		[12-bit Zone]:0 [0/s]		[Response]:            64.75%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3132		[12-bit Zone]:0 [0/s]		[Response]:            65.03%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3137		[12-bit Zone]:0 [0/s]		[Response]:            65.30%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3142		[12-bit Zone]:0 [0/s]		[Response]:            65.57%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3147		[12-bit Zone]:0 [0/s]		[Response]:            65.85%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3154		[12-bit Zone]:0 [0/s]		[Response]:            66.12%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3163		[12-bit Zone]:0 [0/s]		[Response]:            66.39%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3172		[12-bit Zone]:0 [0/s]		[Response]:            66.67%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3177		[12-bit Zone]:0 [0/s]		[Response]:            66.94%		[Queue]:200		
-[NodeSet]:366		[PeerSet]:3178		[12-bit Zone]:0 [0/s]		[Response]:            67.21%		[Queue]:200		
-[NodeSet]:367		[PeerSet]:3184		[12-bit Zone]:0 [0/s]		[Response]:            67.30%		[Queue]:200		
-[NodeSet]:367		[PeerSet]:3197		[12-bit Zone]:0 [0/s]		[Response]:            67.57%		[Queue]:200		
-[NodeSet]:367		[PeerSet]:3201		[12-bit Zone]:0 [0/s]		[Response]:            67.85%		[Queue]:200		
-[NodeSet]:367		[PeerSet]:3205		[12-bit Zone]:0 [0/s]		[Response]:            68.12%		[Queue]:200		
-[NodeSet]:367		[PeerSet]:3208		[12-bit Zone]:0 [0/s]		[Response]:            68.39%		[Queue]:200		
-[NodeSet]:367		[PeerSet]:3215		[12-bit Zone]:0 [0/s]		[Response]:            68.66%		[Queue]:200		
-[NodeSet]:367		[PeerSet]:3225		[12-bit Zone]:0 [0/s]		[Response]:            68.94%		[Queue]:200		
-[NodeSet]:368		[PeerSet]:3225		[12-bit Zone]:0 [0/s]		[Response]:            69.02%		[Queue]:200		
-[NodeSet]:368		[PeerSet]:3225		[12-bit Zone]:0 [0/s]		[Response]:            69.29%		[Queue]:200		
-[NodeSet]:370		[PeerSet]:3225		[12-bit Zone]:0 [0/s]		[Response]:            69.19%		[Queue]:200		
-[NodeSet]:370		[PeerSet]:3228		[12-bit Zone]:0 [0/s]		[Response]:            69.46%		[Queue]:200		
-[NodeSet]:370		[PeerSet]:3235		[12-bit Zone]:0 [0/s]		[Response]:            69.73%		[Queue]:200		
-[NodeSet]:370		[PeerSet]:3240		[12-bit Zone]:0 [0/s]		[Response]:            70.00%		[Queue]:200		
-[NodeSet]:370		[PeerSet]:3246		[12-bit Zone]:0 [0/s]		[Response]:            70.27%		[Queue]:200		
-[NodeSet]:370		[PeerSet]:3250		[12-bit Zone]:0 [0/s]		[Response]:            70.54%		[Queue]:200		
-[NodeSet]:370		[PeerSet]:3259		[12-bit Zone]:0 [0/s]		[Response]:            70.81%		[Queue]:200		
-[NodeSet]:377		[PeerSet]:3266		[12-bit Zone]:0 [0/s]		[Response]:            69.76%		[Queue]:200		
-[NodeSet]:383		[PeerSet]:3268		[12-bit Zone]:0 [0/s]		[Response]:            68.93%		[Queue]:200		
-[NodeSet]:387		[PeerSet]:3273		[12-bit Zone]:0 [0/s]		[Response]:            68.48%		[Queue]:200		
-[NodeSet]:392		[PeerSet]:3273		[12-bit Zone]:0 [0/s]		[Response]:            67.86%		[Queue]:200		
-[NodeSet]:397		[PeerSet]:3274		[12-bit Zone]:0 [0/s]		[Response]:            67.25%		[Queue]:200		
-[NodeSet]:397		[PeerSet]:3282		[12-bit Zone]:0 [0/s]		[Response]:            67.51%		[Queue]:200		
-[NodeSet]:398		[PeerSet]:3286		[12-bit Zone]:0 [0/s]		[Response]:            67.59%		[Queue]:200		
-[NodeSet]:398		[PeerSet]:3286		[12-bit Zone]:0 [0/s]		[Response]:            68.84%		[Queue]:196		
-[NodeSet]:398		[PeerSet]:3296		[12-bit Zone]:0 [0/s]		[Response]:            69.35%		[Queue]:200		
-[NodeSet]:398		[PeerSet]:3298		[12-bit Zone]:0 [0/s]		[Response]:            69.60%		[Queue]:200		
-[NodeSet]:398		[PeerSet]:3305		[12-bit Zone]:0 [0/s]		[Response]:            69.85%		[Queue]:200		
-[NodeSet]:398		[PeerSet]:3305		[12-bit Zone]:0 [0/s]		[Response]:            71.11%		[Queue]:196		
-[NodeSet]:398		[PeerSet]:3316		[12-bit Zone]:0 [0/s]		[Response]:            71.61%		[Queue]:200		
-[NodeSet]:399		[PeerSet]:3326		[12-bit Zone]:0 [0/s]		[Response]:            71.68%		[Queue]:200		
-[NodeSet]:399		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            71.93%		[Queue]:200		
-[NodeSet]:403		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            72.46%		[Queue]:200		
-[NodeSet]:410		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            71.46%		[Queue]:200		
-[NodeSet]:416		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            70.67%		[Queue]:200		
-[NodeSet]:422		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            69.91%		[Queue]:200		
-[NodeSet]:428		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            69.16%		[Queue]:200		
-[NodeSet]:436		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            68.12%		[Queue]:200		
-[NodeSet]:444		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            67.12%		[Queue]:200		
-[NodeSet]:452		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            66.15%		[Queue]:200		
-[NodeSet]:457		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            65.65%		[Queue]:200		
-[NodeSet]:461		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            65.29%		[Queue]:200		
-[NodeSet]:468		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            64.53%		[Queue]:200		
-[NodeSet]:476		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            63.66%		[Queue]:200		
-[NodeSet]:480		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            63.33%		[Queue]:200		
-[NodeSet]:488		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            62.50%		[Queue]:200		
-[NodeSet]:496		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            61.69%		[Queue]:200		
-[NodeSet]:503		[PeerSet]:3338		[12-bit Zone]:0 [0/s]		[Response]:            61.03%		[Queue]:200		
-[NodeSet]:503		[PeerSet]:3344		[12-bit Zone]:0 [0/s]		[Response]:            61.23%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3361		[12-bit Zone]:0 [0/s]		[Response]:            61.51%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3369		[12-bit Zone]:0 [0/s]		[Response]:            62.30%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3377		[12-bit Zone]:0 [0/s]		[Response]:            62.50%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3393		[12-bit Zone]:0 [0/s]		[Response]:            62.90%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3411		[12-bit Zone]:0 [0/s]		[Response]:            63.49%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3427		[12-bit Zone]:0 [0/s]		[Response]:            63.89%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3444		[12-bit Zone]:0 [0/s]		[Response]:            64.68%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3452		[12-bit Zone]:0 [0/s]		[Response]:            64.88%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3462		[12-bit Zone]:0 [0/s]		[Response]:            65.28%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3469		[12-bit Zone]:0 [0/s]		[Response]:            66.07%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3481		[12-bit Zone]:0 [0/s]		[Response]:            66.27%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3487		[12-bit Zone]:0 [0/s]		[Response]:            66.47%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3487		[12-bit Zone]:0 [0/s]		[Response]:            66.67%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3487		[12-bit Zone]:0 [0/s]		[Response]:            66.87%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3487		[12-bit Zone]:0 [0/s]		[Response]:            67.06%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3487		[12-bit Zone]:0 [0/s]		[Response]:            67.26%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3491		[12-bit Zone]:0 [0/s]		[Response]:            67.46%		[Queue]:200		
-[NodeSet]:504		[PeerSet]:3495		[12-bit Zone]:0 [0/s]		[Response]:            67.66%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3501		[12-bit Zone]:0 [0/s]		[Response]:            67.72%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3510		[12-bit Zone]:0 [0/s]		[Response]:            67.92%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3516		[12-bit Zone]:0 [0/s]		[Response]:            68.12%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3528		[12-bit Zone]:0 [0/s]		[Response]:            68.51%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3545		[12-bit Zone]:0 [0/s]		[Response]:            69.11%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3562		[12-bit Zone]:0 [0/s]		[Response]:            69.31%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3568		[12-bit Zone]:0 [0/s]		[Response]:            69.50%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3577		[12-bit Zone]:0 [0/s]		[Response]:            69.70%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3583		[12-bit Zone]:0 [0/s]		[Response]:            69.90%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3587		[12-bit Zone]:0 [0/s]		[Response]:            70.10%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3592		[12-bit Zone]:0 [0/s]		[Response]:            70.30%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3602		[12-bit Zone]:0 [0/s]		[Response]:            70.50%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3606		[12-bit Zone]:0 [0/s]		[Response]:            70.69%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3620		[12-bit Zone]:0 [0/s]		[Response]:            70.89%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3626		[12-bit Zone]:0 [0/s]		[Response]:            71.09%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3629		[12-bit Zone]:0 [0/s]		[Response]:            71.29%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3644		[12-bit Zone]:0 [0/s]		[Response]:            71.49%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3647		[12-bit Zone]:0 [0/s]		[Response]:            71.68%		[Queue]:200		
-[NodeSet]:505		[PeerSet]:3656		[12-bit Zone]:0 [0/s]		[Response]:            71.88%		[Queue]:200		
-[NodeSet]:512		[PeerSet]:3656		[12-bit Zone]:0 [0/s]		[Response]:            71.09%		[Queue]:200		
-[NodeSet]:513		[PeerSet]:3657		[12-bit Zone]:0 [0/s]		[Response]:            71.15%		[Queue]:200		
-[NodeSet]:518		[PeerSet]:3657		[12-bit Zone]:0 [0/s]		[Response]:            70.66%		[Queue]:200		
-[NodeSet]:523		[PeerSet]:3657		[12-bit Zone]:0 [0/s]		[Response]:            70.17%		[Queue]:200		
-[NodeSet]:528		[PeerSet]:3657		[12-bit Zone]:0 [0/s]		[Response]:            69.70%		[Queue]:200		
-[NodeSet]:533		[PeerSet]:3657		[12-bit Zone]:0 [0/s]		[Response]:            69.23%		[Queue]:200		
-[NodeSet]:540		[PeerSet]:3657		[12-bit Zone]:0 [0/s]		[Response]:            68.52%		[Queue]:200		
-[NodeSet]:540		[PeerSet]:3659		[12-bit Zone]:0 [0/s]		[Response]:            68.70%		[Queue]:200		
-[NodeSet]:545		[PeerSet]:3659		[12-bit Zone]:0 [0/s]		[Response]:            68.26%		[Queue]:200		
-[NodeSet]:553		[PeerSet]:3660		[12-bit Zone]:0 [0/s]		[Response]:            67.45%		[Queue]:200		
-[NodeSet]:559		[PeerSet]:3660		[12-bit Zone]:0 [0/s]		[Response]:            66.91%		[Queue]:200		
-[NodeSet]:566		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            66.25%		[Queue]:200		
-[NodeSet]:571		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            65.85%		[Queue]:200		
-[NodeSet]:578		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            65.22%		[Queue]:200		
-[NodeSet]:585		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            64.62%		[Queue]:200		
-[NodeSet]:585		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            64.79%		[Queue]:200		
-[NodeSet]:587		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            64.74%		[Queue]:200		
-[NodeSet]:592		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            64.36%		[Queue]:200		
-[NodeSet]:598		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            63.88%		[Queue]:200		
-[NodeSet]:605		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            63.31%		[Queue]:200		
-[NodeSet]:610		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            62.95%		[Queue]:200		
-[NodeSet]:613		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            62.81%		[Queue]:200		
-[NodeSet]:620		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            62.26%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3661		[12-bit Zone]:0 [0/s]		[Response]:            61.92%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3675		[12-bit Zone]:0 [0/s]		[Response]:            62.08%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3680		[12-bit Zone]:0 [0/s]		[Response]:            62.24%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3688		[12-bit Zone]:0 [0/s]		[Response]:            62.40%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3702		[12-bit Zone]:0 [0/s]		[Response]:            62.56%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3718		[12-bit Zone]:0 [0/s]		[Response]:            62.72%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3742		[12-bit Zone]:0 [0/s]		[Response]:            62.88%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3744		[12-bit Zone]:0 [0/s]		[Response]:            63.04%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3750		[12-bit Zone]:0 [0/s]		[Response]:            63.20%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3762		[12-bit Zone]:0 [0/s]		[Response]:            63.36%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3789		[12-bit Zone]:0 [0/s]		[Response]:            63.52%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3789		[12-bit Zone]:0 [0/s]		[Response]:            63.68%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3795		[12-bit Zone]:0 [0/s]		[Response]:            63.84%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3803		[12-bit Zone]:0 [0/s]		[Response]:            64.00%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3814		[12-bit Zone]:0 [0/s]		[Response]:            64.32%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3823		[12-bit Zone]:0 [0/s]		[Response]:            64.48%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3839		[12-bit Zone]:0 [0/s]		[Response]:            64.64%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3853		[12-bit Zone]:0 [0/s]		[Response]:            64.80%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3858		[12-bit Zone]:0 [0/s]		[Response]:            64.96%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3868		[12-bit Zone]:0 [0/s]		[Response]:            65.12%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3879		[12-bit Zone]:0 [0/s]		[Response]:            65.28%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3879		[12-bit Zone]:0 [0/s]		[Response]:            65.44%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3883		[12-bit Zone]:0 [0/s]		[Response]:            65.60%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3887		[12-bit Zone]:0 [0/s]		[Response]:            65.76%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3895		[12-bit Zone]:0 [0/s]		[Response]:            65.92%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3895		[12-bit Zone]:0 [0/s]		[Response]:            66.72%		[Queue]:195		
-[NodeSet]:625		[PeerSet]:3913		[12-bit Zone]:0 [0/s]		[Response]:            67.04%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3920		[12-bit Zone]:0 [0/s]		[Response]:            67.20%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3940		[12-bit Zone]:0 [0/s]		[Response]:            67.36%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3950		[12-bit Zone]:0 [0/s]		[Response]:            67.52%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3958		[12-bit Zone]:0 [0/s]		[Response]:            67.68%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3973		[12-bit Zone]:0 [0/s]		[Response]:            67.84%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3982		[12-bit Zone]:0 [0/s]		[Response]:            68.00%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3987		[12-bit Zone]:0 [0/s]		[Response]:            68.16%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:3998		[12-bit Zone]:0 [0/s]		[Response]:            68.32%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:4006		[12-bit Zone]:0 [0/s]		[Response]:            68.48%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:4008		[12-bit Zone]:0 [0/s]		[Response]:            68.64%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:4023		[12-bit Zone]:0 [0/s]		[Response]:            68.80%		[Queue]:200		
-[NodeSet]:625		[PeerSet]:4033		[12-bit Zone]:0 [0/s]		[Response]:            68.96%		[Queue]:200		
-[NodeSet]:626		[PeerSet]:4040		[12-bit Zone]:0 [0/s]		[Response]:            69.01%		[Queue]:200		
-[NodeSet]:626		[PeerSet]:4055		[12-bit Zone]:0 [0/s]		[Response]:            69.17%		[Queue]:200		
-[NodeSet]:626		[PeerSet]:4061		[12-bit Zone]:0 [0/s]		[Response]:            69.33%		[Queue]:200		
-[NodeSet]:629		[PeerSet]:4061		[12-bit Zone]:0 [0/s]		[Response]:            69.32%		[Queue]:200		
-[NodeSet]:633		[PeerSet]:4061		[12-bit Zone]:0 [0/s]		[Response]:            69.04%		[Queue]:200		
-[NodeSet]:636		[PeerSet]:4061		[12-bit Zone]:0 [0/s]		[Response]:            68.87%		[Queue]:200		
-[NodeSet]:636		[PeerSet]:4061		[12-bit Zone]:0 [0/s]		[Response]:            69.03%		[Queue]:200		
-[NodeSet]:644		[PeerSet]:4063		[12-bit Zone]:0 [0/s]		[Response]:            68.32%		[Queue]:200		
-[NodeSet]:649		[PeerSet]:4065		[12-bit Zone]:0 [0/s]		[Response]:            67.95%		[Queue]:200		
-[NodeSet]:652		[PeerSet]:4065		[12-bit Zone]:0 [0/s]		[Response]:            67.79%		[Queue]:200		
-[NodeSet]:655		[PeerSet]:4065		[12-bit Zone]:0 [0/s]		[Response]:            67.63%		[Queue]:200		
-[NodeSet]:658		[PeerSet]:4066		[12-bit Zone]:0 [0/s]		[Response]:            67.48%		[Queue]:200		
-[NodeSet]:662		[PeerSet]:4066		[12-bit Zone]:0 [0/s]		[Response]:            67.37%		[Queue]:200		
-[NodeSet]:663		[PeerSet]:4066		[12-bit Zone]:0 [0/s]		[Response]:            67.42%		[Queue]:200		
-[NodeSet]:669		[PeerSet]:4066		[12-bit Zone]:0 [0/s]		[Response]:            66.97%		[Queue]:200		
-[NodeSet]:669		[PeerSet]:4067		[12-bit Zone]:0 [0/s]		[Response]:            67.12%		[Queue]:200		
-[NodeSet]:673		[PeerSet]:4076		[12-bit Zone]:0 [0/s]		[Response]:            67.01%		[Queue]:200		
-[NodeSet]:676		[PeerSet]:4077		[12-bit Zone]:0 [0/s]		[Response]:            66.86%		[Queue]:200		
-[NodeSet]:680		[PeerSet]:4077		[12-bit Zone]:0 [0/s]		[Response]:            66.62%		[Queue]:200		
-[NodeSet]:681		[PeerSet]:4077		[12-bit Zone]:0 [0/s]		[Response]:            66.67%		[Queue]:200		
-[NodeSet]:683		[PeerSet]:4082		[12-bit Zone]:0 [0/s]		[Response]:            66.62%		[Queue]:200		
-[NodeSet]:685		[PeerSet]:4082		[12-bit Zone]:0 [0/s]		[Response]:            66.57%		[Queue]:200		
-[NodeSet]:689		[PeerSet]:4082		[12-bit Zone]:0 [0/s]		[Response]:            66.33%		[Queue]:200		
-[NodeSet]:691		[PeerSet]:4082		[12-bit Zone]:0 [0/s]		[Response]:            66.28%		[Queue]:200		
-[NodeSet]:691		[PeerSet]:4082		[12-bit Zone]:0 [0/s]		[Response]:            66.43%		[Queue]:200		
-[NodeSet]:691		[PeerSet]:4090		[12-bit Zone]:0 [0/s]		[Response]:            66.57%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4094		[12-bit Zone]:0 [0/s]		[Response]:            66.76%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4110		[12-bit Zone]:0 [0/s]		[Response]:            67.34%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4117		[12-bit Zone]:0 [0/s]		[Response]:            67.49%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4136		[12-bit Zone]:0 [0/s]		[Response]:            67.63%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4148		[12-bit Zone]:0 [0/s]		[Response]:            67.77%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4152		[12-bit Zone]:0 [0/s]		[Response]:            67.92%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4160		[12-bit Zone]:0 [0/s]		[Response]:            68.06%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4172		[12-bit Zone]:0 [0/s]		[Response]:            68.21%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4176		[12-bit Zone]:0 [0/s]		[Response]:            68.35%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4183		[12-bit Zone]:0 [0/s]		[Response]:            68.50%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4195		[12-bit Zone]:0 [0/s]		[Response]:            68.64%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4205		[12-bit Zone]:0 [0/s]		[Response]:            68.79%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4211		[12-bit Zone]:0 [0/s]		[Response]:            68.93%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4224		[12-bit Zone]:0 [0/s]		[Response]:            69.08%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4233		[12-bit Zone]:0 [0/s]		[Response]:            69.22%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4237		[12-bit Zone]:0 [0/s]		[Response]:            69.36%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4238		[12-bit Zone]:0 [0/s]		[Response]:            69.51%		[Queue]:200		
-[NodeSet]:692		[PeerSet]:4245		[12-bit Zone]:0 [0/s]		[Response]:            69.65%		[Queue]:200		
-[NodeSet]:694		[PeerSet]:4247		[12-bit Zone]:0 [0/s]		[Response]:            69.60%		[Queue]:200		
-[NodeSet]:694		[PeerSet]:4250		[12-bit Zone]:0 [0/s]		[Response]:            69.74%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4251		[12-bit Zone]:0 [0/s]		[Response]:            69.78%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4264		[12-bit Zone]:0 [0/s]		[Response]:            69.93%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4279		[12-bit Zone]:0 [0/s]		[Response]:            70.07%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4282		[12-bit Zone]:0 [0/s]		[Response]:            70.22%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4294		[12-bit Zone]:0 [0/s]		[Response]:            70.36%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4306		[12-bit Zone]:0 [0/s]		[Response]:            70.50%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4313		[12-bit Zone]:0 [0/s]		[Response]:            70.65%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4317		[12-bit Zone]:0 [0/s]		[Response]:            70.79%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4322		[12-bit Zone]:0 [0/s]		[Response]:            70.94%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4333		[12-bit Zone]:0 [0/s]		[Response]:            71.08%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4334		[12-bit Zone]:0 [0/s]		[Response]:            71.22%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4345		[12-bit Zone]:0 [0/s]		[Response]:            71.37%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4347		[12-bit Zone]:0 [0/s]		[Response]:            71.51%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4356		[12-bit Zone]:0 [0/s]		[Response]:            71.65%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4362		[12-bit Zone]:0 [0/s]		[Response]:            71.80%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4374		[12-bit Zone]:0 [0/s]		[Response]:            71.94%		[Queue]:200		
-[NodeSet]:695		[PeerSet]:4376		[12-bit Zone]:0 [0/s]		[Response]:            72.09%		[Queue]:200		
-2091
-[NodeSet]:695		[PeerSet]:4386		[12-bit Zone]:0 [0/s]		[Response]:            72.23%		[Queue]:200		
+{"ba60a7a1ec51fc9a37ff410bbb243fcfe162d43f":
+{"peers": [
+	{"timestamp":25.04.2018 09:48:08:585958, "addr": ["188.50.194.213", 12335]},
+	{"timestamp":25.04.2018 09:46:51:340780, "addr": ["212.92.107.115", 8999]},
+	{"timestamp":25.04.2018 09:47:58:493388, "addr": ["41.221.246.109", 26085]},
+	{"timestamp":25.04.2018 09:47:52:607393, "addr": ["80.83.25.143", 33704]},
+	{"timestamp":25.04.2018 09:48:08:585876, "addr": ["115.135.118.35", 12165]},
+	{"timestamp":25.04.2018 09:47:58:492613, "addr": ["172.111.161.181", 17767]},
+	{"timestamp":25.04.2018 09:43:07:096876, "addr": ["196.54.41.38", 38484]},
+	{"timestamp":25.04.2018 09:47:58:493334, "addr": ["222.127.140.154", 62149]},
+	{"timestamp":25.04.2018 09:47:53:576442, "addr": ["2.91.83.102", 12831]},
+	{"timestamp":25.04.2018 09:47:58:492645, "addr": ["37.211.73.239", 20823]},
+	{"timestamp":25.04.2018 09:47:58:492994, "addr": ["37.211.139.193", 18318]},
+	{"timestamp":25.04.2018 09:37:52:038201, "addr": ["65.255.48.154", 1050]},
+	{"timestamp":25.04.2018 09:47:58:492136, "addr": ["71.168.174.90", 56977]},
+	{"timestamp":25.04.2018 09:47:58:491780, "addr": ["72.252.168.77", 1027]},
+	{"timestamp":25.04.2018 09:47:53:576520, "addr": ["80.83.25.241", 33704]},
+	{"timestamp":25.04.2018 09:47:58:492214, "addr": ["81.213.206.177", 57803]},
+	{"timestamp":25.04.2018 09:47:58:493419, "addr": ["89.139.2.194", 46911]},
+	{"timestamp":25.04.2018 09:47:58:493729, "addr": ["93.168.167.183", 20307]},
+	{"timestamp":25.04.2018 09:47:58:493245, "addr": ["124.106.247.98", 9572]},
+	{"timestamp":25.04.2018 09:46:56:626573, "addr": ["170.84.9.12", 10479]},
+	{"timestamp":25.04.2018 09:47:58:491814, "addr": ["185.5.172.230", 63530]},
+	{"timestamp":25.04.2018 09:47:58:491334, "addr": ["190.163.11.6", 62965]},
+	{"timestamp":25.04.2018 09:47:58:492879, "addr": ["196.210.187.114", 12074]},
+	{"timestamp":25.04.2018 09:47:58:491439, "addr": ["210.213.201.104", 49160]},
+	{"timestamp":25.04.2018 09:38:59:099407, "addr": ["80.83.25.148", 33704]},
+	{"timestamp":25.04.2018 09:47:56:446487, "addr": ["80.83.25.230", 33704]},
+	{"timestamp":25.04.2018 09:47:58:493304, "addr": ["60.53.185.179", 12800]},
+	{"timestamp":25.04.2018 09:47:58:491065, "addr": ["195.214.190.57", 42392]},
+	{"timestamp":25.04.2018 09:47:58:491712, "addr": ["43.254.162.130", 27858]},
+	{"timestamp":25.04.2018 09:47:58:493102, "addr": ["186.188.150.126", 44399]},
+	{"timestamp":25.04.2018 09:47:58:491191, "addr": ["14.169.49.166", 43669]},
+	{"timestamp":25.04.2018 09:47:58:491302, "addr": ["42.60.193.75", 30628]},
+	{"timestamp":25.04.2018 09:47:34:519031, "addr": ["45.56.157.38", 27354]},
+	{"timestamp":25.04.2018 09:47:58:492363, "addr": ["47.145.37.61", 62348]},
+	{"timestamp":25.04.2018 09:47:54:443973, "addr": ["80.83.25.141", 33704]},
+	{"timestamp":25.04.2018 09:47:58:493589, "addr": ["89.153.114.16", 51413]},
+	{"timestamp":25.04.2018 09:47:58:492011, "addr": ["94.64.145.76", 56978]},
+	{"timestamp":25.04.2018 09:47:58:492713, "addr": ["99.254.227.88", 1024]},
+	{"timestamp":25.04.2018 09:45:32:251054, "addr": ["103.47.134.26", 38549]},
+	{"timestamp":25.04.2018 09:47:58:492517, "addr": ["198.91.201.107", 13698]},
+	{"timestamp":25.04.2018 09:47:56:446525, "addr": ["5.62.43.15", 10871]},
+	{"timestamp":25.04.2018 09:46:56:625267, "addr": ["5.254.125.109", 51413]},
+	{"timestamp":25.04.2018 09:47:58:492074, "addr": ["59.149.60.83", 16881]},
+	{"timestamp":25.04.2018 09:47:58:493188, "addr": ["74.79.125.134", 24935]},
+	{"timestamp":25.04.2018 09:47:58:493133, "addr": ["79.114.46.44", 21070]},
+	{"timestamp":25.04.2018 09:46:51:340414, "addr": ["80.83.25.238", 33704]},
+	{"timestamp":25.04.2018 09:47:58:492274, "addr": ["88.196.25.207", 51413]},
+	{"timestamp":25.04.2018 09:47:58:492743, "addr": ["96.9.143.81", 28179]},
+	{"timestamp":25.04.2018 09:47:58:491919, "addr": ["111.92.72.105", 51413]},
+	{"timestamp":25.04.2018 09:47:58:493215, "addr": ["116.233.2.177", 16881]},
+	{"timestamp":25.04.2018 09:48:08:585923, "addr": ["141.226.181.182", 42218]},
+	{"timestamp":25.04.2018 09:47:53:576708, "addr": ["212.92.121.177", 8999]},
+	{"timestamp":25.04.2018 09:47:58:493448, "addr": ["2.51.196.109", 16881]},
+	{"timestamp":25.04.2018 09:47:58:492187, "addr": ["5.30.126.38", 60559]},
+	{"timestamp":25.04.2018 09:47:58:492334, "addr": ["5.194.185.119", 16051]},
+	{"timestamp":25.04.2018 09:47:58:492042, "addr": ["62.210.192.192", 55100]},
+	{"timestamp":25.04.2018 09:46:56:625962, "addr": ["80.83.25.146", 33704]},
+	{"timestamp":25.04.2018 09:47:58:493361, "addr": ["94.66.59.49", 54369]},
+	{"timestamp":25.04.2018 09:47:58:493075, "addr": ["113.173.107.51", 51413]},
+	{"timestamp":25.04.2018 09:47:58:493526, "addr": ["124.180.217.211", 43611]},
+	{"timestamp":25.04.2018 09:47:58:493021, "addr": ["185.229.59.28", 16881]},
+	{"timestamp":25.04.2018 09:47:58:491748, "addr": ["209.73.151.79", 61422]},
+	{"timestamp":25.04.2018 09:47:54:445186, "addr": ["212.92.105.217", 8999]},
+	{"timestamp":25.04.2018 09:39:03:835505, "addr": ["212.92.122.96", 8999]},
+	{"timestamp":25.04.2018 09:47:58:492306, "addr": ["173.239.230.83", 31409]},
+	{"timestamp":25.04.2018 09:47:55:688978, "addr": ["80.83.25.245", 33704]},
+	{"timestamp":25.04.2018 09:47:58:491271, "addr": ["80.83.25.203", 33704]},
+	{"timestamp":25.04.2018 09:47:41:547185, "addr": ["80.83.25.195", 33704]},
+	{"timestamp":25.04.2018 09:47:54:444306, "addr": ["122.55.34.234", 16499]},
+	{"timestamp":25.04.2018 09:47:58:493550, "addr": ["219.91.246.181", 51635]},
+	{"timestamp":25.04.2018 09:47:58:491471, "addr": ["197.188.93.243", 57188]},
+	{"timestamp":25.04.2018 09:47:58:493896, "addr": ["202.80.219.210", 24716]},
+	{"timestamp":25.04.2018 09:46:47:199886, "addr": ["80.83.25.215", 33704]},
+	{"timestamp":25.04.2018 09:36:48:713489, "addr": ["80.83.25.236", 33704]},
+	{"timestamp":25.04.2018 09:47:53:576546, "addr": ["92.37.122.231", 1025]},
+	{"timestamp":25.04.2018 09:47:58:491952, "addr": ["94.204.69.147", 1031]},
+	{"timestamp":25.04.2018 09:47:56:446548, "addr": ["89.201.251.58", 63559]},
+	{"timestamp":25.04.2018 09:47:55:690142, "addr": ["73.216.229.173", 55485]},
+	{"timestamp":25.04.2018 09:39:17:971539, "addr": ["192.168.1.1", 12335]},
+	{"timestamp":25.04.2018 09:48:07:815224, "addr": ["192.168.1.1", 1]},
+	{"timestamp":25.04.2018 09:41:07:970005, "addr": ["155.93.135.74", 6881]},
+	{"timestamp":25.04.2018 09:47:47:618735, "addr": ["45.56.157.38", 1]},
+	{"timestamp":25.04.2018 09:46:56:626622, "addr": ["183.87.71.49", 60889]},
+	{"timestamp":25.04.2018 09:47:58:492966, "addr": ["90.116.23.190", 26765]},
+	{"timestamp":25.04.2018 09:46:56:626808, "addr": ["212.92.122.236", 8999]},
+	{"timestamp":25.04.2018 09:47:58:492392, "addr": ["124.13.222.74", 53551]},
+	{"timestamp":25.04.2018 09:47:47:618753, "addr": ["112.210.218.154", 1]},
+	{"timestamp":25.04.2018 09:40:27:206612, "addr": ["198.55.124.106", 4644]},
+	{"timestamp":25.04.2018 09:47:58:493928, "addr": ["122.106.211.85", 62348]},
+	{"timestamp":25.04.2018 09:47:58:492565, "addr": ["197.89.218.59", 53342]},
+	{"timestamp":25.04.2018 09:47:58:493505, "addr": ["122.54.247.35", 58174]},
+	{"timestamp":25.04.2018 09:47:54:444173, "addr": ["109.201.152.18", 8999]},
+	{"timestamp":25.04.2018 09:47:55:689874, "addr": ["120.151.10.70", 34443]},
+	{"timestamp":25.04.2018 09:47:58:491504, "addr": ["41.90.202.238", 63590]},
+	{"timestamp":25.04.2018 09:47:58:493644, "addr": ["147.234.23.156", 58659]},
+	{"timestamp":25.04.2018 09:46:51:340605, "addr": ["141.226.122.220", 58659]},
+	{"timestamp":25.04.2018 09:47:58:493485, "addr": ["114.143.197.52", 30269]},
+	{"timestamp":25.04.2018 09:47:58:491642, "addr": ["84.127.83.232", 60091]},
+	{"timestamp":25.04.2018 09:35:31:772623, "addr": ["169.0.181.57", 11493]},
+	{"timestamp":25.04.2018 09:47:58:492934, "addr": ["41.36.13.114", 9999]},
+	{"timestamp":25.04.2018 09:37:52:039602, "addr": ["212.92.121.127", 18554]},
+	{"timestamp":25.04.2018 09:47:58:493666, "addr": ["197.237.221.233", 29276]},
+	{"timestamp":25.04.2018 09:41:30:030197, "addr": ["198.55.124.106", 28814]},
+	{"timestamp":25.04.2018 09:42:24:329997, "addr": ["112.210.218.154", 1201]},
+	{"timestamp":25.04.2018 09:44:29:466602, "addr": ["115.85.14.60", 23138]},
+	{"timestamp":25.04.2018 09:44:29:466922, "addr": ["187.154.199.147", 65139]},
+	{"timestamp":25.04.2018 09:43:14:143078, "addr": ["115.85.14.60", 18837]},
+	{"timestamp":25.04.2018 09:43:14:143293, "addr": ["187.154.199.147", 50641]},
+	{"timestamp":25.04.2018 09:43:07:096501, "addr": ["115.85.14.60", 12468]},
+	{"timestamp":25.04.2018 09:47:58:493571, "addr": ["41.236.213.144", 44822]},
+	{"timestamp":25.04.2018 09:44:29:466093, "addr": ["43.224.109.33", 49973]},
+	{"timestamp":25.04.2018 09:47:58:492159, "addr": ["175.100.148.97", 6085]},
+	{"timestamp":25.04.2018 09:47:48:388984, "addr": ["151.236.23.129", 59069]},
+	{"timestamp":25.04.2018 09:47:58:491572, "addr": ["91.140.89.5", 31250]},
+	{"timestamp":25.04.2018 09:45:28:305764, "addr": ["103.16.69.21", 9738]},
+	{"timestamp":25.04.2018 09:37:58:858059, "addr": ["1.186.168.142", 21261]},
+	{"timestamp":25.04.2018 09:47:54:443531, "addr": ["1.186.168.142", 21226]},
+	{"timestamp":25.04.2018 09:47:58:492844, "addr": ["112.201.161.8", 42581]},
+	{"timestamp":25.04.2018 09:39:47:161103, "addr": ["1.186.168.142", 21214]},
+	{"timestamp":25.04.2018 09:41:41:052153, "addr": ["1.186.168.142", 21216]},
+	{"timestamp":25.04.2018 09:47:53:576409, "addr": ["1.186.168.142", 21210]},
+	{"timestamp":25.04.2018 09:37:19:133877, "addr": ["1.186.168.142", 21254]},
+	{"timestamp":25.04.2018 09:42:28:091359, "addr": ["212.92.106.156", 4151]},
+	{"timestamp":25.04.2018 09:46:56:625035, "addr": ["1.186.168.142", 21217]},
+	{"timestamp":25.04.2018 09:37:58:857922, "addr": ["212.92.107.245", 8999]},
+	{"timestamp":25.04.2018 09:46:56:625529, "addr": ["43.251.173.237", 12517]},
+	{"timestamp":25.04.2018 09:46:56:626553, "addr": ["155.93.135.74", 1117]},
+	{"timestamp":25.04.2018 09:47:58:492677, "addr": ["197.156.75.54", 17728]},
+	{"timestamp":25.04.2018 09:47:54:444156, "addr": ["103.107.229.195", 27271]},
+	{"timestamp":25.04.2018 09:47:55:687550, "addr": ["65.255.58.197", 58194]},
+	{"timestamp":25.04.2018 09:47:55:690120, "addr": ["112.210.218.154", 1202]},
+	{"timestamp":25.04.2018 09:47:58:492771, "addr": ["43.224.109.33", 57111]},
+	{"timestamp":25.04.2018 09:47:58:493688, "addr": ["197.210.152.242", 26052]},
+	{"timestamp":25.04.2018 09:47:58:493623, "addr": ["188.53.173.119", 27763]},
+	{"timestamp":25.04.2018 09:47:56:446541, "addr": ["90.148.213.85", 27763]},
+	{"timestamp":25.04.2018 09:47:55:690109, "addr": ["87.109.208.51", 27763]},
+	{"timestamp":25.04.2018 09:46:51:340545, "addr": ["115.85.14.60", 11041]},
+	{"timestamp":25.04.2018 09:47:55:688898, "addr": ["115.85.14.60", 57084]},
+	{"timestamp":25.04.2018 09:46:56:626143, "addr": ["90.148.239.227", 27763]},
+	{"timestamp":25.04.2018 09:46:56:626402, "addr": ["115.85.14.60", 13987]},
+	{"timestamp":25.04.2018 09:47:54:444266, "addr": ["115.85.14.60", 50334]},
+	{"timestamp":25.04.2018 09:47:58:491605, "addr": ["115.85.14.60", 44029]},
+	{"timestamp":25.04.2018 09:47:55:688220, "addr": ["212.92.123.5", 46304]},
+	{"timestamp":25.04.2018 09:47:55:687670, "addr": ["187.154.199.147", 59910]},
+	{"timestamp":25.04.2018 09:46:56:626658, "addr": ["187.154.199.147", 56897]},
+	{"timestamp":25.04.2018 09:47:56:446696, "addr": ["212.92.120.188", 14556]},
+	{"timestamp":25.04.2018 09:47:58:491536, "addr": ["212.92.122.206", 30397]},
+	{"timestamp":25.04.2018 09:47:58:491408, "addr": ["187.154.199.147", 65092]},
+	{"timestamp":25.04.2018 09:47:53:576643, "addr": ["187.154.199.147", 58143]},
+	{"timestamp":25.04.2018 09:46:51:340686, "addr": ["187.154.199.147", 65019]},
+	{"timestamp":25.04.2018 09:46:51:340787, "addr": ["212.92.121.57", 60221]},
+	{"timestamp":25.04.2018 09:47:58:491372, "addr": ["155.93.135.74", 1118]},
+	{"timestamp":25.04.2018 09:47:58:491236, "addr": ["84.0.126.226", 11259]},
+	{"timestamp":25.04.2018 09:47:58:492907, "addr": ["27.252.193.221", 56568]},
+	{"timestamp":25.04.2018 09:47:58:492100, "addr": ["41.78.120.1", 5525]},
+	{"timestamp":25.04.2018 09:47:58:491882, "addr": ["197.101.160.155", 20844]},
+	{"timestamp":25.04.2018 09:47:58:491674, "addr": ["43.251.173.251", 12517]},
+	{"timestamp":25.04.2018 09:46:51:340501, "addr": ["103.16.69.21", 23945]},
+	{"timestamp":25.04.2018 09:47:58:493705, "addr": ["1.186.168.142", 60555]},
+	{"timestamp":25.04.2018 09:48:08:585943, "addr": ["187.154.199.147", 52909]},
+	{"timestamp":25.04.2018 09:45:29:471180, "addr": ["124.106.247.98", 1]},
+	{"timestamp":25.04.2018 09:47:55:686735, "addr": ["1.186.168.142", 60552]},
+	{"timestamp":25.04.2018 09:47:56:446571, "addr": ["1.186.168.142", 60594]},
+	{"timestamp":25.04.2018 09:46:56:625149, "addr": ["1.186.168.142", 60556]},
+	{"timestamp":25.04.2018 09:47:54:443636, "addr": ["1.186.168.142", 60595]},
+	{"timestamp":25.04.2018 09:46:47:199781, "addr": ["1.186.168.142", 60604]},
+	{"timestamp":25.04.2018 09:47:58:492801, "addr": ["14.192.24.126", 63978]},
+	{"timestamp":25.04.2018 09:47:58:492452, "addr": ["183.87.71.49", 39410]},
+	{"timestamp":25.04.2018 09:45:25:235834, "addr": ["95.186.215.222", 1173]},
+	{"timestamp":25.04.2018 09:47:58:493047, "addr": ["185.107.44.251", 47853]},
+	{"timestamp":25.04.2018 09:46:47:200029, "addr": ["212.92.124.131", 45315]},
+	{"timestamp":25.04.2018 09:47:56:446704, "addr": ["212.92.104.154", 8999]},
+	{"timestamp":25.04.2018 09:47:58:491983, "addr": ["72.183.123.244", 16444]},
+	{"timestamp":25.04.2018 09:47:58:493754, "addr": ["65.255.62.74", 58194]},
+	{"timestamp":25.04.2018 09:47:58:493783, "addr": ["112.210.218.154", 1203]},
+	{"timestamp":25.04.2018 09:47:54:444008, "addr": ["87.109.240.102", 27763]},
+	{"timestamp":25.04.2018 09:46:51:340553, "addr": ["115.85.14.60", 50471]},
+	{"timestamp":25.04.2018 09:47:55:690229, "addr": ["115.85.14.60", 25430]},
+	{"timestamp":25.04.2018 09:47:58:493816, "addr": ["115.85.14.60", 36447]},
+	{"timestamp":25.04.2018 09:47:53:576493, "addr": ["49.148.143.27", 62335]},
+	{"timestamp":25.04.2018 09:47:53:576571, "addr": ["115.85.14.60", 2596]},
+	{"timestamp":25.04.2018 09:47:58:493274, "addr": ["49.148.143.27", 63582]},
+	{"timestamp":25.04.2018 09:46:56:626420, "addr": ["115.85.14.60", 63027]},
+	{"timestamp":25.04.2018 09:47:58:493866, "addr": ["43.224.109.33", 58884]},
+	{"timestamp":25.04.2018 09:47:56:446690, "addr": ["49.148.143.27", 62997]},
+	{"timestamp":25.04.2018 09:47:54:444249, "addr": ["115.85.14.60", 37857]},
+	{"timestamp":25.04.2018 09:47:49:405489, "addr": ["41.251.213.144", 55671]},
+	{"timestamp":25.04.2018 09:46:56:626667, "addr": ["187.154.199.147", 61607]},
+	{"timestamp":25.04.2018 09:47:58:492243, "addr": ["195.154.199.155", 1814]},
+	{"timestamp":25.04.2018 09:46:51:340678, "addr": ["187.154.199.147", 49548]},
+	{"timestamp":25.04.2018 09:47:55:690249, "addr": ["187.154.199.147", 60853]},
+	{"timestamp":25.04.2018 09:47:58:492422, "addr": ["187.154.199.147", 59700]},
+	{"timestamp":25.04.2018 09:47:54:444490, "addr": ["187.154.199.147", 65375]},
+]
+"nodes": [
+	{"timestamp": 1524633097.9060926, "nodeID": "ba768bac4e21adaf49cdc3e8fdaf30ff2c639ff4", "nodeAddr": ["110.22.148.13", 6889]},
+	{"timestamp": 1524635776.4441023, "nodeID": "ba682d245e0d1c06b747deb3124dc843bb8ba63e", "nodeAddr": ["23.240.49.90", 6881]},
+	{"timestamp": 1524636449.3129566, "nodeID": "ba67d4024fd97b913e540d627f3ec0d7e47452fa", "nodeAddr": ["218.214.72.40", 6889]},
+	{"timestamp": 1524637612.2820761, "nodeID": "ba608d86c2b3608584725b35d4a0aee21f0ebcef", "nodeAddr": ["176.20.189.49", 14144]},
+	{"timestamp": 1524642472.6075084, "nodeID": "ba60b147ad229e916e2e9072dd4dea8db697f2ea", "nodeAddr": ["90.207.147.179", 6881]},
+	{"timestamp": 1524642473.5767274, "nodeID": "ba60b7f1800b3efea8a1795301cd4f3e95ef59fa", "nodeAddr": ["70.79.147.179", 6889]},
+	{"timestamp": 1524641939.0994222, "nodeID": "ba60b3cbfc96f5453b130d890a1cdbae32209a5d", "nodeAddr": ["180.64.166.96", 19475]},
+	{"timestamp": 1524642476.4467237, "nodeID": "ba60ac0aa9e7478990472c1483efeedb44adfa41", "nodeAddr": ["94.180.110.61", 64592]},
+	{"timestamp": 1524642474.4452872, "nodeID": "ba60a00030c79d16fd7b918a74fe22f878f04043", "nodeAddr": ["178.94.219.109", 15823]},
+	{"timestamp": 1524642411.340801, "nodeID": "ba60a2a423e312e31f0dcbcb4499565646017003", "nodeAddr": ["82.5.169.120", 57554]},
+	{"timestamp": 1524642416.6268442, "nodeID": "ba60a343286c0cf1fb1357565c60dccfdb9dd5b4", "nodeAddr": ["158.140.218.124", 62768]},
+	{"timestamp": 1524642475.6902812, "nodeID": "ba60a367e67412117d3296930d80f0fabdfc18bc", "nodeAddr": ["124.170.220.171", 42987]},
+	{"timestamp": 1524642478.4939835, "nodeID": "ba60a43295aa5b68130be6fcf5cabe7d9f898a54", "nodeAddr": ["194.28.154.124", 13228]},
+	{"timestamp": 1524638080.830802, "nodeID": "c6e3e25314d2277db84fa3b687c8355e5afe4c05", "nodeAddr": ["82.29.29.57", 6881]},
+	{"timestamp": 1524642461.5474167, "nodeID": "ba60b53cce7de5da90496c85522a3ebc8e32033d", "nodeAddr": ["172.112.38.96", 6881]},
+	{"timestamp": 1524642407.2002103, "nodeID": "ba60ac7bf13eb7d9be60fa5d8b2e301f5fa63059", "nodeAddr": ["196.194.168.234", 44497]},
+	{"timestamp": 1524642468.3890338, "nodeID": "ba6096b8174f2ebed7839e35611a09a6270f958c", "nodeAddr": ["82.25.70.104", 6881]},
+	{"timestamp": 1524642469.4056807, "nodeID": "ba6088fbb61109fbc3fe4385c26fe9ebc8f5d5e7", "nodeAddr": ["176.100.189.49", 10787]},
+	{"timestamp": 1524642471.3984048, "nodeID": "ba60839abc2bff7148dd9d4f1ecbb19226cc2a6a", "nodeAddr": ["90.154.143.167", 40500]},
+	{"timestamp": 1524641808.7135673, "nodeID": "ba60851b7b27c4090f061d7b7f419460fafbcf0a", "nodeAddr": ["178.234.207.167", 11888]},
+	{"timestamp": 1524635522.0700758, "nodeID": "ba60a61bd63f831fce6c0e0760ed4285b5a2313b", "nodeAddr": ["158.181.43.180", 6385]},
+	{"timestamp": 1524638534.3086474, "nodeID": "6f68326fbf922a9ee942d8f261bfd6320b8b2a20", "nodeAddr": ["158.181.43.180", 6385]},
+	{"timestamp": 1524635738.3023543, "nodeID": "972a1016d86b590d2b14bb0df39dbc7a9a1a2be1", "nodeAddr": ["109.15.245.166", 49445]},
+	{"timestamp": 1524635740.435979, "nodeID": "a6e6f207ba8a128154e8b4a9f019518199cd6a83", "nodeAddr": ["186.188.150.126", 44399]},
+	{"timestamp": 1524636064.6372721, "nodeID": "ba6603d430c011ca577c716868ae095d526cf40a", "nodeAddr": ["92.135.84.237", 6889]},
+	{"timestamp": 1524636067.6849895, "nodeID": "ba6b3af803c6c138107f3d12d671df07a43f0b75", "nodeAddr": ["209.93.153.152", 18123]},
+	{"timestamp": 1524636068.9130445, "nodeID": "ba66a3f853efe91387babc3eebf0f871ad2c679d", "nodeAddr": ["218.191.37.135", 51413]},
+	{"timestamp": 1524636093.6628609, "nodeID": "ba7e8acdf282864db4be91380d9c7743f8ff22b0", "nodeAddr": ["77.100.75.152", 36968]},
+	{"timestamp": 1524636182.7730055, "nodeID": "ba64767a28cff8942b16736fee0e077bb3412a22", "nodeAddr": ["176.62.186.219", 25513]},
+	{"timestamp": 1524636183.8982353, "nodeID": "ba632a89a5cd4cd86e829d9e37b865757d1f3d58", "nodeAddr": ["98.5.60.198", 44421]},
+	{"timestamp": 1524636956.61759, "nodeID": "ba63b15f1571775e9622c3a4c8d7152320910c98", "nodeAddr": ["86.174.7.109", 6881]},
+	{"timestamp": 1524642487.815257, "nodeID": "ba6271dbb7a1437243f74bf23a3d2e90478fa46d", "nodeAddr": ["70.119.125.160", 51413]},
+	{"timestamp": 1524635704.359149, "nodeID": "ba62f60b3e7a3dced8696cd3c8dfd9c7db7b9a35", "nodeAddr": ["96.44.148.66", 14706]},
+	{"timestamp": 1524641664.5321999, "nodeID": "ba610fcdc5a22ddccd2beccbb5929b51ab5b7d02", "nodeAddr": ["80.68.119.94", 64713]},
+	{"timestamp": 1524642043.9183297, "nodeID": "ba61f776f4d5359136aa5732ebecdb5653182968", "nodeAddr": ["62.210.181.79", 58822]},
+	{"timestamp": 1524642266.169974, "nodeID": "ba601735990ac73145067040fdaecf6bcf5249de", "nodeAddr": ["83.1.247.217", 51413]},
+	{"timestamp": 1524635766.257218, "nodeID": "baab3365b96b02809ba7bf17bb93c34a2214c7ea", "nodeAddr": ["213.188.54.155", 8999]},
+	{"timestamp": 1524635767.2837331, "nodeID": "bac7a2f43d43c9694c06dce7e5792d8f099b96bb", "nodeAddr": ["207.89.91.36", 6889]},
+	{"timestamp": 1524641794.641398, "nodeID": "ba35bffec323e1cca02ed3f83ef5c0c8eb3ee3cf", "nodeAddr": ["178.32.221.38", 6881]},
+	{"timestamp": 1524635772.3000257, "nodeID": "ba75515c6f77cafe88687e844c5a301bc3844692", "nodeAddr": ["88.247.215.25", 14649]},
+	{"timestamp": 1524635773.505783, "nodeID": "ba6e31fa919a427021502cd0ea7f47c770e56ace", "nodeAddr": ["189.54.145.187", 31217]},
+	{"timestamp": 1524637144.7809398, "nodeID": "ba6c274326e56c88110b23c3292dfdb62c8108fc", "nodeAddr": ["37.116.128.224", 6889]},
+	{"timestamp": 1524635775.3303323, "nodeID": "ba6afbd5754930be1e4123ff4f490c7c02a0bb44", "nodeAddr": ["37.112.185.65", 51666]},
+	{"timestamp": 1524637123.1522045, "nodeID": "ba66d1ba9372297ae81e8fb40fe614e3d4e8f557", "nodeAddr": ["144.133.91.19", 51413]},
+	{"timestamp": 1524641621.4801004, "nodeID": "ba6526f1c1635700b07665bb5050454fabfc85fe", "nodeAddr": ["82.6.211.63", 50321]},
+	{"timestamp": 1524637124.871417, "nodeID": "ba638e49f1f1bbe9ebb3a6db3c870c3e99245e52", "nodeAddr": ["74.58.156.60", 19904]},
+	{"timestamp": 1524642325.2358935, "nodeID": "ba6043535f9195915f5af3cde28f4efc067bc1fd", "nodeAddr": ["84.113.37.227", 6881]},
+	{"timestamp": 1524641828.964562, "nodeID": "ba60eaa5e2db517d3f5d437b08f4e0bd38c8816d", "nodeAddr": ["118.41.132.139", 26867]},
+	{"timestamp": 1524641830.7387328, "nodeID": "ba60f67c6ed6175932b8235a001fbe57df42548e", "nodeAddr": ["94.66.57.5", 56038]},
+	{"timestamp": 1524641976.8675675, "nodeID": "ba60e8af3ce56ff3f1829e8ee2ac7262ba69a44d", "nodeAddr": ["188.143.2.92", 62800]},
+	{"timestamp": 1524642454.5190542, "nodeID": "ba60d2168c9a6c74957349e469c90b91cba99dfd", "nodeAddr": ["142.59.29.70", 46238]},
+	{"timestamp": 1524642299.2814918, "nodeID": "ba60c2d6ae529049f1f1bbe9ebb3a6db3c870ce1", "nodeAddr": ["216.8.144.194", 35409]},
+	{"timestamp": 1524636074.6933305, "nodeID": "ba61bce722ef019003f52c90b7fafdbf88aabd4c", "nodeAddr": ["79.70.153.202", 15013]},
+	{"timestamp": 1524635806.4144742, "nodeID": "ba1f08bd280dc258bbe129b0c38788febc47707a", "nodeAddr": ["208.58.127.27", 6889]},
+	{"timestamp": 1524635812.4726477, "nodeID": "ba73004bb65201069292ccd492e224c0164adca7", "nodeAddr": ["205.206.72.43", 51413]},
+	{"timestamp": 1524636094.655137, "nodeID": "ba6eb8acb2cc216cc606be10da0469eef0072347", "nodeAddr": ["195.177.86.12", 65535]},
+	{"timestamp": 1524641959.8570883, "nodeID": "ba6cf74b4e61ce776f63f3ed47a06c684c53c2c5", "nodeAddr": ["87.140.35.107", 56395]},
+	{"timestamp": 1524635819.3189852, "nodeID": "ba621d017c7c80b09dc636785b24f4b67fb39138", "nodeAddr": ["212.180.196.226", 51413]},
+	{"timestamp": 1524642457.4103076, "nodeID": "ba607ff1f1bbe9ebb3a6db3c870c3e99245e0d90", "nodeAddr": ["84.108.205.182", 35424]},
+	{"timestamp": 1524636967.6682487, "nodeID": "ba6021f1f1bbe9ebb3a6db3c870c3e99245e0d90", "nodeAddr": ["188.19.169.138", 1650]},
+	{"timestamp": 1524635826.4257445, "nodeID": "ba60eb093b5695e248e36680d872d345e4335371", "nodeAddr": ["173.54.202.239", 24792]},
+	{"timestamp": 1524635878.3860712, "nodeID": "ba6421c2892df58b9eff3814f65e49e54aae2a16", "nodeAddr": ["90.209.219.213", 51413]},
+	{"timestamp": 1524635889.3844948, "nodeID": "ba7e02593ff42e9905c321ab95b1f7a22fe11209", "nodeAddr": ["195.154.179.2", 22491]},
+	{"timestamp": 1524636782.4329574, "nodeID": "ba6b27e16cd6ae529049f1f1bbe9ebb3a6db3cbe", "nodeAddr": ["5.166.228.22", 41511]},
+	{"timestamp": 1524635891.4309993, "nodeID": "ba6873284bf864efe310bb07218c4cf7aaa97ece", "nodeAddr": ["93.41.19.177", 5332]},
+	{"timestamp": 1524635902.4832866, "nodeID": "ba47e82e7de5329c3b1a45ff782232d4b2857e1d", "nodeAddr": ["132.206.121.93", 6881]},
+	{"timestamp": 1524635904.9243345, "nodeID": "ba577041d1cc4643fdf0240eafdd9073c50fe65e", "nodeAddr": ["220.125.212.248", 30732]},
+	{"timestamp": 1524635905.6848924, "nodeID": "ba47ce4035e5cba3807d4bb918fbf25f8d14bd01", "nodeAddr": ["126.23.129.29", 51413]},
+	{"timestamp": 1524635909.6718905, "nodeID": "ba7e8bf1f1bbe9ebb3a6db3c870c3e99245e0d90", "nodeAddr": ["221.164.11.152", 54656]},
+	{"timestamp": 1524635911.6664717, "nodeID": "ba7614d98bb1e6fa70bc9f5ed01dd06ca94a0816", "nodeAddr": ["125.132.107.64", 62531]},
+	{"timestamp": 1524635912.6673894, "nodeID": "ba72306b4cacefb0c2c1935e2a6937dea0676022", "nodeAddr": ["60.126.76.130", 59517]},
+	{"timestamp": 1524635913.705138, "nodeID": "ba6e8d337886b00cdaebd4bcf987762d7548b537", "nodeAddr": ["119.148.138.24", 7565]},
+	{"timestamp": 1524635925.4501467, "nodeID": "ba621ae9ebb3a6db3c870c3e99245e0d1c06b7f1", "nodeAddr": ["176.63.25.75", 60225]},
+	{"timestamp": 1524641625.7551873, "nodeID": "ba6155486a38a0a2e08acbfa8aad404ad372529d", "nodeAddr": ["182.68.102.177", 26558]},
+	{"timestamp": 1524642457.1070712, "nodeID": "ba613774dd3564389325fa3d78d5f14c4aee8f58", "nodeAddr": ["82.22.234.216", 50321]},
+	{"timestamp": 1524642488.5859675, "nodeID": "ba6000e646ab921ae44c133b0ba530b7fc4bfad6", "nodeAddr": ["190.83.250.134", 6882]},
+	{"timestamp": 1524642292.2331393, "nodeID": "ba60d81a598478b279b57d1d01fb4ffda09c2b4d", "nodeAddr": ["92.58.30.72", 58182]},
+	{"timestamp": 1524642470.3970542, "nodeID": "ba60836b97381b8f8c7f127d838f3f25426ba53d", "nodeAddr": ["78.83.60.163", 27342]},
+	{"timestamp": 1524635998.6016219, "nodeID": "ba687b8a920d9ea9e9d471793aaa39f18d11fa4c", "nodeAddr": ["66.246.138.242", 51413]},
+	{"timestamp": 1524636099.654948, "nodeID": "ba647f36d8985d3900981e63184cf57cfa7b394e", "nodeAddr": ["77.94.35.29", 6972]},
+	{"timestamp": 1524636003.522663, "nodeID": "ba7aff80fcf75927ba42d93ca8c426a89d690673", "nodeAddr": ["83.128.184.193", 6889]},
+	{"timestamp": 1524636008.6397157, "nodeID": "ba49754b1fa7259f27f80c13dbd8829b11fffb99", "nodeAddr": ["172.97.150.51", 6889]},
+	{"timestamp": 1524636011.6033194, "nodeID": "ba76ae4683a912f9d1d68fbb1e6f7efd6d82891a", "nodeAddr": ["82.240.193.214", 41296]},
+	{"timestamp": 1524636012.59892, "nodeID": "ba659c66d47378ddc34bda1f5ce3a9aafc07058f", "nodeAddr": ["90.210.142.75", 6881]},
+	{"timestamp": 1524636869.5113783, "nodeID": "ba62493bfa5e3c130308a6ecd72bafee898fe134", "nodeAddr": ["88.104.9.54", 27032]},
+	{"timestamp": 1524641800.8206277, "nodeID": "ba61527a29416b2abd43fafa483ba0cd1bad7402", "nodeAddr": ["64.187.211.98", 50321]},
+	{"timestamp": 1524642295.3563683, "nodeID": "ba6075f55e3e52e507f6f6d1b6ba0a6c1800aed5", "nodeAddr": ["68.4.57.247", 48799]},
+	{"timestamp": 1524636017.71894, "nodeID": "ba6325dd6f84c6764044bf2ca98f858ea2947c0a", "nodeAddr": ["24.146.61.84", 6889]},
+	{"timestamp": 1524642230.1788173, "nodeID": "ba625b788fd2e415209db9c94510971c6ad2cab2", "nodeAddr": ["79.178.240.89", 50413]},
+	{"timestamp": 1524642291.2096937, "nodeID": "ba613fb9add5b051abb17f4798e58cdb6f46e45a", "nodeAddr": ["188.193.235.74", 6881]},
+	{"timestamp": 1524642328.305852, "nodeID": "ba6021f90490a21cd0b0e9cb3e1dd7899cb5ce48", "nodeAddr": ["188.19.169.138", 1640]},
+	{"timestamp": 1524642467.6187673, "nodeID": "ba60df216f7f98cdc1d033d915bce6c3ac1bf4af", "nodeAddr": ["116.49.17.243", 51413]},
+	{"timestamp": 1524637227.8613825, "nodeID": "ba60ed61415089de2178b0294ae6072ed09d574c", "nodeAddr": ["87.99.83.231", 1024]},
+	{"timestamp": 1524636031.5916708, "nodeID": "ba51f7ab0fea74f9aeb36a63cd7ae4c960b88389", "nodeAddr": ["188.143.122.97", 27522]},
+	{"timestamp": 1524636032.5587735, "nodeID": "ba487bc0a92c147c06e9e0742deca106fb9c15a2", "nodeAddr": ["185.149.90.90", 51513]},
+	{"timestamp": 1524636034.5626402, "nodeID": "ba7ffa1a391dc489538d9783dea7432c501f400f", "nodeAddr": ["51.255.194.148", 51413]},
+	{"timestamp": 1524641581.7301064, "nodeID": "ba76875b7a5bafbcab0d07a269c0646ca86a70e9", "nodeAddr": ["126.94.96.76", 17998]},
+	{"timestamp": 1524636036.5771658, "nodeID": "ba6d2dcc909b257bc95cdaaa914b80a902e525b8", "nodeAddr": ["81.245.75.239", 51365]},
+	{"timestamp": 1524636038.6803746, "nodeID": "ba67a926672804066f53f90519a169e33478b7ab", "nodeAddr": ["222.230.10.203", 63000]},
+	{"timestamp": 1524642458.3822582, "nodeID": "ba65305c7995733e62a470b6ce75e4f706f4dd28", "nodeAddr": ["80.147.28.39", 55195]},
+	{"timestamp": 1524636955.604295, "nodeID": "ba64220329230611520ff26629e0cb8f265aa937", "nodeAddr": ["94.15.172.113", 6881]},
+	{"timestamp": 1524636041.8879406, "nodeID": "ba638e6d0525f8176432981fd293b06d67979e55", "nodeAddr": ["124.181.105.239", 18288]},
+	{"timestamp": 1524642288.2161772, "nodeID": "ba61057dd4c956c5160fa9f849f4185185b2c10f", "nodeAddr": ["90.154.69.200", 27855]},
+	{"timestamp": 1524637213.951032, "nodeID": "ba6340d5de75811125c91d686aaa30c2a41fb087", "nodeAddr": ["126.150.55.234", 27032]},
+	{"timestamp": 1524636071.8492172, "nodeID": "ba63f835d443df1aa5b3eab2d913eed5ace0b476", "nodeAddr": ["42.98.106.158", 6889]},
+	{"timestamp": 1524637116.717842, "nodeID": "ba6c999393044a41389f303b1cf99687c90d3ad5", "nodeAddr": ["185.112.157.148", 62909]},
+	{"timestamp": 1524642219.1364453, "nodeID": "ba6a683d4280f3cfc0a09d94945a8381652f2f89", "nodeAddr": ["89.179.246.171", 44579]},
+	{"timestamp": 1524637146.8154273, "nodeID": "ba698537cad5a6e13a3162e1755fa151c806064f", "nodeAddr": ["93.65.47.124", 6889]},
+	{"timestamp": 1524642227.2103722, "nodeID": "ba6616b4a79f65bf6c10e4a8bc6e9b350d036214", "nodeAddr": ["188.244.157.34", 12674]},
+	{"timestamp": 1524641971.9766636, "nodeID": "ba60dfc07679d0c2c2b251736d3211ff159eb96a", "nodeAddr": ["94.245.171.155", 11888]},
+	{"timestamp": 1524641972.9780712, "nodeID": "ba600ce60404056e29231d8f54b1f7a215de33fd", "nodeAddr": ["195.154.179.2", 38806]},
+	{"timestamp": 1524641974.1450431, "nodeID": "ba60590aff0af457291f026f6c8c4c29dcfaa6c4", "nodeAddr": ["203.220.103.200", 51413]},
+	{"timestamp": 1524636447.1323028, "nodeID": "ba71b099f0949ed3a973231d7c29b396dbf2eb54", "nodeAddr": ["68.198.45.125", 32198]},
+	{"timestamp": 1524636449.3131552, "nodeID": "ba61a74ccfd7b6e2a9e019969a9d8c518f9f7c82", "nodeAddr": ["178.220.150.54", 50321]},
+	{"timestamp": 1524642290.4793515, "nodeID": "ba60d21a7aad2f5e6780319ffdfc7f3f992d8658", "nodeAddr": ["220.178.170.9", 6748]},
+	{"timestamp": 1524636951.6079748, "nodeID": "ba6ded16c7f55959027b678f81dde66353be7c9f", "nodeAddr": ["87.126.33.171", 54057]},
+	{"timestamp": 1524636952.5747576, "nodeID": "ba67166b9832352615f0995f7ebb65b87ce9a2f2", "nodeAddr": ["94.210.215.191", 34817]},
+	{"timestamp": 1524636953.6169896, "nodeID": "ba660ed09d45528d6537e2ed556f5c56d2145b67", "nodeAddr": ["84.111.160.172", 46050]},
+	{"timestamp": 1524642262.214849, "nodeID": "ba6260c466b6b24187b8fa6f43f7e89279011cc7", "nodeAddr": ["92.54.104.172", 50320]},
+	{"timestamp": 1524637142.783639, "nodeID": "ba7fbee9ebb3a6db3c870c3e99245e0d1c06b7f1", "nodeAddr": ["81.104.40.194", 18914]},
+	{"timestamp": 1524637208.8259692, "nodeID": "ba6871bd978cf9c87d15c0f623c6f45b01a0fd0d", "nodeAddr": ["46.105.247.240", 51413]},
+	{"timestamp": 1524637209.9801528, "nodeID": "ba67f877ff10584af7df712355f4cde1b59d9c81", "nodeAddr": ["70.24.169.178", 6887]},
+	{"timestamp": 1524642001.882413, "nodeID": "ba643b05e7a661a0f454ac5f3dea6c4fef1e91b4", "nodeAddr": ["80.114.23.40", 6889]},
+	{"timestamp": 1524637213.9528494, "nodeID": "ba63ed7e426f2d104288d8732fc26365da7d3f20", "nodeAddr": ["46.209.99.81", 19608]},
+	{"timestamp": 1524637255.0576782, "nodeID": "ba62f65dd4cbfc96f5453b130d890a1cdbae3225", "nodeAddr": ["96.44.148.66", 48753]},
+	{"timestamp": 1524642007.9086573, "nodeID": "ba60283e9e146022dcdbced41391d4820602e53d", "nodeAddr": ["78.61.27.28", 23337]},
+	{"timestamp": 1524636712.4955678, "nodeID": "b9e58d845be44f1119660e7fd73bd8a472220f4a", "nodeAddr": ["18.184.129.125", 8108]},
+	{"timestamp": 1524636677.3275385, "nodeID": "ba6cd1e61131f954c1b1af95915bf78c8279c8bc", "nodeAddr": ["82.193.135.213", 51413]},
+	{"timestamp": 1524636679.4306471, "nodeID": "ba672d54b85f83b88eb9c804827fddb62d0f6fb7", "nodeAddr": ["172.73.121.61", 6881]},
+	{"timestamp": 1524641796.6767473, "nodeID": "ba66ffaf5711a88ed02e4e507c180aad09d49277", "nodeAddr": ["82.136.101.248", 41094]},
+	{"timestamp": 1524636680.6020317, "nodeID": "ba65361c2408a400e6c4b82e81ca4d38d023a20c", "nodeAddr": ["153.192.101.208", 34419]},
+	{"timestamp": 1524642177.3046205, "nodeID": "ba62f369ea6d3343fb35f1faf26626062b19b915", "nodeAddr": ["96.44.148.66", 32971]},
+	{"timestamp": 1524642178.1017911, "nodeID": "ba628da073eca11152fe26a0c5ea574fbc744fb3", "nodeAddr": ["86.163.35.114", 6889]},
+	{"timestamp": 1524636734.3647084, "nodeID": "ba50433300692c9a204ef037ccfd0f98b07e4143", "nodeAddr": ["80.3.31.30", 25316]},
+	{"timestamp": 1524636736.3408422, "nodeID": "ba41b323c65dfdb56d3c97b685af1f5210f9cf8a", "nodeAddr": ["94.242.209.87", 63585]},
+	{"timestamp": 1524636739.5400362, "nodeID": "ba7d391d61f040faf80814c71e9def1dc1404a31", "nodeAddr": ["71.198.3.160", 4676]},
+	{"timestamp": 1524636741.458968, "nodeID": "ba6785fa16555d2966b058ac97faff7dbacb0208", "nodeAddr": ["68.142.45.134", 6889]},
+	{"timestamp": 1524636742.5033262, "nodeID": "ba6276d6ae529049f1f1bbe9ebb3a6db3c870ce1", "nodeAddr": ["72.181.225.99", 10280]},
+	{"timestamp": 1524636743.69709, "nodeID": "ba6129af62480722ba6a640c3f53806c421de42c", "nodeAddr": ["124.82.162.133", 25933]},
+	{"timestamp": 1524636745.4720275, "nodeID": "ba612298699398fb6b7d8a74a5da7a4eda92071e", "nodeAddr": ["86.85.99.23", 6889]},
+	{"timestamp": 1524636747.5679765, "nodeID": "ba63d7dc1cd3f364257d8ebcf7e79329f92d7615", "nodeAddr": ["58.172.75.4", 8999]},
+	{"timestamp": 1524636749.3680391, "nodeID": "ba6395f0dd28456646ccfb99ee54241ca99257a1", "nodeAddr": ["92.39.39.101", 24231]},
+	{"timestamp": 1524636753.3890324, "nodeID": "ba61b230bd42f7f5388f05236c11a902fbb6afa9", "nodeAddr": ["92.249.186.55", 1024]},
+	{"timestamp": 1524636789.9471395, "nodeID": "ba613381b55131c4dc15fa4e39e162fdc523ada0", "nodeAddr": ["93.35.246.32", 11274]},
+	{"timestamp": 1524642298.2180777, "nodeID": "ba601a6da9fae30a87a8ea019434157c2c25d2d4", "nodeAddr": ["82.31.84.24", 57919]},
+	{"timestamp": 1524642006.9186895, "nodeID": "ba60223aa91a7b6ccbc873b889e84ad68b1088af", "nodeAddr": ["128.74.26.142", 33137]},
+	{"timestamp": 1524636855.4965777, "nodeID": "ba7cd41624d69d5fc6b9d8449512b91dda186c64", "nodeAddr": ["81.170.247.48", 36618]},
+	{"timestamp": 1524636857.5510716, "nodeID": "ba73f779b0f054164f6486e7f57f708e7a29802b", "nodeAddr": ["192.131.44.91", 50333]},
+	{"timestamp": 1524636858.625287, "nodeID": "ba72b645731e73b637f2e58307efb5c84fe155de", "nodeAddr": ["72.199.249.163", 6881]},
+	{"timestamp": 1524642258.4210854, "nodeID": "ba696fe23ac09b8df3935cd9551cf0951977d67b", "nodeAddr": ["223.132.164.162", 6881]},
+	{"timestamp": 1524636861.495866, "nodeID": "ba69851e9a96695c55c9059b6106ee8eb12a6838", "nodeAddr": ["77.56.220.120", 47245]},
+	{"timestamp": 1524636864.6816223, "nodeID": "ba62798a1fc0ba6b29aa517ecb184f1d479db5eb", "nodeAddr": ["70.66.32.241", 50321]},
+	{"timestamp": 1524637086.9975133, "nodeID": "ba6268d31d7d8e444f15e1192115afd3c3a97743", "nodeAddr": ["110.20.176.90", 44822]},
+	{"timestamp": 1524637261.0422263, "nodeID": "ba603d870c3e99245e0d1c06b747deb3124dc8db", "nodeAddr": ["80.184.212.4", 47885]},
+	{"timestamp": 1524636960.7309625, "nodeID": "ba611a8d1a985b4fee0c6e082b609567d35a1103", "nodeAddr": ["73.46.114.210", 29113]},
+	{"timestamp": 1524637259.1817088, "nodeID": "ba619d7bf85050e848e157e0755838b2e6902cd8", "nodeAddr": ["58.168.205.103", 45420]},
+	{"timestamp": 1524642265.2875135, "nodeID": "ba61d6ff6cc66a166da090f40ac3c066ce46e196", "nodeAddr": ["104.194.38.67", 6881]},
+	{"timestamp": 1524638416.3217807, "nodeID": "ba610ffc98997635cf64cff257345a6ad48df033", "nodeAddr": ["84.109.167.227", 49206]},
+	{"timestamp": 1524637883.72063, "nodeID": "ba60e77fb90f1076b94eeadc0731a1b080949f2f", "nodeAddr": ["190.88.195.206", 50321]},
+	{"timestamp": 1524637118.7544413, "nodeID": "ba6f3320f693cda28ace7abd13e759e87c2a5047", "nodeAddr": ["79.121.40.34", 3104]},
+	{"timestamp": 1524637119.7410376, "nodeID": "ba6c36af30f110f52572233750b1f7a239be2d18", "nodeAddr": ["195.154.181.225", 52690]},
+	{"timestamp": 1524637120.7808104, "nodeID": "ba6ae01775784f9bf325103c9cc3ac4918a82f37", "nodeAddr": ["77.27.68.207", 27472]},
+	{"timestamp": 1524637123.851351, "nodeID": "ba652f94b44086e3733d20a0d5882422e6d40d0c", "nodeAddr": ["136.33.82.173", 45951]},
+	{"timestamp": 1524637143.775987, "nodeID": "ba6e483ab8afa3b07e252aa253de93e748fa93af", "nodeAddr": ["81.230.83.88", 40736]},
+	{"timestamp": 1524637215.8854578, "nodeID": "ba61bc263ff407adc83bc7e7f089d3245354d5d6", "nodeAddr": ["176.8.158.107", 59230]},
+	{"timestamp": 1524637383.3712525, "nodeID": "ba609cd6ae529049f1f1bbe9ebb3a6db3c870ce1", "nodeAddr": ["112.151.244.254", 19686]},
+	{"timestamp": 1524637882.7742987, "nodeID": "ba60f6d3fdeff4c36c202dfd57ddbc3b166fd849", "nodeAddr": ["186.155.138.1", 30389]},
+	{"timestamp": 1524638046.8218033, "nodeID": "11c6e2e67729e7ff48d2c8761dcb9288902d38c2", "nodeAddr": ["94.62.148.246", 50321]},
+	{"timestamp": 1524638055.0454698, "nodeID": "ba60827c1f18c84fd1126b782d94bd0c19f0162a", "nodeAddr": ["144.12.9.112", 9011]},
+	{"timestamp": 1524641751.6070237, "nodeID": "b5922b663fb31c09092e2452f4b1f7a2075009a1", "nodeAddr": ["212.129.19.188", 53437]},
+	{"timestamp": 1524641585.3579292, "nodeID": "ba715fc1614e2f22df35f02d53153a23b0f3f208", "nodeAddr": ["121.182.155.81", 57885]},
+	{"timestamp": 1524641574.6937587, "nodeID": "ba7bfe14e298d13cd3d24d495ccf046c10747422", "nodeAddr": ["211.185.7.143", 8999]},
+	{"timestamp": 1524641578.6901598, "nodeID": "ba59aedbd2afffc5009c0c5e3731e266c6d065ba", "nodeAddr": ["59.11.50.204", 28247]},
+	{"timestamp": 1524641583.414487, "nodeID": "ba6eb2df1b4d94369462dc50eb119aa616fb9f4a", "nodeAddr": ["91.121.162.77", 65264]},
+	{"timestamp": 1524641585.4854438, "nodeID": "ba666e49f1f1bbe9ebb3a6db3c870c3e99245e52", "nodeAddr": ["130.43.106.18", 51562]},
+	{"timestamp": 1524641618.7612474, "nodeID": "ba69c0ba746160e0c8379a200806c70d050ffde2", "nodeAddr": ["198.58.160.202", 51413]},
+	{"timestamp": 1524641619.7496939, "nodeID": "ba6787d4fe73ba9eb69f0646e6b22195e93715f7", "nodeAddr": ["220.135.30.130", 6881]},
+	{"timestamp": 1524641620.5884113, "nodeID": "ba6625f595a67a9128f710c3b51ebaa2cc2076a3", "nodeAddr": ["174.94.52.229", 6887]},
+	{"timestamp": 1524641626.514365, "nodeID": "ba6021141be16ce423a3dcb1a4a48bd8db4324c8", "nodeAddr": ["188.163.169.138", 23009]},
+	{"timestamp": 1524641654.4901583, "nodeID": "bb5acf2368fa660f132dc33ddacec2d8a988f1e9", "nodeAddr": ["37.187.117.79", 51413]},
+	{"timestamp": 1524641658.5027626, "nodeID": "ba7c3801ac9a858154f06d4519f4f986ffc8392e", "nodeAddr": ["195.154.169.180", 55051]},
+	{"timestamp": 1524642455.397211, "nodeID": "ba6efc3c825a221eaefadf0e176209659b886ea3", "nodeAddr": ["87.252.188.186", 8999]},
+	{"timestamp": 1524641777.6279697, "nodeID": "ba68166bf519d14e3d776d02dacb82d47b916cb3", "nodeAddr": ["81.171.31.216", 55587]},
+	{"timestamp": 1524641795.7103705, "nodeID": "ba6dcba8f10118cbabe9f9a2eb75e0d083c8f3f7", "nodeAddr": ["77.87.97.197", 49001]},
+	{"timestamp": 1524641797.7801237, "nodeID": "ba652bcd2168a2b3d9b418db0da3f4ea2c9917ec", "nodeAddr": ["174.119.212.122", 6882]},
+	{"timestamp": 1524642225.119324, "nodeID": "ba62fe643204ffa582021b49cc36a3bde6674540", "nodeAddr": ["2.98.102.212", 6889]},
+	{"timestamp": 1524641805.3044386, "nodeID": "ba605c730c5b1460625f0f97e4bb36c204cc6f56", "nodeAddr": ["80.106.24.109", 50321]},
+	{"timestamp": 1524642357.4459276, "nodeID": "ba60b8f1f1bbe9ebb3a6db3c870c3e99245e0d90", "nodeAddr": ["80.104.18.33", 19390]},
+	{"timestamp": 1524641913.8884, "nodeID": "ba71aa01a07afbba6792aef5fd3ea07b9533c448", "nodeAddr": ["64.228.163.247", 55193]},
+	{"timestamp": 1524641924.0700417, "nodeID": "ba659e61e3ccf4fef1a163d2d80f58d104aa15ef", "nodeAddr": ["220.116.200.156", 7427]},
+	{"timestamp": 1524641965.207474, "nodeID": "ba7c819e25c84c0d8b1f1133ec90356e558d1c44", "nodeAddr": ["123.120.35.103", 28328]},
+	{"timestamp": 1524641967.1156373, "nodeID": "ba6ca31563d22b216e6981100b93434d0ea501b8", "nodeAddr": ["121.93.117.193", 55483]},
+	{"timestamp": 1524641969.9002595, "nodeID": "ba69e13496b8e963fe80ac1df960f915fcad2972", "nodeAddr": ["87.69.37.194", 63721]},
+	{"timestamp": 1524641997.9205837, "nodeID": "ba7bf15239d4805e7bfa4929a689cb4a38164c88", "nodeAddr": ["83.40.192.202", 6889]},
+	{"timestamp": 1524642000.8891873, "nodeID": "ba6a5c991d7959dcbe4c3f5238c1f870d0e77a7e", "nodeAddr": ["5.15.89.168", 6881]},
+	{"timestamp": 1524642005.006314, "nodeID": "ba61f1e91943c7a28a5c78dc3d5e5cb076d3e4e7", "nodeAddr": ["94.59.70.75", 17965]},
+	{"timestamp": 1524642009.9102206, "nodeID": "ba6135093cb36cbe6edaafef2e8439fe8c473f7f", "nodeAddr": ["86.31.217.220", 6881]},
+	{"timestamp": 1524642175.3004937, "nodeID": "ba6c60a261372ccc444fa27aaec8cfaa697f379f", "nodeAddr": ["49.240.89.82", 6889]},
+	{"timestamp": 1524642176.3555412, "nodeID": "ba64a3c7b2cf3e50e9c530ae5e148462917e2233", "nodeAddr": ["220.240.31.135", 6889]},
+	{"timestamp": 1524642180.1043477, "nodeID": "ba609f5774312f40e0b77b03dd282e1858ce3dc6", "nodeAddr": ["176.14.135.250", 21621]},
+	{"timestamp": 1524642224.2994072, "nodeID": "ba62f697e91ebaff47bad5cc53aad282aa7d46fd", "nodeAddr": ["96.44.148.66", 34459]},
+	{"timestamp": 1524642213.1011367, "nodeID": "ba483b4a01b5233116e6056474b1f7a20bd43357", "nodeAddr": ["212.129.19.188", 51798]},
+	{"timestamp": 1524642214.1027288, "nodeID": "ba5230823775398f0a01217d71b1f7a238af2c8b", "nodeAddr": ["195.154.179.2", 48898]},
+	{"timestamp": 1524642216.111568, "nodeID": "ba46315d10e531e5072334baadb1f7a2012d1450", "nodeAddr": ["195.154.179.2", 24879]},
+	{"timestamp": 1524642223.5400372, "nodeID": "ba6692594aef105068724480f5e1714938e8399c", "nodeAddr": ["69.246.6.65", 49001]},
+	{"timestamp": 1524642226.3792634, "nodeID": "ba67321ffac411328c25c913a6091e2c47f79e14", "nodeAddr": ["118.36.66.100", 40924]},
+	{"timestamp": 1524642234.22164, "nodeID": "ba631168800f7cae15db803052e659897f8c39ab", "nodeAddr": ["100.35.22.183", 51413]},
+	{"timestamp": 1524642263.1970162, "nodeID": "ba62db671cf5d0becd5bc4613b782ebede94e581", "nodeAddr": ["178.205.128.11", 47588]},
+	{"timestamp": 1524642284.3553336, "nodeID": "ba63a2b5fb239d2de7b810eea19278765635e5b1", "nodeAddr": ["24.2.59.113", 8999]},
+	{"timestamp": 1524642285.2372813, "nodeID": "ba61208d76fdc6e08abc7911f1ba65785013ca11", "nodeAddr": ["82.12.144.19", 6881]},
+	{"timestamp": 1524642306.320881, "nodeID": "1219646ab0c8767d603fbce4c29972bc8b84165d", "nodeAddr": ["90.157.173.143", 59450]},
+	{"timestamp": 1524642463.6364965, "nodeID": "ba62cfdec69c04db8696d29af65da66bcd528d27", "nodeAddr": ["112.104.79.19", 62691]},
+	{"timestamp": 1524642486.4091742, "nodeID": "ba670c50ff46a3243eb245bc28828e9a1fd613be", "nodeAddr": ["88.182.159.226", 35159]},
+]
+"name": "Chasing Coral (2017) [WEBRip] [1080p] [YTS.AM]"
+}

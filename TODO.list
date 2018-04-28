@@ -5,19 +5,45 @@ pridaj viac examplov
 TODO
 dokonc unit testy
 dokumentacia
-rozne casy pri prehladavani a % pocet najdenych
 implementuj BT protokol na zistenie zivota peera
 rozdiel v percentach s unikatnou a dvojicou ip + port
 % smerodajna odchylka a chyba
 
+NEW
+testy na less peers s fifo a lifo
+testy na magnet a podobne
+
+potreba filtru. Ak prehladavam dlho ostatne uzly sa naucia moju adresu a kontaktuju ma kvoli informaciam,
+to ma za nasledok spomalenie prehliadania a je preto potrebne tieto odpovede filtrovat zavcas.
+Samozrejme ze to ma za nasledok pokles monitorovacich schopnosti
+
+
 for next:
 ping all recieved peers with correct message. Try to understand why they are not responding
+wireshark to capture peers which i should not connect. Do 1 crawl get peers and start downloading torrent.
+This should tell us what to do next
         # message = (chr(19) +
         #            "BitTorrent protocol" +
         #            8 * chr(0) +               # reserved
         #            self.infohash +
         #            random_infohash())
 
+mechanics with removing already asked nodes. Mechanics is bad because node can have routing table full of peers. For example 1900 and can respond only with 100. This can decrease monitoring about 20 - 40 %.
+        # This mechanics is bad
+        # FIXME
+        # remove already asked
+        # tmp_set = set(self.addr_pool.keys())
+        # node_set = []
+        # save_info = []
+        # for node in nodes["Nodes"]:
+        #     node_set.append(node[1:])
+        #     save_info.append(node[:1])
+
+        # not_asked = set(node_set) - tmp_set
+        # while not_asked:
+        #     item = not_asked.pop()
+        #     item = save_info[-1] + item
+        #     self.torrent.nodes.put((item))
 
 
 https://asciinema.org/a/XYbUW0rMeLRzPlvH9teVsk5SI

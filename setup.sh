@@ -22,7 +22,9 @@
 
 help()
 {
-	echo "Help message"
+	echo "Usage: install-docker when you want to install docker."
+	echo "\t this option can be enchanced with --remove_old to remove old docker."
+	echo "\t also we can add --verify to verify, that docker is installed correctly."
 }
 
 verify()
@@ -127,6 +129,41 @@ do
 					verify
 				fi
 
+			else
+				# Other operation system
+				case "$2" in
+					"--remove_old")
+						sudo apt-get remove docker docker-engine docker.io
+						sudo apt-get update
+						;;
+					"--verify")
+						verify=true
+						;;
+				esac
+				case "$3" in
+					"--remove_old")
+						sudo apt-get remove docker docker-engine docker.io
+						sudo apt-get update
+						;;
+					"--verify")
+						verify=true
+						;;
+				esac
+				sudo apt-get install docker-ce
+				grep 'docker' /etc/group | grep $USER
+				if [ $? -eq 1 ]; then
+					sudo groupadd docker
+					sudo usermod -aG docker $USER
+					session=$(echo $DESKTOP_SESSION | grep -Eo gnome)
+					if [ "$session" == "gnome" ]; then
+						gnome-session-quit
+					fi
+				fi
+				# Verify
+
+				if [ $verify = true ]; then
+					verify
+				fi
 			fi
 			exit 0
 			;;
@@ -137,6 +174,10 @@ do
 			if [ "$OS" == "Fedora" ]; then
 				sudo dnf -y install python-devel python36 bats
 				pip3.6 install --user bencoder.pyx bencode
+			else
+				sudo apt-get install -y build-essential libssl-dev libffi-dev python-dev
+				sudo apt-get install -y python3-pip
+				pip3 install --user bencoder.pyx bencode
 			fi
 			exit 0
 			;;
@@ -155,10 +196,13 @@ do
 			exit 0
 			;;
 		"test")
-			./tests/tests.py
+			./tests/unit/tests.py
 			exit 0
+			;;
+			
 	esac
 	shift
 done
 
+help
 exit 0

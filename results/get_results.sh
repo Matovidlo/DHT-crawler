@@ -436,3 +436,11 @@ mv ./graphs/auto.pdf fifo_less.pdf
 
 rm val.txt
 rm sec.txt
+rm outputLess.txt
+rm testF.txt
+rm outputH.txt
+rm outputF.txt
+rm lifoH.txt
+rm fifoH.txt
+rm lifo_error.txt
+rm connection.txt

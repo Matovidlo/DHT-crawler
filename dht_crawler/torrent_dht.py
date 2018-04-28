@@ -13,13 +13,13 @@ import socket
 import binascii
 import re
 import datetime
+import time
 from random import randint
 from hashlib import sha1
 from struct import unpack
 from bencoder import bencode, bdecode, BTFailure
 
 
-# TODO no IPv6 support
 def entropy(length):
     '''
     entropy to generate infohash
@@ -64,6 +64,16 @@ def decode_krpc(message):
         return None
 
 
+def send_krpc(message, node, sock):
+    '''
+    sends bencoded krpc to node ip address and node port
+    '''
+    try:
+        sock.sendto(bencode(message), (node[1], node[2]))
+    except (IndexError, TypeError):
+        pass
+
+
 def decode_nodes(value, info_pool):
     '''
     decode nodes from response message
@@ -98,16 +108,16 @@ def decode_nodes(value, info_pool):
     return nodes
 
 
-def decode_peers(infohash, peers, info_pool, unique=None):
+def decode_peers(infohash, peers, info_pool, token, unique=None):
     '''
     decodes peers from get_peers response. They have only ip address and port
-    within message
+    within message. When unique specified get only ip address as key
     '''
     nodes = []
     for peer in peers:
         try:
             length = len(peer)
-        except IndexError:
+        except (IndexError, TypeError):
             continue
         if (length % 6) != 0:
             continue
@@ -118,12 +128,12 @@ def decode_peers(infohash, peers, info_pool, unique=None):
             if unique:
                 info_pool[str(ip_addr)] = [datetime.datetime.now()
                                            .strftime('%d.%m.%Y %H:%M:%S:%f'),
-                                           (infohash, ip_addr, port)]
+                                           (token, ip_addr, port)]
             else:
                 key = str(ip_addr) + ":" + str(port)
                 info_pool[key] = [datetime.datetime.now()
                                   .strftime('%d.%m.%Y %H:%M:%S:%f'),
-                                  (infohash, ip_addr, port)]
+                                  (token, ip_addr, port)]
     return nodes
 
 
@@ -175,6 +185,7 @@ class TorrentDHT():
         self.query_socket = socket.socket(socket.AF_INET,
                                           socket.SOCK_DGRAM,
                                           socket.IPPROTO_UDP)
+        # self.query_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.query_socket.bind((get_myip(), bind_port))
         # Set verboisty
         self.verbosity = verbosity
@@ -190,6 +201,7 @@ class TorrentDHT():
         # Append all bootstrap nodes
         for node in arguments.bootstrap_nodes:
             self.nodes.put((self.infohash, node[0], node[1]))
+
 
     def change_arguments(self, length, queue_type):
         '''
@@ -234,18 +246,9 @@ class TorrentDHT():
     # This part is about query messages. Supports all 4 Kademlia messages sends
     # over UDP with bencoding as torrent BEP05 refers.
 
-    def send_krpc(self, message, node):
-        '''
-        sends bencoded krpc to node ip address and node port
-        '''
-        try:
-            self.query_socket.sendto(bencode(message), (node[1], node[2]))
-        except (IndexError, TypeError):
-            pass
-
 
     # Query messages.
-    def query_find_node(self, node, infohash=None):
+    def query_find_node(self, node, sock):
         '''
         send query find_node to node with our infohash
         '''
@@ -254,13 +257,13 @@ class TorrentDHT():
             "y": "q",
             "q": "find_node",
             "a": {
-                "id": infohash,
+                "id": self.target,
                 "target": node[0]
             }
         }
-        self.send_krpc(message, node)
+        send_krpc(message, node, sock)
 
-    def query_ping(self, node, infohash=None):
+    def query_ping(self, node, sock, infohash=None):
         '''
         send query ping to node
         '''
@@ -275,9 +278,9 @@ class TorrentDHT():
                 "id": infohash
             }
         }
-        self.send_krpc(message, node)
+        send_krpc(message, node, sock)
 
-    def query_get_peers(self, node, infohash):
+    def query_get_peers(self, node, infohash, sock):
         '''
         send simple get_peers with our infohash to node
         '''
@@ -292,33 +295,31 @@ class TorrentDHT():
                 "info_hash": binascii.unhexlify(self.target)
             }
         }
-        self.send_krpc(message, node)
+        send_krpc(message, node, sock)
 
-    def query_announce_peer(self, node, infohash, token="", peer_id=None):
+    def query_announce_peer(self, node, infohash, port, sock):
         '''
         send announce_peer query
         '''
         # get port from node
-        port = node[2]
-        peer_id = get_neighbor(peer_id, self.infohash) if peer_id \
-            else self.infohash
+        token = node[0]
         message = {
             "t": "ap",
             "y": "q",
             "q": "announce_peer",
             "a": {
-                "id": peer_id,
+                "id": binascii.unhexlify(infohash),
                 "implied_port": 1, # could be 0 or 1
-                "info_hash": infohash,
+                "info_hash": binascii.unhexlify(self.target),
                 "port": port,
-                "token": token
+                "token": binascii.unhexlify(token)
             }
         }
-        self.send_krpc(message, node)
+        send_krpc(message, node, sock)
 
     # Response message decode
     # Decode all types of messages, recieved and querry
-    def decode_message(self, msg, info_pool):
+    def decode_message(self, msg, info_pool, peer_announce=None, addr=None):
         '''
         decodes response message. When nodes decode nodes when peers
         decode peers and return them as result.
@@ -328,15 +329,35 @@ class TorrentDHT():
         for key_type, message_content in msg.items():
             # response is detected
             if str(key_type)[2] == "r":
+                nid = ""
+                token = ""
+                if isinstance(message_content, int):
+                    return retval
+
                 for key, value in message_content.items():
                     tmp_pool = {}
+                    if key.decode("utf-8") == "token":
+                        token = value[0:len(value)]
+                        token = binascii.hexlify(token).decode("utf-8")
+
+                    if key.decode("utf-8") == "id":
+                        nid = value[0:len(value)]
+                        target = binascii.hexlify(nid).decode("utf-8")
+
                     if key.decode("utf-8") == "nodes":
                         nodes = decode_nodes(value, tmp_pool)
                         info_pool["Nodes"] = tmp_pool
                         retval["Nodes"] = nodes
+
                     if key.decode("utf-8") == "values":
                         # TODO not unique IP now
-                        nodes = decode_peers(self.target, value, tmp_pool)
+                        target = binascii.hexlify(nid).decode("utf-8")
+                        nodes = decode_peers(target, value, tmp_pool, token)
+                        if peer_announce is not None:
+                            peer_announce[target] = [(token,
+                                                      addr[0],
+                                                      addr[1]),
+                                                     time.time()]
                         info_pool["Peers"] = tmp_pool
                         retval["Peers"] = nodes
         return retval

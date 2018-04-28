@@ -2,12 +2,13 @@
 '''
 Created by Martin Vaško
 '''
-import sys
 import time
 import datetime
 from unittest import TestCase, main
-sys.path.append('../../src')
-from monitor import Monitor, argument_parser
+# user defined classes
+import include
+from monitor import Monitor
+from arg_parse import argument_parser
 from torrent_dht import TorrentDHT, TorrentArguments, decode_peers
 
 
@@ -18,6 +19,9 @@ from torrent_dht import TorrentDHT, TorrentArguments, decode_peers
 class TestCrawler(TestCase):
 
     def test_connection(self):
+        '''
+        tests connection of dht_socket and Monitor.
+        '''
         parser = argument_parser()
         result = parser.parse_args(['--test'])
         args = TorrentArguments()
@@ -27,14 +31,15 @@ class TestCrawler(TestCase):
             self.assertRaises(OSError)
             return
         monitor = Monitor(result, dht_socket)
-        self.assertEqual(monitor.start_sender(test=True), 2)
+        self.assertEqual(monitor.start_sender(test=True), 1)
         # monitor.crawl_begin(test=True)
         dht_socket.query_socket.close()
 
     def test_torrent_parser(self):
+        '''
+        this should take care of parser sha1 infohash.
+        '''
         parser = argument_parser()
-        # TODO another file announce parse
-        # file = './examples/Chasing Coral (2017) [WEBRip] [1080p] [YTS.AM].torrent'
         file = '../../examples/dht_example.torrent'
         result = parser.parse_args(['--file',
                                     file])
@@ -52,14 +57,17 @@ class TestCrawler(TestCase):
         dht_socket.query_socket.close()
 
     def test_insert_to_peerpool(self):
+        '''
+        Test should change record when is same as already inserted
+        '''
         info_pool = {}
         decode_peers('ba60a7a1ec51fc9a37ff410bbb243fcfe162d43f',
-                     [b'v]\xb6\xd1\x1dO'], info_pool)
+                     [b'v]\xb6\xd1\x1dO'], info_pool, 'token1')
         past_time = datetime.datetime.strptime(info_pool['118.93.182.209:7503'][0],
                                                "%d.%m.%Y %H:%M:%S:%f")
         time.sleep(5)
         decode_peers('ba60a7a1ec51fc9a37ff410bbb243fcfe162d43f',
-                     [b'v]\xb6\xd1\x1dO'], info_pool)
+                     [b'v]\xb6\xd1\x1dO'], info_pool, 'token2')
         current_time = datetime.datetime.strptime(info_pool['118.93.182.209:7503'][0],
                                                   "%d.%m.%Y %H:%M:%S:%f")
         delta_time = current_time - past_time

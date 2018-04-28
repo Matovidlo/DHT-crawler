@@ -127,7 +127,24 @@ class ProcessOutput():
             print("Time spend not recieving any UDP response: {}"
                   .format(self.monitor.no_recieve))
         else:
-            print(json.dumps(self.monitor.info_pool, indent=4, sort_keys=True))
-            print(json.dumps(self.monitor.peers_pool, indent=4, sort_keys=True))
-            print("Time spend not recieving any UDP response: {}"
-                  .format(self.monitor.no_recieve))
+
+            print("{{\"{}\":".format(self.monitor.torrent.target))
+
+            print("{\"peers\": [")
+            for peer in self.monitor.peers_pool.values():
+                print("\t{{\"timestamp\":{}, \"addr\": [\"{}\", {}]}},"
+                      .format(peer[0], str(peer[1][1]), peer[1][2]))
+            print("]")
+            print("\"nodes\": [")
+            for key, node in self.monitor.peer_announce.items():
+                print("\t{{\"timestamp\": {}, \"nodeID\": \"{}\", "\
+                      "\"nodeAddr\": [\"{}\", {}]}},"
+                      .format(node[1], key, node[0][1], node[0][2]))
+            print("]")
+            print("\"name\": \"{}\"".format(self.monitor.torrent_name))
+            print("}")
+            print("}")
+            # TODO
+            # print()
+            # print("Time spend not recieving any UDP response: {}"
+            #       .format(self.monitor.no_recieve))
