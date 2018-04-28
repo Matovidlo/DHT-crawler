@@ -12,6 +12,7 @@ LOADER = unittest.TestLoader()
 CWD = os.getcwd()
 CWD = re.search(r"([^\/]+)$", CWD)
 CWD = CWD.group(0)
+print(CWD)
 if CWD == "tests":
     TESTSUITE = LOADER.discover('unit')
 elif CWD == "monitoring":
