@@ -139,7 +139,10 @@ class Monitor:
         '''
         # port = self.sock.getsockname()
         # self.sock.close()
-        self.torrent.query_socket.close()
+        try:
+            self.torrent.query_socket.close()
+        except KeyboardInterrupt:
+            pass
         present_time = datetime.datetime.now()
         peers_outdated = []
 

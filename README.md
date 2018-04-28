@@ -39,6 +39,11 @@ of pgfplots and tex to nice looking graphs of result output.
 
 ### Contribution
 
-There is possiblity to contribute, when something is not working or something should be 
+There is possiblity to contribute, when something is not working or something should be
 done better even refactor some part of library. Project is not well modularized so
 there is probably good call to get better structure of this property.
+
+## Built With
+
+* [Fedora 26](https://getfedora.org/) - Distribution on which was tool developed.
+* [Python3/3.6](https://www.python.org/) - Programming language which is used to run exec.py program.
