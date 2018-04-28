@@ -42,10 +42,11 @@ class TestCrawler(TestCase):
         cwd = os.getcwd()
         cwd = re.search(r"([^\/]+)$", cwd)
         cwd = cwd.group(0)
+        file = './examples/dht_example.torrent'
         if cwd == "tests":
             file = "../examples/dht_example.torrent"
-        elif cwd == "monitoring":
-            file = './examples/dht_example.torrent'
+        # elif cwd == "monitoring":
+            # file = './examples/dht_example.torrent'
         result = parser.parse_args(['--file',
                                     file])
         args = TorrentArguments()
