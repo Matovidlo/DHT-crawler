@@ -1,0 +1,23 @@
+language: python
+python:
+# - "3.0"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.5-dev"  # 3.5 development branch
+  - "3.6"
+  - "3.6-dev"  # 3.6 development branch
+#  - "3.7-dev"  # 3.7 development branch
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  # first start unit tests
+  - tests/__main__.py
+  # start program for short term
+  - dht_crawler/exec.py --duration 10
+  # run program with different examples
+  - dht_crawler/exec.py --duration 10 --file examples/Chasin_Coral2017_1080p.torrent --print_as_country
+  - dht_crawler/exec.py --duration 10 --magnet examples/magnet-link_fedora --db_format
+  - dht_crawler/exec.py --duration 10 --hash 59066769B9AD42DA2E508611C33D7C4480B3857B
