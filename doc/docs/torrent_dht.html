@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>torrent_dht.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>torrent_dht.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Create by Martin Vasko</span>
+<span class="sd">3BIT, Brno, Faculty of Information Technology.</span>
+
+<span class="sd">This should be used as part of library, where you can create,</span>
+<span class="sd">bind socket and send all torrent DHT messages over UDP.</span>
+<span class="sd">BOOTSTRAP_NODES are well known nodes from which should begin torrent</span>
+<span class="sd">peer detection.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">queue</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">binascii</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha1</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">unpack</span>
+<span class="kn">from</span> <span class="nn">bencoder</span> <span class="kn">import</span> <span class="n">bencode</span><span class="p">,</span> <span class="n">bdecode</span><span class="p">,</span> <span class="n">BTFailure</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">entropy</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    entropy to generate infohash</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">random_infohash</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    generates random 20 bytes infohash</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">i_hash</span> <span class="o">=</span> <span class="n">sha1</span><span class="p">(</span><span class="n">entropy</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>infohash should be 20 bytes long</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">return</span> <span class="n">i_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">get_neighbor</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">infohash</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    mixture of infohashes</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">target</span><span class="p">[:</span><span class="n">end</span><span class="p">]</span> <span class="o">+</span> <span class="n">infohash</span><span class="p">[</span><span class="n">end</span><span class="p">:]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">has_node</span><span class="p">(</span><span class="n">id_node</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info_pool</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    when node is in infopool clear duplicities.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">list_node</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="n">info_pool</span><span class="p">[</span><span class="n">id_node</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">port</span><span class="p">:</span>
+            <span class="n">list_node</span> <span class="o">=</span> <span class="n">nodes</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">list_node</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">decode_krpc</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    decode with bencoding. When exception is thrown, return None.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">bdecode</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">BTFailure</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">send_krpc</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">sock</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    sends bencoded krpc to node ip address and node port</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">bencode</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">node</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">pass</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">decode_nodes</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">info_pool</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    decode nodes from response message</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">nodes</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p>nodes in raw state</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+        <span class="n">nid</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">20</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ip_addr</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">inet_ntoa</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">20</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">24</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nodes</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;!H&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">24</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">26</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">nid</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">nid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">info_pool</span><span class="p">:</span>
+            <span class="n">info_pool</span><span class="p">[</span><span class="n">nid</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ip_addr</span><span class="p">,</span> <span class="n">port</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">has_node</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">info_pool</span><span class="p">):</span>
+                <span class="n">info_pool</span><span class="p">[</span><span class="n">nid</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ip_addr</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <p>duplicates</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>                <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">nodes</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">decode_peers</span><span class="p">(</span><span class="n">infohash</span><span class="p">,</span> <span class="n">peers</span><span class="p">,</span> <span class="n">info_pool</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    decodes peers from get_peers response. They have only ip address and port</span>
+<span class="sd">    within message. When unique specified get only ip address as key</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">peer</span> <span class="ow">in</span> <span class="n">peers</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">peer</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+            <span class="n">ip_addr</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">inet_ntoa</span><span class="p">(</span><span class="n">peer</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;!H&quot;</span><span class="p">,</span> <span class="n">peer</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">infohash</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">unique</span><span class="p">:</span>
+                <span class="n">info_pool</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ip_addr</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+                                           <span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">.%m.%Y %H:%M:%S:</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">),</span>
+                                           <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">,</span> <span class="n">port</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ip_addr</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+                <span class="n">info_pool</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+                                  <span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">.%m.%Y %H:%M:%S:</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">ip_addr</span><span class="p">,</span> <span class="n">port</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">nodes</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">get_myip</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    get my global ip_address, by connecting to google and get sockname</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">))</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">name</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">TorrentArguments</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    bootstrap arguments for DHT class</span>
+<span class="sd">    &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-14'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-14'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bootstrap_nodes</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_node_qsize</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bootstrap_nodes</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_nodes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="s2">&quot;router.bittorrent.com&quot;</span><span class="p">,</span> <span class="mi">6881</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;dht.transmissionbt.com&quot;</span><span class="p">,</span> <span class="mi">6881</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;router.utorrent.com&quot;</span><span class="p">,</span> <span class="mi">6881</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_nodes</span> <span class="o">=</span> <span class="n">bootstrap_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_node_qsize</span> <span class="o">=</span> <span class="n">max_node_qsize</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-15'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-15'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">clear_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        clear</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_nodes</span> <span class="o">=</span> <span class="p">[]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-16'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-16'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">print_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        print</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_nodes</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-17'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-17'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">TorrentDHT</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Class which perform query and response of dht messages.</span>
+<span class="sd">    &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-18'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-18'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">bind_port</span><span class="o">=</span><span class="mi">6882</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span>
+                                          <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">,</span>
+                                          <span class="n">socket</span><span class="o">.</span><span class="n">IPPROTO_UDP</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-19'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-19'>#</a>
+      </div>
+      <p>self.query_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">query_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">get_myip</span><span class="p">(),</span> <span class="n">bind_port</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-20'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-20'>#</a>
+      </div>
+      <p>Set verboisty</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">verbosity</span> <span class="o">=</span> <span class="n">verbosity</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-21'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-21'>#</a>
+      </div>
+      <p>create all necessary for transmission over network</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span> <span class="o">=</span> <span class="n">random_infohash</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_pool</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">random_infohash</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-22'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-22'>#</a>
+      </div>
+      <p>list of nodes</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_nodes</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">bootstrap_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_node_qsize</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">max_node_qsize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">LifoQueue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node_qsize</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-23'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-23'>#</a>
+      </div>
+      <p>Append all bootstrap nodes</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">bootstrap_nodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-24'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-24'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">change_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">queue_type</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        change class arguments</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_node_qsize</span> <span class="o">=</span> <span class="n">length</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-25'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-25'>#</a>
+      </div>
+      <p>change queue type</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">if</span> <span class="n">queue_type</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node_qsize</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_nodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-26'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-26'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">change_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infohash</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">queue_type</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        change bootstrap nodes when parsed magnet-link or .torrent file</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">queue_type</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node_qsize</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">LifoQueue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node_qsize</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">node_list</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">node_list</span><span class="p">:</span>
+                <span class="n">compact_node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+                <span class="n">port</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:\d+&quot;</span><span class="p">,</span> <span class="n">compact_node</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">port</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">::]</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="n">port</span> <span class="o">=</span> <span class="mi">80</span>
+                <span class="n">compact_node</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*:&quot;</span><span class="p">,</span> <span class="n">compact_node</span><span class="p">)</span>
+                <span class="n">compact_node</span> <span class="o">=</span> <span class="n">compact_node</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">6</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">bootstrap</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_nodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">infohash</span><span class="p">,</span> <span class="n">bootstrap</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bootstrap</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-27'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-27'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">change_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infohash</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        change infohash in nodes queue</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">infohash</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-28'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-28'>#</a>
+      </div>
+      <p>This part is about query messages. Supports all 4 Kademlia messages sends
+over UDP with bencoding as torrent BEP05 refers.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-29'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-29'>#</a>
+      </div>
+      <p>Query messages.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">query_find_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">sock</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        send query find_node to node with our infohash</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;fn&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;q&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;find_node&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">send_krpc</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">sock</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-30'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-30'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">query_ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">sock</span><span class="p">,</span> <span class="n">infohash</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        send query ping to node</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">infohash</span> <span class="o">=</span> <span class="n">get_neighbor</span><span class="p">(</span><span class="n">infohash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">)</span> <span class="k">if</span> <span class="n">infohash</span> \
+            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-31'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-31'>#</a>
+      </div>
+      <p>By default transaction ID should be at least 2 bytes long</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;pg&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;q&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;ping&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">infohash</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">send_krpc</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">sock</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-32'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-32'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">query_get_peers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">infohash</span><span class="p">,</span> <span class="n">sock</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        send simple get_peers with our infohash to node</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">infohash</span> <span class="o">=</span> <span class="n">get_neighbor</span><span class="p">(</span><span class="n">infohash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">)</span> <span class="k">if</span> <span class="n">infohash</span> \
+            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;gp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;q&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;get_peers&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">infohash</span><span class="p">),</span>
+                <span class="s2">&quot;info_hash&quot;</span><span class="p">:</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">send_krpc</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">sock</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-33'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-33'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">query_announce_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">infohash</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sock</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        send announce_peer query</span>
+<span class="sd">        &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-34'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-34'>#</a>
+      </div>
+      <p>get port from node</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">token</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;ap&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;q&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;announce_peer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">infohash</span><span class="p">),</span>
+                <span class="s2">&quot;implied_port&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># could be 0 or 1</span>
+                <span class="s2">&quot;info_hash&quot;</span><span class="p">:</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
+                <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">port</span><span class="p">,</span>
+                <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">send_krpc</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">sock</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-35'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-35'>#</a>
+      </div>
+      <p>Response message decode
+Decode all types of messages, recieved and querry</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">decode_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">info_pool</span><span class="p">,</span> <span class="n">peer_announce</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        decodes response message. When nodes decode nodes when peers</span>
+<span class="sd">        decode peers and return them as result.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key_type</span><span class="p">,</span> <span class="n">message_content</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">items</span><span class="p">():</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-36'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-36'>#</a>
+      </div>
+      <p>response is detected</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">key_type</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+                <span class="n">nid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">message_content</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">retval</span>
+
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">message_content</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">tmp_pool</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;token&quot;</span><span class="p">:</span>
+                        <span class="n">token</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span>
+                        <span class="n">token</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span>
+                        <span class="n">nid</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span>
+                        <span class="n">target</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+                        <span class="n">nodes</span> <span class="o">=</span> <span class="n">decode_nodes</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">tmp_pool</span><span class="p">)</span>
+                        <span class="n">info_pool</span><span class="p">[</span><span class="s2">&quot;Nodes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_pool</span>
+                        <span class="n">retval</span><span class="p">[</span><span class="s2">&quot;Nodes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span>
+
+                    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;values&quot;</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-37'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-37'>#</a>
+      </div>
+      <p>TODO not unique IP now</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>                        <span class="n">target</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+                        <span class="n">nodes</span> <span class="o">=</span> <span class="n">decode_peers</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">tmp_pool</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">peer_announce</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                            <span class="n">peer_announce</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">token</span><span class="p">,</span>
+                                                      <span class="n">addr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                      <span class="n">addr</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                                                     <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()]</span>
+                        <span class="n">info_pool</span><span class="p">[</span><span class="s2">&quot;Peers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_pool</span>
+                        <span class="n">retval</span><span class="p">[</span><span class="s2">&quot;Peers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span>
+        <span class="k">return</span> <span class="n">retval</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

@@ -13,8 +13,8 @@ if __name__ == '__main__':
         print("Input file was not valid!")
         sys.exit(1)
 
-    if CRAWL.torrent.target_pool:
-        for torrent in CRAWL.torrent.target_pool:
+    if CRAWL.torrent.infohash_list[1]:
+        for torrent in  CRAWL.torrent.infohash_list[1]:
             CRAWL.crawl_begin(torrent)
     else:
         CRAWL.crawl_begin()

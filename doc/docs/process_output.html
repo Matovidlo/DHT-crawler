@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>process_output.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>process_output.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Create by Martin Vasko</span>
+<span class="sd">3BIT, Brno, Faculty of Information Technology.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">json</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">ProcessOutput</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Process output to process regex or to remove duplicities</span>
+<span class="sd">    &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monitor</span><span class="p">,</span> <span class="n">country_print</span><span class="p">,</span> <span class="n">country</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span> <span class="o">=</span> <span class="n">monitor</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>class variables to save position and information about node</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">country_city</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">country_print</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_country</span> <span class="o">=</span> <span class="n">country_print</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_country</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">country_name</span> <span class="o">=</span> <span class="n">country</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_pool</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port_pool</span> <span class="o">=</span> <span class="p">{}</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">translate_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        translates nodes ip address to equivalent country name, check wether</span>
+<span class="sd">        they corelate with name given as parameter, returns adjusted ip</span>
+<span class="sd">        addresses which should be deleted from `nodes` list.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">iplist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">infolist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">info</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">url_of_location</span> <span class="o">=</span> <span class="s2">&quot;http://www.freegeoip.net/json/{}&quot;</span>\
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">location_info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url_of_location</span><span class="p">)</span>
+                                       <span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;country_name&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">iplist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">infolist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">country_name</span> <span class="o">!=</span> <span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;country_name&#39;</span><span class="p">]:</span>
+                    <span class="n">iplist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">infolist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">infolist</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">iplist</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">parse_ips</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        initiate pool of ip addresses port and infohashes for geolocation.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">iplist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">infolist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">portlist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">peers_pool</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">infolist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">iplist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">portlist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">val</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_pool</span> <span class="o">=</span> <span class="n">iplist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port_pool</span> <span class="o">=</span> <span class="n">portlist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span> <span class="o">=</span> <span class="n">infolist</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">fill_locations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location_info</span><span class="p">,</span> <span class="n">iplist</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        fill various information to dictionary</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">iplist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">country_city</span><span class="p">[</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;country_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span>
+                                   <span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]]</span>
+        <span class="n">is_in_list</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">ip_addr</span> <span class="ow">in</span> <span class="n">iplist</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ip_addr</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]):</span>
+                <span class="n">is_in_list</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_in_list</span><span class="p">:</span>
+            <span class="n">iplist</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]),</span>
+                           <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">]),</span>
+                           <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">location_info</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">])})</span>
+        <span class="k">return</span> <span class="n">iplist</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">get_geolocations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        get real locations of ip addresses</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_country</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parse_ips</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">ip_addr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip_pool</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p>FIXME when freegeoip is down we need another website to
+get this kind of information</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>                <span class="n">url_of_location</span> <span class="o">=</span> <span class="s2">&quot;http://www.freegeoip.net/json/{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">ip_addr</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">location_info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
+                        <span class="n">url_of_location</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">iplist</span> <span class="o">=</span> <span class="p">[]</span>
+
+                <span class="k">if</span> <span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;country_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> \
+                        <span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">country_city</span><span class="p">:</span>
+                    <span class="n">iplist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_locations</span><span class="p">(</span><span class="n">location_info</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">iplist</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]),</span>
+                               <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">port_pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                               <span class="s2">&quot;infohash&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                               <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">]),</span>
+                               <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">])</span>
+                              <span class="p">}]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">country_city</span><span class="p">[</span><span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;country_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span>
+                                  <span class="n">location_info</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">iplist</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">print_geolocations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        print geolocation when argument --print_as_country is specified, else</span>
+<span class="sd">        print as json object with no resolution.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_country</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">country_city</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">peer_announce</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time spend not recieving any UDP response: {}&quot;</span>
+                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">no_recieve</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{{</span><span class="se">\&quot;</span><span class="s2">{}</span><span class="se">\&quot;</span><span class="s2">:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">target</span><span class="p">))</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">peers</span><span class="se">\&quot;</span><span class="s2">: [&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">peer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">peers_pool</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">{{</span><span class="se">\&quot;</span><span class="s2">timestamp</span><span class="se">\&quot;</span><span class="s2">:{}, </span><span class="se">\&quot;</span><span class="s2">addr</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">{}</span><span class="se">\&quot;</span><span class="s2">, {}]}},&quot;</span>
+                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">peer</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">peer</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span> <span class="n">peer</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">nodes</span><span class="se">\&quot;</span><span class="s2">: [&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">peer_announce</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">{{</span><span class="se">\&quot;</span><span class="s2">timestamp</span><span class="se">\&quot;</span><span class="s2">: {}, </span><span class="se">\&quot;</span><span class="s2">nodeID</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">{}</span><span class="se">\&quot;</span><span class="s2">, &quot;</span>\
+                      <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">nodeAddr</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">{}</span><span class="se">\&quot;</span><span class="s2">, {}]}},&quot;</span>
+                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">key</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">{}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">torrent_name</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <p>TODO
+print()
+print("Time spend not recieving any UDP response: {}"
+      .format(self.monitor.no_recieve))</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

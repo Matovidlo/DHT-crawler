@@ -162,6 +162,7 @@ class TorrentArguments:
         else:
             self.bootstrap_nodes = bootstrap_nodes
         self.max_node_qsize = max_node_qsize
+        self.unique = False
 
     def clear_bootstrap(self):
         '''
@@ -191,16 +192,18 @@ class TorrentDHT():
         self.verbosity = verbosity
 
         # create all necessary for transmission over network
-        self.infohash = random_infohash()
-        self.target_pool = []
-        self.target = random_infohash()
+        # Infohash, target_pool, target torrent and wether
+        # output should be unique or not
+        self.infohash_list = [random_infohash(), [],
+                              random_infohash(), arguments.unique]
         # list of nodes
         self.bootstrap_nodes = arguments.bootstrap_nodes
         self.max_node_qsize = arguments.max_node_qsize
+        # 200 lifo
         self.nodes = queue.LifoQueue(self.max_node_qsize)
         # Append all bootstrap nodes
         for node in arguments.bootstrap_nodes:
-            self.nodes.put((self.infohash, node[0], node[1]))
+            self.nodes.put((self.infohash_list[0], node[0], node[1]))
 
 
     def change_arguments(self, length, queue_type):
@@ -212,8 +215,10 @@ class TorrentDHT():
         # change queue type
         if queue_type:
             self.nodes = queue.Queue(self.max_node_qsize)
+        else:
+            self.nodes = queue.LifoQueue(self.max_node_qsize)
         for node in self.bootstrap_nodes:
-            self.nodes.put((self.infohash, node[0], node[1]))
+            self.nodes.put((self.infohash_list[0], node[0], node[1]))
 
     def change_bootstrap(self, infohash, nodes, queue_type):
         '''
@@ -241,7 +246,7 @@ class TorrentDHT():
         '''
         change infohash in nodes queue
         '''
-        self.target = infohash
+        self.infohash_list[2] = infohash
 
     # This part is about query messages. Supports all 4 Kademlia messages sends
     # over UDP with bencoding as torrent BEP05 refers.
@@ -257,7 +262,7 @@ class TorrentDHT():
             "y": "q",
             "q": "find_node",
             "a": {
-                "id": self.target,
+                "id": self.infohash_list[2],
                 "target": node[0]
             }
         }
@@ -267,8 +272,8 @@ class TorrentDHT():
         '''
         send query ping to node
         '''
-        infohash = get_neighbor(infohash, self.infohash) if infohash \
-            else self.infohash
+        infohash = get_neighbor(infohash, self.infohash_list[0]) if infohash \
+            else self.infohash_list[0]
         # By default transaction ID should be at least 2 bytes long
         message = {
             "t": "pg",
@@ -284,15 +289,15 @@ class TorrentDHT():
         '''
         send simple get_peers with our infohash to node
         '''
-        infohash = get_neighbor(infohash, self.infohash) if infohash \
-            else self.infohash
+        infohash = get_neighbor(infohash, self.infohash_list[0]) if infohash \
+            else self.infohash_list[0]
         message = {
             "t": "gp",
             "y": "q",
             "q": "get_peers",
             "a": {
                 "id": binascii.unhexlify(infohash),
-                "info_hash": binascii.unhexlify(self.target)
+                "info_hash": binascii.unhexlify(self.infohash_list[2])
             }
         }
         send_krpc(message, node, sock)
@@ -310,7 +315,7 @@ class TorrentDHT():
             "a": {
                 "id": binascii.unhexlify(infohash),
                 "implied_port": 1, # could be 0 or 1
-                "info_hash": binascii.unhexlify(self.target),
+                "info_hash": binascii.unhexlify(self.infohash_list[2]),
                 "port": port,
                 "token": binascii.unhexlify(token)
             }
@@ -350,9 +355,12 @@ class TorrentDHT():
                         retval["Nodes"] = nodes
 
                     if key.decode("utf-8") == "values":
-                        # TODO not unique IP now
                         target = binascii.hexlify(nid).decode("utf-8")
-                        nodes = decode_peers(target, value, tmp_pool, token)
+                        # decode peers with target token, their value and fill
+                        # tmp pool by given unique or non unique value within
+                        # self.infohash_list
+                        nodes = decode_peers(target, value, tmp_pool,
+                                             token, self.infohash_list[3])
                         if peer_announce is not None:
                             peer_announce[target] = [(token,
                                                       addr[0],

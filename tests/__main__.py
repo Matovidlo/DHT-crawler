@@ -2,21 +2,13 @@
 
 import sys
 import os
-import re
 import unittest
 
-sys.path.append('./dht_crawler')
-sys.path.append('../dht_crawler')
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.split(ROOT_DIR)[0]
+sys.path.append(ROOT_DIR + "/dht_crawler")
 
 LOADER = unittest.TestLoader()
-CWD = os.getcwd()
-CWD = re.search(r"([^\/]+)$", CWD)
-CWD = CWD.group(0)
-if CWD == "tests":
-    TESTSUITE = LOADER.discover('unit')
-elif CWD == "monitoring" or CWD == "DHT-crawler":
-    TESTSUITE = LOADER.discover('tests')
-else:
-    TESTSUITE = LOADER.discover('tests')
+TESTSUITE = LOADER.discover('unit')
 TESTRUNNER = unittest.TextTestRunner(verbosity=2)
 TESTRUNNER.run(TESTSUITE)

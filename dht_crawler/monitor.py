@@ -47,6 +47,16 @@ def kill_sender_reciever(thread1, thread2=None):
         pass
 
 
+def init_socket(port):
+    '''
+    Initialize empty socket to send announce peer messages
+    '''
+    sock = socket.socket(socket.AF_INET,
+                         socket.SOCK_DGRAM,
+                         socket.IPPROTO_UDP)
+    sock.bind((get_myip(), port))
+    return sock
+
 class Monitor:
     """
      Parse it from class methods to monitor class where we want to exchange
@@ -124,17 +134,6 @@ class Monitor:
             print(msg)
 
 
-    def init_socket(self, port):
-        '''
-        Initialize empty socket to send announce peer messages
-        '''
-        sock = socket.socket(socket.AF_INET,
-                             socket.SOCK_DGRAM,
-                             socket.IPPROTO_UDP)
-        sock.bind((get_myip(), port))
-        return sock
-
-
     #####################
     # START OF CRAWLING #
     #####################
@@ -144,18 +143,16 @@ class Monitor:
         When respond, then connection is still there and peer is valid, else
         peer is deleted from dictionary.
         '''
-        # port = self.sock.getsockname()
-        # self.sock.close()
         try:
             self.torrent.query_socket.close()
         except KeyboardInterrupt:
-            # TODO
             pass
         present_time = datetime.datetime.now()
         peers_outdated = []
 
+        peer_pool = self.peers_pool.values()
         # take all of incomming peers and check them
-        for value in self.peers_pool.values():
+        for value in peer_pool:
             try:
                 past_time = datetime.datetime.strptime(value[0], "%d.%m.%Y %H:%M:%S:%f")
             except KeyboardInterrupt:
@@ -165,9 +162,9 @@ class Monitor:
             if int(total_seconds) > 800:
                 # outdated peer
                 peers_outdated.append(value[1])
-            # send announce peer to 'start' session
-            # query queried node
 
+        # send announce peer to 'start' session
+        # query queried node
         for value in peers_outdated:
             del self.peers_pool[value[1] + ":" + str(value[2])]
 
@@ -231,7 +228,7 @@ class Monitor:
             return last_time
 
 
-    def start_listener(self, thread1):
+    def start_listener(self):
         '''
         start listener thread. Recieve query packet and decode its body.
         There is shared queue between listener and sender thread.
@@ -247,11 +244,11 @@ class Monitor:
             except (OSError, ValueError):
                 continue
 
-            if self.torrent.nodes.qsize() > self.max_peers * 0.3:
-                for _ in range(1, 20):
-                    last_time = self.process_and_update(ready, last_time)
-            else:
-                last_time = self.process_and_update(ready, last_time)
+            # if self.torrent.nodes.qsize() > self.max_peers * 0.3:
+                # for _ in range(1, 20):
+                    # last_time = self.process_and_update(ready, last_time)
+            # else:
+            last_time = self.process_and_update(ready, last_time)
 
 
     def start_sender(self, test=False):
@@ -321,7 +318,7 @@ class Monitor:
 
         '''
         if torrent:
-            self.torrent.target = torrent
+            self.torrent.infohash_list[2] = torrent
 
         send_thread = Thread(target=self.start_sender, args=())
         send_thread.daemon = True
@@ -336,7 +333,6 @@ class Monitor:
         duration_thread.start()
         while True:
             if test:
-                time.sleep(5)
                 break
             try:
                 if self.country:
@@ -347,18 +343,12 @@ class Monitor:
             except KeyboardInterrupt:
                 self.vprint("\nClearing threads, wait a second")
                 break
-        if test:
-            kill_sender_reciever(send_thread, listen_thread)
-        else:
-            self.query_for_connectivity()
-            if self.output.print_country and not self.db_format:
-                self.output.get_geolocations()
-                self.output.print_geolocations()
-            if (self.db_format and self.output.print_country) or self.db_format:
-                self.output.get_geolocations()
-                self.output.print_geolocations()
-            if not self.db_format:
-                self.info()
+        self.query_for_connectivity()
+        if self.db_format or self.output.print_country:
+            self.output.get_geolocations()
+            self.output.print_chosen_output()
+        if not self.db_format:
+            self.info()
 
 
     def info(self):
@@ -432,7 +422,7 @@ class Monitor:
                         info_hash = hashlib.sha1(bencode(value)).hexdigest()
                         # set torrent target
                         self.infohash = get_neighbor(info_hash, self.infohash)
-                        self.torrent.target_pool.append(info_hash)
+                        self.torrent.infohash_list[1].append(info_hash)
 
                     if key == "nodes":
                         pass
@@ -460,7 +450,7 @@ class Monitor:
                 info_hash = info_hash.group(0)[1:-3]
                 self.infohash = get_neighbor(info_hash, self.infohash)
                 # set torrent target
-                self.torrent.target_pool.append(info_hash)
+                self.torrent.infohash_list[1].append(info_hash)
 
 ########################################
 # This should be used in main function #

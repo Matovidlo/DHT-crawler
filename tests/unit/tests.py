@@ -6,7 +6,7 @@ import time
 import datetime
 import os
 import re
-from unittest import TestCase
+from unittest import TestCase, main
 # user defined classes
 from monitor import Monitor
 from arg_parse import argument_parser
@@ -31,8 +31,9 @@ class TestCrawler(TestCase):
             return
         monitor = Monitor(result, dht_socket)
         self.assertEqual(monitor.start_sender(test=True), 1)
-        # monitor.crawl_begin(test=True)
+        monitor.crawl_begin(test=True)
         dht_socket.query_socket.close()
+
 
     def test_torrent_parser(self):
         '''
@@ -57,10 +58,61 @@ class TestCrawler(TestCase):
             return
         monitor = Monitor(result, dht_socket)
         monitor.parse_torrent()
-        value = monitor.torrent.target_pool[0]
+        value = monitor.torrent.infohash_list[1][0]
         self.assertEqual(value, 'fb6e3624037cc9e4662a0698031659e6b4883b24')
-        # monitor.crawl_begin(test=True)
         dht_socket.query_socket.close()
+
+
+    def test_magnet_parser(self):
+        '''
+        This test should try magnet_parser.
+        '''
+        parser = argument_parser()
+        cwd = os.getcwd()
+        cwd = re.search(r"([^\/]+)$", cwd)
+        cwd = cwd.group(0)
+        file = './examples/magnet-link_fedora'
+        if cwd == "tests":
+            file = "../examples/magnet-link_fedora"
+        result = parser.parse_args(['--magnet', file])
+        args = TorrentArguments()
+        try:
+            dht_socket = TorrentDHT(args)
+        except OSError:
+            self.assertRaises(OSError)
+            return
+        monitor = Monitor(result, dht_socket)
+        monitor.parse_magnet()
+        value = monitor.torrent_name
+        self.assertEqual(value, "Fedora-LXDE-Live-x86_64-27")
+        dht_socket.query_socket.close()
+
+
+    def test_query_for_connectivity(self):
+        '''
+        Test monitor method which should remove outdated peers.
+        '''
+        parser = argument_parser()
+        result = parser.parse_args()
+        args = TorrentArguments()
+        try:
+            dht_socket = TorrentDHT(args)
+        except OSError:
+            self.assertRaises(OSError)
+            return
+        monitor = Monitor(result, dht_socket)
+        monitor.peers_pool = {"147.229.14.12:58431":
+                              ["28.04.2018 07:27:14:606460",
+                               ("token", "147.229.14.12", 58431)]}
+        monitor.query_for_connectivity()
+        self.assertIsInstance(monitor.peers_pool, dict)
+        monitor.peers_pool = {"147.229.14.12:58431":
+                              [datetime.datetime.now()
+                               .strftime('%d.%m.%Y %H:%M:%S:%f'),
+                               ("token", "147.229.14.12", 58431)]}
+        monitor.query_for_connectivity()
+        self.assertIsNotNone(monitor.peers_pool)
+
 
     def test_insert_to_peerpool(self):
         '''
@@ -78,23 +130,30 @@ class TestCrawler(TestCase):
                                                   "%d.%m.%Y %H:%M:%S:%f")
         delta_time = current_time - past_time
         total_seconds = delta_time.total_seconds()
-        # 5 second delay should be displayed
+        # 5 second delay should be displayed because of actualized entry
         self.assertEqual(int(total_seconds), 5)
 
-    # def test_diverge_in_location(self):
-    #     parser = argument_parser()
-    #     result = parser.parse_args(['--duration', '5'])
-    #     parser.country = "Czechia"
-    #     try:
-    #         dht_socket = TorrentDHT()
-    #     except OSError:
-    #         self.assertRaises(OSError)
-    #         return
-    #     monitor = Monitor(result, dht_socket)
-    #     monitor.info_pool = {'abc': [('147.229.216.41', 6881)]}
-    #     dict_pool = {'abc': [('147.229.216.41', 6881)]}
-    #     self.assertEqual(monitor.diverge_in_location(dict_pool), {})
-    #     monitor.crawl_begin(test=True)
 
-# if __name__ == '__main__':
-#     main()
+    def test_get_geolocations(self):
+        '''
+        Tests getting geolocation of ip adress.
+        '''
+        parser = argument_parser()
+        result = parser.parse_args(['--print_as_country'])
+        args = TorrentArguments()
+        try:
+            dht_socket = TorrentDHT(args)
+        except OSError:
+            self.assertRaises(OSError)
+            return
+        monitor = Monitor(result, dht_socket)
+        monitor.peers_pool = {"147.229.14.12:58431":
+                              [datetime.datetime.now()
+                               .strftime('%d.%m.%Y %H:%M:%S:%f'),
+                               ("token", "147.229.14.12", 58431)]}
+        monitor.output.get_geolocations()
+        self.assertEqual(next(iter(monitor.output.country_city)), "Czechia:Brno")
+
+
+if __name__ == '__main__':
+    main()

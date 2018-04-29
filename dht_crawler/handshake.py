@@ -93,4 +93,3 @@ class TorrentHandshake:
         #     msg = decode_krpc(msg)
         #     if msg is None:
         #         continue
-
