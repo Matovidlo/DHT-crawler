@@ -324,7 +324,7 @@ class Monitor:
         send_thread.daemon = True
         send_thread.start()
         listen_thread = Thread(target=self.start_listener,
-                               args=(send_thread,))
+                               args=())
         listen_thread.daemon = True
         listen_thread.start()
         duration_thread = Thread(target=self.start_timer,

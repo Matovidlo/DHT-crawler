@@ -187,9 +187,9 @@ do
 			;;
 		"run")
 			# RUN program with magnet link
-			./dht_crawler/exec.py --duration 60 --magnet ./examples/magnet-link_fedora
+			./dht_crawler/exec.py --duration 60 --magnet ./examples/magnet-link_fedora --bind_port 4187
 			./dht_crawler/exec.py --duration 60 --file ./examples/Chasin_Coral2017_1080p.torrent \
-													   ./examples/arrow\ s06e19\ hdtv\ x264-svaeztv\ mkv.torrent
+							   	  ./examples/arrow\ s06e19\ hdtv\ x264-svaeztv\ mkv.torrent --bind_port 4274
 			exit 0
 			;;
 		"run-docker")

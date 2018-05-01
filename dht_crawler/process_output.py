@@ -58,11 +58,10 @@ class ProcessOutput():
         iplist = []
         infolist = []
         portlist = []
-        for key, value in self.monitor.peers_pool.items():
-            infolist.append((key))
-            for val in value:
-                iplist.append((val[1]))
-                portlist.append((val[2]))
+        for value in self.monitor.peers_pool.values():
+            infolist.append((value[0]))
+            iplist.append((value[1][1]))
+            portlist.append((value[1][2]))
         self.pools[0] = infolist
         self.pools[1] = iplist
         self.pools[2] = portlist
@@ -97,12 +96,12 @@ class ProcessOutput():
                 url_of_location = "http://www.freegeoip.net/json/{0}".format(
                     ip_addr)
                 try:
-                    location_info = json.loads(urllib.request.urlopen(
-                        url_of_location).read())
-                except:
+                    location_info = urllib.request.urlopen(
+                        url_of_location).read()
+                except urllib.error.HTTPError:
                     continue
                 iplist = []
-
+                location_info = json.loads(location_info.decode("utf-8"))
                 if location_info['country_name'] + ":" + \
                         location_info['city'] in self.country_city:
                     iplist = self.fill_locations(location_info)

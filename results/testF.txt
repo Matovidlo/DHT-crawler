@@ -1,3 +1,0 @@
-../logs/fifo_less/logH*.out
-
-

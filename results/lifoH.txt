@@ -1,3 +1,0 @@
-../logs/lifo_queue/logH*.out
-
-
