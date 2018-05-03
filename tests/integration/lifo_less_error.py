@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 
-for i in range(1, 120):
+for i in range(1, 200):
     with open("../../logs/error/logLi{}.out".format(i), "w") as f:
         subprocess.Popen(["../../dht_crawler/exec.py",
                           "--duration=900",

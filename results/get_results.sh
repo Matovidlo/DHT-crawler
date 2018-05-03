@@ -116,8 +116,6 @@ echo "End magnet Peer Set"
 
 # LIFO
 ######
-rm error.txt
-rm error_perc.txt
 rm ./graphs/lifoH.txt
 rm ./graphs/fifoH.txt
 rm ./graphs/lifoNF.txt
@@ -141,7 +139,7 @@ for i in `seq 1 $num_lines`; do
 		ret=$((ret + value))
 
 		value=$(echo "$result" | grep -Po "\[NodeSet\]:\d+" )
-		value=$(echo $val | grep -Po "\d+")
+		value=$(echo $value | grep -Po "\d+")
 
 		nodes=$((nodes + value))
 	done
@@ -187,7 +185,7 @@ for i in `seq 1 $num_lines`; do
 		ret=$((ret + value))
 
 		value=$(echo "$result" | grep -Po "\[NodeSet\]:\d+" )
-		value=$(echo $val | grep -Po "\d+")
+		value=$(echo $value | grep -Po "\d+")
 
 		nodes=$((nodes + value))
 	done
@@ -207,12 +205,12 @@ cat ./graphs/4experiment.tex ./graphs/fifoH.txt ./graphs/last.tex > ./graphs/aut
 make -C ./graphs
 mv ./graphs/auto.pdf fifo_peerresult.pdf
 
-# cat ./graphs/3experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.tex
-# make -C ./graphs
-# mv ./graphs/auto.pdf fifo_peerpercentage.pdf
+cat ./graphs/3experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.tex
+make -C ./graphs
+mv ./graphs/auto.pdf fifo_peerpercentage.pdf
 
-# rm error.txt
-# rm error_perc.txt
+rm error.txt
+rm error_perc.txt
 
 
 
@@ -282,6 +280,9 @@ echo "End Lifo and Fifo Peer Set Node Set"
 ######################
 # Average 120 process to 1 with distribution error
 ##################################################
+rm error.txt
+rm error_perc.txt
+
 num_lines=$(cat ../logs/error/logH1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
@@ -344,7 +345,7 @@ for i in `seq 1 $num_lines`; do
 	num=$(($i * 5))
 	result=$(($ret / 120))
 	echo "( $num, $result )" >> error.txt
-	percentage=$(echo "(12 - $result) / 12" | bc -l)
+	percentage=$(echo "(3000 - $result) / 3000" | bc -l)
 	echo "( $num, $percentage )" >> error_perc.txt
 	ret=0
 done
@@ -353,7 +354,7 @@ cat ./graphs/7experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
 mv ./graphs/auto.pdf fifo_error_peers.pdf
 
-cat ./graphs/6experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.tex
+cat ./graphs/3experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
 mv ./graphs/auto.pdf fifo_error_percentage.pdf
 
@@ -369,9 +370,6 @@ echo "End of LIFO and FIFO Peers error Greatest Showman"
 num_lines=$(cat ../logs/lifo_less/logU1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
-	if [ $i -ge 30 ]; then
-		break
-	fi
 	for filename in ../logs/lifo_less/logU*.out; do
 		# echo $filename
 		tmp=$(head -$i $filename)
@@ -387,18 +385,18 @@ for i in `seq 1 $num_lines`; do
 	num=$(($i * 5))
 	result=$(($ret / 200))
 	echo "( $num, $result )" >> error.txt
-	percentage=$(echo "(800 - $result) / 800" | bc -l)
+	percentage=$(echo "(1000 - $result) / 1000" | bc -l)
 	echo "( $num, $percentage )" >> error_perc.txt
 	ret=0
 done
 
 cat ./graphs/8experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
-mv ./graphs/auto.pdf lifo_less.pdf
+mv ./graphs/auto.pdf lifo_ubuntu.pdf
 
 cat ./graphs/6experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
-mv ./graphs/auto.pdf fifo_error_percentage.pdf
+mv ./graphs/auto.pdf lifo_ubuntu_error_percentage.pdf
 
 rm error.txt
 rm error_perc.txt
@@ -409,9 +407,6 @@ rm error_perc.txt
 num_lines=$(cat ../logs/fifo_less/logH1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
-	if [ $i -ge 30 ]; then
-		break
-	fi
 	for filename in ../logs/fifo_less/logH*.out; do
 		# echo $filename
 		tmp=$(head -$i $filename)
@@ -427,31 +422,32 @@ for i in `seq 1 $num_lines`; do
 	num=$(($i * 5))
 	result=$(($ret / 200))
 	echo "( $num, $result )" >> error.txt
-	percentage=$(echo "(800 - $result) / 800" | bc -l)
+	percentage=$(echo "(1000 - $result) / 1000" | bc -l)
 	echo "( $num, $percentage )" >> error_perc.txt
 	ret=0
 done
 
 cat ./graphs/8experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
-mv ./graphs/auto.pdf fifo_less.pdf
+mv ./graphs/auto.pdf fifo_ubuntu.pdf
 
 cat ./graphs/6experiment.tex error_perc.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
-mv ./graphs/auto.pdf fifo_error_percentage.pdf
+mv ./graphs/auto.pdf fifo_ubuntu_error_percentage.pdf
 
 rm error.txt
 rm error_perc.txt
 
+echo "End ubuntu"
 ####################################################
 ################### Fedora error, less popular too
 ####################################################
 num_lines=$(cat ../logs/error/logFi1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
-	if [ $i -ge 30 ]; then
-		break
-	fi
+	# if [ $i -ge 30 ]; then
+	# 	break
+	# fi
 	for filename in ../logs/error/logFi*.out; do
 		# echo $filename
 		tmp=$(head -$i $filename)
@@ -467,12 +463,12 @@ for i in `seq 1 $num_lines`; do
 	num=$(($i * 5))
 	result=$(($ret / 120))
 	echo "( $num, $result )" >> error.txt
-	percentage=$(echo "(80 - $result) / 80" | bc -l)
+	percentage=$(echo "(100 - $result) / 100" | bc -l)
 	echo "( $num, $percentage )" >> error_perc.txt
 	ret=0
 done
 
-cat ./graphs/4experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
+cat ./graphs/7experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
 mv ./graphs/auto.pdf fifo_fedora_less.pdf
 
@@ -490,9 +486,9 @@ rm error_perc.txt
 num_lines=$(cat ../logs/error/logLi1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
-	if [ $i -ge 30 ]; then
-		break
-	fi
+	# if [ $i -ge 30 ]; then
+	# 	break
+	# fi
 	for filename in ../logs/error/logLi*.out; do
 		# echo $filename
 		tmp=$(head -$i $filename)
@@ -508,12 +504,12 @@ for i in `seq 1 $num_lines`; do
 	num=$(($i * 5))
 	result=$(($ret / 120))
 	echo "( $num, $result )" >> error.txt
-	percentage=$(echo "(80 - $result) / 80" | bc -l)
+	percentage=$(echo "(100 - $result) / 100" | bc -l)
 	echo "( $num, $percentage )" >> error_perc.txt
 	ret=0
 done
 
-cat ./graphs/4experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
+cat ./graphs/7experiment.tex error.txt ./graphs/last.tex > ./graphs/auto.tex
 make -C ./graphs
 mv ./graphs/auto.pdf lifo_fedora_less.pdf
 
