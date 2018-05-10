@@ -246,6 +246,7 @@ class TorrentDHT():
         '''
         change infohash in nodes queue
         '''
+        self.infohash_list[1].append(infohash)
         self.infohash_list[2] = infohash
 
     # This part is about query messages. Supports all 4 Kademlia messages sends

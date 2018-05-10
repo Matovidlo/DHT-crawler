@@ -107,10 +107,9 @@ class Monitor:
 
         self.sock = self.torrent.query_socket
         self.n_nodes = 0             # Number of nodes in a specified n-bit zone
-        self.tnspeed = 0
         self.no_recieve = 0      # timer that should point how many packets were timed out
 
-        self.torrent_name = ""
+        self.torrent_name = []
         self.info_pool = {}      # infohashes already found
         self.peers_pool = {}     # peers already found
         self.addr_pool = {}      # Addr recieved from
@@ -133,6 +132,18 @@ class Monitor:
         if self.torrent.verbosity:
             print(msg)
 
+    def clear_monitor(self):
+        '''
+        clear monitor class before next crawl
+        '''
+        self.torrent.change_arguments(self.max_peers, self.queue_type)
+        self.no_recieve = 0      # timer that should point how many packets were timed out
+        self.info_pool = {}      # infohashes already found
+        self.peers_pool = {}     # peers already found
+        self.addr_pool = {}      # Addr recieved from
+        self.peer_announce = {}  # pool of NODES announced peers
+        self.respondent = 0     # Number of respondents
+
 
     #####################
     # START OF CRAWLING #
@@ -143,10 +154,10 @@ class Monitor:
         When respond, then connection is still there and peer is valid, else
         peer is deleted from dictionary.
         '''
-        try:
-            self.torrent.query_socket.close()
-        except KeyboardInterrupt:
-            pass
+        # try:
+        #     self.torrent.query_socket.close()
+        # except KeyboardInterrupt:
+        #     pass
         present_time = datetime.datetime.now()
         peers_outdated = []
 
@@ -199,7 +210,6 @@ class Monitor:
         if msg is None:
             return last_time
         self.addr_pool[addr] = {"timestamp": time.time()}
-        self.respondent += 1
 
         pool = {}
         nodes = self.torrent.decode_message(msg, pool, self.peer_announce, addr)
@@ -207,6 +217,7 @@ class Monitor:
         try:
             if nodes["Nodes"]:
                 self.info_pool.update(pool["Nodes"])
+                self.respondent += 1
             if nodes["Peers"]:
                 self.peers_pool.update(pool["Peers"])
         except KeyError:
@@ -273,17 +284,15 @@ class Monitor:
             hexdig_self = int(self.infohash, 16)
             hexdig_target = int(node[0], 16)
             if((hexdig_self ^ hexdig_target) >> 148) == 0:
+                # we are close, we should send more packets but it is slow
+                # on recieving thread because of decoding and composing
+                # dictionaries
                 try:
                     self.torrent.query_get_peers(node, self.infohash, self.sock)
                 except OSError:
                     return 9
-                # TODO
-                # for i in range(10, 20):
-                    # tid = get_neighbor(self.infohash, node[0], i)
-                    # self.torrent.query_get_peers(node, self.infohash, self.sock)
-                    # node = self.torrent.nodes.get(True)
             # Speed is less than 2000 bps
-            elif self.n_nodes < 2000:
+            else:
                 try:
                     self.torrent.query_get_peers(node, self.infohash, self.sock)
                 except OSError:
@@ -317,6 +326,7 @@ class Monitor:
             This paramter is for testing connection.
 
         '''
+        self.clear_monitor()
         if torrent:
             self.torrent.infohash_list[2] = torrent
 
@@ -349,17 +359,20 @@ class Monitor:
             self.output.print_chosen_output()
         if not self.db_format:
             self.info()
-
+            print("Time spend not recieving any UDP response: {}"
+                  .format(self.no_recieve))
 
     def info(self):
         '''
         Print info for current state of crawling.
         '''
-        print("[NodeSet]:%i\t\t[PeerSet]:%i\t\t[Response]:\
+        bernouli = self.respondent*100.0 / max(1, len(self.info_pool))
+        if bernouli > 100:
+            bernouli = 100.00
+        print("[NodeSet]:%i\t\t[PeerSet]:%i\t\t[Bernoulli process]:\
             %.2f%%\t\t[Queue]:%i\t\t" %
               (len(self.info_pool), len(self.peers_pool),
-               self.respondent*100.0 / max(1, len(self.info_pool)),
-               self.torrent.nodes.qsize()))
+               bernouli, self.torrent.nodes.qsize()))
 
     def diverge_in_location(self, nodes):
         '''
@@ -374,6 +387,7 @@ class Monitor:
                     nodes.remove(nodes[num])
                 num = num + 1
         return nodes
+
 
     def get_torrent_name(self, value):
         '''
@@ -392,7 +406,7 @@ class Monitor:
         for name, name_val in value.items():
             name = name.decode('utf-8')
             if name == "name":
-                self.torrent_name = name_val.decode("utf-8")
+                self.torrent_name.append(name_val.decode("utf-8"))
 
     def parse_torrent(self):
         '''
@@ -442,7 +456,7 @@ class Monitor:
                 content = file_r.read().decode('utf-8')
                 name = re.search(r"&dn.*&(xt|tr)", content)
                 name = re.search(r"^((?!tr.*).)*", name.group(0))
-                self.torrent_name = name.group(0)[4:-1]
+                self.torrent_name.append(name.group(0)[4:-1])
 
                 info_hash = re.search(r"urn:.*&(xl|dn)", content)
                 # match last `:` and its content
@@ -451,6 +465,7 @@ class Monitor:
                 self.infohash = get_neighbor(info_hash, self.infohash)
                 # set torrent target
                 self.torrent.infohash_list[1].append(info_hash)
+                file_r.close()
 
 ########################################
 # This should be used in main function #

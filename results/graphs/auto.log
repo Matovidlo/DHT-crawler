@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.11.3)  3 MAY 2018 06:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.11.3)  8 MAY 2018 09:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1276,21 +1276,20 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
 (./auto.aux) ) 
 Here is how much of TeX's memory you used:
- 32718 strings out of 494911
- 822290 string characters out of 6180105
- 1118330 words of memory out of 5000000
- 35590 multiletter control sequences out of 15000+600000
+ 31987 strings out of 494911
+ 803407 string characters out of 6180105
+ 919290 words of memory out of 5000000
+ 34859 multiletter control sequences out of 15000+600000
  5049 words of font info for 20 fonts, out of 8000000 for 9000
  34 hyphenation exceptions out of 8191
- 62i,10n,103p,10376b,1773s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,10n,103p,10376b,1771s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
 i10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on auto.pdf (1 page, 78744 bytes).
+>
+Output written on auto.pdf (1 page, 31780 bytes).
 PDF statistics:
- 27 PDF objects out of 1000 (max. 8388607)
- 19 compressed objects within 1 object stream
+ 19 PDF objects out of 1000 (max. 8388607)
+ 13 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

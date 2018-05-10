@@ -126,9 +126,6 @@ num_lines=$(cat ../logs/lifo_queue/logH1.out | wc -l)
 ret=0
 nodes=0
 for i in `seq 1 $num_lines`; do
-	# if [ $i -ge 30 ]; then
-	# 	break
-	# fi
 	for filename in ../logs/lifo_queue/logH*.out; do
 		tmp=$(head -$i $filename)
 		result=$(echo -e "$tmp" | tail -1)
@@ -148,9 +145,6 @@ for i in `seq 1 $num_lines`; do
 	echo "( $num, $result )" >> ./graphs/lifoH.txt
 	result=$((nodes / 200))
 	echo "( $num, $result )" >> ./graphs/lifoNF.txt
-	# TODO there is static value
-	# percentage=$(echo "(3300 - $result) / 3300" | bc -l)
-	# echo "( $num, $percentage )" >> error_perc.txt
 	nodes=0
 	ret=0
 done
@@ -194,9 +188,6 @@ for i in `seq 1 $num_lines`; do
 	echo "( $num, $result )" >> ./graphs/fifoH.txt
 	result=$((nodes / 200))
 	echo "( $num, $result )" >> ./graphs/fifoNF.txt
-	# TODO there is static value
-	# percentage=$(echo "(3300 - $result) / 3300" | bc -l)
-	# echo "( $num, $percentage )" >> error_perc.txt
 	nodes=0
 	ret=0
 done
@@ -290,10 +281,8 @@ for i in `seq 1 $num_lines`; do
 		break
 	fi
 	for filename in ../logs/error/logH*.out; do
-		# echo $filename
 		tmp=$(head -$i $filename)
 		result=$(echo -e "$tmp" | tail -1)
-		# echo $result
 
 		value=$(echo "$result" | grep -Po "\[PeerSet\]:\d+")
 		value=$(echo "$value" | grep -Po "\d+")
@@ -331,10 +320,8 @@ for i in `seq 1 $num_lines`; do
 		break
 	fi
 	for filename in ../logs/error/logF*.out; do
-		# echo $filename
 		tmp=$(head -$i $filename)
 		result=$(echo -e "$tmp" | tail -1)
-		# echo $result
 
 		value=$(echo "$result" | grep -Po "\[PeerSet\]:\d+")
 		value=$(echo "$value" | grep -Po "\d+")
@@ -370,11 +357,12 @@ echo "End of LIFO and FIFO Peers error Greatest Showman"
 num_lines=$(cat ../logs/lifo_less/logU1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
+	if [ $i -ge 100 ]; then
+		break
+	fi
 	for filename in ../logs/lifo_less/logU*.out; do
-		# echo $filename
 		tmp=$(head -$i $filename)
 		result=$(echo -e "$tmp" | tail -1)
-		# echo $result
 
 		value=$(echo "$result" | grep -Po "\[PeerSet\]:\d+")
 		value=$(echo "$value" | grep -Po "\d+")
@@ -407,11 +395,12 @@ rm error_perc.txt
 num_lines=$(cat ../logs/fifo_less/logH1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
+	if [ $i -ge 100 ]; then
+		break
+	fi
 	for filename in ../logs/fifo_less/logH*.out; do
-		# echo $filename
 		tmp=$(head -$i $filename)
 		result=$(echo -e "$tmp" | tail -1)
-		# echo $result
 
 		value=$(echo "$result" | grep -Po "\[PeerSet\]:\d+")
 		value=$(echo "$value" | grep -Po "\d+")
@@ -445,14 +434,12 @@ echo "End ubuntu"
 num_lines=$(cat ../logs/error/logFi1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
-	# if [ $i -ge 30 ]; then
-	# 	break
-	# fi
+	if [ $i -ge 100 ]; then
+		break
+	fi
 	for filename in ../logs/error/logFi*.out; do
-		# echo $filename
 		tmp=$(head -$i $filename)
 		result=$(echo -e "$tmp" | tail -1)
-		# echo $result
 
 		value=$(echo "$result" | grep -Po "\[PeerSet\]:\d+")
 		value=$(echo "$value" | grep -Po "\d+")
@@ -486,14 +473,12 @@ rm error_perc.txt
 num_lines=$(cat ../logs/error/logLi1.out | wc -l)
 ret=0
 for i in `seq 1 $num_lines`; do
-	# if [ $i -ge 30 ]; then
-	# 	break
-	# fi
+	if [ $i -ge 100 ]; then
+		break
+	fi
 	for filename in ../logs/error/logLi*.out; do
-		# echo $filename
 		tmp=$(head -$i $filename)
 		result=$(echo -e "$tmp" | tail -1)
-		# echo $result
 
 		value=$(echo "$result" | grep -Po "\[PeerSet\]:\d+")
 		value=$(echo "$value" | grep -Po "\d+")

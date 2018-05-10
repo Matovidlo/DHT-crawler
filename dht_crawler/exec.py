@@ -14,7 +14,8 @@ if __name__ == '__main__':
         sys.exit(1)
 
     if CRAWL.torrent.infohash_list[1]:
-        for torrent in  CRAWL.torrent.infohash_list[1]:
+        for torrent in CRAWL.torrent.infohash_list[1]:
             CRAWL.crawl_begin(torrent)
+        CRAWL.torrent.query_socket.close()
     else:
         CRAWL.crawl_begin()
