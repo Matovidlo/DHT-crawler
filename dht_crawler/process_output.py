@@ -140,6 +140,7 @@ class ProcessOutput():
                       "\"nodeAddr\": [\"{}\", {}]}},"
                       .format(node[1], key, node[0][1], node[0][2]))
             print("]")
-            print("\"name\": \"{}\"".format(self.monitor.torrent_name.pop()))
+            print("\"name\": \"{}\"".format(self.monitor.torrent_name
+                                            .pop(0)))
             print("}")
             print("}")

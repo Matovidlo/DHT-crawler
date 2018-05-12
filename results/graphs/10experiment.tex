@@ -1,0 +1,16 @@
+\documentclass{standalone}
+
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\begin{tikzpicture}
+	\begin{axis}[
+	  scale=1.5,
+		xlabel={Dĺžka prehľadávania s LIFO [s]},
+		ylabel={Úspešnosť prehľadávania stavového priestoru [\%]}
+	]
+	\addplot coordinates{
