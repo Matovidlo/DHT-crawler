@@ -10,7 +10,7 @@
 \begin{tikzpicture}
 	\begin{axis}[
 	  scale=1.5,
-		xlabel={Dĺžka prehľadávania pre 200 procesov [s]},
-		ylabel={Percentuálny podiel peerov a uzlov.}
+		xlabel={Dĺžka prehľadávania s LIFO [s]},
+		ylabel={Úspešnosť prehľadávania stavového priestoru [\%]}
 	]
 	\addplot coordinates{
