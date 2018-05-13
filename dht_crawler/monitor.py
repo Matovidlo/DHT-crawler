@@ -170,7 +170,7 @@ class Monitor:
                 continue
             delta_time = present_time - past_time
             total_seconds = delta_time.total_seconds()
-            if int(total_seconds) > 800:
+            if int(total_seconds) > 600:
                 # outdated peer
                 peers_outdated.append(value[1])
 
