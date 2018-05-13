@@ -47,14 +47,31 @@ def kill_sender_reciever(thread1, thread2=None):
         pass
 
 
-class Monitor:
+def init_socket(port):
     '''
+    Initialize empty socket to send announce peer messages
+    '''
+    sock = socket.socket(socket.AF_INET,
+                         socket.SOCK_DGRAM,
+                         socket.IPPROTO_UDP)
+    sock.bind((get_myip(), port))
+    return sock
+
+class Monitor:
+    """
      Parse it from class methods to monitor class where we want to exchange
      this information.
      Start monitoring and initialize all necessary things at first
-    '''
+    """
 
     def __init__(self, arguments, torrent):
+        """
+        Construct a new 'Foo' object.
+
+        :param name: The name of foo
+        :param age: The ageof foo
+        :return: returns nothing
+        """
         self.timeout = 1
         self.torrent = torrent
         self.infohash = random_infohash()
@@ -90,10 +107,9 @@ class Monitor:
 
         self.sock = self.torrent.query_socket
         self.n_nodes = 0             # Number of nodes in a specified n-bit zone
-        self.tnspeed = 0
         self.no_recieve = 0      # timer that should point how many packets were timed out
 
-        self.torrent_name = ""
+        self.torrent_name = []
         self.info_pool = {}      # infohashes already found
         self.peers_pool = {}     # peers already found
         self.addr_pool = {}      # Addr recieved from
@@ -116,16 +132,17 @@ class Monitor:
         if self.torrent.verbosity:
             print(msg)
 
-
-    def init_socket(self, port):
+    def clear_monitor(self):
         '''
-        Initialize empty socket to send announce peer messages
+        clear monitor class before next crawl
         '''
-        sock = socket.socket(socket.AF_INET,
-                             socket.SOCK_DGRAM,
-                             socket.IPPROTO_UDP)
-        sock.bind((get_myip(), port))
-        return sock
+        self.torrent.change_arguments(self.max_peers, self.queue_type)
+        self.no_recieve = 0      # timer that should point how many packets were timed out
+        self.info_pool = {}      # infohashes already found
+        self.peers_pool = {}     # peers already found
+        self.addr_pool = {}      # Addr recieved from
+        self.peer_announce = {}  # pool of NODES announced peers
+        self.respondent = 0     # Number of respondents
 
 
     #####################
@@ -137,26 +154,28 @@ class Monitor:
         When respond, then connection is still there and peer is valid, else
         peer is deleted from dictionary.
         '''
-        # port = self.sock.getsockname()
-        # self.sock.close()
-        try:
-            self.torrent.query_socket.close()
-        except KeyboardInterrupt:
-            pass
+        # try:
+        #     self.torrent.query_socket.close()
+        # except KeyboardInterrupt:
+        #     pass
         present_time = datetime.datetime.now()
         peers_outdated = []
 
+        peer_pool = self.peers_pool.values()
         # take all of incomming peers and check them
-        for value in self.peers_pool.values():
-            past_time = datetime.datetime.strptime(value[0], "%d.%m.%Y %H:%M:%S:%f")
+        for value in peer_pool:
+            try:
+                past_time = datetime.datetime.strptime(value[0], "%d.%m.%Y %H:%M:%S:%f")
+            except KeyboardInterrupt:
+                continue
             delta_time = present_time - past_time
             total_seconds = delta_time.total_seconds()
-            if int(total_seconds) > 800:
+            if int(total_seconds) > 600:
                 # outdated peer
                 peers_outdated.append(value[1])
-            # send announce peer to 'start' session
-            # query queried node
 
+        # send announce peer to 'start' session
+        # query queried node
         for value in peers_outdated:
             del self.peers_pool[value[1] + ":" + str(value[2])]
 
@@ -191,7 +210,6 @@ class Monitor:
         if msg is None:
             return last_time
         self.addr_pool[addr] = {"timestamp": time.time()}
-        self.respondent += 1
 
         pool = {}
         nodes = self.torrent.decode_message(msg, pool, self.peer_announce, addr)
@@ -199,6 +217,7 @@ class Monitor:
         try:
             if nodes["Nodes"]:
                 self.info_pool.update(pool["Nodes"])
+                self.respondent += 1
             if nodes["Peers"]:
                 self.peers_pool.update(pool["Peers"])
         except KeyError:
@@ -220,7 +239,7 @@ class Monitor:
             return last_time
 
 
-    def start_listener(self, thread1):
+    def start_listener(self):
         '''
         start listener thread. Recieve query packet and decode its body.
         There is shared queue between listener and sender thread.
@@ -236,11 +255,11 @@ class Monitor:
             except (OSError, ValueError):
                 continue
 
-            if self.torrent.nodes.qsize() > self.max_peers * 0.3:
-                for _ in range(1, 20):
-                    last_time = self.process_and_update(ready, last_time)
-            else:
-                last_time = self.process_and_update(ready, last_time)
+            # if self.torrent.nodes.qsize() > self.max_peers * 0.3:
+                # for _ in range(1, 20):
+                    # last_time = self.process_and_update(ready, last_time)
+            # else:
+            last_time = self.process_and_update(ready, last_time)
 
 
     def start_sender(self, test=False):
@@ -265,17 +284,15 @@ class Monitor:
             hexdig_self = int(self.infohash, 16)
             hexdig_target = int(node[0], 16)
             if((hexdig_self ^ hexdig_target) >> 148) == 0:
+                # we are close, we should send more packets but it is slow
+                # on recieving thread because of decoding and composing
+                # dictionaries
                 try:
                     self.torrent.query_get_peers(node, self.infohash, self.sock)
                 except OSError:
                     return 9
-                # TODO
-                # for i in range(10, 20):
-                    # tid = get_neighbor(self.infohash, node[0], i)
-                    # self.torrent.query_get_peers(node, self.infohash, self.sock)
-                    # node = self.torrent.nodes.get(True)
             # Speed is less than 2000 bps
-            elif self.n_nodes < 2000:
+            else:
                 try:
                     self.torrent.query_get_peers(node, self.infohash, self.sock)
                 except OSError:
@@ -300,15 +317,24 @@ class Monitor:
         '''
         Create all threads, duration to count how long program is executed.
         When Ctrl+C is pressed kill all threads
+
+        Parameters
+        ----------
+        torrent : infohash
+            20 bytes long infohash which should be used as part of monitoring.
+        test : bool
+            This paramter is for testing connection.
+
         '''
+        self.clear_monitor()
         if torrent:
-            self.torrent.target = torrent
+            self.torrent.infohash_list[2] = torrent
 
         send_thread = Thread(target=self.start_sender, args=())
         send_thread.daemon = True
         send_thread.start()
         listen_thread = Thread(target=self.start_listener,
-                               args=(send_thread,))
+                               args=())
         listen_thread.daemon = True
         listen_thread.start()
         duration_thread = Thread(target=self.start_timer,
@@ -317,7 +343,6 @@ class Monitor:
         duration_thread.start()
         while True:
             if test:
-                time.sleep(5)
                 break
             try:
                 if self.country:
@@ -328,29 +353,26 @@ class Monitor:
             except KeyboardInterrupt:
                 self.vprint("\nClearing threads, wait a second")
                 break
-        if test:
-            kill_sender_reciever(send_thread, listen_thread)
-        else:
-            self.query_for_connectivity()
-            if self.output.print_country and not self.db_format:
-                self.output.get_geolocations()
-                self.output.print_geolocations()
-            if (self.db_format and self.output.print_country) or self.db_format:
-                self.output.get_geolocations()
-                self.output.print_geolocations()
-            else:
-                self.info()
-
+        self.query_for_connectivity()
+        if self.db_format or self.output.print_country:
+            self.output.get_geolocations()
+            self.output.print_chosen_output()
+        if not self.db_format:
+            self.info()
+            print("Time spend not recieving any UDP response: {}"
+                  .format(self.no_recieve))
 
     def info(self):
         '''
         Print info for current state of crawling.
         '''
-        print("[NodeSet]:%i\t\t[PeerSet]:%i\t\t[Response]:\
+        bernouli = self.respondent*100.0 / max(1, len(self.info_pool))
+        if bernouli > 100:
+            bernouli = 100.00
+        print("[NodeSet]:%i\t\t[PeerSet]:%i\t\t[Bernoulli process]:\
             %.2f%%\t\t[Queue]:%i\t\t" %
               (len(self.info_pool), len(self.peers_pool),
-               self.respondent*100.0 / max(1, len(self.info_pool)),
-               self.torrent.nodes.qsize()))
+               bernouli, self.torrent.nodes.qsize()))
 
     def diverge_in_location(self, nodes):
         '''
@@ -366,14 +388,25 @@ class Monitor:
                 num = num + 1
         return nodes
 
+
     def get_torrent_name(self, value):
         '''
         get name of torrent from torrent file
+
+        Parameters
+        ----------
+        value : dict
+            This should contain encoded name of torrent.
+
+        Returns
+        -------
+        self.torrent_name
+            Parsed torrent name from value dictionary.
         '''
         for name, name_val in value.items():
             name = name.decode('utf-8')
             if name == "name":
-                self.torrent_name = name_val.decode("utf-8")
+                self.torrent_name.append(name_val.decode("utf-8"))
 
     def parse_torrent(self):
         '''
@@ -387,6 +420,10 @@ class Monitor:
                 info_hash = None
                 nodes = []
                 self.vprint("Torrent file content")
+                if not decode_krpc(content):
+                    raise TypeError("WrongFileType")
+                if not isinstance(decode_krpc(content), dict):
+                    raise TypeError("WrongFileType")
                 for key, value in decode_krpc(content).items():
                     key = key.decode('utf-8')
                     if key == "creation date":
@@ -399,7 +436,7 @@ class Monitor:
                         info_hash = hashlib.sha1(bencode(value)).hexdigest()
                         # set torrent target
                         self.infohash = get_neighbor(info_hash, self.infohash)
-                        self.torrent.target_pool.append(info_hash)
+                        self.torrent.infohash_list[1].append(info_hash)
 
                     if key == "nodes":
                         pass
@@ -419,7 +456,7 @@ class Monitor:
                 content = file_r.read().decode('utf-8')
                 name = re.search(r"&dn.*&(xt|tr)", content)
                 name = re.search(r"^((?!tr.*).)*", name.group(0))
-                self.torrent_name = name.group(0)[4:-1]
+                self.torrent_name.append(name.group(0)[4:-1])
 
                 info_hash = re.search(r"urn:.*&(xl|dn)", content)
                 # match last `:` and its content
@@ -427,7 +464,8 @@ class Monitor:
                 info_hash = info_hash.group(0)[1:-3]
                 self.infohash = get_neighbor(info_hash, self.infohash)
                 # set torrent target
-                self.torrent.target_pool.append(info_hash)
+                self.torrent.infohash_list[1].append(info_hash)
+                file_r.close()
 
 ########################################
 # This should be used in main function #
@@ -440,6 +478,16 @@ def create_monitor(verbosity=False):
     arguments to be created successfully. Then change of hash and parsing
     can change resolution of crawl. When they are not specified then
     global bootstrap nodes are used instead.
+
+    Parameters
+    ----------
+    verbosity : bool
+        Indicate verbose output
+
+    Returns
+    -------
+    object
+        Monitor object with initialized DHT socket and parsed arguments.
     '''
     args = parse_input_args()
     # This is variant with verbose output to track some lib imported staff

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>handshake.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>handshake.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created by Martin Vaško</span>
+<span class="sd">part of BT library which should implement handshake methods.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">select</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
+<span class="kn">from</span> <span class="nn">torrent_dht</span> <span class="kn">import</span> <span class="n">get_myip</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">TorrentHandshake</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Torrent handshake class to process initial handshake with peer to prove</span>
+<span class="sd">    its connectivity and filter it from peer pool if non respondend.</span>
+<span class="sd">    &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span>
+                                       <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">,</span>
+                                       <span class="n">socket</span><span class="o">.</span><span class="n">IPPROTO_UDP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">micro_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span>
+                                          <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">,</span>
+                                          <span class="n">socket</span><span class="o">.</span><span class="n">IPPROTO_TCP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">get_myip</span><span class="p">(),</span> <span class="n">port</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">send_handshake</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">peer</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        send handshake message for bitTorrent connection</span>
+<span class="sd">        &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      <p>FIXME split to create handshake message</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">def</span> <span class="nf">_int_to_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bytes_len</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">bytes_len</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">ver</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span> <span class="o">|</span> <span class="n">ver</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mh">0xffff</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()),</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="mh">0xf000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mh">0xffff</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="n">_int_to_bytes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <p>just to establish connection to get result of this, but handshake
+should be good to get positive or negative acknowledgment
+TODO hole punch, those messages are mostly filtered because of firewall</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Connecting&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="p">(</span><span class="n">peer</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">peer</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ready</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mf">0.4</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">KeyboardInterrupt</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">ready</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">micro_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">create_connection</span><span class="p">((</span><span class="n">peer</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                              <span class="n">peer</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+                                                             <span class="n">timeout</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">micro_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">micro_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bt_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">False</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p>Announce peers that we want to download torrent
+query_sock = self.init_socket(port[1] + 3200)
+for value in self.peer_announce.values():
+    self.torrent.query_announce_peer(value[0], self.infohash,
+                                     (port[1] + 3200), query_sock)
+    try:
+        ready = select.select([query_sock], [], [], 0.1)
+    except (OSError, ValueError):
+        continue
+    msg = None
+    if ready[0]:
+        msg, _ = query_sock.recvfrom(2048)
+    else:
+        continue</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <pre><code>if not msg:
+    continue
+msg = decode_krpc(msg)
+if msg is None:
+    continue
+</code></pre>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

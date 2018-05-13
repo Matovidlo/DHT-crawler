@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>monitor.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>monitor.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created by Martin Vasko</span>
+<span class="sd">3BIT, Brno, Faculty of Information Technology.</span>
+
+<span class="sd">Brief information:</span>
+<span class="sd">This is implementation of monitoring BiTtorrent with Kademlia DHT.</span>
+<span class="sd">Whole monitor class which will be presented next is going to be supported by</span>
+<span class="sd">torrentDHT implementation, which was implemented by Martin Vasko.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">select</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span><span class="p">,</span> <span class="n">Semaphore</span>
+<span class="kn">from</span> <span class="nn">bencoder</span> <span class="kn">import</span> <span class="n">bencode</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <p>from handshake import TorrentHandshake</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="kn">from</span> <span class="nn">arg_parse</span> <span class="kn">import</span> <span class="n">parse_input_args</span>
+<span class="kn">from</span> <span class="nn">torrent_dht</span> <span class="kn">import</span> <span class="n">TorrentDHT</span><span class="p">,</span> <span class="n">TorrentArguments</span><span class="p">,</span>\
+                       <span class="n">random_infohash</span><span class="p">,</span> <span class="n">decode_krpc</span><span class="p">,</span> <span class="n">get_neighbor</span><span class="p">,</span> \
+                       <span class="n">get_myip</span>
+<span class="kn">from</span> <span class="nn">process_output</span> <span class="kn">import</span> <span class="n">ProcessOutput</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">kill_sender_reciever</span><span class="p">(</span><span class="n">thread1</span><span class="p">,</span> <span class="n">thread2</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    kill sender reciever and TorrentDHT socket when there is</span>
+<span class="sd">    continuous bootstrap.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">identification</span> <span class="o">=</span> <span class="n">thread1</span><span class="o">.</span><span class="n">ident</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">pthread_kill</span><span class="p">(</span><span class="n">identification</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ProcessLookupError</span><span class="p">:</span>
+        <span class="k">pass</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>take some time to kill reciever thread</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="n">thread2</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">identification</span> <span class="o">=</span> <span class="n">thread2</span><span class="o">.</span><span class="n">ident</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">pthread_kill</span><span class="p">(</span><span class="n">identification</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ProcessLookupError</span><span class="p">:</span>
+        <span class="k">pass</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      <p>Parse it from class methods to monitor class where we want to exchange
+ this information.
+ Start monitoring and initialize all necessary things at first</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">Monitor</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p>Construct a new 'Foo' object.</p>
+<p>:param name: The name of foo
+:param age: The ageof foo
+:return: returns nothing</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">torrent</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span> <span class="o">=</span> <span class="n">torrent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span> <span class="o">=</span> <span class="n">random_infohash</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mi">600</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p>file which should be parsed</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">file</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p>magnet-link given</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">magnet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">country</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <p>print output in db format required for tarzan server</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">db_format</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">db_format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue_type</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">queue_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_peers</span> <span class="o">=</span> <span class="mi">600</span>
+        <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">max_peers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_peers</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">max_peers</span>
+        <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">hash</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      <p>infohash of some file on internet,
+if not specified randomly generate infohash</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">change_info</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">hash</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">counter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p>How long should wait after queue is empty</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">counter</span>
+        <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">test</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      <p>Test of connection !</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="bp">self</span><span class="o">.</span><span class="n">test</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">test</span>
+        <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-14'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-14'>#</a>
+      </div>
+      <p>Duration of crawl</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">duration</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-15'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-15'>#</a>
+      </div>
+      <p>local variables for class</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">query_socket</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_nodes</span> <span class="o">=</span> <span class="mi">0</span>             <span class="c1"># Number of nodes in a specified n-bit zone</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tnspeed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_recieve</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1"># timer that should point how many packets were timed out</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">torrent_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span> <span class="o">=</span> <span class="p">{}</span>      <span class="c1"># infohashes already found</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">peers_pool</span> <span class="o">=</span> <span class="p">{}</span>     <span class="c1"># peers already found</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr_pool</span> <span class="o">=</span> <span class="p">{}</span>      <span class="c1"># Addr recieved from</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">peer_announce</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># pool of NODES announced peers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">respondent</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c1"># Number of respondents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">ProcessOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arguments</span><span class="o">.</span><span class="n">print_as_country</span><span class="p">,</span>
+                                    <span class="n">arguments</span><span class="o">.</span><span class="n">country</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Semaphore</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-16'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-16'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;File: {},</span><span class="se">\n</span><span class="s2">Magnet-link: {},</span><span class="se">\n</span><span class="s2">Duration of crawl: {},</span><span class="se">\</span>
+<span class="s2">                </span><span class="se">\n</span><span class="s2">Counter: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-17'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-17'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">vprint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Print only when -v parameter is present</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">verbosity</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-18'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-18'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">init_socket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Initialize empty socket to send announce peer messages</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span>
+                             <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">,</span>
+                             <span class="n">socket</span><span class="o">.</span><span class="n">IPPROTO_UDP</span><span class="p">)</span>
+        <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">get_myip</span><span class="p">(),</span> <span class="n">port</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">sock</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-19'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-19'>#</a>
+      </div>
+      <h6></h6>
+<p>START OF CRAWLING #</p>
+<h6></h6>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">query_for_connectivity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Query all found peers for connectivity.</span>
+<span class="sd">        When respond, then connection is still there and peer is valid, else</span>
+<span class="sd">        peer is deleted from dictionary.</span>
+<span class="sd">        &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-20'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-20'>#</a>
+      </div>
+      <p>port = self.sock.getsockname()
+self.sock.close()</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">query_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-21'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-21'>#</a>
+      </div>
+      <p>TODO</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="k">pass</span>
+        <span class="n">present_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">peers_outdated</span> <span class="o">=</span> <span class="p">[]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-22'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-22'>#</a>
+      </div>
+      <p>take all of incomming peers and check them</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peers_pool</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">past_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">.%m.%Y %H:%M:%S:</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">delta_time</span> <span class="o">=</span> <span class="n">present_time</span> <span class="o">-</span> <span class="n">past_time</span>
+            <span class="n">total_seconds</span> <span class="o">=</span> <span class="n">delta_time</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_seconds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">800</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-23'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-23'>#</a>
+      </div>
+      <p>outdated peer</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>                <span class="n">peers_outdated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-24'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-24'>#</a>
+      </div>
+      <p>send announce peer to 'start' session
+query queried node</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">peers_outdated</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">peers_pool</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">])]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-25'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-25'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">insert_to_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Inserts nodes to queue by given queue type.</span>
+<span class="sd">        &#39;&#39;&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-26'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-26'>#</a>
+      </div>
+      <p>Do not remove already asked</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">last_node</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Nodes&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">last_node</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">node</span><span class="p">))</span>
+            <span class="n">last_node</span> <span class="o">=</span> <span class="n">node</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-27'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-27'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">process_and_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ready</span><span class="p">,</span> <span class="n">last_time</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        process packet and update all necesseties like info_pool, peers_pool.</span>
+<span class="sd">        When decoding failed or not ready socket for recieving return back to</span>
+<span class="sd">        listener thread.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">ready</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">msg</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">2048</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">last_time</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">no_recieve</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_recieve</span> <span class="o">+</span> <span class="mf">0.1</span>
+            <span class="k">return</span> <span class="n">last_time</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">decode_krpc</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">last_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr_pool</span><span class="p">[</span><span class="n">addr</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">respondent</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">pool</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">decode_message</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">peer_announce</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-28'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-28'>#</a>
+      </div>
+      <p>update dictionary by given pool value</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Nodes&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="s2">&quot;Nodes&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Peers&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">peers_pool</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="s2">&quot;Peers&quot;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-29'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-29'>#</a>
+      </div>
+      <p>Resolution without cleaning queue</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_peers</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Nodes&quot;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">insert_to_queue</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">db_format</span><span class="p">:</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">curr</span> <span class="o">-</span> <span class="n">last_time</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+                <span class="n">last_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">last_time</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-30'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-30'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">start_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thread1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        start listener thread. Recieve query packet and decode its body.</span>
+<span class="sd">        There is shared queue between listener and sender thread.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">last_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-31'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-31'>#</a>
+      </div>
+      <p>socket is closed no value returned</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ready</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_peers</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+                    <span class="n">last_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_and_update</span><span class="p">(</span><span class="n">ready</span><span class="p">,</span> <span class="n">last_time</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">last_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_and_update</span><span class="p">(</span><span class="n">ready</span><span class="p">,</span> <span class="n">last_time</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-32'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-32'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">start_sender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        start sender thread. There is test parameter to test connection for</span>
+<span class="sd">        unit testing. Otherwise continuous connection is performed till</span>
+<span class="sd">        we dont get all nodes from k-zone or duration is exhausted.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">test</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-33'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-33'>#</a>
+      </div>
+      <p>if test is given perform single message send</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">hexdig_self</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="n">hexdig_target</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">query_get_peers</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+            <span class="n">hexdig_self</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="n">hexdig_target</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">hexdig_self</span> <span class="o">^</span> <span class="n">hexdig_target</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">148</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">query_get_peers</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="mi">9</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-34'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-34'>#</a>
+      </div>
+      <p>TODO
+for i in range(10, 20):
+tid = get_neighbor(self.infohash, node[0], i)
+self.torrent.query_get_peers(node, self.infohash, self.sock)
+node = self.torrent.nodes.get(True)
+Speed is less than 2000 bps</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_nodes</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">query_get_peers</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="mi">9</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-35'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-35'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">start_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thread1</span><span class="p">,</span> <span class="n">thread2</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        start thread timer for duration, when exhausted kill threads</span>
+<span class="sd">        and exit program.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vprint</span><span class="p">(</span><span class="s2">&quot;Start of duration&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-36'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-36'>#</a>
+      </div>
+      <p>sleep for shorter time</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">):</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vprint</span><span class="p">(</span><span class="s2">&quot;End of duration&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-37'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-37'>#</a>
+      </div>
+      <p>Clear all resources</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">kill_sender_reciever</span><span class="p">(</span><span class="n">thread1</span><span class="p">,</span> <span class="n">thread2</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-38'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-38'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">crawl_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">torrent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create all threads, duration to count how long program is executed.</span>
+<span class="sd">        When Ctrl+C is pressed kill all threads</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        torrent : infohash</span>
+<span class="sd">            20 bytes long infohash which should be used as part of monitoring.</span>
+<span class="sd">        test : bool</span>
+<span class="sd">            This paramter is for testing connection.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">torrent</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">torrent</span>
+
+        <span class="n">send_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">start_sender</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">())</span>
+        <span class="n">send_thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">send_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">listen_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">start_listener</span><span class="p">,</span>
+                               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">send_thread</span><span class="p">,))</span>
+        <span class="n">listen_thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">listen_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">duration_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">start_timer</span><span class="p">,</span>
+                                 <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">send_thread</span><span class="p">,</span> <span class="n">listen_thread</span><span class="p">))</span>
+        <span class="n">duration_thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">duration_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">test</span><span class="p">:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">country</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_geolocations</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vprint</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Clearing threads, wait a second&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">test</span><span class="p">:</span>
+            <span class="n">kill_sender_reciever</span><span class="p">(</span><span class="n">send_thread</span><span class="p">,</span> <span class="n">listen_thread</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">query_for_connectivity</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">print_country</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">db_format</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_geolocations</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">print_geolocations</span><span class="p">()</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db_format</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">print_country</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">db_format</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_geolocations</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">print_geolocations</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">db_format</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-39'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-39'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Print info for current state of crawling.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[NodeSet]:</span><span class="si">%i</span><span class="se">\t\t</span><span class="s2">[PeerSet]:</span><span class="si">%i</span><span class="se">\t\t</span><span class="s2">[Response]:</span><span class="se">\</span>
+<span class="s2">            </span><span class="si">%.2f%%</span><span class="se">\t\t</span><span class="s2">[Queue]:</span><span class="si">%i</span><span class="se">\t\t</span><span class="s2">&quot;</span> <span class="o">%</span>
+              <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">peers_pool</span><span class="p">),</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">respondent</span><span class="o">*</span><span class="mf">100.0</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span><span class="p">)),</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">qsize</span><span class="p">()))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-40'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-40'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">diverge_in_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        After climbing to another teritory, do not access it,</span>
+<span class="sd">        return adjusted list of nodes.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">iplist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">translate_node</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">info_pool</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ip_addr</span> <span class="ow">in</span> <span class="n">iplist</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">node_ip</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">node_ip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ip_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">nodes</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">nodes</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-41'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-41'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">get_torrent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        get name of torrent from torrent file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : dict</span>
+<span class="sd">            This should contain encoded name of torrent.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self.torrent_name</span>
+<span class="sd">            Parsed torrent name from value dictionary.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">name_val</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">torrent_name</span> <span class="o">=</span> <span class="n">name_val</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-42'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-42'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">parse_torrent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        parse torrent file to get infohash and announce list of nodes for</span>
+<span class="sd">        better bootstrap.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">:</span>
+                <span class="n">file_r</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">file_r</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">info_hash</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vprint</span><span class="p">(</span><span class="s2">&quot;Torrent file content&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">decode_krpc</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;WrongFileType&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">decode_krpc</span><span class="p">(</span><span class="n">content</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;WrongFileType&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">decode_krpc</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;creation date&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">vprint</span><span class="p">(</span><span class="s2">&quot;Creation of file: &quot;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">vprint</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span>
+                                    <span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                                    <span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;info&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">get_torrent_name</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                        <span class="n">info_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">bencode</span><span class="p">(</span><span class="n">value</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-43'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-43'>#</a>
+      </div>
+      <p>set torrent target</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>                        <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span> <span class="o">=</span> <span class="n">get_neighbor</span><span class="p">(</span><span class="n">info_hash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">target_pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info_hash</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+                        <span class="k">pass</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;announce-list&quot;</span><span class="p">:</span>
+                        <span class="n">nodes</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">change_bootstrap</span><span class="p">(</span><span class="n">info_hash</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue_type</span><span class="p">)</span>
+                <span class="n">file_r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-44'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-44'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">parse_magnet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        parse magnet link</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">magnet</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="p">:</span>
+                <span class="n">file_r</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">magnet</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">file_r</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&amp;dn.*&amp;(xt|tr)&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^((?!tr.*).)*&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">torrent_name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">info_hash</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;urn:.*&amp;(xl|dn)&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-45'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-45'>#</a>
+      </div>
+      <p>match last <code>:</code> and its content</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>                <span class="n">info_hash</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?:.(?!:))+$&quot;</span><span class="p">,</span> <span class="n">info_hash</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+                <span class="n">info_hash</span> <span class="o">=</span> <span class="n">info_hash</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span> <span class="o">=</span> <span class="n">get_neighbor</span><span class="p">(</span><span class="n">info_hash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infohash</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-46'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-46'>#</a>
+      </div>
+      <p>set torrent target</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>                <span class="bp">self</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">target_pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info_hash</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-47'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-47'>#</a>
+      </div>
+      <h6></h6>
+<p>This should be used in main function #</p>
+<h6></h6>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-48'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-48'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">create_monitor</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    creates monitor class object. TorrentDHT creates udp socket which is</span>
+<span class="sd">    binded on `bind_port`. Monitor needs this `dht_socket` and command line</span>
+<span class="sd">    arguments to be created successfully. Then change of hash and parsing</span>
+<span class="sd">    can change resolution of crawl. When they are not specified then</span>
+<span class="sd">    global bootstrap nodes are used instead.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    verbosity : bool</span>
+<span class="sd">        Indicate verbose output</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    object</span>
+<span class="sd">        Monitor object with initialized DHT socket and parsed arguments.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parse_input_args</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-49'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-49'>#</a>
+      </div>
+      <p>This is variant with verbose output to track some lib imported staff</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">bind_port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">torrent_arguments</span> <span class="o">=</span> <span class="n">TorrentArguments</span><span class="p">()</span>
+        <span class="n">dht_socket</span> <span class="o">=</span> <span class="n">TorrentDHT</span><span class="p">(</span><span class="n">torrent_arguments</span><span class="p">,</span> <span class="n">bind_port</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">bind_port</span><span class="p">,</span>
+                                <span class="n">verbosity</span><span class="o">=</span><span class="n">verbosity</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">torrent_arguments</span> <span class="o">=</span> <span class="n">TorrentArguments</span><span class="p">()</span>
+        <span class="n">dht_socket</span> <span class="o">=</span> <span class="n">TorrentDHT</span><span class="p">(</span><span class="n">torrent_arguments</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="n">verbosity</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-50'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-50'>#</a>
+      </div>
+      <p>Monitor class needs dht_socket, which is imported from TorrentDHT.py</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">monitor</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">dht_socket</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-51'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-51'>#</a>
+      </div>
+      <p>This variant is only to test connection to BOOTSTRAP_NODES</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="n">monitor</span><span class="o">.</span><span class="n">test</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">start_sender</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">torrent</span><span class="o">.</span><span class="n">change_arguments</span><span class="p">(</span><span class="n">monitor</span><span class="o">.</span><span class="n">max_peers</span><span class="p">,</span> <span class="n">monitor</span><span class="o">.</span><span class="n">queue_type</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">parse_torrent</span><span class="p">()</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">parse_magnet</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">monitor</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

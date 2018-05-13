@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import re
 
-# TODO file name
 def average_graph(element_count, content, is_float=None, file_name=None):
     result = 0
     if file_name:
@@ -89,8 +88,9 @@ def correct_ratio(file_name):
 if __name__ == '__main__':
     #set_avg("../resultPF.txt", 20)
     #peer_node_ratio()
-    correct_ratio("../ratio.txt")
-    set_avg("../resultH.txt", 20)
+
+    # correct_ratio("../ratio.txt")
+    # set_avg("../resultH.txt", 20)
 
     set_avg("../lifoH.txt", 10, "../lifo_avgP.txt")
     set_avg("../lifoNF.txt", 10, "../lifo_avgN.txt")

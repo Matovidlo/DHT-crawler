@@ -1,58 +1,74 @@
 .TH MONITOR BITTORRENT 1
 .SH NAME
-monitor \- sends KRPC calls to any known host, or program should find this host and monitor trough this start host to BitTorrent network with help of Kademlia DHT.
+dht_crawler/exec.py \- sends KRPC calls to any known host, or program should
+find this host and monitor trough this start host to BitTorrent network
+with help of Kademlia DHT.
 .SH SYNOPSIS
-.B monitor.py
-
-
-
-
+.B dht_crawler/exec.py
 [\fB\-h\fR]
-[\fB\-u\fR]
-[\fB\-t\fR \fIinterval\fR]
-[\fB\-i\fR \fIinterval\fR]
-[\fB\-p\fR \fIport\fR]
-[\fB\-l\fR \fIport\fR]
-[\fB\-s\fR \fIsize\fR]
-[\fB\-r\fR \fIvalue\fR]
-.IR <node>, <node>, ...
+[\fB\--help\fR]
+[\fB\--hash\fR \fIinfohash\fR]
+[\fB\--file\fR \fIfile [file ...]\fR]
+[\fB\--magnet\fR \fIfile [file ...]\fR]
+[\fB\--bind_port\fR \fIport\fR]
+[\fB\--duration\fR \fIseconds\fR]
+[\fB\--print_as_country\fR]
+[\fB\--db_format\fR]
+[\fB\--fifo\fR]
+[\fB\--counter\fR \fIseconds\fR]
+[\fB\--max-peers\fR \fIqueue_length\fR]
+[\fB\--test\fR]
+[\fB\--country\fR \fI<country-name>\fR]
+
 .SH DESCRIPTION
-.B testovac \fRuses the ICMP protocol's mandatory ECHO_REQUEST or UDP datagram to recieve an ICMP ECHO_RESPONSE or UDP from any host.  ECHO_REQUEST datagrams ('pings') have an IP and ICMP header, followed by a \fBstruct timeval\fR and arbitrary number of 'pad' bytes used to fill out packet. UDP packet is filled with \fBstruct timeval\fR and requisite number of 'pad' bytes.
-.B testovac \fRworks with both IPv4 and IPv6. Using both at the same time because every node is handled in parallel thread. If you provide a domain name to the parameters, it is translated to IP address.
-.B testovac \fRhas ability to operate as UDP server. In this mode the received packet is sent back to a sender with no addition.
+.B dht_crawler \fRuses the DHT BitTorrent protocol for MLDHT. Has 4 types of messages
+from which for monitoring are 2 of them used. .B dht_crawler \fRworks with IPv4. For communication and recieving
+threads are used. Project is composed of modules and unit tests with integration testing.
+Please read documentation for further information.
 .SH OPTIONS
 .TP
-.BR \-h\fR
+.BR \-h or --help\fR
 Show help message.
 .TP
-.BR \-u\fR
-Use UDP datagram. Must be specified with \fB\-p\fR option.
+.BR \--hash\fR \fIinfohash\fR
+Use infohash for crawling.
 .TP
-.BR \-s\fR\ \fISIZE\fR
-Size of the packet. Implicit value for UDP is 64 bytes, for ICMP 56 bytes.
+.BR \--file\fR \fIfile [file ...]\fR
+Use torrent file as input <file>. Extract all necessary information for crawling and further
+information to store in database. For storing in database format use \fI--db_format\fR.
 .TP
-.BR \-t\fR\ \fISECONDS\fR
-Specifies \fIinterval\fR in seconds in which statistics are printed.
+.BR \--magnet\fR \fIfile [file ...]\fR
+Use torrent magnet-link as input <file>. This magnet link must be stored within file.
+Also there is extraction of additional information from magnet-link.
 .TP
-.BR \-i\fR\ \fISECONDS\fR
-Specifies \fIinterval\fR in milliseconds between sending each packet.
+.BR \--bind_port\fR \fIport\fR
+Specifies <port> number on which UDP socket should be connected. This option is
+mostly used by integration tests which are using multiple instances of crawler.
 .TP
-.BR \-w\fR\ \fISECONDS\fR
-Specifies \fIinterval\fR in seconds for response wait.
+.BR \--duration\fR \fIseconds\fR
+Specifies duration of crawl in <seconds>. When exhausted, all threads are killed
+and resources are dealocated.
 .TP
-.BR \-p\fR\ \fISECONDS\fR
-Set sender UDP \FIport\fR. Must be specified \fB\-u\fR option.
+.BR \--print_as_country\fR
+Formats output with use of geoip on peers.
 .TP
-.BR \-l\fR\ \fIPORT\fR
-Set testovac to listen state on \fIport\fR.
+.BR \--db_format\fR
+Formats output to database format with infohash, peer pool, node pool and torrent
+name if present.
 .TP
-.BR \-r\fR\ \fIVALUE\fR
-set rtt threshold with \fIvalue\fR. If rtt is longer than the threshold, accident will be reported.
+.BR \--fifo\fR
+Runs crawler with FIFO queue instead of LIFO. When non present LIFO queue is
+created.
 .TP
-.BR \-v\fR
-Verbose mode. Program shows on stdout received packets.
+.BR \--counter\fR \fIseconds\fR
+Counter determines in seconds how long should we wait before sending and recieving
+packet. This timer is set to 0 when not present.
 .TP
-.BR <node>\fR
-IPv4/IPv6/hostname node address
-.SH SEE ALSO
-.BR ping\fR(8)
+.BR \--max-peers\fR \fIqueue_length\fR
+Specifies length of queue by integer.
+.TP
+.BR \--test\fR
+Tests DHT connection. Used for unit testing.
+.TP
+.BR \--country\fR \fI<country-name>\fR
+When specifies crawler should print only country with given <country-name>.

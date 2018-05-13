@@ -1,3 +1,0 @@
-../logs/less_peers/*.out
-
-

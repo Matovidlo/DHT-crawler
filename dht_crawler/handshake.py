@@ -22,6 +22,8 @@ class TorrentHandshake:
                                           socket.SOCK_STREAM,
                                           socket.IPPROTO_TCP)
         self.bt_socket.bind(get_myip(), port)
+
+
     def send_handshake(self, peer):
         '''
         send handshake message for bitTorrent connection
@@ -72,25 +74,3 @@ class TorrentHandshake:
 
         self.bt_socket.close()
         return False
-
-        # Announce peers that we want to download torrent
-        # query_sock = self.init_socket(port[1] + 3200)
-        # for value in self.peer_announce.values():
-        #     self.torrent.query_announce_peer(value[0], self.infohash,
-        #                                      (port[1] + 3200), query_sock)
-        #     try:
-        #         ready = select.select([query_sock], [], [], 0.1)
-        #     except (OSError, ValueError):
-        #         continue
-        #     msg = None
-        #     if ready[0]:
-        #         msg, _ = query_sock.recvfrom(2048)
-        #     else:
-        #         continue
-
-        #     if not msg:
-        #         continue
-        #     msg = decode_krpc(msg)
-        #     if msg is None:
-        #         continue
-

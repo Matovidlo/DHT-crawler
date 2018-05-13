@@ -1,3 +1,0 @@
-../logs/fifo_queue/logH*.out
-
-

@@ -1,3 +1,0 @@
-../logs/nodes_timer/logH*.out
-
-
